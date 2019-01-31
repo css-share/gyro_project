@@ -24,7 +24,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD='C:/Xilinx/Vivado/projects/pl2ps_interrupt_example/pl2ps_interrupt_example.runs/synth_1'
+HD_PWD='C:/Xilinx/Vivado/projects/project_GYRO_Jan_25_2019/project_GYRO_Jan_25_2019.runs/synth_1'
 cd "$HD_PWD"
 
 HD_LOG=runme.log

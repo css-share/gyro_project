@@ -48,11 +48,11 @@
 
 
 // IP VLNV: xilinx.com:user:axi_gyro_hsi:1.0
-// IP Revision: 19
+// IP Revision: 25
 
 (* X_CORE_INFO = "axi_gyro_hsi_v1_0,Vivado 2018.2" *)
 (* CHECK_LICENSE_TYPE = "design_1_axi_gyro_hsi_0_0,axi_gyro_hsi_v1_0,{}" *)
-(* CORE_GENERATION_INFO = "design_1_axi_gyro_hsi_0_0,axi_gyro_hsi_v1_0,{x_ipProduct=Vivado 2018.2,x_ipVendor=xilinx.com,x_ipLibrary=user,x_ipName=axi_gyro_hsi,x_ipVersion=1.0,x_ipCoreRevision=19,x_ipLanguage=VERILOG,x_ipSimLanguage=MIXED,C_S00_AXI_DATA_WIDTH=32,C_S00_AXI_ADDR_WIDTH=4}" *)
+(* CORE_GENERATION_INFO = "design_1_axi_gyro_hsi_0_0,axi_gyro_hsi_v1_0,{x_ipProduct=Vivado 2018.2,x_ipVendor=xilinx.com,x_ipLibrary=user,x_ipName=axi_gyro_hsi,x_ipVersion=1.0,x_ipCoreRevision=25,x_ipLanguage=VERILOG,x_ipSimLanguage=MIXED,C_S00_AXI_DATA_WIDTH=32,C_S00_AXI_ADDR_WIDTH=4}" *)
 (* DowngradeIPIdentifiedWarnings = "yes" *)
 module design_1_axi_gyro_hsi_0_0 (
   MCK,

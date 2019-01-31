@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-| Date         : Fri Jan 25 20:11:54 2019
+| Date         : Wed Jan 30 18:44:32 2019
 | Host         : AsusP8 running 64-bit major release  (build 9200)
 | Command      : report_drc -file design_1_wrapper_drc_opted.rpt -pb design_1_wrapper_drc_opted.pb -rpx design_1_wrapper_drc_opted.rpx
 | Design       : design_1_wrapper
@@ -24,18 +24,18 @@ Table of Contents
       Design limits: <entire design considered>
            Ruledeck: default
              Max violations: <unlimited>
-             Violations found: 2
+             Violations found: 1
 +-------------+----------+-------------------------------------------------------------+------------+
 | Rule        | Severity | Description                                                 | Violations |
 +-------------+----------+-------------------------------------------------------------+------------+
-| PLHOLDVIO-2 | Warning  | Non-Optimal connections which could lead to hold violations | 2          |
+| PLHOLDVIO-2 | Warning  | Non-Optimal connections which could lead to hold violations | 1          |
 +-------------+----------+-------------------------------------------------------------+------------+
 
 2. REPORT DETAILS
 -----------------
 PLHOLDVIO-2#1 Warning
 Non-Optimal connections which could lead to hold violations  
-A LUT design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Packetizer/FSM/out[8]_i_1 is driving clock pin of 11 cells. This could lead to large hold time violations. First few involved cells are:
+A LUT design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/CLK_DIV2/ff0/out[8]_i_1 is driving clock pin of 11 cells. This could lead to large hold time violations. First few involved cells are:
     design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Packetizer/SR9/out_reg[5]_srl6_inst_axi_gyro_hsi_v1_0_S00_AXI_inst_GYRO_ADC_OUT_STREAM_GYRO_Packetizer_SR9_out_reg_c_4 {SRL16E}
     design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Packetizer/SR9/out_reg[6]_inst_axi_gyro_hsi_v1_0_S00_AXI_inst_GYRO_ADC_OUT_STREAM_GYRO_Packetizer_SR9_out_reg_c_5 {FDRE}
     design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Packetizer/SR9/out_reg[7] {FDCE}
@@ -45,21 +45,6 @@ A LUT design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT
     design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Packetizer/SR9/out_reg_c_1 {FDCE}
     design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Packetizer/SR9/out_reg_c_2 {FDCE}
     design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Packetizer/SR9/out_reg_c_3 {FDCE}
-
-Related violations: <none>
-
-PLHOLDVIO-2#2 Warning
-Non-Optimal connections which could lead to hold violations  
-A LUT design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Tokenizer/FSM/r_reg[32]_i_1 is driving clock pin of 33 cells. This could lead to large hold time violations. First few involved cells are:
-    design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Tokenizer/SR/r_reg_reg[0] {FDPE}
-    design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Tokenizer/SR/r_reg_reg[10] {FDCE}
-    design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Tokenizer/SR/r_reg_reg[11] {FDCE}
-    design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Tokenizer/SR/r_reg_reg[12] {FDCE}
-    design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Tokenizer/SR/r_reg_reg[13] {FDCE}
-    design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Tokenizer/SR/r_reg_reg[14] {FDCE}
-    design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Tokenizer/SR/r_reg_reg[15] {FDCE}
-    design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Tokenizer/SR/r_reg_reg[16] {FDCE}
-    design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Tokenizer/SR/r_reg_reg[17] {FDCE}
 
 Related violations: <none>
 

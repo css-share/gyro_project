@@ -296,7 +296,7 @@ int main() {
     xil_printf("== GYRO Channel test ==\n\r");
 
 
-    *(baseaddr_gyro_channel+3) = 0x03000000;
+    *(baseaddr_gyro_channel+3) = 0x03300100;
     *(baseaddr_gyro_channel+2) = 0x80000000;
 
      nops(100000);

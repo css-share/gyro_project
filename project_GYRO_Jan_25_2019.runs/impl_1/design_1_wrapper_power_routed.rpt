@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-| Date             : Fri Jan 25 20:12:38 2019
+| Date             : Wed Jan 30 18:45:17 2019
 | Host             : AsusP8 running 64-bit major release  (build 9200)
 | Command          : report_power -file design_1_wrapper_power_routed.rpt -pb design_1_wrapper_power_summary_routed.pb -rpx design_1_wrapper_power_routed.rpx
 | Design           : design_1_wrapper
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 1.694        |
+| Total On-Chip Power (W)  | 1.689        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 1.547        |
+| Dynamic (W)              | 1.543        |
 | Device Static (W)        | 0.146        |
 | Effective TJA (C/W)      | 11.5         |
 | Max Ambient (C)          | 65.5         |
@@ -52,19 +52,20 @@ Table of Contents
 +-------------------------+-----------+----------+-----------+-----------------+
 | On-Chip                 | Power (W) | Used     | Available | Utilization (%) |
 +-------------------------+-----------+----------+-----------+-----------------+
-| Clocks                  |     0.005 |        3 |       --- |             --- |
-| Slice Logic             |     0.002 |     2778 |       --- |             --- |
-|   LUT as Logic          |     0.002 |      871 |     53200 |            1.64 |
-|   Register              |    <0.001 |     1420 |    106400 |            1.33 |
+| Clocks                  |     0.004 |        3 |       --- |             --- |
+| Slice Logic             |     0.002 |     2718 |       --- |             --- |
+|   LUT as Logic          |     0.002 |      826 |     53200 |            1.55 |
+|   Register              |    <0.001 |     1397 |    106400 |            1.31 |
 |   CARRY4                |    <0.001 |       10 |     13300 |            0.08 |
-|   LUT as Shift Register |    <0.001 |       63 |     17400 |            0.36 |
+|   LUT as Shift Register |    <0.001 |       64 |     17400 |            0.37 |
+|   BUFG                  |    <0.001 |        1 |        32 |            3.13 |
 |   F7/F8 Muxes           |    <0.001 |        1 |     53200 |           <0.01 |
-|   Others                |     0.000 |      234 |       --- |             --- |
-| Signals                 |     0.003 |     2185 |       --- |             --- |
-| I/O                     |     0.008 |       16 |       200 |            8.00 |
+|   Others                |     0.000 |      237 |       --- |             --- |
+| Signals                 |     0.003 |     2120 |       --- |             --- |
+| I/O                     |     0.004 |       16 |       200 |            8.00 |
 | PS7                     |     1.529 |        1 |       --- |             --- |
 | Static Power            |     0.146 |          |           |                 |
-| Total                   |     1.694 |          |           |                 |
+| Total                   |     1.689 |          |           |                 |
 +-------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -74,11 +75,11 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.025 |       0.011 |      0.015 |
-| Vccaux    |       1.800 |     0.016 |       0.001 |      0.015 |
+| Vccint    |       1.000 |     0.025 |       0.010 |      0.015 |
+| Vccaux    |       1.800 |     0.015 |       0.000 |      0.015 |
 | Vcco33    |       3.300 |     0.001 |       0.000 |      0.001 |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |
-| Vcco18    |       1.800 |     0.004 |       0.003 |      0.001 |
+| Vcco18    |       1.800 |     0.002 |       0.001 |      0.001 |
 | Vcco15    |       1.500 |     0.000 |       0.000 |      0.000 |
 | Vcco135   |       1.350 |     0.000 |       0.000 |      0.000 |
 | Vcco12    |       1.200 |     0.000 |       0.000 |      0.000 |
@@ -150,8 +151,8 @@ Table of Contents
 +-------------------------------------------------------+-----------+
 | Name                                                  | Power (W) |
 +-------------------------------------------------------+-----------+
-| design_1_wrapper                                      |     1.547 |
-|   design_1_i                                          |     1.540 |
+| design_1_wrapper                                      |     1.543 |
+|   design_1_i                                          |     1.539 |
 |     SPI_ip_0                                          |     0.001 |
 |       inst                                            |     0.001 |
 |         SPI_ip_v1_0_S00_AXI_inst                      |     0.001 |
@@ -175,12 +176,14 @@ Table of Contents
 |       inst                                            |     0.002 |
 |         axi_gyro_hsi_v1_0_S00_AXI_inst                |     0.002 |
 |           GYRO_ADC_OUT_STREAM                         |     0.001 |
+|             CLK_DIV2                                  |    <0.001 |
+|               ff0                                     |    <0.001 |
 |             GYRO_Packetizer                           |    <0.001 |
+|               FF0                                     |    <0.001 |
+|               FF1                                     |    <0.001 |
 |               FSM                                     |    <0.001 |
 |               SR9                                     |    <0.001 |
-|               syncMuxSel                              |    <0.001 |
-|                 FF0                                   |    <0.001 |
-|             GYRO_StreamGenerator                      |     0.001 |
+|             GYRO_StreamGenerator                      |    <0.001 |
 |               CNTR_DATA                               |    <0.001 |
 |               CNTR_SAMPLES                            |    <0.001 |
 |               FSM                                     |    <0.001 |
@@ -189,10 +192,11 @@ Table of Contents
 |               STATE_REG                               |    <0.001 |
 |               ff0                                     |    <0.001 |
 |               ff1                                     |    <0.001 |
-|               ff2                                     |    <0.001 |
+|               ff2                                     |     0.000 |
 |             GYRO_Tokenizer                            |    <0.001 |
-|               FSM                                     |    <0.001 |
-|               SR                                      |     0.000 |
+|               FF0                                     |    <0.001 |
+|               FF1                                     |    <0.001 |
+|               SR                                      |    <0.001 |
 |     processing_system7_0                              |     1.530 |
 |       inst                                            |     1.530 |
 |     ps7_0_axi_periph                                  |     0.005 |
@@ -208,7 +212,7 @@ Table of Contents
 |               RD.r_channel_0                          |    <0.001 |
 |                 rd_data_fifo_0                        |    <0.001 |
 |                 transaction_fifo_0                    |    <0.001 |
-|               SI_REG                                  |     0.002 |
+|               SI_REG                                  |     0.001 |
 |                 ar.ar_pipe                            |    <0.001 |
 |                 aw.aw_pipe                            |    <0.001 |
 |                 b.b_pipe                              |    <0.001 |
