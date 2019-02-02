@@ -10,58 +10,52 @@ preplace port LED1 -pg 1 -y -370 -defaultsOSRD
 preplace port SPI_CS -pg 1 -y -390 -defaultsOSRD
 preplace port SPI_MOSI -pg 1 -y -430 -defaultsOSRD
 preplace port SW6 -pg 1 -y -210 -defaultsOSRD
+preplace port HSICKA0 -pg 1 -y -590 -defaultsOSRD
 preplace port HSIA0 -pg 1 -y -620 -defaultsOSRD
 preplace port LED2 -pg 1 -y -350 -defaultsOSRD
 preplace port SW7 -pg 1 -y -190 -defaultsOSRD
+preplace port HSICKA1 -pg 1 -y -570 -defaultsOSRD
 preplace port HSIA1 -pg 1 -y -600 -defaultsOSRD
 preplace port SPI_SCK -pg 1 -y -410 -defaultsOSRD
-preplace port DBG0 -pg 1 -y -610 -defaultsOSRD
 preplace port SPI_MISO -pg 1 -y -400 -defaultsOSRD
 preplace port FIXED_IO -pg 1 -y -240 -defaultsOSRD
-preplace port DBG1 -pg 1 -y -590 -defaultsOSRD
 preplace port LED7 -pg 1 -y 312 -defaultsOSRD
-preplace port DBG2 -pg 1 -y -570 -defaultsOSRD
-preplace port DBG3 -pg 1 -y -550 -defaultsOSRD
-preplace port DBG4 -pg 1 -y -530 -defaultsOSRD
 preplace inst SPI_ip_0 -pg 1 -lvl 5 -y -390 -defaultsOSRD
 preplace inst xlconcat_0 -pg 1 -lvl 2 -y -250 -defaultsOSRD
 preplace inst axi_gyro_hsi_0 -pg 1 -lvl 5 -y -600 -defaultsOSRD
-preplace inst ps7_0_axi_periph -pg 1 -lvl 5 -y -118 -defaultsOSRD
+preplace inst ps7_0_axi_periph -pg 1 -lvl 5 -y -110 -defaultsOSRD
 preplace inst axi4_pl_interrupt_ge_0 -pg 1 -lvl 1 -y -190 -defaultsOSRD
 preplace inst rst_ps7_0_100M -pg 1 -lvl 4 -y 100 -defaultsOSRD
 preplace inst processing_system7_0 -pg 1 -lvl 3 -y -40 -defaultsOSRD
-preplace netloc processing_system7_0_DDR 1 3 3 1070J -630 1450 -740 1940
-preplace netloc ps7_0_axi_periph_M02_AXI 1 4 2 1470 -730 1920
-preplace netloc axi_gyro_hsi_0_MCK 1 5 1 NJ
+preplace netloc processing_system7_0_DDR 1 3 3 NJ -120 1430 -280 1940
+preplace netloc ps7_0_axi_periph_M02_AXI 1 4 2 1450 -700 1920
+preplace netloc axi_gyro_hsi_0_MCK 1 5 1 1940J
 preplace netloc SPI_ip_0_FSM_DONE 1 5 1 NJ
 preplace netloc SPI_ip_0_SPI_SCK 1 5 1 NJ
-preplace netloc processing_system7_0_M_AXI_GP0 1 3 2 NJ -60 1430
+preplace netloc processing_system7_0_M_AXI_GP0 1 3 2 NJ -60 1470
+preplace netloc axi_gyro_hsi_0_HSICKA0 1 5 1 1940
 preplace netloc SPI_ip_0_SPI_CS 1 5 1 NJ
 preplace netloc axi4_pl_interrupt_ge_0_LED_7 1 1 5 NJ -150 590J 312 NJ 312 NJ 312 NJ
-preplace netloc rst_ps7_0_100M_peripheral_aresetn 1 0 5 -90 -80 NJ -80 610J -190 1090J -40 1460
+preplace netloc rst_ps7_0_100M_peripheral_aresetn 1 0 5 -90 -80 NJ -80 610J -190 1080J -40 1460
+preplace netloc axi_gyro_hsi_0_HSICKA1 1 5 1 1940
 preplace netloc SW7 1 0 1 NJ
 preplace netloc processing_system7_0_FCLK_RESET0_N 1 3 1 1060
-preplace netloc ps7_0_axi_periph_M01_AXI 1 4 2 1470J -290 1900
+preplace netloc ps7_0_axi_periph_M01_AXI 1 4 2 1480J -290 1900
 preplace netloc SW6_1 1 0 1 NJ
-preplace netloc axi_gyro_hsi_0_DBG0 1 5 1 NJ
 preplace netloc xlconcat_0_dout 1 2 1 630
-preplace netloc processing_system7_0_FIXED_IO 1 3 3 NJ -100 1440 -278 1930
-preplace netloc axi_gyro_hsi_0_DBG1 1 5 1 NJ
+preplace netloc processing_system7_0_FIXED_IO 1 3 3 NJ -100 1440 -270 1930
 preplace netloc HSIA0_1 1 0 5 NJ -620 NJ -620 NJ -620 NJ -620 NJ
-preplace netloc axi_gyro_hsi_0_DBG2 1 5 1 NJ
 preplace netloc axi4_pl_interrupt_ge_0_LED_0 1 1 5 NJ -170 600J 340 NJ 340 NJ 340 NJ
 preplace netloc axi4_pl_interrupt_ge_0_interrupt_0 1 1 1 360
-preplace netloc processing_system7_0_FCLK_CLK0 1 0 5 -110 -70 NJ -70 640 -200 1080 -50 1450
-preplace netloc axi_gyro_hsi_0_DBG3 1 5 1 NJ
+preplace netloc processing_system7_0_FCLK_CLK0 1 0 5 -110 -70 NJ -70 640 -200 1070 -50 1450
 preplace netloc SPI_MISO_1 1 0 5 NJ -400 NJ -400 NJ -400 NJ -400 NJ
 preplace netloc axi4_pl_interrupt_ge_0_interrupt_1 1 1 1 370
-preplace netloc ps7_0_axi_periph_M00_AXI 1 0 6 -100J -90 NJ -90 620J -180 1060J -30 1430J 42 1910
-preplace netloc axi_gyro_hsi_0_DBG4 1 5 1 NJ
+preplace netloc ps7_0_axi_periph_M00_AXI 1 0 6 -100J -90 NJ -90 620J -180 1060J -30 1430J 50 1910
 preplace netloc HSIA1_1 1 0 5 NJ -600 NJ -600 NJ -600 NJ -600 NJ
 preplace netloc SPI_ip_0_SPI_MOSI 1 5 1 NJ
 preplace netloc axi4_pl_interrupt_ge_0_interrupt_2 1 1 1 380
 preplace netloc SPI_ip_0_FSM_START 1 5 1 NJ
-preplace netloc rst_ps7_0_100M_interconnect_aresetn 1 4 1 1470
+preplace netloc rst_ps7_0_100M_interconnect_aresetn 1 4 1 1480
 levelinfo -pg 1 -130 240 500 850 1260 1750 3020 -top -800 -bot 400
 ",
 }

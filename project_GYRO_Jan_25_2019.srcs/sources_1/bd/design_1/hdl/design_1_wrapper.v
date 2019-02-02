@@ -1,7 +1,7 @@
 //Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-//Date        : Wed Jan 30 18:07:00 2019
+//Date        : Fri Feb  1 15:19:07 2019
 //Host        : AsusP8 running 64-bit major release  (build 9200)
 //Command     : generate_target design_1_wrapper.bd
 //Design      : design_1_wrapper
@@ -10,12 +10,7 @@
 `timescale 1 ps / 1 ps
 
 module design_1_wrapper
-   (DBG0,
-    DBG1,
-    DBG2,
-    DBG3,
-    DBG4,
-    DDR_addr,
+   (DDR_addr,
     DDR_ba,
     DDR_cas_n,
     DDR_ck_n,
@@ -38,6 +33,8 @@ module design_1_wrapper
     FIXED_IO_ps_srstb,
     HSIA0,
     HSIA1,
+    HSICKA0,
+    HSICKA1,
     LED0,
     LED1,
     LED2,
@@ -49,11 +46,6 @@ module design_1_wrapper
     SPI_SCK,
     SW6,
     SW7);
-  output DBG0;
-  output DBG1;
-  output DBG2;
-  output DBG3;
-  output DBG4;
   inout [14:0]DDR_addr;
   inout [2:0]DDR_ba;
   inout DDR_cas_n;
@@ -77,6 +69,8 @@ module design_1_wrapper
   inout FIXED_IO_ps_srstb;
   input HSIA0;
   input HSIA1;
+  output HSICKA0;
+  output HSICKA1;
   output LED0;
   output LED1;
   output LED2;
@@ -89,11 +83,6 @@ module design_1_wrapper
   input SW6;
   input SW7;
 
-  wire DBG0;
-  wire DBG1;
-  wire DBG2;
-  wire DBG3;
-  wire DBG4;
   wire [14:0]DDR_addr;
   wire [2:0]DDR_ba;
   wire DDR_cas_n;
@@ -117,6 +106,8 @@ module design_1_wrapper
   wire FIXED_IO_ps_srstb;
   wire HSIA0;
   wire HSIA1;
+  wire HSICKA0;
+  wire HSICKA1;
   wire LED0;
   wire LED1;
   wire LED2;
@@ -130,12 +121,7 @@ module design_1_wrapper
   wire SW7;
 
   design_1 design_1_i
-       (.DBG0(DBG0),
-        .DBG1(DBG1),
-        .DBG2(DBG2),
-        .DBG3(DBG3),
-        .DBG4(DBG4),
-        .DDR_addr(DDR_addr),
+       (.DDR_addr(DDR_addr),
         .DDR_ba(DDR_ba),
         .DDR_cas_n(DDR_cas_n),
         .DDR_ck_n(DDR_ck_n),
@@ -158,6 +144,8 @@ module design_1_wrapper
         .FIXED_IO_ps_srstb(FIXED_IO_ps_srstb),
         .HSIA0(HSIA0),
         .HSIA1(HSIA1),
+        .HSICKA0(HSICKA0),
+        .HSICKA1(HSICKA1),
         .LED0(LED0),
         .LED1(LED1),
         .LED2(LED2),

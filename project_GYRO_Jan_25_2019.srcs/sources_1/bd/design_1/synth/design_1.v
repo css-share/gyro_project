@@ -1,7 +1,7 @@
 //Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-//Date        : Wed Jan 30 18:07:00 2019
+//Date        : Fri Feb  1 15:19:07 2019
 //Host        : AsusP8 running 64-bit major release  (build 9200)
 //Command     : generate_target design_1.bd
 //Design      : design_1
@@ -11,12 +11,7 @@
 
 (* CORE_GENERATION_INFO = "design_1,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=design_1,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=13,numReposBlks=8,numNonXlnxBlks=0,numHierBlks=5,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=0,numPkgbdBlks=0,bdsource=USER,da_axi4_cnt=3,da_ps7_cnt=1,synth_mode=OOC_per_IP}" *) (* HW_HANDOFF = "design_1.hwdef" *) 
 module design_1
-   (DBG0,
-    DBG1,
-    DBG2,
-    DBG3,
-    DBG4,
-    DDR_addr,
+   (DDR_addr,
     DDR_ba,
     DDR_cas_n,
     DDR_ck_n,
@@ -39,6 +34,8 @@ module design_1
     FIXED_IO_ps_srstb,
     HSIA0,
     HSIA1,
+    HSICKA0,
+    HSICKA1,
     LED0,
     LED1,
     LED2,
@@ -50,11 +47,6 @@ module design_1
     SPI_SCK,
     SW6,
     SW7);
-  (* X_INTERFACE_INFO = "xilinx.com:signal:data:1.0 DATA.DBG0 DATA" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME DATA.DBG0, LAYERED_METADATA undef" *) output DBG0;
-  (* X_INTERFACE_INFO = "xilinx.com:signal:data:1.0 DATA.DBG1 DATA" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME DATA.DBG1, LAYERED_METADATA undef" *) output DBG1;
-  (* X_INTERFACE_INFO = "xilinx.com:signal:data:1.0 DATA.DBG2 DATA" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME DATA.DBG2, LAYERED_METADATA undef" *) output DBG2;
-  (* X_INTERFACE_INFO = "xilinx.com:signal:data:1.0 DATA.DBG3 DATA" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME DATA.DBG3, LAYERED_METADATA undef" *) output DBG3;
-  (* X_INTERFACE_INFO = "xilinx.com:signal:data:1.0 DATA.DBG4 DATA" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME DATA.DBG4, LAYERED_METADATA undef" *) output DBG4;
   (* X_INTERFACE_INFO = "xilinx.com:interface:ddrx:1.0 DDR ADDR" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME DDR, AXI_ARBITRATION_SCHEME TDM, BURST_LENGTH 8, CAN_DEBUG false, CAS_LATENCY 11, CAS_WRITE_LATENCY 11, CS_ENABLED true, DATA_MASK_ENABLED true, DATA_WIDTH 8, MEMORY_TYPE COMPONENTS, MEM_ADDR_MAP ROW_COLUMN_BANK, SLOT Single, TIMEPERIOD_PS 1250" *) inout [14:0]DDR_addr;
   (* X_INTERFACE_INFO = "xilinx.com:interface:ddrx:1.0 DDR BA" *) inout [2:0]DDR_ba;
   (* X_INTERFACE_INFO = "xilinx.com:interface:ddrx:1.0 DDR CAS_N" *) inout DDR_cas_n;
@@ -78,6 +70,8 @@ module design_1
   (* X_INTERFACE_INFO = "xilinx.com:display_processing_system7:fixedio:1.0 FIXED_IO PS_SRSTB" *) inout FIXED_IO_ps_srstb;
   (* X_INTERFACE_INFO = "xilinx.com:signal:data:1.0 DATA.HSIA0 DATA" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME DATA.HSIA0, LAYERED_METADATA undef" *) input HSIA0;
   (* X_INTERFACE_INFO = "xilinx.com:signal:data:1.0 DATA.HSIA1 DATA" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME DATA.HSIA1, LAYERED_METADATA undef" *) input HSIA1;
+  (* X_INTERFACE_INFO = "xilinx.com:signal:data:1.0 DATA.HSICKA0 DATA" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME DATA.HSICKA0, LAYERED_METADATA undef" *) output HSICKA0;
+  (* X_INTERFACE_INFO = "xilinx.com:signal:data:1.0 DATA.HSICKA1 DATA" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME DATA.HSICKA1, LAYERED_METADATA undef" *) output HSICKA1;
   (* X_INTERFACE_INFO = "xilinx.com:signal:data:1.0 DATA.LED0 DATA" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME DATA.LED0, LAYERED_METADATA undef" *) output LED0;
   (* X_INTERFACE_INFO = "xilinx.com:signal:data:1.0 DATA.LED1 DATA" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME DATA.LED1, LAYERED_METADATA undef" *) output LED1;
   (* X_INTERFACE_INFO = "xilinx.com:signal:data:1.0 DATA.LED2 DATA" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME DATA.LED2, LAYERED_METADATA undef" *) output LED2;
@@ -105,11 +99,8 @@ module design_1
   wire axi4_pl_interrupt_ge_0_interrupt_0;
   wire axi4_pl_interrupt_ge_0_interrupt_1;
   wire axi4_pl_interrupt_ge_0_interrupt_2;
-  wire axi_gyro_hsi_0_DBG0;
-  wire axi_gyro_hsi_0_DBG1;
-  wire axi_gyro_hsi_0_DBG2;
-  wire axi_gyro_hsi_0_DBG3;
-  wire axi_gyro_hsi_0_DBG4;
+  wire axi_gyro_hsi_0_HSICKA0;
+  wire axi_gyro_hsi_0_HSICKA1;
   wire axi_gyro_hsi_0_MCK;
   wire [14:0]processing_system7_0_DDR_ADDR;
   wire [2:0]processing_system7_0_DDR_BA;
@@ -233,13 +224,10 @@ module design_1
   wire [0:0]rst_ps7_0_100M_peripheral_aresetn;
   wire [2:0]xlconcat_0_dout;
 
-  assign DBG0 = axi_gyro_hsi_0_DBG0;
-  assign DBG1 = axi_gyro_hsi_0_DBG1;
-  assign DBG2 = axi_gyro_hsi_0_DBG2;
-  assign DBG3 = axi_gyro_hsi_0_DBG3;
-  assign DBG4 = axi_gyro_hsi_0_DBG4;
   assign HSIA0_1 = HSIA0;
   assign HSIA1_1 = HSIA1;
+  assign HSICKA0 = axi_gyro_hsi_0_HSICKA0;
+  assign HSICKA1 = axi_gyro_hsi_0_HSICKA1;
   assign LED0 = axi4_pl_interrupt_ge_0_LED_0;
   assign LED1 = SPI_ip_0_FSM_START;
   assign LED2 = SPI_ip_0_FSM_DONE;
@@ -308,13 +296,10 @@ module design_1
         .s00_axi_wstrb(ps7_0_axi_periph_M00_AXI_WSTRB),
         .s00_axi_wvalid(ps7_0_axi_periph_M00_AXI_WVALID));
   design_1_axi_gyro_hsi_0_0 axi_gyro_hsi_0
-       (.DBG0(axi_gyro_hsi_0_DBG0),
-        .DBG1(axi_gyro_hsi_0_DBG1),
-        .DBG2(axi_gyro_hsi_0_DBG2),
-        .DBG3(axi_gyro_hsi_0_DBG3),
-        .DBG4(axi_gyro_hsi_0_DBG4),
-        .HSIA0(HSIA0_1),
+       (.HSIA0(HSIA0_1),
         .HSIA1(HSIA1_1),
+        .HSICKA0(axi_gyro_hsi_0_HSICKA0),
+        .HSICKA1(axi_gyro_hsi_0_HSICKA1),
         .MCK(axi_gyro_hsi_0_MCK),
         .s00_axi_aclk(processing_system7_0_FCLK_CLK0),
         .s00_axi_araddr(ps7_0_axi_periph_M02_AXI_ARADDR[3:0]),

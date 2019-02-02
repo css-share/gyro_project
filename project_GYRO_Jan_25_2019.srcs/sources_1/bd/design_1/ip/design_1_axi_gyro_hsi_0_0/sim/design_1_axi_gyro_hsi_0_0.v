@@ -48,7 +48,7 @@
 
 
 // IP VLNV: xilinx.com:user:axi_gyro_hsi:1.0
-// IP Revision: 25
+// IP Revision: 29
 
 `timescale 1ns/1ps
 
@@ -59,11 +59,6 @@ module design_1_axi_gyro_hsi_0_0 (
   HSICKA1,
   HSIA0,
   HSIA1,
-  DBG0,
-  DBG1,
-  DBG2,
-  DBG3,
-  DBG4,
   s00_axi_awaddr,
   s00_axi_awprot,
   s00_axi_awvalid,
@@ -92,11 +87,6 @@ output wire HSICKA0;
 output wire HSICKA1;
 input wire HSIA0;
 input wire HSIA1;
-output wire DBG0;
-output wire DBG1;
-output wire DBG2;
-output wire DBG3;
-output wire DBG4;
 (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI AWADDR" *)
 input wire [3 : 0] s00_axi_awaddr;
 (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI AWPROT" *)
@@ -153,11 +143,6 @@ input wire s00_axi_aresetn;
     .HSICKA1(HSICKA1),
     .HSIA0(HSIA0),
     .HSIA1(HSIA1),
-    .DBG0(DBG0),
-    .DBG1(DBG1),
-    .DBG2(DBG2),
-    .DBG3(DBG3),
-    .DBG4(DBG4),
     .s00_axi_awaddr(s00_axi_awaddr),
     .s00_axi_awprot(s00_axi_awprot),
     .s00_axi_awvalid(s00_axi_awvalid),

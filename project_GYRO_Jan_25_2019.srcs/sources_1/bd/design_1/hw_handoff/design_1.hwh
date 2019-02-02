@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Wed Jan 30 18:07:00 2019" VIVADOVERSION="2018.2">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Fri Feb  1 15:19:07 2019" VIVADOVERSION="2018.2">
 
   <SYSTEMINFO ARCH="zynq" BOARD="em.avnet.com:zed:part0:1.4" DEVICE="7z020" NAME="design_1" PACKAGE="clg484" SPEEDGRADE="-1"/>
 
@@ -85,34 +85,19 @@
         <CONNECTION INSTANCE="axi_gyro_hsi_0" PORT="HSIA1"/>
       </CONNECTIONS>
     </PORT>
-    <PORT DIR="O" NAME="DBG0" SIGIS="data" SIGNAME="axi_gyro_hsi_0_DBG0">
-      <CONNECTIONS>
-        <CONNECTION INSTANCE="axi_gyro_hsi_0" PORT="DBG0"/>
-      </CONNECTIONS>
-    </PORT>
-    <PORT DIR="O" NAME="DBG1" SIGIS="data" SIGNAME="axi_gyro_hsi_0_DBG1">
-      <CONNECTIONS>
-        <CONNECTION INSTANCE="axi_gyro_hsi_0" PORT="DBG1"/>
-      </CONNECTIONS>
-    </PORT>
-    <PORT DIR="O" NAME="DBG2" SIGIS="data" SIGNAME="axi_gyro_hsi_0_DBG2">
-      <CONNECTIONS>
-        <CONNECTION INSTANCE="axi_gyro_hsi_0" PORT="DBG2"/>
-      </CONNECTIONS>
-    </PORT>
-    <PORT DIR="O" NAME="DBG3" SIGIS="data" SIGNAME="axi_gyro_hsi_0_DBG3">
-      <CONNECTIONS>
-        <CONNECTION INSTANCE="axi_gyro_hsi_0" PORT="DBG3"/>
-      </CONNECTIONS>
-    </PORT>
-    <PORT DIR="O" NAME="DBG4" SIGIS="data" SIGNAME="axi_gyro_hsi_0_DBG4">
-      <CONNECTIONS>
-        <CONNECTION INSTANCE="axi_gyro_hsi_0" PORT="DBG4"/>
-      </CONNECTIONS>
-    </PORT>
     <PORT DIR="O" NAME="MCK" SIGIS="data" SIGNAME="axi_gyro_hsi_0_MCK">
       <CONNECTIONS>
         <CONNECTION INSTANCE="axi_gyro_hsi_0" PORT="MCK"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="HSICKA0" SIGIS="data" SIGNAME="axi_gyro_hsi_0_HSICKA0">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="axi_gyro_hsi_0" PORT="HSICKA0"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="HSICKA1" SIGIS="data" SIGNAME="axi_gyro_hsi_0_HSICKA1">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="axi_gyro_hsi_0" PORT="HSICKA1"/>
       </CONNECTIONS>
     </PORT>
   </EXTERNALPORTS>
@@ -605,8 +590,16 @@
             <CONNECTION INSTANCE="External_Ports" PORT="MCK"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" NAME="HSICKA0" SIGIS="undef"/>
-        <PORT DIR="O" NAME="HSICKA1" SIGIS="undef"/>
+        <PORT DIR="O" NAME="HSICKA0" SIGIS="undef" SIGNAME="axi_gyro_hsi_0_HSICKA0">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="HSICKA0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="HSICKA1" SIGIS="undef" SIGNAME="axi_gyro_hsi_0_HSICKA1">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="HSICKA1"/>
+          </CONNECTIONS>
+        </PORT>
         <PORT DIR="I" NAME="HSIA0" SIGIS="undef" SIGNAME="External_Ports_HSIA0">
           <CONNECTIONS>
             <CONNECTION INSTANCE="External_Ports" PORT="HSIA0"/>
@@ -615,31 +608,6 @@
         <PORT DIR="I" NAME="HSIA1" SIGIS="undef" SIGNAME="External_Ports_HSIA1">
           <CONNECTIONS>
             <CONNECTION INSTANCE="External_Ports" PORT="HSIA1"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="O" NAME="DBG0" SIGIS="undef" SIGNAME="axi_gyro_hsi_0_DBG0">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="External_Ports" PORT="DBG0"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="O" NAME="DBG1" SIGIS="undef" SIGNAME="axi_gyro_hsi_0_DBG1">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="External_Ports" PORT="DBG1"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="O" NAME="DBG2" SIGIS="undef" SIGNAME="axi_gyro_hsi_0_DBG2">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="External_Ports" PORT="DBG2"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="O" NAME="DBG3" SIGIS="undef" SIGNAME="axi_gyro_hsi_0_DBG3">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="External_Ports" PORT="DBG3"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="O" NAME="DBG4" SIGIS="undef" SIGNAME="axi_gyro_hsi_0_DBG4">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="External_Ports" PORT="DBG4"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="I" LEFT="3" NAME="s00_axi_awaddr" RIGHT="0" SIGIS="undef" SIGNAME="axi_gyro_hsi_0_s00_axi_awaddr">

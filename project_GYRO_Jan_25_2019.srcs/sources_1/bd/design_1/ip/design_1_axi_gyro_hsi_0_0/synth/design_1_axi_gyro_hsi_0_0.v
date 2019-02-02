@@ -48,11 +48,11 @@
 
 
 // IP VLNV: xilinx.com:user:axi_gyro_hsi:1.0
-// IP Revision: 25
+// IP Revision: 29
 
 (* X_CORE_INFO = "axi_gyro_hsi_v1_0,Vivado 2018.2" *)
 (* CHECK_LICENSE_TYPE = "design_1_axi_gyro_hsi_0_0,axi_gyro_hsi_v1_0,{}" *)
-(* CORE_GENERATION_INFO = "design_1_axi_gyro_hsi_0_0,axi_gyro_hsi_v1_0,{x_ipProduct=Vivado 2018.2,x_ipVendor=xilinx.com,x_ipLibrary=user,x_ipName=axi_gyro_hsi,x_ipVersion=1.0,x_ipCoreRevision=25,x_ipLanguage=VERILOG,x_ipSimLanguage=MIXED,C_S00_AXI_DATA_WIDTH=32,C_S00_AXI_ADDR_WIDTH=4}" *)
+(* CORE_GENERATION_INFO = "design_1_axi_gyro_hsi_0_0,axi_gyro_hsi_v1_0,{x_ipProduct=Vivado 2018.2,x_ipVendor=xilinx.com,x_ipLibrary=user,x_ipName=axi_gyro_hsi,x_ipVersion=1.0,x_ipCoreRevision=29,x_ipLanguage=VERILOG,x_ipSimLanguage=MIXED,C_S00_AXI_DATA_WIDTH=32,C_S00_AXI_ADDR_WIDTH=4}" *)
 (* DowngradeIPIdentifiedWarnings = "yes" *)
 module design_1_axi_gyro_hsi_0_0 (
   MCK,
@@ -60,11 +60,6 @@ module design_1_axi_gyro_hsi_0_0 (
   HSICKA1,
   HSIA0,
   HSIA1,
-  DBG0,
-  DBG1,
-  DBG2,
-  DBG3,
-  DBG4,
   s00_axi_awaddr,
   s00_axi_awprot,
   s00_axi_awvalid,
@@ -93,11 +88,6 @@ output wire HSICKA0;
 output wire HSICKA1;
 input wire HSIA0;
 input wire HSIA1;
-output wire DBG0;
-output wire DBG1;
-output wire DBG2;
-output wire DBG3;
-output wire DBG4;
 (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI AWADDR" *)
 input wire [3 : 0] s00_axi_awaddr;
 (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI AWPROT" *)
@@ -154,11 +144,6 @@ input wire s00_axi_aresetn;
     .HSICKA1(HSICKA1),
     .HSIA0(HSIA0),
     .HSIA1(HSIA1),
-    .DBG0(DBG0),
-    .DBG1(DBG1),
-    .DBG2(DBG2),
-    .DBG3(DBG3),
-    .DBG4(DBG4),
     .s00_axi_awaddr(s00_axi_awaddr),
     .s00_axi_awprot(s00_axi_awprot),
     .s00_axi_awvalid(s00_axi_awvalid),

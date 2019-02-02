@@ -80,13 +80,13 @@
 -endlib
 -makelib ies_lib/xil_defaultlib \
   "../../../bd/design_1/ip/design_1_xbar_0/sim/design_1_xbar_0.v" \
-  "../../../bd/design_1/ipshared/4584/src/Packetizer.v" \
-  "../../../bd/design_1/ipshared/4584/src/StreamPipeline.v" \
-  "../../../bd/design_1/ipshared/4584/src/Tokenizer.v" \
-  "../../../bd/design_1/ipshared/4584/src/gyro_basics.v" \
-  "../../../bd/design_1/ipshared/4584/src/StreamGenerator.v" \
-  "../../../bd/design_1/ipshared/4584/src/axi_gyro_hsi_v1_0_S00_AXI.v" \
-  "../../../bd/design_1/ipshared/4584/hdl/axi_gyro_hsi_v1_0.v" \
+  "../../../bd/design_1/ipshared/c69c/src/Packetizer.v" \
+  "../../../bd/design_1/ipshared/c69c/src/StreamPipeline.v" \
+  "../../../bd/design_1/ipshared/c69c/src/Tokenizer.v" \
+  "../../../bd/design_1/ipshared/c69c/src/gyro_basics.v" \
+  "../../../bd/design_1/ipshared/c69c/src/StreamGenerator.v" \
+  "../../../bd/design_1/ipshared/c69c/src/axi_gyro_hsi_v1_0_S00_AXI.v" \
+  "../../../bd/design_1/ipshared/c69c/hdl/axi_gyro_hsi_v1_0.v" \
   "../../../bd/design_1/ip/design_1_axi_gyro_hsi_0_0/sim/design_1_axi_gyro_hsi_0_0.v" \
 -endlib
 -makelib ies_lib/axi_protocol_converter_v2_1_17 \

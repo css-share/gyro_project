@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-| Date             : Wed Jan 30 18:45:17 2019
+| Date             : Fri Feb  1 15:55:13 2019
 | Host             : AsusP8 running 64-bit major release  (build 9200)
 | Command          : report_power -file design_1_wrapper_power_routed.rpt -pb design_1_wrapper_power_summary_routed.pb -rpx design_1_wrapper_power_routed.rpx
 | Design           : design_1_wrapper
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 1.689        |
+| Total On-Chip Power (W)  | 1.688        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 1.543        |
+| Dynamic (W)              | 1.542        |
 | Device Static (W)        | 0.146        |
 | Effective TJA (C/W)      | 11.5         |
 | Max Ambient (C)          | 65.5         |
@@ -53,19 +53,19 @@ Table of Contents
 | On-Chip                 | Power (W) | Used     | Available | Utilization (%) |
 +-------------------------+-----------+----------+-----------+-----------------+
 | Clocks                  |     0.004 |        3 |       --- |             --- |
-| Slice Logic             |     0.002 |     2718 |       --- |             --- |
-|   LUT as Logic          |     0.002 |      826 |     53200 |            1.55 |
-|   Register              |    <0.001 |     1397 |    106400 |            1.31 |
-|   CARRY4                |    <0.001 |       10 |     13300 |            0.08 |
+| Slice Logic             |     0.002 |     2717 |       --- |             --- |
+|   LUT as Logic          |     0.002 |      823 |     53200 |            1.55 |
+|   Register              |    <0.001 |     1381 |    106400 |            1.30 |
+|   CARRY4                |    <0.001 |       22 |     13300 |            0.17 |
 |   LUT as Shift Register |    <0.001 |       64 |     17400 |            0.37 |
 |   BUFG                  |    <0.001 |        1 |        32 |            3.13 |
 |   F7/F8 Muxes           |    <0.001 |        1 |     53200 |           <0.01 |
-|   Others                |     0.000 |      237 |       --- |             --- |
-| Signals                 |     0.003 |     2120 |       --- |             --- |
-| I/O                     |     0.004 |       16 |       200 |            8.00 |
+|   Others                |     0.000 |      243 |       --- |             --- |
+| Signals                 |     0.003 |     2105 |       --- |             --- |
+| I/O                     |     0.003 |       13 |       200 |            6.50 |
 | PS7                     |     1.529 |        1 |       --- |             --- |
 | Static Power            |     0.146 |          |           |                 |
-| Total                   |     1.689 |          |           |                 |
+| Total                   |     1.688 |          |           |                 |
 +-------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -151,7 +151,7 @@ Table of Contents
 +-------------------------------------------------------+-----------+
 | Name                                                  | Power (W) |
 +-------------------------------------------------------+-----------+
-| design_1_wrapper                                      |     1.543 |
+| design_1_wrapper                                      |     1.542 |
 |   design_1_i                                          |     1.539 |
 |     SPI_ip_0                                          |     0.001 |
 |       inst                                            |     0.001 |
@@ -178,6 +178,10 @@ Table of Contents
 |           GYRO_ADC_OUT_STREAM                         |     0.001 |
 |             CLK_DIV2                                  |    <0.001 |
 |               ff0                                     |    <0.001 |
+|             GYRO_Debugger                             |    <0.001 |
+|               CNTR0                                   |    <0.001 |
+|               CNTR1                                   |    <0.001 |
+|               CNTR2                                   |    <0.001 |
 |             GYRO_Packetizer                           |    <0.001 |
 |               FF0                                     |    <0.001 |
 |               FF1                                     |    <0.001 |
