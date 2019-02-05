@@ -1,0 +1,8 @@
+20:38:08 **** Incremental Build of configuration Debug for project axi4_pl_interrupt_generator_test ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Nothing to be done for `main-build'.
+
+20:38:09 Build Finished (took 235ms)
+
