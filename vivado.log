@@ -1,0 +1,99 @@
+#-----------------------------------------------------------
+# Vivado v2018.2 (64-bit)
+# SW Build 2258646 on Thu Jun 14 20:03:12 MDT 2018
+# IP Build 2256618 on Thu Jun 14 22:10:49 MDT 2018
+# Start of session at: Tue Feb  5 19:48:24 2019
+# Process ID: 1600
+# Current directory: C:/Xilinx_Projects/gyro_project
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent7800 C:\Xilinx_Projects\gyro_project\project_GYRO_Feb_04_2019.xpr
+# Log file: C:/Xilinx_Projects/gyro_project/vivado.log
+# Journal file: C:/Xilinx_Projects/gyro_project\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project C:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.xpr
+Scanning sources...
+Finished scanning sources
+WARNING: [Project 1-509] GeneratedRun file for 'synth_1' not found
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'c:/Xilinx_Projects/ip_repo/axis_stream_fifo_1.0'.
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'c:/Xilinx_Projects/ip_repo/axis_GYRO_Streaming_FIFO_1.0'.
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'c:/Xilinx_Projects/ip_repo/axi_gyro_hsi_1.0'.
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'c:/Xilinx_Projects/ip_repo/SPI_ip_1.0'.
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'c:/Xilinx_Projects/ip_repo/axi4_pl_interrupt_generator_1.0'.
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2018.2/data/ip'.
+open_project: Time (s): cpu = 00:00:48 ; elapsed = 00:00:49 . Memory (MB): peak = 869.184 ; gain = 173.758
+update_compile_order -fileset sources_1
+open_bd_design {C:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/design_1.bd}
+Adding cell -- xilinx.com:ip:processing_system7:5.5 - processing_system7_0
+Adding cell -- xilinx.com:ip:proc_sys_reset:5.0 - rst_ps7_0_100M
+Adding cell -- xilinx.com:ip:xlconcat:2.1 - xlconcat_0
+Adding cell -- xilinx.com:user:axi4_pl_interrupt_generator:1.0 - axi4_pl_interrupt_ge_0
+Adding cell -- xilinx.com:user:axi4_pl_SPI_ip:1.0 - SPI_ip_0
+Adding cell -- xilinx.com:user:axi_gyro_hsi:1.0 - axi_gyro_hsi_0
+Adding cell -- xilinx.com:ip:axi_dma:7.1 - axi_dma_0
+Adding cell -- xilinx.com:ip:smartconnect:1.0 - axi_smc
+Adding cell -- xilinx.com:user:axis_stream_fifo:1.0 - axis_stream_fifo_0
+Adding cell -- xilinx.com:ip:axi_crossbar:2.1 - xbar
+Adding cell -- xilinx.com:ip:axi_protocol_converter:2.1 - auto_pc
+Successfully read diagram <design_1> from BD file <C:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/design_1.bd>
+open_bd_design: Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 991.066 ; gain = 112.480
+ipx::edit_ip_in_project -upgrade true -name axi_gyro_hsi_v1_0_project -directory C:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.tmp/axi_gyro_hsi_v1_0_project c:/Xilinx_Projects/ip_repo/axi_gyro_hsi_1.0/component.xml
+INFO: [ProjectBase 1-489] The host OS only allows 260 characters in a normal path. The project is stored in a path with more than 80 characters. If you experience issues with IP, Block Designs, or files not being found, please consider moving the project to a location with a shorter path. Alternately consider using the OS subst command to map part of the path to a drive letter.
+Current project path is 'c:/xilinx_projects/gyro_project/project_gyro_feb_04_2019.tmp/axi_gyro_hsi_v1_0_project'
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2018.2/data/ip'.
+create_project: Time (s): cpu = 00:00:20 ; elapsed = 00:00:14 . Memory (MB): peak = 1020.762 ; gain = 8.617
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'c:/Xilinx_Projects/ip_repo/axis_stream_fifo_1.0'.
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'c:/Xilinx_Projects/ip_repo/axis_GYRO_Streaming_FIFO_1.0'.
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'c:/Xilinx_Projects/ip_repo/axi_gyro_hsi_1.0'.
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'c:/Xilinx_Projects/ip_repo/SPI_ip_1.0'.
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'c:/Xilinx_Projects/ip_repo/axi4_pl_interrupt_generator_1.0'.
+INFO: [IP_Flow 19-795] Syncing license key meta-data
+ipx::edit_ip_in_project: Time (s): cpu = 00:00:31 ; elapsed = 00:00:20 . Memory (MB): peak = 1029.285 ; gain = 17.141
+update_compile_order -fileset sources_1
+close_project
+launch_runs synth_2 -jobs 2
+INFO: [BD 41-1662] The design 'design_1.bd' is already validated. Therefore parameter propagation will not be re-run.
+VHDL Output written to : C:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/synth/design_1.v
+VHDL Output written to : C:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/sim/design_1.v
+VHDL Output written to : C:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/hdl/design_1_wrapper.v
+INFO: [BD 41-1029] Generation completed for the IP Integrator block processing_system7_0 .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block axi4_pl_interrupt_ge_0 .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block rst_ps7_0_100M .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block xlconcat_0 .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block SPI_ip_0 .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block ps7_0_axi_periph/xbar .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block axi_gyro_hsi_0 .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block axi_dma_0 .
+Exporting to file c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ip/design_1_axi_smc_0/bd_0/hw_handoff/design_1_axi_smc_0.hwh
+Generated Block Design Tcl file c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ip/design_1_axi_smc_0/bd_0/hw_handoff/design_1_axi_smc_0_bd.tcl
+Generated Hardware Definition File c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ip/design_1_axi_smc_0/bd_0/synth/design_1_axi_smc_0.hwdef
+INFO: [BD 41-1029] Generation completed for the IP Integrator block axi_smc .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block axis_stream_fifo_0 .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block ps7_0_axi_periph/s00_couplers/auto_pc .
+Exporting to file C:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/hw_handoff/design_1.hwh
+Generated Block Design Tcl file C:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/hw_handoff/design_1_bd.tcl
+Generated Hardware Definition File C:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/synth/design_1.hwdef
+[Tue Feb  5 19:56:04 2019] Launched synth_2...
+Run output will be captured here: C:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.runs/synth_2/runme.log
+launch_runs: Time (s): cpu = 00:00:51 ; elapsed = 00:00:58 . Memory (MB): peak = 1260.918 ; gain = 224.184
+launch_runs impl_2 -jobs 2
+[Tue Feb  5 19:58:36 2019] Launched impl_2...
+Run output will be captured here: C:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.runs/impl_2/runme.log
+launch_runs impl_2 -to_step write_bitstream -jobs 2
+[Tue Feb  5 20:11:12 2019] Launched impl_2...
+Run output will be captured here: C:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.runs/impl_2/runme.log
+file copy -force C:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.runs/impl_2/design_1_wrapper.sysdef C:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.sdk/design_1_wrapper.hdf
+
+launch_sdk -workspace C:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.sdk -hwspec C:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.sdk/design_1_wrapper.hdf
+INFO: [Vivado 12-393] Launching SDK...
+INFO: [Vivado 12-417] Running xsdk -workspace C:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.sdk -hwspec C:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.sdk/design_1_wrapper.hdf
+INFO: [Vivado 12-3157] SDK launch initiated. Please check console for any further messages.
+launch_sdk -workspace C:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.sdk -hwspec C:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.sdk/design_1_wrapper.hdf
+INFO: [Vivado 12-393] Launching SDK...
+INFO: [Vivado 12-417] Running xsdk -workspace C:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.sdk -hwspec C:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.sdk/design_1_wrapper.hdf
+INFO: [Vivado 12-3157] SDK launch initiated. Please check console for any further messages.
+exit
+INFO: [Common 17-206] Exiting Vivado at Tue Feb  5 23:12:18 2019...

@@ -1,8 +1,49 @@
-20:38:08 **** Incremental Build of configuration Debug for project axi4_pl_interrupt_generator_test ****
+20:34:58 **** Build of configuration Debug for project axi4_pl_interrupt_generator_test ****
 make pre-build main-build 
 a9-linaro-pre-build-step
 ' '
-make: Nothing to be done for `main-build'.
+'Building file: ../src/helloworld.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/helloworld.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../axi4_pl_interrupt_generator_test_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/helloworld.d" -MT"src/helloworld.o" -o "src/helloworld.o" "../src/helloworld.c"
+In file included from ../src/helloworld.c:4:0:
+../../axi4_pl_interrupt_generator_test_bsp/ps7_cortexa9_0/include/xbasic_types.h:115:2: warning: #warning The xbasics_type.h file is deprecated and users should use xil_types.h and xil_assert. [-Wcpp]
+ #warning  The xbasics_type.h file is deprecated and users should use xil_types.h and xil_assert.
+  ^~~~~~~
+../../axi4_pl_interrupt_generator_test_bsp/ps7_cortexa9_0/include/xbasic_types.h:116:2: warning: #warning Please refer the Standalone BSP UG647 for further details [-Wcpp]
+ #warning  Please refer the Standalone BSP UG647 for further details
+  ^~~~~~~
+../src/helloworld.c: In function 'setSPIClockDivision':
+../src/helloworld.c:76:7: warning: unused variable 'w' [-Wunused-variable]
+   int w;
+       ^
+../src/helloworld.c: In function 'main':
+../src/helloworld.c:208:18: warning: unused variable 'writeVal' [-Wunused-variable]
+     int readVal, writeVal;
+                  ^~~~~~~~
+../src/helloworld.c:208:9: warning: unused variable 'readVal' [-Wunused-variable]
+     int readVal, writeVal;
+         ^~~~~~~
+../src/helloworld.c:206:6: warning: unused variable 'err' [-Wunused-variable]
+  int err;
+      ^~~
+'Finished building: ../src/helloworld.c'
+' '
+'Building file: ../src/platform.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/platform.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../axi4_pl_interrupt_generator_test_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/platform.d" -MT"src/platform.o" -o "src/platform.o" "../src/platform.c"
+'Finished building: ../src/platform.c'
+' '
+'Building target: axi4_pl_interrupt_generator_test.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../axi4_pl_interrupt_generator_test_bsp/ps7_cortexa9_0/lib -o "axi4_pl_interrupt_generator_test.elf"  ./src/helloworld.o ./src/platform.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+'Finished building target: axi4_pl_interrupt_generator_test.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size axi4_pl_interrupt_generator_test.elf  |tee "axi4_pl_interrupt_generator_test.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  29056	   2736	  22600	  54392	   d478	axi4_pl_interrupt_generator_test.elf
+'Finished building: axi4_pl_interrupt_generator_test.elf.size'
+' '
 
-20:38:09 Build Finished (took 235ms)
+20:35:00 Build Finished (took 2s.617ms)
 

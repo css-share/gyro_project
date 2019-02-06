@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
 	<name>axi4_gyro_test_0</name>
-	<comment>Created by SDK v2018.2. axi4_gyro_test_0_bsp - ps7_cortexa9_0</comment>
+	<comment></comment>
 	<projects>
 		<project>standalone_bsp_0</project>
 	</projects>

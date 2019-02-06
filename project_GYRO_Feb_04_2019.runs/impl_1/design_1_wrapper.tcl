@@ -60,7 +60,6 @@ proc step_failed { step } {
   close $ch
 }
 
-set_msg_config -id {HDL-1065} -limit 10000
 
 start_step init_design
 set ACTIVE_STEP init_design
@@ -70,24 +69,24 @@ set rc [catch {
   set_property board_part em.avnet.com:zed:part0:1.4 [current_project]
   set_property design_mode GateLvl [current_fileset]
   set_param project.singleFileAddWarning.threshold 0
-  set_property webtalk.parent_dir C:/Xilinx/Vivado/projects/project_GYRO_Feb_04_2019/project_GYRO_Feb_04_2019.cache/wt [current_project]
-  set_property parent.project_path C:/Xilinx/Vivado/projects/project_GYRO_Feb_04_2019/project_GYRO_Feb_04_2019.xpr [current_project]
+  set_property webtalk.parent_dir C:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.cache/wt [current_project]
+  set_property parent.project_path C:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.xpr [current_project]
   set_property ip_repo_paths {
-  C:/Xilinx/Vivado/projects/ip_repo/axis_stream_fifo_1.0
-  C:/Xilinx/Vivado/projects/ip_repo/axis_GYRO_Streaming_FIFO_1.0
-  c:/Xilinx/Vivado/projects/ip_repo/axi_gyro_hsi_1.0
-  c:/Xilinx/Vivado/projects/ip_repo/SPI_ip_1.0
-  c:/Xilinx/Vivado/projects/ip_repo/axi4_pl_interrupt_generator_1.0
+  C:/Xilinx_Projects/ip_repo/axis_stream_fifo_1.0
+  C:/Xilinx_Projects/ip_repo/axis_GYRO_Streaming_FIFO_1.0
+  C:/Xilinx_Projects/ip_repo/axi_gyro_hsi_1.0
+  C:/Xilinx_Projects/ip_repo/SPI_ip_1.0
+  C:/Xilinx_Projects/ip_repo/axi4_pl_interrupt_generator_1.0
 } [current_project]
-  set_property ip_output_repo C:/Xilinx/Vivado/projects/project_GYRO_Feb_04_2019/project_GYRO_Feb_04_2019.cache/ip [current_project]
+  set_property ip_output_repo C:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.cache/ip [current_project]
   set_property ip_cache_permissions {read write} [current_project]
   set_property XPM_LIBRARIES {XPM_CDC XPM_FIFO XPM_MEMORY} [current_project]
-  add_files -quiet C:/Xilinx/Vivado/projects/project_GYRO_Feb_04_2019/project_GYRO_Feb_04_2019.runs/synth_1/design_1_wrapper.dcp
+  add_files -quiet C:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.runs/synth_1/design_1_wrapper.dcp
   set_msg_config -source 4 -id {BD 41-1661} -limit 0
   set_param project.isImplRun true
-  add_files C:/Xilinx/Vivado/projects/project_GYRO_Feb_04_2019/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/design_1.bd
+  add_files C:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/design_1.bd
   set_param project.isImplRun false
-  read_xdc C:/Xilinx/Vivado/projects/project_GYRO_Feb_04_2019/project_GYRO_Feb_04_2019.srcs/constrs_1/new/LED_0.xdc
+  read_xdc C:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/constrs_1/new/LED_0.xdc
   set_param project.isImplRun true
   link_design -top design_1_wrapper -part xc7z020clg484-1
   set_param project.isImplRun false
@@ -163,26 +162,6 @@ if {$rc} {
   return -code error $RESULT
 } else {
   end_step route_design
-  unset ACTIVE_STEP 
-}
-
-start_step write_bitstream
-set ACTIVE_STEP write_bitstream
-set rc [catch {
-  create_msg_db write_bitstream.pb
-  set_property XPM_LIBRARIES {XPM_CDC XPM_FIFO XPM_MEMORY} [current_project]
-  catch { write_mem_info -force design_1_wrapper.mmi }
-  write_bitstream -force design_1_wrapper.bit 
-  catch { write_sysdef -hwdef design_1_wrapper.hwdef -bitfile design_1_wrapper.bit -meminfo design_1_wrapper.mmi -file design_1_wrapper.sysdef }
-  catch {write_debug_probes -quiet -force design_1_wrapper}
-  catch {file copy -force design_1_wrapper.ltx debug_nets.ltx}
-  close_msg_db -file write_bitstream.pb
-} RESULT]
-if {$rc} {
-  step_failed write_bitstream
-  return -code error $RESULT
-} else {
-  end_step write_bitstream
   unset ACTIVE_STEP 
 }
 

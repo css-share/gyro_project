@@ -1,0 +1,60 @@
+#-----------------------------------------------------------
+# Vivado v2018.2 (64-bit)
+# SW Build 2258646 on Thu Jun 14 20:03:12 MDT 2018
+# IP Build 2256618 on Thu Jun 14 22:10:49 MDT 2018
+# Start of session at: Tue Feb  5 15:50:42 2019
+# Process ID: 976
+# Current directory: C:/Xilinx_Projects/gyro_project
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent844 C:\Xilinx_Projects\gyro_project\project_GYRO_Feb_04_2019.xpr
+# Log file: C:/Xilinx_Projects/gyro_project/vivado.log
+# Journal file: C:/Xilinx_Projects/gyro_project\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project C:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.xpr
+Scanning sources...
+Finished scanning sources
+WARNING: [filemgmt 56-3] IP Repository Path: Could not find the directory 'C:/Xilinx_Projects/ip_repo/axis_stream_fifo_1.0'.
+WARNING: [filemgmt 56-3] IP Repository Path: Could not find the directory 'C:/Xilinx_Projects/ip_repo/axis_GYRO_Streaming_FIFO_1.0'.
+WARNING: [filemgmt 56-3] IP Repository Path: Could not find the directory 'C:/Xilinx_Projects/ip_repo/axi_gyro_hsi_1.0'.
+WARNING: [filemgmt 56-3] IP Repository Path: Could not find the directory 'C:/Xilinx_Projects/ip_repo/SPI_ip_1.0'.
+WARNING: [filemgmt 56-3] IP Repository Path: Could not find the directory 'C:/Xilinx_Projects/ip_repo/axi4_pl_interrupt_generator_1.0'.
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+WARNING: [IP_Flow 19-2248] Failed to load user IP repository 'c:/Xilinx_Projects/ip_repo/axis_stream_fifo_1.0'; Can't find the specified path.
+If this directory should no longer be in your list of user repositories, go to the IP Settings dialog and remove it.
+WARNING: [IP_Flow 19-2248] Failed to load user IP repository 'c:/Xilinx_Projects/ip_repo/axis_GYRO_Streaming_FIFO_1.0'; Can't find the specified path.
+If this directory should no longer be in your list of user repositories, go to the IP Settings dialog and remove it.
+WARNING: [IP_Flow 19-2248] Failed to load user IP repository 'c:/Xilinx_Projects/ip_repo/axi_gyro_hsi_1.0'; Can't find the specified path.
+If this directory should no longer be in your list of user repositories, go to the IP Settings dialog and remove it.
+WARNING: [IP_Flow 19-2248] Failed to load user IP repository 'c:/Xilinx_Projects/ip_repo/SPI_ip_1.0'; Can't find the specified path.
+If this directory should no longer be in your list of user repositories, go to the IP Settings dialog and remove it.
+WARNING: [IP_Flow 19-2248] Failed to load user IP repository 'c:/Xilinx_Projects/ip_repo/axi4_pl_interrupt_generator_1.0'; Can't find the specified path.
+If this directory should no longer be in your list of user repositories, go to the IP Settings dialog and remove it.
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2018.2/data/ip'.
+WARNING: [BD 41-1661] One or more IPs have been locked in the design 'design_1.bd'. Please run report_ip_status for more details and recommendations on how to fix this issue.
+List of locked IPs:
+design_1_axi4_pl_interrupt_ge_0_0
+design_1_axi_gyro_hsi_0_0
+design_1_SPI_ip_0_1
+design_1_axis_stream_fifo_0_0
+
+open_project: Time (s): cpu = 00:00:49 ; elapsed = 00:00:47 . Memory (MB): peak = 879.539 ; gain = 172.648
+open_bd_design {C:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/design_1.bd}
+Adding cell -- xilinx.com:ip:processing_system7:5.5 - processing_system7_0
+Adding cell -- xilinx.com:ip:proc_sys_reset:5.0 - rst_ps7_0_100M
+Adding cell -- xilinx.com:ip:xlconcat:2.1 - xlconcat_0
+Adding cell -- xilinx.com:user:axi4_pl_interrupt_generator:1.0 - axi4_pl_interrupt_ge_0
+Adding cell -- xilinx.com:user:axi4_pl_SPI_ip:1.0 - SPI_ip_0
+Adding cell -- xilinx.com:user:axi_gyro_hsi:1.0 - axi_gyro_hsi_0
+Adding cell -- xilinx.com:ip:axi_dma:7.1 - axi_dma_0
+Adding cell -- xilinx.com:ip:smartconnect:1.0 - axi_smc
+Adding cell -- xilinx.com:user:axis_stream_fifo:1.0 - axis_stream_fifo_0
+Adding cell -- xilinx.com:ip:axi_crossbar:2.1 - xbar
+Adding cell -- xilinx.com:ip:axi_protocol_converter:2.1 - auto_pc
+Successfully read diagram <design_1> from BD file <C:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/design_1.bd>
+open_bd_design: Time (s): cpu = 00:00:27 ; elapsed = 00:00:27 . Memory (MB): peak = 985.055 ; gain = 100.473
+update_compile_order -fileset sources_1
+reset_run synth_2
+set_property name synth_1 [get_runs synth_2]
+ERROR: [Common 17-69] Command failed: A run with this name already exists. Please specify a unique name.
+exit
+INFO: [Common 17-206] Exiting Vivado at Tue Feb  5 15:58:45 2019...
