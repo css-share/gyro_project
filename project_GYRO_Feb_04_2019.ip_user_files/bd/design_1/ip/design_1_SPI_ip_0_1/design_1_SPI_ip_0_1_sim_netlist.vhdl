@@ -1,10 +1,10 @@
 -- Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
--- Date        : Tue Jan 22 17:10:21 2019
+-- Date        : Mon Feb  4 15:32:23 2019
 -- Host        : AsusP8 running 64-bit major release  (build 9200)
--- Command     : write_vhdl -force -mode funcsim -rename_top design_1_SPI_ip_0_1 -prefix
---               design_1_SPI_ip_0_1_ design_1_SPI_ip_0_1_sim_netlist.vhdl
+-- Command     : write_vhdl -force -mode funcsim
+--               C:/Xilinx/Vivado/projects/project_GYRO_Feb_04_2019/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ip/design_1_SPI_ip_0_1/design_1_SPI_ip_0_1_sim_netlist.vhdl
 -- Design      : design_1_SPI_ip_0_1
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -67,19 +67,22 @@ entity design_1_SPI_ip_0_1_SPI_fsm is
     \r_reg_reg[1]_P\ : out STD_LOGIC;
     \r_reg_reg[0]_P\ : out STD_LOGIC;
     \r_reg_reg[4]_P_0\ : out STD_LOGIC;
+    SPI_SCK : out STD_LOGIC;
     SPI_MOSI : out STD_LOGIC;
     SPI_CS : out STD_LOGIC;
     D : out STD_LOGIC_VECTOR ( 0 to 0 );
     s00_axi_aresetn : in STD_LOGIC;
     Q : in STD_LOGIC_VECTOR ( 24 downto 0 );
-    MOSI_int : in STD_LOGIC;
     \slv_reg3_reg[31]\ : in STD_LOGIC_VECTOR ( 0 to 0 );
+    MOSI_int : in STD_LOGIC;
     axi_araddr : in STD_LOGIC_VECTOR ( 1 downto 0 );
     \slv_reg2_reg[31]\ : in STD_LOGIC_VECTOR ( 0 to 0 );
     SR : in STD_LOGIC_VECTOR ( 0 to 0 );
     \FSM_onehot_state_reg[3]_0\ : in STD_LOGIC_VECTOR ( 1 downto 0 );
     CLK : in STD_LOGIC
   );
+  attribute ORIG_REF_NAME : string;
+  attribute ORIG_REF_NAME of design_1_SPI_ip_0_1_SPI_fsm : entity is "SPI_fsm";
 end design_1_SPI_ip_0_1_SPI_fsm;
 
 architecture STRUCTURE of design_1_SPI_ip_0_1_SPI_fsm is
@@ -225,6 +228,15 @@ SPI_MOSI_INST_0: unisim.vcomponents.LUT4
       I2 => \FSM_onehot_state_reg_n_0_[0]\,
       I3 => load,
       O => SPI_MOSI
+    );
+SPI_SCK_INST_0: unisim.vcomponents.LUT2
+    generic map(
+      INIT => X"6"
+    )
+        port map (
+      I0 => \^out\(2),
+      I1 => \slv_reg3_reg[31]\(0),
+      O => SPI_SCK
     );
 \axi_rdata[31]_i_1\: unisim.vcomponents.LUT6
     generic map(
@@ -749,6 +761,8 @@ entity design_1_SPI_ip_0_1_dff is
     s00_axi_aclk : in STD_LOGIC;
     s00_axi_aresetn : in STD_LOGIC
   );
+  attribute ORIG_REF_NAME : string;
+  attribute ORIG_REF_NAME of design_1_SPI_ip_0_1_dff : entity is "dff";
 end design_1_SPI_ip_0_1_dff;
 
 architecture STRUCTURE of design_1_SPI_ip_0_1_dff is
@@ -1089,6 +1103,8 @@ entity design_1_SPI_ip_0_1_downCounter5Bits is
     Q : in STD_LOGIC_VECTOR ( 0 to 0 );
     \FSM_onehot_state_reg[1]_0\ : in STD_LOGIC
   );
+  attribute ORIG_REF_NAME : string;
+  attribute ORIG_REF_NAME of design_1_SPI_ip_0_1_downCounter5Bits : entity is "downCounter5Bits";
 end design_1_SPI_ip_0_1_downCounter5Bits;
 
 architecture STRUCTURE of design_1_SPI_ip_0_1_downCounter5Bits is
@@ -1364,6 +1380,8 @@ entity design_1_SPI_ip_0_1_leftShiftRegister25bits is
     \slv_reg2_reg[23]\ : in STD_LOGIC_VECTOR ( 23 downto 0 );
     Q : in STD_LOGIC_VECTOR ( 23 downto 0 )
   );
+  attribute ORIG_REF_NAME : string;
+  attribute ORIG_REF_NAME of design_1_SPI_ip_0_1_leftShiftRegister25bits : entity is "leftShiftRegister25bits";
 end design_1_SPI_ip_0_1_leftShiftRegister25bits;
 
 architecture STRUCTURE of design_1_SPI_ip_0_1_leftShiftRegister25bits is
@@ -2687,6 +2705,8 @@ entity design_1_SPI_ip_0_1_clock_divider is
     s00_axi_aresetn : in STD_LOGIC;
     \slv_reg3_reg[2]\ : in STD_LOGIC_VECTOR ( 2 downto 0 )
   );
+  attribute ORIG_REF_NAME : string;
+  attribute ORIG_REF_NAME of design_1_SPI_ip_0_1_clock_divider : entity is "clock_divider";
 end design_1_SPI_ip_0_1_clock_divider;
 
 architecture STRUCTURE of design_1_SPI_ip_0_1_clock_divider is
@@ -2766,7 +2786,8 @@ use UNISIM.VCOMPONENTS.ALL;
 entity design_1_SPI_ip_0_1_SPI_Master is
   port (
     SR : out STD_LOGIC_VECTOR ( 0 to 0 );
-    \out\ : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    \out\ : out STD_LOGIC_VECTOR ( 0 to 0 );
+    SPI_SCK : out STD_LOGIC;
     SPI_MOSI : out STD_LOGIC;
     SPI_CS : out STD_LOGIC;
     D : out STD_LOGIC_VECTOR ( 24 downto 0 );
@@ -2778,6 +2799,8 @@ entity design_1_SPI_ip_0_1_SPI_Master is
     axi_araddr : in STD_LOGIC_VECTOR ( 1 downto 0 );
     \slv_reg2_reg[31]\ : in STD_LOGIC_VECTOR ( 24 downto 0 )
   );
+  attribute ORIG_REF_NAME : string;
+  attribute ORIG_REF_NAME of design_1_SPI_ip_0_1_SPI_Master : entity is "SPI_Master";
 end design_1_SPI_ip_0_1_SPI_Master;
 
 architecture STRUCTURE of design_1_SPI_ip_0_1_SPI_Master is
@@ -2834,13 +2857,14 @@ architecture STRUCTURE of design_1_SPI_ip_0_1_SPI_Master is
   signal FSM_n_8 : STD_LOGIC;
   signal FSM_n_9 : STD_LOGIC;
   signal MOSI_int : STD_LOGIC;
+  signal SCK_int : STD_LOGIC;
   signal \^sr\ : STD_LOGIC_VECTOR ( 0 to 0 );
   signal clock_int : STD_LOGIC;
-  signal \^out\ : STD_LOGIC_VECTOR ( 1 downto 0 );
+  signal \^out\ : STD_LOGIC_VECTOR ( 0 to 0 );
   signal shift : STD_LOGIC;
 begin
   SR(0) <= \^sr\(0);
-  \out\(1 downto 0) <= \^out\(1 downto 0);
+  \out\(0) <= \^out\(0);
 CLOCKDIV: entity work.design_1_SPI_ip_0_1_clock_divider
      port map (
       CLK => clock_int,
@@ -2856,7 +2880,8 @@ DWCNTR: entity work.design_1_SPI_ip_0_1_downCounter5Bits
       \FSM_onehot_state_reg[1]\ => FSM_n_52,
       \FSM_onehot_state_reg[1]_0\ => FSM_n_27,
       Q(0) => Q(24),
-      \out\(2 downto 1) => \^out\(1 downto 0),
+      \out\(2) => SCK_int,
+      \out\(1) => \^out\(0),
       \out\(0) => shift,
       s00_axi_aresetn => \^sr\(0)
     );
@@ -2870,9 +2895,11 @@ FSM: entity work.design_1_SPI_ip_0_1_SPI_fsm
       Q(24 downto 0) => Q(24 downto 0),
       SPI_CS => SPI_CS,
       SPI_MOSI => SPI_MOSI,
+      SPI_SCK => SPI_SCK,
       SR(0) => \^sr\(0),
       axi_araddr(1 downto 0) => axi_araddr(1 downto 0),
-      \out\(2 downto 1) => \^out\(1 downto 0),
+      \out\(2) => SCK_int,
+      \out\(1) => \^out\(0),
       \out\(0) => shift,
       \r_reg_reg[0]_C\ => FSM_n_3,
       \r_reg_reg[0]_P\ => FSM_n_51,
@@ -2995,12 +3022,13 @@ library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
 entity design_1_SPI_ip_0_1_SPI_ip_v1_0_S00_AXI is
   port (
-    \out\ : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    FSM_DONE : out STD_LOGIC;
     S_AXI_AWREADY : out STD_LOGIC;
     S_AXI_WREADY : out STD_LOGIC;
     FSM_START : out STD_LOGIC;
     S_AXI_ARREADY : out STD_LOGIC;
     s00_axi_rdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    SPI_SCK : out STD_LOGIC;
     SPI_MOSI : out STD_LOGIC;
     SPI_CS : out STD_LOGIC;
     s00_axi_rvalid : out STD_LOGIC;
@@ -3018,6 +3046,8 @@ entity design_1_SPI_ip_0_1_SPI_ip_v1_0_S00_AXI is
     s00_axi_bready : in STD_LOGIC;
     s00_axi_rready : in STD_LOGIC
   );
+  attribute ORIG_REF_NAME : string;
+  attribute ORIG_REF_NAME of design_1_SPI_ip_0_1_SPI_ip_v1_0_S00_AXI : entity is "SPI_ip_v1_0_S00_AXI";
 end design_1_SPI_ip_0_1_SPI_ip_v1_0_S00_AXI;
 
 architecture STRUCTURE of design_1_SPI_ip_0_1_SPI_ip_v1_0_S00_AXI is
@@ -3051,7 +3081,7 @@ architecture STRUCTURE of design_1_SPI_ip_0_1_SPI_ip_v1_0_S00_AXI is
   signal \slv_reg2[23]_i_1_n_0\ : STD_LOGIC;
   signal \slv_reg2[31]_i_1_n_0\ : STD_LOGIC;
   signal \slv_reg2[7]_i_1_n_0\ : STD_LOGIC;
-  signal slv_reg3 : STD_LOGIC_VECTOR ( 2 downto 0 );
+  signal slv_reg3 : STD_LOGIC_VECTOR ( 31 downto 0 );
   signal \slv_reg3[15]_i_1_n_0\ : STD_LOGIC;
   signal \slv_reg3[23]_i_1_n_0\ : STD_LOGIC;
   signal \slv_reg3[31]_i_1_n_0\ : STD_LOGIC;
@@ -3077,7 +3107,6 @@ architecture STRUCTURE of design_1_SPI_ip_0_1_SPI_ip_v1_0_S00_AXI is
   signal \slv_reg3_reg_n_0_[28]\ : STD_LOGIC;
   signal \slv_reg3_reg_n_0_[29]\ : STD_LOGIC;
   signal \slv_reg3_reg_n_0_[30]\ : STD_LOGIC;
-  signal \slv_reg3_reg_n_0_[31]\ : STD_LOGIC;
   signal \slv_reg3_reg_n_0_[3]\ : STD_LOGIC;
   signal \slv_reg3_reg_n_0_[4]\ : STD_LOGIC;
   signal \slv_reg3_reg_n_0_[5]\ : STD_LOGIC;
@@ -4488,7 +4517,7 @@ axi_wready_reg: unisim.vcomponents.FDRE
       C => s00_axi_aclk,
       CE => \slv_reg3[31]_i_1_n_0\,
       D => s00_axi_wdata(31),
-      Q => \slv_reg3_reg_n_0_[31]\,
+      Q => slv_reg3(31),
       R => user_SPI_Block_n_0
     );
 \slv_reg3_reg[3]\: unisim.vcomponents.FDRE
@@ -4566,14 +4595,15 @@ user_SPI_Block: entity work.design_1_SPI_ip_0_1_SPI_Master
       SPI_CS => SPI_CS,
       SPI_MISO => SPI_MISO,
       SPI_MOSI => SPI_MOSI,
+      SPI_SCK => SPI_SCK,
       SR(0) => user_SPI_Block_n_0,
       axi_araddr(1 downto 0) => axi_araddr(3 downto 2),
-      \out\(1 downto 0) => \out\(1 downto 0),
+      \out\(0) => FSM_DONE,
       s00_axi_aclk => s00_axi_aclk,
       s00_axi_aresetn => s00_axi_aresetn,
       \slv_reg2_reg[31]\(24) => slv_reg2(31),
       \slv_reg2_reg[31]\(23 downto 0) => slv_reg2(23 downto 0),
-      \slv_reg3_reg[31]\(24) => \slv_reg3_reg_n_0_[31]\,
+      \slv_reg3_reg[31]\(24) => slv_reg3(31),
       \slv_reg3_reg[31]\(23) => \slv_reg3_reg_n_0_[23]\,
       \slv_reg3_reg[31]\(22) => \slv_reg3_reg_n_0_[22]\,
       \slv_reg3_reg[31]\(21) => \slv_reg3_reg_n_0_[21]\,
@@ -4604,12 +4634,13 @@ library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
 entity design_1_SPI_ip_0_1_SPI_ip_v1_0 is
   port (
-    \out\ : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    FSM_DONE : out STD_LOGIC;
     S_AXI_AWREADY : out STD_LOGIC;
     S_AXI_WREADY : out STD_LOGIC;
     Q : out STD_LOGIC_VECTOR ( 0 to 0 );
     S_AXI_ARREADY : out STD_LOGIC;
     s00_axi_rdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    SPI_SCK : out STD_LOGIC;
     SPI_MOSI : out STD_LOGIC;
     SPI_CS : out STD_LOGIC;
     s00_axi_rvalid : out STD_LOGIC;
@@ -4627,20 +4658,23 @@ entity design_1_SPI_ip_0_1_SPI_ip_v1_0 is
     s00_axi_bready : in STD_LOGIC;
     s00_axi_rready : in STD_LOGIC
   );
+  attribute ORIG_REF_NAME : string;
+  attribute ORIG_REF_NAME of design_1_SPI_ip_0_1_SPI_ip_v1_0 : entity is "SPI_ip_v1_0";
 end design_1_SPI_ip_0_1_SPI_ip_v1_0;
 
 architecture STRUCTURE of design_1_SPI_ip_0_1_SPI_ip_v1_0 is
 begin
 SPI_ip_v1_0_S00_AXI_inst: entity work.design_1_SPI_ip_0_1_SPI_ip_v1_0_S00_AXI
      port map (
+      FSM_DONE => FSM_DONE,
       FSM_START => Q(0),
       SPI_CS => SPI_CS,
       SPI_MISO => SPI_MISO,
       SPI_MOSI => SPI_MOSI,
+      SPI_SCK => SPI_SCK,
       S_AXI_ARREADY => S_AXI_ARREADY,
       S_AXI_AWREADY => S_AXI_AWREADY,
       S_AXI_WREADY => S_AXI_WREADY,
-      \out\(1 downto 0) => \out\(1 downto 0),
       s00_axi_aclk => s00_axi_aclk,
       s00_axi_araddr(1 downto 0) => s00_axi_araddr(1 downto 0),
       s00_axi_aresetn => s00_axi_aresetn,
@@ -4706,7 +4740,7 @@ architecture STRUCTURE of design_1_SPI_ip_0_1 is
   attribute X_INTERFACE_INFO : string;
   attribute X_INTERFACE_INFO of s00_axi_aclk : signal is "xilinx.com:signal:clock:1.0 S00_AXI_CLK CLK";
   attribute X_INTERFACE_PARAMETER : string;
-  attribute X_INTERFACE_PARAMETER of s00_axi_aclk : signal is "XIL_INTERFACENAME S00_AXI_CLK, ASSOCIATED_BUSIF S00_AXI, ASSOCIATED_RESET s00_axi_aresetn, FREQ_HZ 1e+08, PHASE 0.000, CLK_DOMAIN design_1_processing_system7_0_0_FCLK_CLK0";
+  attribute X_INTERFACE_PARAMETER of s00_axi_aclk : signal is "XIL_INTERFACENAME S00_AXI_CLK, ASSOCIATED_BUSIF S00_AXI, ASSOCIATED_RESET s00_axi_aresetn, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN design_1_processing_system7_0_0_FCLK_CLK0";
   attribute X_INTERFACE_INFO of s00_axi_aresetn : signal is "xilinx.com:signal:reset:1.0 S00_AXI_RST RST";
   attribute X_INTERFACE_PARAMETER of s00_axi_aresetn : signal is "XIL_INTERFACENAME S00_AXI_RST, POLARITY ACTIVE_LOW";
   attribute X_INTERFACE_INFO of s00_axi_arready : signal is "xilinx.com:interface:aximm:1.0 S00_AXI ARREADY";
@@ -4716,7 +4750,7 @@ architecture STRUCTURE of design_1_SPI_ip_0_1 is
   attribute X_INTERFACE_INFO of s00_axi_bready : signal is "xilinx.com:interface:aximm:1.0 S00_AXI BREADY";
   attribute X_INTERFACE_INFO of s00_axi_bvalid : signal is "xilinx.com:interface:aximm:1.0 S00_AXI BVALID";
   attribute X_INTERFACE_INFO of s00_axi_rready : signal is "xilinx.com:interface:aximm:1.0 S00_AXI RREADY";
-  attribute X_INTERFACE_PARAMETER of s00_axi_rready : signal is "XIL_INTERFACENAME S00_AXI, WIZ_DATA_WIDTH 32, WIZ_NUM_REG 4, SUPPORTS_NARROW_BURST 0, DATA_WIDTH 32, PROTOCOL AXI4LITE, FREQ_HZ 1e+08, ID_WIDTH 0, ADDR_WIDTH 4, AWUSER_WIDTH 0, ARUSER_WIDTH 0, WUSER_WIDTH 0, RUSER_WIDTH 0, BUSER_WIDTH 0, READ_WRITE_MODE READ_WRITE, HAS_BURST 0, HAS_LOCK 0, HAS_PROT 1, HAS_CACHE 0, HAS_QOS 0, HAS_REGION 0, HAS_WSTRB 1, HAS_BRESP 1, HAS_RRESP 1, NUM_READ_OUTSTANDING 2, NUM_WRITE_OUTSTANDING 2, MAX_BURST_LENGTH 1, PHASE 0.000, CLK_DOMAIN design_1_processing_system7_0_0_FCLK_CLK0, NUM_READ_THREADS 1, NUM_WRITE_THREADS 1, RUSER_BITS_PER_BYTE 0, WUSER_BITS_PER_BYTE 0";
+  attribute X_INTERFACE_PARAMETER of s00_axi_rready : signal is "XIL_INTERFACENAME S00_AXI, WIZ_DATA_WIDTH 32, WIZ_NUM_REG 4, SUPPORTS_NARROW_BURST 0, DATA_WIDTH 32, PROTOCOL AXI4LITE, FREQ_HZ 100000000, ID_WIDTH 0, ADDR_WIDTH 4, AWUSER_WIDTH 0, ARUSER_WIDTH 0, WUSER_WIDTH 0, RUSER_WIDTH 0, BUSER_WIDTH 0, READ_WRITE_MODE READ_WRITE, HAS_BURST 0, HAS_LOCK 0, HAS_PROT 1, HAS_CACHE 0, HAS_QOS 0, HAS_REGION 0, HAS_WSTRB 1, HAS_BRESP 1, HAS_RRESP 1, NUM_READ_OUTSTANDING 2, NUM_WRITE_OUTSTANDING 2, MAX_BURST_LENGTH 1, PHASE 0.000, CLK_DOMAIN design_1_processing_system7_0_0_FCLK_CLK0, NUM_READ_THREADS 1, NUM_WRITE_THREADS 1, RUSER_BITS_PER_BYTE 0, WUSER_BITS_PER_BYTE 0";
   attribute X_INTERFACE_INFO of s00_axi_rvalid : signal is "xilinx.com:interface:aximm:1.0 S00_AXI RVALID";
   attribute X_INTERFACE_INFO of s00_axi_wready : signal is "xilinx.com:interface:aximm:1.0 S00_AXI WREADY";
   attribute X_INTERFACE_INFO of s00_axi_wvalid : signal is "xilinx.com:interface:aximm:1.0 S00_AXI WVALID";
@@ -4740,15 +4774,15 @@ GND: unisim.vcomponents.GND
     );
 inst: entity work.design_1_SPI_ip_0_1_SPI_ip_v1_0
      port map (
+      FSM_DONE => FSM_DONE,
       Q(0) => FSM_START,
       SPI_CS => SPI_CS,
       SPI_MISO => SPI_MISO,
       SPI_MOSI => SPI_MOSI,
+      SPI_SCK => SPI_SCK,
       S_AXI_ARREADY => s00_axi_arready,
       S_AXI_AWREADY => s00_axi_awready,
       S_AXI_WREADY => s00_axi_wready,
-      \out\(1) => SPI_SCK,
-      \out\(0) => FSM_DONE,
       s00_axi_aclk => s00_axi_aclk,
       s00_axi_araddr(1 downto 0) => s00_axi_araddr(3 downto 2),
       s00_axi_aresetn => s00_axi_aresetn,

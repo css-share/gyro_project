@@ -1,10 +1,10 @@
 // Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-// Date        : Tue Jan 22 17:10:21 2019
+// Date        : Mon Feb  4 15:32:23 2019
 // Host        : AsusP8 running 64-bit major release  (build 9200)
-// Command     : write_verilog -force -mode funcsim -rename_top design_1_SPI_ip_0_1 -prefix
-//               design_1_SPI_ip_0_1_ design_1_SPI_ip_0_1_sim_netlist.v
+// Command     : write_verilog -force -mode funcsim
+//               C:/Xilinx/Vivado/projects/project_GYRO_Feb_04_2019/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ip/design_1_SPI_ip_0_1/design_1_SPI_ip_0_1_sim_netlist.v
 // Design      : design_1_SPI_ip_0_1
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -12,9 +12,126 @@
 // --------------------------------------------------------------------------------
 `timescale 1 ps / 1 ps
 
+(* CHECK_LICENSE_TYPE = "design_1_SPI_ip_0_1,SPI_ip_v1_0,{}" *) (* DowngradeIPIdentifiedWarnings = "yes" *) (* X_CORE_INFO = "SPI_ip_v1_0,Vivado 2018.2" *) 
+(* NotValidForBitStream *)
+module design_1_SPI_ip_0_1
+   (SPI_MISO,
+    SPI_MOSI,
+    SPI_SCK,
+    SPI_CS,
+    FSM_START,
+    FSM_DONE,
+    s00_axi_awaddr,
+    s00_axi_awprot,
+    s00_axi_awvalid,
+    s00_axi_awready,
+    s00_axi_wdata,
+    s00_axi_wstrb,
+    s00_axi_wvalid,
+    s00_axi_wready,
+    s00_axi_bresp,
+    s00_axi_bvalid,
+    s00_axi_bready,
+    s00_axi_araddr,
+    s00_axi_arprot,
+    s00_axi_arvalid,
+    s00_axi_arready,
+    s00_axi_rdata,
+    s00_axi_rresp,
+    s00_axi_rvalid,
+    s00_axi_rready,
+    s00_axi_aclk,
+    s00_axi_aresetn);
+  input SPI_MISO;
+  output SPI_MOSI;
+  output SPI_SCK;
+  output SPI_CS;
+  output FSM_START;
+  output FSM_DONE;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI AWADDR" *) input [3:0]s00_axi_awaddr;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI AWPROT" *) input [2:0]s00_axi_awprot;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI AWVALID" *) input s00_axi_awvalid;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI AWREADY" *) output s00_axi_awready;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI WDATA" *) input [31:0]s00_axi_wdata;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI WSTRB" *) input [3:0]s00_axi_wstrb;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI WVALID" *) input s00_axi_wvalid;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI WREADY" *) output s00_axi_wready;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI BRESP" *) output [1:0]s00_axi_bresp;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI BVALID" *) output s00_axi_bvalid;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI BREADY" *) input s00_axi_bready;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI ARADDR" *) input [3:0]s00_axi_araddr;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI ARPROT" *) input [2:0]s00_axi_arprot;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI ARVALID" *) input s00_axi_arvalid;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI ARREADY" *) output s00_axi_arready;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI RDATA" *) output [31:0]s00_axi_rdata;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI RRESP" *) output [1:0]s00_axi_rresp;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI RVALID" *) output s00_axi_rvalid;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI RREADY" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME S00_AXI, WIZ_DATA_WIDTH 32, WIZ_NUM_REG 4, SUPPORTS_NARROW_BURST 0, DATA_WIDTH 32, PROTOCOL AXI4LITE, FREQ_HZ 100000000, ID_WIDTH 0, ADDR_WIDTH 4, AWUSER_WIDTH 0, ARUSER_WIDTH 0, WUSER_WIDTH 0, RUSER_WIDTH 0, BUSER_WIDTH 0, READ_WRITE_MODE READ_WRITE, HAS_BURST 0, HAS_LOCK 0, HAS_PROT 1, HAS_CACHE 0, HAS_QOS 0, HAS_REGION 0, HAS_WSTRB 1, HAS_BRESP 1, HAS_RRESP 1, NUM_READ_OUTSTANDING 2, NUM_WRITE_OUTSTANDING 2, MAX_BURST_LENGTH 1, PHASE 0.000, CLK_DOMAIN design_1_processing_system7_0_0_FCLK_CLK0, NUM_READ_THREADS 1, NUM_WRITE_THREADS 1, RUSER_BITS_PER_BYTE 0, WUSER_BITS_PER_BYTE 0" *) input s00_axi_rready;
+  (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 S00_AXI_CLK CLK" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME S00_AXI_CLK, ASSOCIATED_BUSIF S00_AXI, ASSOCIATED_RESET s00_axi_aresetn, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN design_1_processing_system7_0_0_FCLK_CLK0" *) input s00_axi_aclk;
+  (* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 S00_AXI_RST RST" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME S00_AXI_RST, POLARITY ACTIVE_LOW" *) input s00_axi_aresetn;
+
+  wire \<const0> ;
+  wire FSM_DONE;
+  wire FSM_START;
+  wire SPI_CS;
+  wire SPI_MISO;
+  wire SPI_MOSI;
+  wire SPI_SCK;
+  wire s00_axi_aclk;
+  wire [3:0]s00_axi_araddr;
+  wire s00_axi_aresetn;
+  wire s00_axi_arready;
+  wire s00_axi_arvalid;
+  wire [3:0]s00_axi_awaddr;
+  wire s00_axi_awready;
+  wire s00_axi_awvalid;
+  wire s00_axi_bready;
+  wire s00_axi_bvalid;
+  wire [31:0]s00_axi_rdata;
+  wire s00_axi_rready;
+  wire s00_axi_rvalid;
+  wire [31:0]s00_axi_wdata;
+  wire s00_axi_wready;
+  wire [3:0]s00_axi_wstrb;
+  wire s00_axi_wvalid;
+
+  assign s00_axi_bresp[1] = \<const0> ;
+  assign s00_axi_bresp[0] = \<const0> ;
+  assign s00_axi_rresp[1] = \<const0> ;
+  assign s00_axi_rresp[0] = \<const0> ;
+  GND GND
+       (.G(\<const0> ));
+  design_1_SPI_ip_0_1_SPI_ip_v1_0 inst
+       (.FSM_DONE(FSM_DONE),
+        .Q(FSM_START),
+        .SPI_CS(SPI_CS),
+        .SPI_MISO(SPI_MISO),
+        .SPI_MOSI(SPI_MOSI),
+        .SPI_SCK(SPI_SCK),
+        .S_AXI_ARREADY(s00_axi_arready),
+        .S_AXI_AWREADY(s00_axi_awready),
+        .S_AXI_WREADY(s00_axi_wready),
+        .s00_axi_aclk(s00_axi_aclk),
+        .s00_axi_araddr(s00_axi_araddr[3:2]),
+        .s00_axi_aresetn(s00_axi_aresetn),
+        .s00_axi_arvalid(s00_axi_arvalid),
+        .s00_axi_awaddr(s00_axi_awaddr[3:2]),
+        .s00_axi_awvalid(s00_axi_awvalid),
+        .s00_axi_bready(s00_axi_bready),
+        .s00_axi_bvalid(s00_axi_bvalid),
+        .s00_axi_rdata(s00_axi_rdata),
+        .s00_axi_rready(s00_axi_rready),
+        .s00_axi_rvalid(s00_axi_rvalid),
+        .s00_axi_wdata(s00_axi_wdata),
+        .s00_axi_wstrb(s00_axi_wstrb),
+        .s00_axi_wvalid(s00_axi_wvalid));
+endmodule
+
+(* ORIG_REF_NAME = "SPI_Master" *) 
 module design_1_SPI_ip_0_1_SPI_Master
    (SR,
     out,
+    SPI_SCK,
     SPI_MOSI,
     SPI_CS,
     D,
@@ -26,7 +143,8 @@ module design_1_SPI_ip_0_1_SPI_Master
     axi_araddr,
     \slv_reg2_reg[31] );
   output [0:0]SR;
-  output [1:0]out;
+  output [0:0]out;
+  output SPI_SCK;
   output SPI_MOSI;
   output SPI_CS;
   output [24:0]D;
@@ -93,13 +211,15 @@ module design_1_SPI_ip_0_1_SPI_Master
   wire FSM_n_9;
   wire MOSI_int;
   wire [24:0]Q;
+  wire SCK_int;
   wire SPI_CS;
   wire SPI_MISO;
   wire SPI_MOSI;
+  wire SPI_SCK;
   wire [0:0]SR;
   wire [1:0]axi_araddr;
   wire clock_int;
-  wire [1:0]out;
+  wire [0:0]out;
   wire s00_axi_aclk;
   wire s00_axi_aresetn;
   wire shift;
@@ -117,7 +237,7 @@ module design_1_SPI_ip_0_1_SPI_Master
         .\FSM_onehot_state_reg[1] (FSM_n_52),
         .\FSM_onehot_state_reg[1]_0 (FSM_n_27),
         .Q(Q[24]),
-        .out({out,shift}),
+        .out({SCK_int,out,shift}),
         .s00_axi_aresetn(SR));
   design_1_SPI_ip_0_1_SPI_fsm FSM
        (.CLK(clock_int),
@@ -127,9 +247,10 @@ module design_1_SPI_ip_0_1_SPI_Master
         .Q(Q),
         .SPI_CS(SPI_CS),
         .SPI_MOSI(SPI_MOSI),
+        .SPI_SCK(SPI_SCK),
         .SR(SR),
         .axi_araddr(axi_araddr),
-        .out({out,shift}),
+        .out({SCK_int,out,shift}),
         .\r_reg_reg[0]_C (FSM_n_3),
         .\r_reg_reg[0]_P (FSM_n_51),
         .\r_reg_reg[10]_C (FSM_n_13),
@@ -243,6 +364,7 @@ module design_1_SPI_ip_0_1_SPI_Master
         .\slv_reg3_reg[23] (\slv_reg3_reg[31] [23:0]));
 endmodule
 
+(* ORIG_REF_NAME = "SPI_fsm" *) 
 module design_1_SPI_ip_0_1_SPI_fsm
    (out,
     \r_reg_reg[0]_C ,
@@ -295,13 +417,14 @@ module design_1_SPI_ip_0_1_SPI_fsm
     \r_reg_reg[1]_P ,
     \r_reg_reg[0]_P ,
     \r_reg_reg[4]_P_0 ,
+    SPI_SCK,
     SPI_MOSI,
     SPI_CS,
     D,
     s00_axi_aresetn,
     Q,
-    MOSI_int,
     \slv_reg3_reg[31] ,
+    MOSI_int,
     axi_araddr,
     \slv_reg2_reg[31] ,
     SR,
@@ -358,13 +481,14 @@ module design_1_SPI_ip_0_1_SPI_fsm
   output \r_reg_reg[1]_P ;
   output \r_reg_reg[0]_P ;
   output \r_reg_reg[4]_P_0 ;
+  output SPI_SCK;
   output SPI_MOSI;
   output SPI_CS;
   output [0:0]D;
   input s00_axi_aresetn;
   input [24:0]Q;
-  input MOSI_int;
   input [0:0]\slv_reg3_reg[31] ;
+  input MOSI_int;
   input [1:0]axi_araddr;
   input [0:0]\slv_reg2_reg[31] ;
   input [0:0]SR;
@@ -383,6 +507,7 @@ module design_1_SPI_ip_0_1_SPI_fsm
   wire [24:0]Q;
   wire SPI_CS;
   wire SPI_MOSI;
+  wire SPI_SCK;
   wire [0:0]SR;
   wire [1:0]axi_araddr;
   (* RTL_KEEP = "yes" *) wire load;
@@ -535,6 +660,12 @@ module design_1_SPI_ip_0_1_SPI_fsm
         .I2(\FSM_onehot_state_reg_n_0_[0] ),
         .I3(load),
         .O(SPI_MOSI));
+  LUT2 #(
+    .INIT(4'h6)) 
+    SPI_SCK_INST_0
+       (.I0(out[2]),
+        .I1(\slv_reg3_reg[31] ),
+        .O(SPI_SCK));
   LUT6 #(
     .INIT(64'hAFA0CFCFAFA0C0C0)) 
     \axi_rdata[31]_i_1 
@@ -895,13 +1026,15 @@ module design_1_SPI_ip_0_1_SPI_fsm
         .O(\r_reg_reg[9]_C ));
 endmodule
 
+(* ORIG_REF_NAME = "SPI_ip_v1_0" *) 
 module design_1_SPI_ip_0_1_SPI_ip_v1_0
-   (out,
+   (FSM_DONE,
     S_AXI_AWREADY,
     S_AXI_WREADY,
     Q,
     S_AXI_ARREADY,
     s00_axi_rdata,
+    SPI_SCK,
     SPI_MOSI,
     SPI_CS,
     s00_axi_rvalid,
@@ -918,12 +1051,13 @@ module design_1_SPI_ip_0_1_SPI_ip_v1_0
     s00_axi_wstrb,
     s00_axi_bready,
     s00_axi_rready);
-  output [1:0]out;
+  output FSM_DONE;
   output S_AXI_AWREADY;
   output S_AXI_WREADY;
   output [0:0]Q;
   output S_AXI_ARREADY;
   output [31:0]s00_axi_rdata;
+  output SPI_SCK;
   output SPI_MOSI;
   output SPI_CS;
   output s00_axi_rvalid;
@@ -941,14 +1075,15 @@ module design_1_SPI_ip_0_1_SPI_ip_v1_0
   input s00_axi_bready;
   input s00_axi_rready;
 
+  wire FSM_DONE;
   wire [0:0]Q;
   wire SPI_CS;
   wire SPI_MISO;
   wire SPI_MOSI;
+  wire SPI_SCK;
   wire S_AXI_ARREADY;
   wire S_AXI_AWREADY;
   wire S_AXI_WREADY;
-  wire [1:0]out;
   wire s00_axi_aclk;
   wire [1:0]s00_axi_araddr;
   wire s00_axi_aresetn;
@@ -965,14 +1100,15 @@ module design_1_SPI_ip_0_1_SPI_ip_v1_0
   wire s00_axi_wvalid;
 
   design_1_SPI_ip_0_1_SPI_ip_v1_0_S00_AXI SPI_ip_v1_0_S00_AXI_inst
-       (.FSM_START(Q),
+       (.FSM_DONE(FSM_DONE),
+        .FSM_START(Q),
         .SPI_CS(SPI_CS),
         .SPI_MISO(SPI_MISO),
         .SPI_MOSI(SPI_MOSI),
+        .SPI_SCK(SPI_SCK),
         .S_AXI_ARREADY(S_AXI_ARREADY),
         .S_AXI_AWREADY(S_AXI_AWREADY),
         .S_AXI_WREADY(S_AXI_WREADY),
-        .out(out),
         .s00_axi_aclk(s00_axi_aclk),
         .s00_axi_araddr(s00_axi_araddr),
         .s00_axi_aresetn(s00_axi_aresetn),
@@ -989,13 +1125,15 @@ module design_1_SPI_ip_0_1_SPI_ip_v1_0
         .s00_axi_wvalid(s00_axi_wvalid));
 endmodule
 
+(* ORIG_REF_NAME = "SPI_ip_v1_0_S00_AXI" *) 
 module design_1_SPI_ip_0_1_SPI_ip_v1_0_S00_AXI
-   (out,
+   (FSM_DONE,
     S_AXI_AWREADY,
     S_AXI_WREADY,
     FSM_START,
     S_AXI_ARREADY,
     s00_axi_rdata,
+    SPI_SCK,
     SPI_MOSI,
     SPI_CS,
     s00_axi_rvalid,
@@ -1012,12 +1150,13 @@ module design_1_SPI_ip_0_1_SPI_ip_v1_0_S00_AXI
     s00_axi_wstrb,
     s00_axi_bready,
     s00_axi_rready);
-  output [1:0]out;
+  output FSM_DONE;
   output S_AXI_AWREADY;
   output S_AXI_WREADY;
   output FSM_START;
   output S_AXI_ARREADY;
   output [31:0]s00_axi_rdata;
+  output SPI_SCK;
   output SPI_MOSI;
   output SPI_CS;
   output s00_axi_rvalid;
@@ -1035,10 +1174,12 @@ module design_1_SPI_ip_0_1_SPI_ip_v1_0_S00_AXI
   input s00_axi_bready;
   input s00_axi_rready;
 
+  wire FSM_DONE;
   wire FSM_START;
   wire SPI_CS;
   wire SPI_MISO;
   wire SPI_MOSI;
+  wire SPI_SCK;
   wire S_AXI_ARREADY;
   wire S_AXI_AWREADY;
   wire S_AXI_WREADY;
@@ -1054,7 +1195,6 @@ module design_1_SPI_ip_0_1_SPI_ip_v1_0_S00_AXI
   wire axi_bvalid_i_1_n_0;
   wire axi_rvalid_i_1_n_0;
   wire axi_wready0;
-  wire [1:0]out;
   wire [1:0]p_0_in;
   wire [31:0]reg_data_out;
   wire s00_axi_aclk;
@@ -1081,7 +1221,7 @@ module design_1_SPI_ip_0_1_SPI_ip_v1_0_S00_AXI
   wire \slv_reg2[23]_i_1_n_0 ;
   wire \slv_reg2[31]_i_1_n_0 ;
   wire \slv_reg2[7]_i_1_n_0 ;
-  wire [2:0]slv_reg3;
+  wire [31:0]slv_reg3;
   wire \slv_reg3[15]_i_1_n_0 ;
   wire \slv_reg3[23]_i_1_n_0 ;
   wire \slv_reg3[31]_i_1_n_0 ;
@@ -1107,7 +1247,6 @@ module design_1_SPI_ip_0_1_SPI_ip_v1_0_S00_AXI
   wire \slv_reg3_reg_n_0_[28] ;
   wire \slv_reg3_reg_n_0_[29] ;
   wire \slv_reg3_reg_n_0_[30] ;
-  wire \slv_reg3_reg_n_0_[31] ;
   wire \slv_reg3_reg_n_0_[3] ;
   wire \slv_reg3_reg_n_0_[4] ;
   wire \slv_reg3_reg_n_0_[5] ;
@@ -2160,7 +2299,7 @@ module design_1_SPI_ip_0_1_SPI_ip_v1_0_S00_AXI
        (.C(s00_axi_aclk),
         .CE(\slv_reg3[31]_i_1_n_0 ),
         .D(s00_axi_wdata[31]),
-        .Q(\slv_reg3_reg_n_0_[31] ),
+        .Q(slv_reg3[31]),
         .R(user_SPI_Block_n_0));
   FDRE \slv_reg3_reg[3] 
        (.C(s00_axi_aclk),
@@ -2217,15 +2356,17 @@ module design_1_SPI_ip_0_1_SPI_ip_v1_0_S00_AXI
         .SPI_CS(SPI_CS),
         .SPI_MISO(SPI_MISO),
         .SPI_MOSI(SPI_MOSI),
+        .SPI_SCK(SPI_SCK),
         .SR(user_SPI_Block_n_0),
         .axi_araddr(axi_araddr),
-        .out(out),
+        .out(FSM_DONE),
         .s00_axi_aclk(s00_axi_aclk),
         .s00_axi_aresetn(s00_axi_aresetn),
         .\slv_reg2_reg[31] ({slv_reg2[31],slv_reg2[23:0]}),
-        .\slv_reg3_reg[31] ({\slv_reg3_reg_n_0_[31] ,\slv_reg3_reg_n_0_[23] ,\slv_reg3_reg_n_0_[22] ,\slv_reg3_reg_n_0_[21] ,\slv_reg3_reg_n_0_[20] ,\slv_reg3_reg_n_0_[19] ,\slv_reg3_reg_n_0_[18] ,\slv_reg3_reg_n_0_[17] ,\slv_reg3_reg_n_0_[16] ,\slv_reg3_reg_n_0_[15] ,\slv_reg3_reg_n_0_[14] ,\slv_reg3_reg_n_0_[13] ,\slv_reg3_reg_n_0_[12] ,\slv_reg3_reg_n_0_[11] ,\slv_reg3_reg_n_0_[10] ,\slv_reg3_reg_n_0_[9] ,\slv_reg3_reg_n_0_[8] ,\slv_reg3_reg_n_0_[7] ,\slv_reg3_reg_n_0_[6] ,\slv_reg3_reg_n_0_[5] ,\slv_reg3_reg_n_0_[4] ,\slv_reg3_reg_n_0_[3] ,slv_reg3}));
+        .\slv_reg3_reg[31] ({slv_reg3[31],\slv_reg3_reg_n_0_[23] ,\slv_reg3_reg_n_0_[22] ,\slv_reg3_reg_n_0_[21] ,\slv_reg3_reg_n_0_[20] ,\slv_reg3_reg_n_0_[19] ,\slv_reg3_reg_n_0_[18] ,\slv_reg3_reg_n_0_[17] ,\slv_reg3_reg_n_0_[16] ,\slv_reg3_reg_n_0_[15] ,\slv_reg3_reg_n_0_[14] ,\slv_reg3_reg_n_0_[13] ,\slv_reg3_reg_n_0_[12] ,\slv_reg3_reg_n_0_[11] ,\slv_reg3_reg_n_0_[10] ,\slv_reg3_reg_n_0_[9] ,\slv_reg3_reg_n_0_[8] ,\slv_reg3_reg_n_0_[7] ,\slv_reg3_reg_n_0_[6] ,\slv_reg3_reg_n_0_[5] ,\slv_reg3_reg_n_0_[4] ,\slv_reg3_reg_n_0_[3] ,slv_reg3[2:0]}));
 endmodule
 
+(* ORIG_REF_NAME = "clock_divider" *) 
 module design_1_SPI_ip_0_1_clock_divider
    (Q_reg,
     CLK,
@@ -2295,120 +2436,7 @@ module design_1_SPI_ip_0_1_clock_divider
         .\slv_reg3_reg[1] (\slv_reg3_reg[2] [1:0]));
 endmodule
 
-(* CHECK_LICENSE_TYPE = "design_1_SPI_ip_0_1,SPI_ip_v1_0,{}" *) (* DowngradeIPIdentifiedWarnings = "yes" *) (* X_CORE_INFO = "SPI_ip_v1_0,Vivado 2018.2" *) 
-(* NotValidForBitStream *)
-module design_1_SPI_ip_0_1
-   (SPI_MISO,
-    SPI_MOSI,
-    SPI_SCK,
-    SPI_CS,
-    FSM_START,
-    FSM_DONE,
-    s00_axi_awaddr,
-    s00_axi_awprot,
-    s00_axi_awvalid,
-    s00_axi_awready,
-    s00_axi_wdata,
-    s00_axi_wstrb,
-    s00_axi_wvalid,
-    s00_axi_wready,
-    s00_axi_bresp,
-    s00_axi_bvalid,
-    s00_axi_bready,
-    s00_axi_araddr,
-    s00_axi_arprot,
-    s00_axi_arvalid,
-    s00_axi_arready,
-    s00_axi_rdata,
-    s00_axi_rresp,
-    s00_axi_rvalid,
-    s00_axi_rready,
-    s00_axi_aclk,
-    s00_axi_aresetn);
-  input SPI_MISO;
-  output SPI_MOSI;
-  output SPI_SCK;
-  output SPI_CS;
-  output FSM_START;
-  output FSM_DONE;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI AWADDR" *) input [3:0]s00_axi_awaddr;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI AWPROT" *) input [2:0]s00_axi_awprot;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI AWVALID" *) input s00_axi_awvalid;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI AWREADY" *) output s00_axi_awready;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI WDATA" *) input [31:0]s00_axi_wdata;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI WSTRB" *) input [3:0]s00_axi_wstrb;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI WVALID" *) input s00_axi_wvalid;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI WREADY" *) output s00_axi_wready;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI BRESP" *) output [1:0]s00_axi_bresp;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI BVALID" *) output s00_axi_bvalid;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI BREADY" *) input s00_axi_bready;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI ARADDR" *) input [3:0]s00_axi_araddr;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI ARPROT" *) input [2:0]s00_axi_arprot;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI ARVALID" *) input s00_axi_arvalid;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI ARREADY" *) output s00_axi_arready;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI RDATA" *) output [31:0]s00_axi_rdata;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI RRESP" *) output [1:0]s00_axi_rresp;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI RVALID" *) output s00_axi_rvalid;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI RREADY" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME S00_AXI, WIZ_DATA_WIDTH 32, WIZ_NUM_REG 4, SUPPORTS_NARROW_BURST 0, DATA_WIDTH 32, PROTOCOL AXI4LITE, FREQ_HZ 1e+08, ID_WIDTH 0, ADDR_WIDTH 4, AWUSER_WIDTH 0, ARUSER_WIDTH 0, WUSER_WIDTH 0, RUSER_WIDTH 0, BUSER_WIDTH 0, READ_WRITE_MODE READ_WRITE, HAS_BURST 0, HAS_LOCK 0, HAS_PROT 1, HAS_CACHE 0, HAS_QOS 0, HAS_REGION 0, HAS_WSTRB 1, HAS_BRESP 1, HAS_RRESP 1, NUM_READ_OUTSTANDING 2, NUM_WRITE_OUTSTANDING 2, MAX_BURST_LENGTH 1, PHASE 0.000, CLK_DOMAIN design_1_processing_system7_0_0_FCLK_CLK0, NUM_READ_THREADS 1, NUM_WRITE_THREADS 1, RUSER_BITS_PER_BYTE 0, WUSER_BITS_PER_BYTE 0" *) input s00_axi_rready;
-  (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 S00_AXI_CLK CLK" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME S00_AXI_CLK, ASSOCIATED_BUSIF S00_AXI, ASSOCIATED_RESET s00_axi_aresetn, FREQ_HZ 1e+08, PHASE 0.000, CLK_DOMAIN design_1_processing_system7_0_0_FCLK_CLK0" *) input s00_axi_aclk;
-  (* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 S00_AXI_RST RST" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME S00_AXI_RST, POLARITY ACTIVE_LOW" *) input s00_axi_aresetn;
-
-  wire \<const0> ;
-  wire FSM_DONE;
-  wire FSM_START;
-  wire SPI_CS;
-  wire SPI_MISO;
-  wire SPI_MOSI;
-  wire SPI_SCK;
-  wire s00_axi_aclk;
-  wire [3:0]s00_axi_araddr;
-  wire s00_axi_aresetn;
-  wire s00_axi_arready;
-  wire s00_axi_arvalid;
-  wire [3:0]s00_axi_awaddr;
-  wire s00_axi_awready;
-  wire s00_axi_awvalid;
-  wire s00_axi_bready;
-  wire s00_axi_bvalid;
-  wire [31:0]s00_axi_rdata;
-  wire s00_axi_rready;
-  wire s00_axi_rvalid;
-  wire [31:0]s00_axi_wdata;
-  wire s00_axi_wready;
-  wire [3:0]s00_axi_wstrb;
-  wire s00_axi_wvalid;
-
-  assign s00_axi_bresp[1] = \<const0> ;
-  assign s00_axi_bresp[0] = \<const0> ;
-  assign s00_axi_rresp[1] = \<const0> ;
-  assign s00_axi_rresp[0] = \<const0> ;
-  GND GND
-       (.G(\<const0> ));
-  design_1_SPI_ip_0_1_SPI_ip_v1_0 inst
-       (.Q(FSM_START),
-        .SPI_CS(SPI_CS),
-        .SPI_MISO(SPI_MISO),
-        .SPI_MOSI(SPI_MOSI),
-        .S_AXI_ARREADY(s00_axi_arready),
-        .S_AXI_AWREADY(s00_axi_awready),
-        .S_AXI_WREADY(s00_axi_wready),
-        .out({SPI_SCK,FSM_DONE}),
-        .s00_axi_aclk(s00_axi_aclk),
-        .s00_axi_araddr(s00_axi_araddr[3:2]),
-        .s00_axi_aresetn(s00_axi_aresetn),
-        .s00_axi_arvalid(s00_axi_arvalid),
-        .s00_axi_awaddr(s00_axi_awaddr[3:2]),
-        .s00_axi_awvalid(s00_axi_awvalid),
-        .s00_axi_bready(s00_axi_bready),
-        .s00_axi_bvalid(s00_axi_bvalid),
-        .s00_axi_rdata(s00_axi_rdata),
-        .s00_axi_rready(s00_axi_rready),
-        .s00_axi_rvalid(s00_axi_rvalid),
-        .s00_axi_wdata(s00_axi_wdata),
-        .s00_axi_wstrb(s00_axi_wstrb),
-        .s00_axi_wvalid(s00_axi_wvalid));
-endmodule
-
+(* ORIG_REF_NAME = "dff" *) 
 module design_1_SPI_ip_0_1_dff
    (Q_int_0,
     Q_reg_0,
@@ -2683,6 +2711,7 @@ module design_1_SPI_ip_0_1_dff_6
         .Q(Q_int_7));
 endmodule
 
+(* ORIG_REF_NAME = "downCounter5Bits" *) 
 module design_1_SPI_ip_0_1_downCounter5Bits
    (D,
     \FSM_onehot_state_reg[1] ,
@@ -2863,6 +2892,7 @@ module design_1_SPI_ip_0_1_downCounter5Bits
         .Q(\r_reg_reg[4]_P_n_0 ));
 endmodule
 
+(* ORIG_REF_NAME = "leftShiftRegister25bits" *) 
 module design_1_SPI_ip_0_1_leftShiftRegister25bits
    (MOSI_int,
     D,

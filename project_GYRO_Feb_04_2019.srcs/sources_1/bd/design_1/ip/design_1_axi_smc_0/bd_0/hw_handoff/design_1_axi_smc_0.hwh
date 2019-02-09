@@ -1,11 +1,40 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Tue Feb  5 19:55:58 2019" VIVADOVERSION="2018.2">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Fri Feb  8 19:25:41 2019" VIVADOVERSION="2018.2">
 
   <SYSTEMINFO ARCH="zynq" BOARD="em.avnet.com:zed:part0:1.4" DEVICE="7z020" NAME="bd_afc3" PACKAGE="clg484" SPEEDGRADE="-1"/>
 
   <EXTERNALPORTS>
     <PORT CLKFREQUENCY="100000000" DIR="I" NAME="aclk" SIGIS="clk" SIGNAME="External_Ports_aclk">
       <CONNECTIONS>
+        <CONNECTION INSTANCE="s00_entry_pipeline_s00_mmu" PORT="aclk"/>
+        <CONNECTION INSTANCE="s00_entry_pipeline_s00_si_converter" PORT="aclk"/>
+        <CONNECTION INSTANCE="s00_entry_pipeline_s00_transaction_regulator" PORT="aclk"/>
+        <CONNECTION INSTANCE="s00_axi2sc" PORT="aclk"/>
+        <CONNECTION INSTANCE="s00_nodes_s00_ar_node" PORT="s_sc_aclk"/>
+        <CONNECTION INSTANCE="s00_nodes_s00_aw_node" PORT="s_sc_aclk"/>
+        <CONNECTION INSTANCE="s00_nodes_s00_w_node" PORT="s_sc_aclk"/>
+        <CONNECTION INSTANCE="s00_nodes_s00_r_node" PORT="m_sc_aclk"/>
+        <CONNECTION INSTANCE="s00_nodes_s00_b_node" PORT="m_sc_aclk"/>
+        <CONNECTION INSTANCE="s01_entry_pipeline_s01_mmu" PORT="aclk"/>
+        <CONNECTION INSTANCE="s01_entry_pipeline_s01_si_converter" PORT="aclk"/>
+        <CONNECTION INSTANCE="s01_entry_pipeline_s01_transaction_regulator" PORT="aclk"/>
+        <CONNECTION INSTANCE="s01_axi2sc" PORT="aclk"/>
+        <CONNECTION INSTANCE="s01_nodes_s01_ar_node" PORT="s_sc_aclk"/>
+        <CONNECTION INSTANCE="s01_nodes_s01_r_node" PORT="m_sc_aclk"/>
+        <CONNECTION INSTANCE="s02_entry_pipeline_s02_mmu" PORT="aclk"/>
+        <CONNECTION INSTANCE="s02_entry_pipeline_s02_si_converter" PORT="aclk"/>
+        <CONNECTION INSTANCE="s02_entry_pipeline_s02_transaction_regulator" PORT="aclk"/>
+        <CONNECTION INSTANCE="s02_axi2sc" PORT="aclk"/>
+        <CONNECTION INSTANCE="s02_nodes_s02_aw_node" PORT="s_sc_aclk"/>
+        <CONNECTION INSTANCE="s02_nodes_s02_w_node" PORT="s_sc_aclk"/>
+        <CONNECTION INSTANCE="s02_nodes_s02_b_node" PORT="m_sc_aclk"/>
+        <CONNECTION INSTANCE="m00_sc2axi" PORT="aclk"/>
+        <CONNECTION INSTANCE="m00_nodes_m00_ar_node" PORT="m_sc_aclk"/>
+        <CONNECTION INSTANCE="m00_nodes_m00_aw_node" PORT="m_sc_aclk"/>
+        <CONNECTION INSTANCE="m00_nodes_m00_w_node" PORT="m_sc_aclk"/>
+        <CONNECTION INSTANCE="m00_nodes_m00_r_node" PORT="s_sc_aclk"/>
+        <CONNECTION INSTANCE="m00_nodes_m00_b_node" PORT="s_sc_aclk"/>
+        <CONNECTION INSTANCE="m00_exit_pipeline_m00_exit" PORT="aclk"/>
         <CONNECTION INSTANCE="switchboards_ar_switchboard" PORT="aclk"/>
         <CONNECTION INSTANCE="switchboards_aw_switchboard" PORT="aclk"/>
         <CONNECTION INSTANCE="switchboards_b_switchboard" PORT="aclk"/>
@@ -26,35 +55,6 @@
         <CONNECTION INSTANCE="m00_nodes_m00_w_node" PORT="s_sc_aclk"/>
         <CONNECTION INSTANCE="m00_nodes_m00_r_node" PORT="m_sc_aclk"/>
         <CONNECTION INSTANCE="m00_nodes_m00_b_node" PORT="m_sc_aclk"/>
-        <CONNECTION INSTANCE="m00_sc2axi" PORT="aclk"/>
-        <CONNECTION INSTANCE="m00_nodes_m00_ar_node" PORT="m_sc_aclk"/>
-        <CONNECTION INSTANCE="m00_nodes_m00_aw_node" PORT="m_sc_aclk"/>
-        <CONNECTION INSTANCE="m00_nodes_m00_w_node" PORT="m_sc_aclk"/>
-        <CONNECTION INSTANCE="m00_nodes_m00_r_node" PORT="s_sc_aclk"/>
-        <CONNECTION INSTANCE="m00_nodes_m00_b_node" PORT="s_sc_aclk"/>
-        <CONNECTION INSTANCE="m00_exit_pipeline_m00_exit" PORT="aclk"/>
-        <CONNECTION INSTANCE="s02_axi2sc" PORT="aclk"/>
-        <CONNECTION INSTANCE="s02_entry_pipeline_s02_mmu" PORT="aclk"/>
-        <CONNECTION INSTANCE="s02_entry_pipeline_s02_si_converter" PORT="aclk"/>
-        <CONNECTION INSTANCE="s02_entry_pipeline_s02_transaction_regulator" PORT="aclk"/>
-        <CONNECTION INSTANCE="s02_nodes_s02_aw_node" PORT="s_sc_aclk"/>
-        <CONNECTION INSTANCE="s02_nodes_s02_w_node" PORT="s_sc_aclk"/>
-        <CONNECTION INSTANCE="s02_nodes_s02_b_node" PORT="m_sc_aclk"/>
-        <CONNECTION INSTANCE="s01_axi2sc" PORT="aclk"/>
-        <CONNECTION INSTANCE="s01_entry_pipeline_s01_mmu" PORT="aclk"/>
-        <CONNECTION INSTANCE="s01_entry_pipeline_s01_si_converter" PORT="aclk"/>
-        <CONNECTION INSTANCE="s01_entry_pipeline_s01_transaction_regulator" PORT="aclk"/>
-        <CONNECTION INSTANCE="s01_nodes_s01_ar_node" PORT="s_sc_aclk"/>
-        <CONNECTION INSTANCE="s01_nodes_s01_r_node" PORT="m_sc_aclk"/>
-        <CONNECTION INSTANCE="s00_axi2sc" PORT="aclk"/>
-        <CONNECTION INSTANCE="s00_entry_pipeline_s00_mmu" PORT="aclk"/>
-        <CONNECTION INSTANCE="s00_entry_pipeline_s00_si_converter" PORT="aclk"/>
-        <CONNECTION INSTANCE="s00_entry_pipeline_s00_transaction_regulator" PORT="aclk"/>
-        <CONNECTION INSTANCE="s00_nodes_s00_ar_node" PORT="s_sc_aclk"/>
-        <CONNECTION INSTANCE="s00_nodes_s00_aw_node" PORT="s_sc_aclk"/>
-        <CONNECTION INSTANCE="s00_nodes_s00_w_node" PORT="s_sc_aclk"/>
-        <CONNECTION INSTANCE="s00_nodes_s00_r_node" PORT="m_sc_aclk"/>
-        <CONNECTION INSTANCE="s00_nodes_s00_b_node" PORT="m_sc_aclk"/>
         <CONNECTION INSTANCE="clk_map_psr_aclk" PORT="slowest_sync_clk"/>
       </CONNECTIONS>
     </PORT>
@@ -63,72 +63,6 @@
         <CONNECTION INSTANCE="clk_map_psr_aclk" PORT="aux_reset_in"/>
       </CONNECTIONS>
     </PORT>
-    <PORT DIR="O" LEFT="31" NAME="M00_AXI_awaddr" RIGHT="0" SIGIS="undef"/>
-    <PORT DIR="O" LEFT="3" NAME="M00_AXI_awlen" RIGHT="0" SIGIS="undef"/>
-    <PORT DIR="O" LEFT="2" NAME="M00_AXI_awsize" RIGHT="0" SIGIS="undef"/>
-    <PORT DIR="O" LEFT="1" NAME="M00_AXI_awburst" RIGHT="0" SIGIS="undef"/>
-    <PORT DIR="O" LEFT="1" NAME="M00_AXI_awlock" RIGHT="0" SIGIS="undef"/>
-    <PORT DIR="O" LEFT="3" NAME="M00_AXI_awcache" RIGHT="0" SIGIS="undef"/>
-    <PORT DIR="O" LEFT="2" NAME="M00_AXI_awprot" RIGHT="0" SIGIS="undef"/>
-    <PORT DIR="O" LEFT="3" NAME="M00_AXI_awqos" RIGHT="0" SIGIS="undef"/>
-    <PORT DIR="O" NAME="M00_AXI_awvalid" SIGIS="undef"/>
-    <PORT DIR="I" NAME="M00_AXI_awready" SIGIS="undef"/>
-    <PORT DIR="O" LEFT="63" NAME="M00_AXI_wdata" RIGHT="0" SIGIS="undef"/>
-    <PORT DIR="O" LEFT="7" NAME="M00_AXI_wstrb" RIGHT="0" SIGIS="undef"/>
-    <PORT DIR="O" NAME="M00_AXI_wlast" SIGIS="undef"/>
-    <PORT DIR="O" NAME="M00_AXI_wvalid" SIGIS="undef"/>
-    <PORT DIR="I" NAME="M00_AXI_wready" SIGIS="undef"/>
-    <PORT DIR="I" LEFT="1" NAME="M00_AXI_bresp" RIGHT="0" SIGIS="undef"/>
-    <PORT DIR="I" NAME="M00_AXI_bvalid" SIGIS="undef"/>
-    <PORT DIR="O" NAME="M00_AXI_bready" SIGIS="undef"/>
-    <PORT DIR="O" LEFT="31" NAME="M00_AXI_araddr" RIGHT="0" SIGIS="undef"/>
-    <PORT DIR="O" LEFT="3" NAME="M00_AXI_arlen" RIGHT="0" SIGIS="undef"/>
-    <PORT DIR="O" LEFT="2" NAME="M00_AXI_arsize" RIGHT="0" SIGIS="undef"/>
-    <PORT DIR="O" LEFT="1" NAME="M00_AXI_arburst" RIGHT="0" SIGIS="undef"/>
-    <PORT DIR="O" LEFT="1" NAME="M00_AXI_arlock" RIGHT="0" SIGIS="undef"/>
-    <PORT DIR="O" LEFT="3" NAME="M00_AXI_arcache" RIGHT="0" SIGIS="undef"/>
-    <PORT DIR="O" LEFT="2" NAME="M00_AXI_arprot" RIGHT="0" SIGIS="undef"/>
-    <PORT DIR="O" LEFT="3" NAME="M00_AXI_arqos" RIGHT="0" SIGIS="undef"/>
-    <PORT DIR="O" NAME="M00_AXI_arvalid" SIGIS="undef"/>
-    <PORT DIR="I" NAME="M00_AXI_arready" SIGIS="undef"/>
-    <PORT DIR="I" LEFT="63" NAME="M00_AXI_rdata" RIGHT="0" SIGIS="undef"/>
-    <PORT DIR="I" LEFT="1" NAME="M00_AXI_rresp" RIGHT="0" SIGIS="undef"/>
-    <PORT DIR="I" NAME="M00_AXI_rlast" SIGIS="undef"/>
-    <PORT DIR="I" NAME="M00_AXI_rvalid" SIGIS="undef"/>
-    <PORT DIR="O" NAME="M00_AXI_rready" SIGIS="undef"/>
-    <PORT DIR="I" LEFT="31" NAME="S02_AXI_awaddr" RIGHT="0" SIGIS="undef"/>
-    <PORT DIR="I" LEFT="7" NAME="S02_AXI_awlen" RIGHT="0" SIGIS="undef"/>
-    <PORT DIR="I" LEFT="2" NAME="S02_AXI_awsize" RIGHT="0" SIGIS="undef"/>
-    <PORT DIR="I" LEFT="1" NAME="S02_AXI_awburst" RIGHT="0" SIGIS="undef"/>
-    <PORT DIR="I" LEFT="0" NAME="S02_AXI_awlock" RIGHT="0" SIGIS="undef"/>
-    <PORT DIR="I" LEFT="3" NAME="S02_AXI_awcache" RIGHT="0" SIGIS="undef"/>
-    <PORT DIR="I" LEFT="2" NAME="S02_AXI_awprot" RIGHT="0" SIGIS="undef"/>
-    <PORT DIR="I" LEFT="3" NAME="S02_AXI_awqos" RIGHT="0" SIGIS="undef"/>
-    <PORT DIR="I" NAME="S02_AXI_awvalid" SIGIS="undef"/>
-    <PORT DIR="O" NAME="S02_AXI_awready" SIGIS="undef"/>
-    <PORT DIR="I" LEFT="31" NAME="S02_AXI_wdata" RIGHT="0" SIGIS="undef"/>
-    <PORT DIR="I" LEFT="3" NAME="S02_AXI_wstrb" RIGHT="0" SIGIS="undef"/>
-    <PORT DIR="I" NAME="S02_AXI_wlast" SIGIS="undef"/>
-    <PORT DIR="I" NAME="S02_AXI_wvalid" SIGIS="undef"/>
-    <PORT DIR="O" NAME="S02_AXI_wready" SIGIS="undef"/>
-    <PORT DIR="O" LEFT="1" NAME="S02_AXI_bresp" RIGHT="0" SIGIS="undef"/>
-    <PORT DIR="O" NAME="S02_AXI_bvalid" SIGIS="undef"/>
-    <PORT DIR="I" NAME="S02_AXI_bready" SIGIS="undef"/>
-    <PORT DIR="I" LEFT="31" NAME="S01_AXI_araddr" RIGHT="0" SIGIS="undef"/>
-    <PORT DIR="I" LEFT="7" NAME="S01_AXI_arlen" RIGHT="0" SIGIS="undef"/>
-    <PORT DIR="I" LEFT="2" NAME="S01_AXI_arsize" RIGHT="0" SIGIS="undef"/>
-    <PORT DIR="I" LEFT="1" NAME="S01_AXI_arburst" RIGHT="0" SIGIS="undef"/>
-    <PORT DIR="I" LEFT="0" NAME="S01_AXI_arlock" RIGHT="0" SIGIS="undef"/>
-    <PORT DIR="I" LEFT="3" NAME="S01_AXI_arcache" RIGHT="0" SIGIS="undef"/>
-    <PORT DIR="I" LEFT="2" NAME="S01_AXI_arprot" RIGHT="0" SIGIS="undef"/>
-    <PORT DIR="I" LEFT="3" NAME="S01_AXI_arqos" RIGHT="0" SIGIS="undef"/>
-    <PORT DIR="I" NAME="S01_AXI_arvalid" SIGIS="undef"/>
-    <PORT DIR="O" NAME="S01_AXI_arready" SIGIS="undef"/>
-    <PORT DIR="O" LEFT="31" NAME="S01_AXI_rdata" RIGHT="0" SIGIS="undef"/>
-    <PORT DIR="O" LEFT="1" NAME="S01_AXI_rresp" RIGHT="0" SIGIS="undef"/>
-    <PORT DIR="O" NAME="S01_AXI_rlast" SIGIS="undef"/>
-    <PORT DIR="O" NAME="S01_AXI_rvalid" SIGIS="undef"/>
-    <PORT DIR="I" NAME="S01_AXI_rready" SIGIS="undef"/>
     <PORT DIR="I" LEFT="31" NAME="S00_AXI_awaddr" RIGHT="0" SIGIS="undef"/>
     <PORT DIR="I" LEFT="7" NAME="S00_AXI_awlen" RIGHT="0" SIGIS="undef"/>
     <PORT DIR="I" LEFT="2" NAME="S00_AXI_awsize" RIGHT="0" SIGIS="undef"/>
@@ -162,6 +96,72 @@
     <PORT DIR="O" NAME="S00_AXI_rlast" SIGIS="undef"/>
     <PORT DIR="O" NAME="S00_AXI_rvalid" SIGIS="undef"/>
     <PORT DIR="I" NAME="S00_AXI_rready" SIGIS="undef"/>
+    <PORT DIR="I" LEFT="31" NAME="S01_AXI_araddr" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="I" LEFT="7" NAME="S01_AXI_arlen" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="I" LEFT="2" NAME="S01_AXI_arsize" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="I" LEFT="1" NAME="S01_AXI_arburst" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="I" LEFT="0" NAME="S01_AXI_arlock" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="I" LEFT="3" NAME="S01_AXI_arcache" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="I" LEFT="2" NAME="S01_AXI_arprot" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="I" LEFT="3" NAME="S01_AXI_arqos" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="I" NAME="S01_AXI_arvalid" SIGIS="undef"/>
+    <PORT DIR="O" NAME="S01_AXI_arready" SIGIS="undef"/>
+    <PORT DIR="O" LEFT="31" NAME="S01_AXI_rdata" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="O" LEFT="1" NAME="S01_AXI_rresp" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="O" NAME="S01_AXI_rlast" SIGIS="undef"/>
+    <PORT DIR="O" NAME="S01_AXI_rvalid" SIGIS="undef"/>
+    <PORT DIR="I" NAME="S01_AXI_rready" SIGIS="undef"/>
+    <PORT DIR="I" LEFT="31" NAME="S02_AXI_awaddr" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="I" LEFT="7" NAME="S02_AXI_awlen" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="I" LEFT="2" NAME="S02_AXI_awsize" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="I" LEFT="1" NAME="S02_AXI_awburst" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="I" LEFT="0" NAME="S02_AXI_awlock" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="I" LEFT="3" NAME="S02_AXI_awcache" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="I" LEFT="2" NAME="S02_AXI_awprot" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="I" LEFT="3" NAME="S02_AXI_awqos" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="I" NAME="S02_AXI_awvalid" SIGIS="undef"/>
+    <PORT DIR="O" NAME="S02_AXI_awready" SIGIS="undef"/>
+    <PORT DIR="I" LEFT="31" NAME="S02_AXI_wdata" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="I" LEFT="3" NAME="S02_AXI_wstrb" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="I" NAME="S02_AXI_wlast" SIGIS="undef"/>
+    <PORT DIR="I" NAME="S02_AXI_wvalid" SIGIS="undef"/>
+    <PORT DIR="O" NAME="S02_AXI_wready" SIGIS="undef"/>
+    <PORT DIR="O" LEFT="1" NAME="S02_AXI_bresp" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="O" NAME="S02_AXI_bvalid" SIGIS="undef"/>
+    <PORT DIR="I" NAME="S02_AXI_bready" SIGIS="undef"/>
+    <PORT DIR="O" LEFT="31" NAME="M00_AXI_awaddr" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="O" LEFT="3" NAME="M00_AXI_awlen" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="O" LEFT="2" NAME="M00_AXI_awsize" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="O" LEFT="1" NAME="M00_AXI_awburst" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="O" LEFT="1" NAME="M00_AXI_awlock" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="O" LEFT="3" NAME="M00_AXI_awcache" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="O" LEFT="2" NAME="M00_AXI_awprot" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="O" LEFT="3" NAME="M00_AXI_awqos" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="O" NAME="M00_AXI_awvalid" SIGIS="undef"/>
+    <PORT DIR="I" NAME="M00_AXI_awready" SIGIS="undef"/>
+    <PORT DIR="O" LEFT="63" NAME="M00_AXI_wdata" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="O" LEFT="7" NAME="M00_AXI_wstrb" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="O" NAME="M00_AXI_wlast" SIGIS="undef"/>
+    <PORT DIR="O" NAME="M00_AXI_wvalid" SIGIS="undef"/>
+    <PORT DIR="I" NAME="M00_AXI_wready" SIGIS="undef"/>
+    <PORT DIR="I" LEFT="1" NAME="M00_AXI_bresp" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="I" NAME="M00_AXI_bvalid" SIGIS="undef"/>
+    <PORT DIR="O" NAME="M00_AXI_bready" SIGIS="undef"/>
+    <PORT DIR="O" LEFT="31" NAME="M00_AXI_araddr" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="O" LEFT="3" NAME="M00_AXI_arlen" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="O" LEFT="2" NAME="M00_AXI_arsize" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="O" LEFT="1" NAME="M00_AXI_arburst" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="O" LEFT="1" NAME="M00_AXI_arlock" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="O" LEFT="3" NAME="M00_AXI_arcache" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="O" LEFT="2" NAME="M00_AXI_arprot" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="O" LEFT="3" NAME="M00_AXI_arqos" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="O" NAME="M00_AXI_arvalid" SIGIS="undef"/>
+    <PORT DIR="I" NAME="M00_AXI_arready" SIGIS="undef"/>
+    <PORT DIR="I" LEFT="63" NAME="M00_AXI_rdata" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="I" LEFT="1" NAME="M00_AXI_rresp" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="I" NAME="M00_AXI_rlast" SIGIS="undef"/>
+    <PORT DIR="I" NAME="M00_AXI_rvalid" SIGIS="undef"/>
+    <PORT DIR="O" NAME="M00_AXI_rready" SIGIS="undef"/>
   </EXTERNALPORTS>
 
   <EXTERNALINTERFACES>
@@ -468,6 +468,31 @@
         <PORT DIR="O" LEFT="0" NAME="peripheral_reset" RIGHT="0" SIGIS="rst"/>
         <PORT DIR="O" LEFT="0" NAME="interconnect_aresetn" RIGHT="0" SIGIS="rst" SIGNAME="clk_map_psr_aclk_interconnect_aresetn">
           <CONNECTIONS>
+            <CONNECTION INSTANCE="s00_entry_pipeline_s00_mmu" PORT="aresetn"/>
+            <CONNECTION INSTANCE="s00_entry_pipeline_s00_si_converter" PORT="aresetn"/>
+            <CONNECTION INSTANCE="s00_entry_pipeline_s00_transaction_regulator" PORT="aresetn"/>
+            <CONNECTION INSTANCE="s00_nodes_s00_ar_node" PORT="s_sc_aresetn"/>
+            <CONNECTION INSTANCE="s00_nodes_s00_aw_node" PORT="s_sc_aresetn"/>
+            <CONNECTION INSTANCE="s00_nodes_s00_w_node" PORT="s_sc_aresetn"/>
+            <CONNECTION INSTANCE="s00_nodes_s00_r_node" PORT="m_sc_aresetn"/>
+            <CONNECTION INSTANCE="s00_nodes_s00_b_node" PORT="m_sc_aresetn"/>
+            <CONNECTION INSTANCE="s01_entry_pipeline_s01_mmu" PORT="aresetn"/>
+            <CONNECTION INSTANCE="s01_entry_pipeline_s01_si_converter" PORT="aresetn"/>
+            <CONNECTION INSTANCE="s01_entry_pipeline_s01_transaction_regulator" PORT="aresetn"/>
+            <CONNECTION INSTANCE="s01_nodes_s01_ar_node" PORT="s_sc_aresetn"/>
+            <CONNECTION INSTANCE="s01_nodes_s01_r_node" PORT="m_sc_aresetn"/>
+            <CONNECTION INSTANCE="s02_entry_pipeline_s02_mmu" PORT="aresetn"/>
+            <CONNECTION INSTANCE="s02_entry_pipeline_s02_si_converter" PORT="aresetn"/>
+            <CONNECTION INSTANCE="s02_entry_pipeline_s02_transaction_regulator" PORT="aresetn"/>
+            <CONNECTION INSTANCE="s02_nodes_s02_aw_node" PORT="s_sc_aresetn"/>
+            <CONNECTION INSTANCE="s02_nodes_s02_w_node" PORT="s_sc_aresetn"/>
+            <CONNECTION INSTANCE="s02_nodes_s02_b_node" PORT="m_sc_aresetn"/>
+            <CONNECTION INSTANCE="m00_nodes_m00_ar_node" PORT="m_sc_aresetn"/>
+            <CONNECTION INSTANCE="m00_nodes_m00_aw_node" PORT="m_sc_aresetn"/>
+            <CONNECTION INSTANCE="m00_nodes_m00_w_node" PORT="m_sc_aresetn"/>
+            <CONNECTION INSTANCE="m00_nodes_m00_r_node" PORT="s_sc_aresetn"/>
+            <CONNECTION INSTANCE="m00_nodes_m00_b_node" PORT="s_sc_aresetn"/>
+            <CONNECTION INSTANCE="m00_exit_pipeline_m00_exit" PORT="aresetn"/>
             <CONNECTION INSTANCE="s00_nodes_s00_ar_node" PORT="m_sc_aresetn"/>
             <CONNECTION INSTANCE="s00_nodes_s00_aw_node" PORT="m_sc_aresetn"/>
             <CONNECTION INSTANCE="s00_nodes_s00_w_node" PORT="m_sc_aresetn"/>
@@ -483,31 +508,6 @@
             <CONNECTION INSTANCE="m00_nodes_m00_w_node" PORT="s_sc_aresetn"/>
             <CONNECTION INSTANCE="m00_nodes_m00_r_node" PORT="m_sc_aresetn"/>
             <CONNECTION INSTANCE="m00_nodes_m00_b_node" PORT="m_sc_aresetn"/>
-            <CONNECTION INSTANCE="m00_nodes_m00_ar_node" PORT="m_sc_aresetn"/>
-            <CONNECTION INSTANCE="m00_nodes_m00_aw_node" PORT="m_sc_aresetn"/>
-            <CONNECTION INSTANCE="m00_nodes_m00_w_node" PORT="m_sc_aresetn"/>
-            <CONNECTION INSTANCE="m00_nodes_m00_r_node" PORT="s_sc_aresetn"/>
-            <CONNECTION INSTANCE="m00_nodes_m00_b_node" PORT="s_sc_aresetn"/>
-            <CONNECTION INSTANCE="m00_exit_pipeline_m00_exit" PORT="aresetn"/>
-            <CONNECTION INSTANCE="s02_entry_pipeline_s02_mmu" PORT="aresetn"/>
-            <CONNECTION INSTANCE="s02_entry_pipeline_s02_si_converter" PORT="aresetn"/>
-            <CONNECTION INSTANCE="s02_entry_pipeline_s02_transaction_regulator" PORT="aresetn"/>
-            <CONNECTION INSTANCE="s02_nodes_s02_aw_node" PORT="s_sc_aresetn"/>
-            <CONNECTION INSTANCE="s02_nodes_s02_w_node" PORT="s_sc_aresetn"/>
-            <CONNECTION INSTANCE="s02_nodes_s02_b_node" PORT="m_sc_aresetn"/>
-            <CONNECTION INSTANCE="s01_entry_pipeline_s01_mmu" PORT="aresetn"/>
-            <CONNECTION INSTANCE="s01_entry_pipeline_s01_si_converter" PORT="aresetn"/>
-            <CONNECTION INSTANCE="s01_entry_pipeline_s01_transaction_regulator" PORT="aresetn"/>
-            <CONNECTION INSTANCE="s01_nodes_s01_ar_node" PORT="s_sc_aresetn"/>
-            <CONNECTION INSTANCE="s01_nodes_s01_r_node" PORT="m_sc_aresetn"/>
-            <CONNECTION INSTANCE="s00_entry_pipeline_s00_mmu" PORT="aresetn"/>
-            <CONNECTION INSTANCE="s00_entry_pipeline_s00_si_converter" PORT="aresetn"/>
-            <CONNECTION INSTANCE="s00_entry_pipeline_s00_transaction_regulator" PORT="aresetn"/>
-            <CONNECTION INSTANCE="s00_nodes_s00_ar_node" PORT="s_sc_aresetn"/>
-            <CONNECTION INSTANCE="s00_nodes_s00_aw_node" PORT="s_sc_aresetn"/>
-            <CONNECTION INSTANCE="s00_nodes_s00_w_node" PORT="s_sc_aresetn"/>
-            <CONNECTION INSTANCE="s00_nodes_s00_r_node" PORT="m_sc_aresetn"/>
-            <CONNECTION INSTANCE="s00_nodes_s00_b_node" PORT="m_sc_aresetn"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" LEFT="0" NAME="peripheral_aresetn" RIGHT="0" SIGIS="rst"/>
@@ -1395,7 +1395,7 @@
         </BUSINTERFACE>
       </BUSINTERFACES>
     </MODULE>
-    <MODULE FULLNAME="/m00_nodes/m00_aw_node" HWVERSION="1.0" INSTANCE="m00_nodes_m00_aw_node" IPTYPE="BUS" IS_ENABLE="1" MODCLASS="BUS" MODTYPE="sc_node" VLNV="xilinx.com:ip:sc_node:1.0">
+    <MODULE FULLNAME="/m00_nodes/m00_aw_node" HWVERSION="1.0" INSTANCE="m00_nodes_m00_aw_node" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="sc_node" VLNV="xilinx.com:ip:sc_node:1.0">
       <DOCUMENTS>
         <DOCUMENT SOURCE="http://www.xilinx.com/cgi-bin/docs/ipdoc?c=smartconnect;v=v1_0;d=pg247-smartconnect.pdf"/>
       </DOCUMENTS>
@@ -1484,7 +1484,7 @@
         <PARAMETER NAME="M14_NUM_BYTES" VALUE="8"/>
         <PARAMETER NAME="M15_NUM_BYTES" VALUE="8"/>
         <PARAMETER NAME="Component_Name" VALUE="bd_afc3_m00awn_0"/>
-        <PARAMETER NAME="EDK_IPTYPE" VALUE="BUS"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
       <PORTS>
         <PORT CLKFREQUENCY="100000000" DIR="I" NAME="s_sc_aclk" SIGIS="clk" SIGNAME="External_Ports_aclk">
@@ -1574,7 +1574,7 @@
         </PORT>
       </PORTS>
       <BUSINTERFACES>
-        <BUSINTERFACE BUSNAME="switchboards_aw_switchboard_M00_SC" NAME="S_SC" TYPE="SLAVE" VLNV="xilinx.com:interface:sc:1.0">
+        <BUSINTERFACE BUSNAME="switchboards_aw_switchboard_M00_SC" NAME="S_SC" TYPE="TARGET" VLNV="xilinx.com:interface:sc:1.0">
           <PORTMAPS>
             <PORTMAP LOGICAL="INFO" PHYSICAL="s_sc_info"/>
             <PORTMAP LOGICAL="PAYLD" PHYSICAL="s_sc_payld"/>
@@ -1583,7 +1583,7 @@
             <PORTMAP LOGICAL="SEND" PHYSICAL="s_sc_send"/>
           </PORTMAPS>
         </BUSINTERFACE>
-        <BUSINTERFACE BUSNAME="m00_nodes_m00_aw_node_M_SC" NAME="M_SC" TYPE="MASTER" VLNV="xilinx.com:interface:sc:1.0">
+        <BUSINTERFACE BUSNAME="m00_nodes_m00_aw_node_M_SC" NAME="M_SC" TYPE="INITIATOR" VLNV="xilinx.com:interface:sc:1.0">
           <PORTMAPS>
             <PORTMAP LOGICAL="INFO" PHYSICAL="m_sc_info"/>
             <PORTMAP LOGICAL="PAYLD" PHYSICAL="m_sc_payld"/>
@@ -1592,7 +1592,7 @@
             <PORTMAP LOGICAL="SEND" PHYSICAL="m_sc_send"/>
           </PORTMAPS>
         </BUSINTERFACE>
-        <BUSINTERFACE BUSNAME="m00_nodes_m00_aw_node_M_AXIS_ARB" NAME="M_AXIS_ARB" TYPE="MASTER" VLNV="xilinx.com:interface:axis:1.0">
+        <BUSINTERFACE BUSNAME="m00_nodes_m00_aw_node_M_AXIS_ARB" NAME="M_AXIS_ARB" TYPE="INITIATOR" VLNV="xilinx.com:interface:axis:1.0">
           <PARAMETER NAME="TDATA_NUM_BYTES" VALUE="2"/>
           <PARAMETER NAME="TDEST_WIDTH" VALUE="0"/>
           <PARAMETER NAME="TID_WIDTH" VALUE="0"/>
@@ -1981,7 +1981,7 @@
         </BUSINTERFACE>
       </BUSINTERFACES>
     </MODULE>
-    <MODULE FULLNAME="/m00_nodes/m00_w_node" HWVERSION="1.0" INSTANCE="m00_nodes_m00_w_node" IPTYPE="BUS" IS_ENABLE="1" MODCLASS="BUS" MODTYPE="sc_node" VLNV="xilinx.com:ip:sc_node:1.0">
+    <MODULE FULLNAME="/m00_nodes/m00_w_node" HWVERSION="1.0" INSTANCE="m00_nodes_m00_w_node" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="sc_node" VLNV="xilinx.com:ip:sc_node:1.0">
       <DOCUMENTS>
         <DOCUMENT SOURCE="http://www.xilinx.com/cgi-bin/docs/ipdoc?c=smartconnect;v=v1_0;d=pg247-smartconnect.pdf"/>
       </DOCUMENTS>
@@ -2070,7 +2070,7 @@
         <PARAMETER NAME="M14_NUM_BYTES" VALUE="8"/>
         <PARAMETER NAME="M15_NUM_BYTES" VALUE="8"/>
         <PARAMETER NAME="Component_Name" VALUE="bd_afc3_m00wn_0"/>
-        <PARAMETER NAME="EDK_IPTYPE" VALUE="BUS"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
       <PORTS>
         <PORT CLKFREQUENCY="100000000" DIR="I" NAME="s_sc_aclk" SIGIS="clk" SIGNAME="External_Ports_aclk">
@@ -2160,7 +2160,7 @@
         </PORT>
       </PORTS>
       <BUSINTERFACES>
-        <BUSINTERFACE BUSNAME="switchboards_w_switchboard_M00_SC" NAME="S_SC" TYPE="SLAVE" VLNV="xilinx.com:interface:sc:1.0">
+        <BUSINTERFACE BUSNAME="switchboards_w_switchboard_M00_SC" NAME="S_SC" TYPE="TARGET" VLNV="xilinx.com:interface:sc:1.0">
           <PORTMAPS>
             <PORTMAP LOGICAL="INFO" PHYSICAL="s_sc_info"/>
             <PORTMAP LOGICAL="PAYLD" PHYSICAL="s_sc_payld"/>
@@ -2169,7 +2169,7 @@
             <PORTMAP LOGICAL="SEND" PHYSICAL="s_sc_send"/>
           </PORTMAPS>
         </BUSINTERFACE>
-        <BUSINTERFACE BUSNAME="m00_nodes_m00_w_node_M_SC" NAME="M_SC" TYPE="MASTER" VLNV="xilinx.com:interface:sc:1.0">
+        <BUSINTERFACE BUSNAME="m00_nodes_m00_w_node_M_SC" NAME="M_SC" TYPE="INITIATOR" VLNV="xilinx.com:interface:sc:1.0">
           <PORTMAPS>
             <PORTMAP LOGICAL="INFO" PHYSICAL="m_sc_info"/>
             <PORTMAP LOGICAL="PAYLD" PHYSICAL="m_sc_payld"/>
@@ -2178,7 +2178,7 @@
             <PORTMAP LOGICAL="SEND" PHYSICAL="m_sc_send"/>
           </PORTMAPS>
         </BUSINTERFACE>
-        <BUSINTERFACE BUSNAME="m00_nodes_m00_aw_node_M_AXIS_ARB" NAME="S_AXIS_ARB" TYPE="SLAVE" VLNV="xilinx.com:interface:axis:1.0">
+        <BUSINTERFACE BUSNAME="m00_nodes_m00_aw_node_M_AXIS_ARB" NAME="S_AXIS_ARB" TYPE="TARGET" VLNV="xilinx.com:interface:axis:1.0">
           <PARAMETER NAME="TDATA_NUM_BYTES" VALUE="2"/>
           <PARAMETER NAME="TDEST_WIDTH" VALUE="0"/>
           <PARAMETER NAME="TID_WIDTH" VALUE="0"/>
@@ -2593,7 +2593,7 @@
             <PORTMAP LOGICAL="SEND" PHYSICAL="s_sc_ar_send"/>
           </PORTMAPS>
         </BUSINTERFACE>
-        <BUSINTERFACE BUSNAME="m00_nodes_m00_aw_node_M_SC" NAME="S_SC_AW" TYPE="SLAVE" VLNV="xilinx.com:interface:sc:1.0">
+        <BUSINTERFACE BUSNAME="m00_nodes_m00_aw_node_M_SC" NAME="S_SC_AW" TYPE="TARGET" VLNV="xilinx.com:interface:sc:1.0">
           <PORTMAPS>
             <PORTMAP LOGICAL="INFO" PHYSICAL="s_sc_aw_info"/>
             <PORTMAP LOGICAL="PAYLD" PHYSICAL="s_sc_aw_payld"/>
@@ -2602,7 +2602,7 @@
             <PORTMAP LOGICAL="SEND" PHYSICAL="s_sc_aw_send"/>
           </PORTMAPS>
         </BUSINTERFACE>
-        <BUSINTERFACE BUSNAME="m00_nodes_m00_w_node_M_SC" NAME="S_SC_W" TYPE="SLAVE" VLNV="xilinx.com:interface:sc:1.0">
+        <BUSINTERFACE BUSNAME="m00_nodes_m00_w_node_M_SC" NAME="S_SC_W" TYPE="TARGET" VLNV="xilinx.com:interface:sc:1.0">
           <PORTMAPS>
             <PORTMAP LOGICAL="INFO" PHYSICAL="s_sc_w_info"/>
             <PORTMAP LOGICAL="PAYLD" PHYSICAL="s_sc_w_payld"/>
@@ -18288,7 +18288,7 @@
             <PORTMAP LOGICAL="RECV" PHYSICAL="s_sc_recv"/>
           </PORTMAPS>
         </BUSINTERFACE>
-        <BUSINTERFACE BUSNAME="switchboards_aw_switchboard_M00_SC" NAME="M00_SC" TYPE="MASTER" VLNV="xilinx.com:interface:sc:1.0">
+        <BUSINTERFACE BUSNAME="switchboards_aw_switchboard_M00_SC" NAME="M00_SC" TYPE="INITIATOR" VLNV="xilinx.com:interface:sc:1.0">
           <PORTMAPS>
             <PORTMAP LOGICAL="RECV" PHYSICAL="m_sc_recv"/>
             <PORTMAP LOGICAL="SEND" PHYSICAL="m_sc_send"/>
@@ -19469,7 +19469,7 @@
             <PORTMAP LOGICAL="RECV" PHYSICAL="s_sc_recv"/>
           </PORTMAPS>
         </BUSINTERFACE>
-        <BUSINTERFACE BUSNAME="switchboards_w_switchboard_M00_SC" NAME="M00_SC" TYPE="MASTER" VLNV="xilinx.com:interface:sc:1.0">
+        <BUSINTERFACE BUSNAME="switchboards_w_switchboard_M00_SC" NAME="M00_SC" TYPE="INITIATOR" VLNV="xilinx.com:interface:sc:1.0">
           <PORTMAPS>
             <PORTMAP LOGICAL="RECV" PHYSICAL="m_sc_recv"/>
             <PORTMAP LOGICAL="SEND" PHYSICAL="m_sc_send"/>

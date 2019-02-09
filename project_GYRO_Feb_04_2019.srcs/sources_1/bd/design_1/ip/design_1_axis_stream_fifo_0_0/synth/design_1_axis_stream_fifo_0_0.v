@@ -48,11 +48,11 @@
 
 
 // IP VLNV: xilinx.com:user:axis_stream_fifo:1.0
-// IP Revision: 2
+// IP Revision: 7
 
 (* X_CORE_INFO = "axis_stream_fifo_v1_0,Vivado 2018.2" *)
 (* CHECK_LICENSE_TYPE = "design_1_axis_stream_fifo_0_0,axis_stream_fifo_v1_0,{}" *)
-(* CORE_GENERATION_INFO = "design_1_axis_stream_fifo_0_0,axis_stream_fifo_v1_0,{x_ipProduct=Vivado 2018.2,x_ipVendor=xilinx.com,x_ipLibrary=user,x_ipName=axis_stream_fifo,x_ipVersion=1.0,x_ipCoreRevision=2,x_ipLanguage=VERILOG,x_ipSimLanguage=MIXED,C_S00_AXI_DATA_WIDTH=32,C_S00_AXI_ADDR_WIDTH=4,ADDR_WIDTH=12,C_AXIS_TDATA_WIDTH=32}" *)
+(* CORE_GENERATION_INFO = "design_1_axis_stream_fifo_0_0,axis_stream_fifo_v1_0,{x_ipProduct=Vivado 2018.2,x_ipVendor=xilinx.com,x_ipLibrary=user,x_ipName=axis_stream_fifo,x_ipVersion=1.0,x_ipCoreRevision=7,x_ipLanguage=VERILOG,x_ipSimLanguage=MIXED,C_S00_AXI_DATA_WIDTH=32,C_S00_AXI_ADDR_WIDTH=4,ADDR_WIDTH=12,C_AXIS_TDATA_WIDTH=32}" *)
 (* DowngradeIPIdentifiedWarnings = "yes" *)
 module design_1_axis_stream_fifo_0_0 (
   s00_axi_awaddr,
@@ -86,6 +86,12 @@ module design_1_axis_stream_fifo_0_0 (
   s00_axis_tdata,
   s00_axis_tstrb,
   s00_axis_tlast,
+  tclk,
+  tresetn,
+  tdata,
+  tvalid,
+  tready,
+  tlast,
   s00_axis_tvalid,
   s00_axis_tready,
   s00_axis_aclk,
@@ -161,6 +167,12 @@ input wire [31 : 0] s00_axis_tdata;
 input wire [3 : 0] s00_axis_tstrb;
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 S00_AXIS TLAST" *)
 input wire s00_axis_tlast;
+input wire tclk;
+input wire tresetn;
+input wire [31 : 0] tdata;
+input wire tvalid;
+output wire tready;
+input wire tlast;
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 S00_AXIS TVALID" *)
 input wire s00_axis_tvalid;
 (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME S00_AXIS, WIZ_DATA_WIDTH 32, TDATA_NUM_BYTES 4, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 1, HAS_TKEEP 0, HAS_TLAST 1, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN design_1_processing_system7_0_0_FCLK_CLK0, LAYERED_METADATA undef" *)
@@ -210,6 +222,12 @@ input wire s00_axis_aresetn;
     .s00_axis_tdata(s00_axis_tdata),
     .s00_axis_tstrb(s00_axis_tstrb),
     .s00_axis_tlast(s00_axis_tlast),
+    .tclk(tclk),
+    .tresetn(tresetn),
+    .tdata(tdata),
+    .tvalid(tvalid),
+    .tready(tready),
+    .tlast(tlast),
     .s00_axis_tvalid(s00_axis_tvalid),
     .s00_axis_tready(s00_axis_tready),
     .s00_axis_aclk(s00_axis_aclk),

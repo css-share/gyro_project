@@ -6,9 +6,9 @@
   <File Type="OPT-DCP" Name="design_1_wrapper_opt.dcp"/>
   <File Type="OPT-HWDEF" Name="design_1_wrapper.hwdef"/>
   <File Type="PWROPT-DCP" Name="design_1_wrapper_pwropt.dcp"/>
+  <File Type="BG-BGN" Name="design_1_wrapper.bgn"/>
   <File Type="PLACE-DCP" Name="design_1_wrapper_placed.dcp"/>
   <File Type="PLACE-PRE-SIMILARITY" Name="design_1_wrapper_incremental_reuse_pre_placed.rpt"/>
-  <File Type="BG-BGN" Name="design_1_wrapper.bgn"/>
   <File Type="POSTPLACE-PWROPT-DCP" Name="design_1_wrapper_postplace_pwropt.dcp"/>
   <File Type="BG-BIN" Name="design_1_wrapper.bin"/>
   <File Type="PHYSOPT-DCP" Name="design_1_wrapper_physopt.dcp"/>

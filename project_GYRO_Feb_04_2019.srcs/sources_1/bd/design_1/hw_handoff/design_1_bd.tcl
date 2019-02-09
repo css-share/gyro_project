@@ -614,7 +614,6 @@ proc create_root_design { parentCell } {
  ] $xlconcat_0
 
   # Create interface connections
-  connect_bd_intf_net -intf_net axi_dma_0_M_AXIS_MM2S [get_bd_intf_pins axi_dma_0/M_AXIS_MM2S] [get_bd_intf_pins axis_stream_fifo_0/S00_AXIS]
   connect_bd_intf_net -intf_net axi_dma_0_M_AXI_MM2S [get_bd_intf_pins axi_dma_0/M_AXI_MM2S] [get_bd_intf_pins axi_smc/S01_AXI]
   connect_bd_intf_net -intf_net axi_dma_0_M_AXI_S2MM [get_bd_intf_pins axi_dma_0/M_AXI_S2MM] [get_bd_intf_pins axi_smc/S02_AXI]
   connect_bd_intf_net -intf_net axi_dma_0_M_AXI_SG [get_bd_intf_pins axi_dma_0/M_AXI_SG] [get_bd_intf_pins axi_smc/S00_AXI]
@@ -650,6 +649,12 @@ proc create_root_design { parentCell } {
   connect_bd_net -net axi_gyro_hsi_0_HSICKA0 [get_bd_ports HSICKA0] [get_bd_pins axi_gyro_hsi_0/HSICKA0]
   connect_bd_net -net axi_gyro_hsi_0_HSICKA1 [get_bd_ports HSICKA1] [get_bd_pins axi_gyro_hsi_0/HSICKA1]
   connect_bd_net -net axi_gyro_hsi_0_MCK [get_bd_ports MCK] [get_bd_pins axi_gyro_hsi_0/MCK]
+  connect_bd_net -net axi_gyro_hsi_0_tclk [get_bd_pins axi_gyro_hsi_0/tclock] [get_bd_pins axis_stream_fifo_0/tclk]
+  connect_bd_net -net axi_gyro_hsi_0_tdata [get_bd_pins axi_gyro_hsi_0/tdata] [get_bd_pins axis_stream_fifo_0/tdata]
+  connect_bd_net -net axi_gyro_hsi_0_tlast [get_bd_pins axi_gyro_hsi_0/tlast] [get_bd_pins axis_stream_fifo_0/tlast]
+  connect_bd_net -net axi_gyro_hsi_0_tresetn [get_bd_pins axi_gyro_hsi_0/tresetn] [get_bd_pins axis_stream_fifo_0/tresetn]
+  connect_bd_net -net axi_gyro_hsi_0_tvalid [get_bd_pins axi_gyro_hsi_0/tvalid] [get_bd_pins axis_stream_fifo_0/tvalid]
+  connect_bd_net -net axis_stream_fifo_0_tready [get_bd_pins axi_gyro_hsi_0/tready] [get_bd_pins axis_stream_fifo_0/tready]
   connect_bd_net -net processing_system7_0_FCLK_CLK0 [get_bd_pins SPI_ip_0/s00_axi_aclk] [get_bd_pins axi4_pl_interrupt_ge_0/s00_axi_aclk] [get_bd_pins axi_dma_0/m_axi_mm2s_aclk] [get_bd_pins axi_dma_0/m_axi_s2mm_aclk] [get_bd_pins axi_dma_0/m_axi_sg_aclk] [get_bd_pins axi_dma_0/s_axi_lite_aclk] [get_bd_pins axi_gyro_hsi_0/s00_axi_aclk] [get_bd_pins axi_smc/aclk] [get_bd_pins axis_stream_fifo_0/m00_axis_aclk] [get_bd_pins axis_stream_fifo_0/s00_axi_aclk] [get_bd_pins axis_stream_fifo_0/s00_axis_aclk] [get_bd_pins processing_system7_0/FCLK_CLK0] [get_bd_pins processing_system7_0/M_AXI_GP0_ACLK] [get_bd_pins processing_system7_0/S_AXI_HP0_ACLK] [get_bd_pins ps7_0_axi_periph/ACLK] [get_bd_pins ps7_0_axi_periph/M00_ACLK] [get_bd_pins ps7_0_axi_periph/M01_ACLK] [get_bd_pins ps7_0_axi_periph/M02_ACLK] [get_bd_pins ps7_0_axi_periph/M03_ACLK] [get_bd_pins ps7_0_axi_periph/M04_ACLK] [get_bd_pins ps7_0_axi_periph/S00_ACLK] [get_bd_pins rst_ps7_0_100M/slowest_sync_clk]
   connect_bd_net -net processing_system7_0_FCLK_RESET0_N [get_bd_pins processing_system7_0/FCLK_RESET0_N] [get_bd_pins rst_ps7_0_100M/ext_reset_in]
   connect_bd_net -net rst_ps7_0_100M_interconnect_aresetn [get_bd_pins ps7_0_axi_periph/ARESETN] [get_bd_pins rst_ps7_0_100M/interconnect_aresetn]

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Tue Feb  5 19:55:59 2019" VIVADOVERSION="2018.2">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Fri Feb  8 19:25:44 2019" VIVADOVERSION="2018.2">
 
   <SYSTEMINFO ARCH="zynq" BOARD="em.avnet.com:zed:part0:1.4" DEVICE="7z020" NAME="design_1" PACKAGE="clg484" SPEEDGRADE="-1"/>
 
@@ -1771,27 +1771,11 @@
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" NAME="mm2s_prmry_reset_out_n" SIGIS="rst"/>
-        <PORT DIR="O" LEFT="31" NAME="m_axis_mm2s_tdata" RIGHT="0" SIGIS="undef" SIGNAME="axi_dma_0_m_axis_mm2s_tdata">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="axis_stream_fifo_0" PORT="s00_axis_tdata"/>
-          </CONNECTIONS>
-        </PORT>
+        <PORT DIR="O" LEFT="31" NAME="m_axis_mm2s_tdata" RIGHT="0" SIGIS="undef"/>
         <PORT DIR="O" LEFT="3" NAME="m_axis_mm2s_tkeep" RIGHT="0" SIGIS="undef"/>
-        <PORT DIR="O" NAME="m_axis_mm2s_tvalid" SIGIS="undef" SIGNAME="axi_dma_0_m_axis_mm2s_tvalid">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="axis_stream_fifo_0" PORT="s00_axis_tvalid"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="I" NAME="m_axis_mm2s_tready" SIGIS="undef" SIGNAME="axi_dma_0_m_axis_mm2s_tready">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="axis_stream_fifo_0" PORT="s00_axis_tready"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="O" NAME="m_axis_mm2s_tlast" SIGIS="undef" SIGNAME="axi_dma_0_m_axis_mm2s_tlast">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="axis_stream_fifo_0" PORT="s00_axis_tlast"/>
-          </CONNECTIONS>
-        </PORT>
+        <PORT DIR="O" NAME="m_axis_mm2s_tvalid" SIGIS="undef"/>
+        <PORT DIR="I" NAME="m_axis_mm2s_tready" SIGIS="undef"/>
+        <PORT DIR="O" NAME="m_axis_mm2s_tlast" SIGIS="undef"/>
         <PORT DIR="O" LEFT="31" NAME="m_axi_s2mm_awaddr" RIGHT="0" SIGIS="undef" SIGNAME="axi_dma_0_m_axi_s2mm_awaddr">
           <CONNECTIONS>
             <CONNECTION INSTANCE="axi_smc" PORT="S02_AXI_awaddr"/>
@@ -2116,7 +2100,7 @@
             <PORTMAP LOGICAL="WVALID" PHYSICAL="m_axi_s2mm_wvalid"/>
           </PORTMAPS>
         </BUSINTERFACE>
-        <BUSINTERFACE BUSNAME="axi_dma_0_M_AXIS_MM2S" NAME="M_AXIS_MM2S" TYPE="INITIATOR" VLNV="xilinx.com:interface:axis:1.0">
+        <BUSINTERFACE BUSNAME="__NOC__" NAME="M_AXIS_MM2S" TYPE="INITIATOR" VLNV="xilinx.com:interface:axis:1.0">
           <PARAMETER NAME="TDATA_NUM_BYTES" VALUE="4"/>
           <PARAMETER NAME="TDEST_WIDTH" VALUE="0"/>
           <PARAMETER NAME="TID_WIDTH" VALUE="0"/>
@@ -2167,7 +2151,6 @@
       </MEMORYMAP>
       <PERIPHERALS>
         <PERIPHERAL INSTANCE="processing_system7_0"/>
-        <PERIPHERAL INSTANCE="axis_stream_fifo_0"/>
       </PERIPHERALS>
     </MODULE>
     <MODULE FULLNAME="/axi_gyro_hsi_0" HWVERSION="1.0" INSTANCE="axi_gyro_hsi_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="axi_gyro_hsi" VLNV="xilinx.com:user:axi_gyro_hsi:1.0">
@@ -2178,6 +2161,8 @@
       <PARAMETERS>
         <PARAMETER NAME="C_S00_AXI_DATA_WIDTH" VALUE="32"/>
         <PARAMETER NAME="C_S00_AXI_ADDR_WIDTH" VALUE="4"/>
+        <PARAMETER NAME="ADDR_WIDTH" VALUE="12"/>
+        <PARAMETER NAME="C_AXIS_TDATA_WIDTH" VALUE="32"/>
         <PARAMETER NAME="Component_Name" VALUE="design_1_axi_gyro_hsi_0_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
         <PARAMETER NAME="C_S00_AXI_BASEADDR" VALUE="0x43C20000"/>
@@ -2207,6 +2192,36 @@
         <PORT DIR="I" NAME="HSIA1" SIGIS="undef" SIGNAME="External_Ports_HSIA1">
           <CONNECTIONS>
             <CONNECTION INSTANCE="External_Ports" PORT="HSIA1"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="tclock" SIGIS="undef" SIGNAME="axi_gyro_hsi_0_tclock">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="axis_stream_fifo_0" PORT="tclk"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="tresetn" SIGIS="undef" SIGNAME="axi_gyro_hsi_0_tresetn">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="axis_stream_fifo_0" PORT="tresetn"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="31" NAME="tdata" RIGHT="0" SIGIS="undef" SIGNAME="axi_gyro_hsi_0_tdata">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="axis_stream_fifo_0" PORT="tdata"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="tvalid" SIGIS="undef" SIGNAME="axi_gyro_hsi_0_tvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="axis_stream_fifo_0" PORT="tvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="tready" SIGIS="undef" SIGNAME="axis_stream_fifo_0_tready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="axis_stream_fifo_0" PORT="tready"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="tlast" SIGIS="undef" SIGNAME="axi_gyro_hsi_0_tlast">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="axis_stream_fifo_0" PORT="tlast"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="I" LEFT="3" NAME="s00_axi_awaddr" RIGHT="0" SIGIS="undef" SIGNAME="axi_gyro_hsi_0_s00_axi_awaddr">
@@ -3251,27 +3266,41 @@
             <CONNECTION INSTANCE="rst_ps7_0_100M" PORT="peripheral_aresetn"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="31" NAME="s00_axis_tdata" RIGHT="0" SIGIS="undef" SIGNAME="axi_dma_0_m_axis_mm2s_tdata">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="axi_dma_0" PORT="m_axis_mm2s_tdata"/>
-          </CONNECTIONS>
-        </PORT>
+        <PORT DIR="I" LEFT="31" NAME="s00_axis_tdata" RIGHT="0" SIGIS="undef"/>
         <PORT DIR="I" LEFT="3" NAME="s00_axis_tstrb" RIGHT="0" SIGIS="undef"/>
-        <PORT DIR="I" NAME="s00_axis_tlast" SIGIS="undef" SIGNAME="axi_dma_0_m_axis_mm2s_tlast">
+        <PORT DIR="I" NAME="s00_axis_tlast" SIGIS="undef"/>
+        <PORT DIR="I" NAME="tclk" SIGIS="undef" SIGNAME="axi_gyro_hsi_0_tclock">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="axi_dma_0" PORT="m_axis_mm2s_tlast"/>
+            <CONNECTION INSTANCE="axi_gyro_hsi_0" PORT="tclock"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="s00_axis_tvalid" SIGIS="undef" SIGNAME="axi_dma_0_m_axis_mm2s_tvalid">
+        <PORT DIR="I" NAME="tresetn" SIGIS="undef" SIGNAME="axi_gyro_hsi_0_tresetn">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="axi_dma_0" PORT="m_axis_mm2s_tvalid"/>
+            <CONNECTION INSTANCE="axi_gyro_hsi_0" PORT="tresetn"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" NAME="s00_axis_tready" SIGIS="undef" SIGNAME="axi_dma_0_m_axis_mm2s_tready">
+        <PORT DIR="I" LEFT="31" NAME="tdata" RIGHT="0" SIGIS="undef" SIGNAME="axi_gyro_hsi_0_tdata">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="axi_dma_0" PORT="m_axis_mm2s_tready"/>
+            <CONNECTION INSTANCE="axi_gyro_hsi_0" PORT="tdata"/>
           </CONNECTIONS>
         </PORT>
+        <PORT DIR="I" NAME="tvalid" SIGIS="undef" SIGNAME="axi_gyro_hsi_0_tvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="axi_gyro_hsi_0" PORT="tvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="tready" SIGIS="undef" SIGNAME="axis_stream_fifo_0_tready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="axi_gyro_hsi_0" PORT="tready"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="tlast" SIGIS="undef" SIGNAME="axi_gyro_hsi_0_tlast">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="axi_gyro_hsi_0" PORT="tlast"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="s00_axis_tvalid" SIGIS="undef"/>
+        <PORT DIR="O" NAME="s00_axis_tready" SIGIS="undef"/>
         <PORT CLKFREQUENCY="100000000" DIR="I" NAME="s00_axis_aclk" SIGIS="clk" SIGNAME="processing_system7_0_FCLK_CLK0">
           <CONNECTIONS>
             <CONNECTION INSTANCE="processing_system7_0" PORT="FCLK_CLK0"/>
@@ -3339,7 +3368,7 @@
             <PORTMAP LOGICAL="RREADY" PHYSICAL="s00_axi_rready"/>
           </PORTMAPS>
         </BUSINTERFACE>
-        <BUSINTERFACE BUSNAME="axi_dma_0_M_AXIS_MM2S" NAME="S00_AXIS" TYPE="TARGET" VLNV="xilinx.com:interface:axis:1.0">
+        <BUSINTERFACE BUSNAME="__NOC__" NAME="S00_AXIS" TYPE="TARGET" VLNV="xilinx.com:interface:axis:1.0">
           <PARAMETER NAME="WIZ_DATA_WIDTH" VALUE="32"/>
           <PARAMETER NAME="TDATA_NUM_BYTES" VALUE="4"/>
           <PARAMETER NAME="TDEST_WIDTH" VALUE="0"/>
@@ -4725,16 +4754,12 @@
             <CONNECTION INSTANCE="rst_ps7_0_100M" PORT="slowest_sync_clk"/>
             <CONNECTION INSTANCE="axi4_pl_interrupt_ge_0" PORT="s00_axi_aclk"/>
             <CONNECTION INSTANCE="SPI_ip_0" PORT="s00_axi_aclk"/>
-            <CONNECTION INSTANCE="axi_gyro_hsi_0" PORT="s00_axi_aclk"/>
             <CONNECTION INSTANCE="processing_system7_0" PORT="S_AXI_HP0_ACLK"/>
             <CONNECTION INSTANCE="axi_smc" PORT="aclk"/>
             <CONNECTION INSTANCE="axi_dma_0" PORT="m_axi_sg_aclk"/>
             <CONNECTION INSTANCE="axi_dma_0" PORT="s_axi_lite_aclk"/>
             <CONNECTION INSTANCE="axi_dma_0" PORT="m_axi_mm2s_aclk"/>
             <CONNECTION INSTANCE="axi_dma_0" PORT="m_axi_s2mm_aclk"/>
-            <CONNECTION INSTANCE="axis_stream_fifo_0" PORT="s00_axi_aclk"/>
-            <CONNECTION INSTANCE="axis_stream_fifo_0" PORT="m00_axis_aclk"/>
-            <CONNECTION INSTANCE="axis_stream_fifo_0" PORT="s00_axis_aclk"/>
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="ACLK"/>
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="S00_ACLK"/>
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="M00_ACLK"/>
@@ -4742,6 +4767,10 @@
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="M02_ACLK"/>
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="M03_ACLK"/>
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="M04_ACLK"/>
+            <CONNECTION INSTANCE="axi_gyro_hsi_0" PORT="s00_axi_aclk"/>
+            <CONNECTION INSTANCE="axis_stream_fifo_0" PORT="s00_axi_aclk"/>
+            <CONNECTION INSTANCE="axis_stream_fifo_0" PORT="m00_axis_aclk"/>
+            <CONNECTION INSTANCE="axis_stream_fifo_0" PORT="s00_axis_aclk"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" NAME="FCLK_RESET0_N" SIGIS="rst" SIGNAME="processing_system7_0_FCLK_RESET0_N">
@@ -6239,18 +6268,18 @@
           <CONNECTIONS>
             <CONNECTION INSTANCE="axi4_pl_interrupt_ge_0" PORT="s00_axi_aresetn"/>
             <CONNECTION INSTANCE="SPI_ip_0" PORT="s00_axi_aresetn"/>
-            <CONNECTION INSTANCE="axi_gyro_hsi_0" PORT="s00_axi_aresetn"/>
             <CONNECTION INSTANCE="axi_smc" PORT="aresetn"/>
             <CONNECTION INSTANCE="axi_dma_0" PORT="axi_resetn"/>
-            <CONNECTION INSTANCE="axis_stream_fifo_0" PORT="s00_axi_aresetn"/>
-            <CONNECTION INSTANCE="axis_stream_fifo_0" PORT="m00_axis_aresetn"/>
-            <CONNECTION INSTANCE="axis_stream_fifo_0" PORT="s00_axis_aresetn"/>
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="S00_ARESETN"/>
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="M00_ARESETN"/>
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="M01_ARESETN"/>
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="M02_ARESETN"/>
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="M03_ARESETN"/>
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="M04_ARESETN"/>
+            <CONNECTION INSTANCE="axi_gyro_hsi_0" PORT="s00_axi_aresetn"/>
+            <CONNECTION INSTANCE="axis_stream_fifo_0" PORT="s00_axi_aresetn"/>
+            <CONNECTION INSTANCE="axis_stream_fifo_0" PORT="m00_axis_aresetn"/>
+            <CONNECTION INSTANCE="axis_stream_fifo_0" PORT="s00_axis_aresetn"/>
           </CONNECTIONS>
         </PORT>
       </PORTS>
