@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-| Date         : Fri Feb  8 19:55:42 2019
+| Date         : Sun Feb 10 02:14:23 2019
 | Host         : DESKTOP-KC9HGNO running 64-bit major release  (build 9200)
 | Command      : report_drc -file design_1_wrapper_drc_routed.rpt -pb design_1_wrapper_drc_routed.pb -rpx design_1_wrapper_drc_routed.rpx
 | Design       : design_1_wrapper
@@ -24,13 +24,13 @@ Table of Contents
       Design limits: <entire design considered>
            Ruledeck: default
              Max violations: <unlimited>
-             Violations found: 61
+             Violations found: 70
 +-------------+----------+-------------------------------------------------------------+------------+
 | Rule        | Severity | Description                                                 | Violations |
 +-------------+----------+-------------------------------------------------------------+------------+
-| PDRC-153    | Warning  | Gated clock check                                           | 48         |
-| PLHOLDVIO-2 | Warning  | Non-Optimal connections which could lead to hold violations | 3          |
-| REQP-1839   | Warning  | RAMB36 async control check                                  | 8          |
+| PDRC-153    | Warning  | Gated clock check                                           | 62         |
+| PLHOLDVIO-2 | Warning  | Non-Optimal connections which could lead to hold violations | 2          |
+| REQP-1839   | Warning  | RAMB36 async control check                                  | 4          |
 | REQP-181    | Advisory | writefirst                                                  | 2          |
 +-------------+----------+-------------------------------------------------------------+------------+
 
@@ -168,117 +168,187 @@ Related violations: <none>
 
 PDRC-153#27 Warning
 Gated clock check  
-Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/CLK_DIV2/ff0/shift is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/CLK_DIV2/ff0/data_out[31]_i_1/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/CLK_DIV2/ff0/data_out[31]_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Packetizer/FF1/shift is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Packetizer/FF1/out[8]_i_1/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Packetizer/FF1/out[8]_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#28 Warning
 Gated clock check  
-Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Packetizer/FSM/clock0 is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Packetizer/FSM/r_reg[0]_i_2/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Packetizer/FSM/r_reg[0]_i_2. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Packetizer/FF3/clock0_0 is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Packetizer/FF3/r_reg[0]_i_2/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Packetizer/FF3/r_reg[0]_i_2. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#29 Warning
 Gated clock check  
-Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Packetizer/SR9/tlast is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Packetizer/SR9/tlast_INST_0/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Packetizer/SR9/tlast_INST_0. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[0]_P_1 is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[0]_LDC_i_1/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[0]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#30 Warning
 Gated clock check  
-Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/load_state_data_reg_i_1_n_0 is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/load_state_data_reg_i_1/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/load_state_data_reg_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[10]_P_0 is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[10]_LDC_i_1/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[10]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#31 Warning
 Gated clock check  
-Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[0]_P is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[15]_LDC_i_1/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[15]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[11]_P_0 is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[11]_LDC_i_1/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[11]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#32 Warning
 Gated clock check  
-Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[0]_P_0 is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[0]_LDC_i_1/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[0]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[12]_P_0 is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[12]_LDC_i_1/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[12]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#33 Warning
 Gated clock check  
-Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[10]_P is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[10]_LDC_i_1/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[10]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[13]_P_0 is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[13]_LDC_i_1/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[13]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#34 Warning
 Gated clock check  
-Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[11]_P is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[11]_LDC_i_1/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[11]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[14]_P_0 is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[14]_LDC_i_1/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[14]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#35 Warning
 Gated clock check  
-Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[12]_P is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[12]_LDC_i_1/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[12]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[15]_P_0 is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[15]_LDC_i_1/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[15]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#36 Warning
 Gated clock check  
-Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[13]_P is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[13]_LDC_i_1/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[13]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[1]_P_1 is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[1]_LDC_i_1/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[1]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#37 Warning
 Gated clock check  
-Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[14]_P is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[14]_LDC_i_1/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[14]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[2]_P_0 is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[2]_LDC_i_1/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[2]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#38 Warning
 Gated clock check  
-Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[15]_P is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[15]_LDC_i_1__0/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[15]_LDC_i_1__0. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[3]_P_0 is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[3]_LDC_i_1/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[3]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#39 Warning
 Gated clock check  
-Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[1]_P is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[1]_LDC_i_1/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[1]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[4]_P_0 is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[4]_LDC_i_1/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[4]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#40 Warning
 Gated clock check  
-Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[2]_P is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[2]_LDC_i_1/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[2]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[5]_P_0 is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[5]_LDC_i_1__0/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[5]_LDC_i_1__0. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#41 Warning
 Gated clock check  
-Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[3]_P is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[3]_LDC_i_1/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[3]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[6]_P_0 is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[6]_LDC_i_1/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[6]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#42 Warning
 Gated clock check  
-Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[4]_P is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[5]_LDC_i_1/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[5]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[7]_P_0 is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[7]_LDC_i_1/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[7]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#43 Warning
 Gated clock check  
-Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[4]_P_0 is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[4]_LDC_i_1/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[4]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[8]_P_0 is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[8]_LDC_i_1/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[8]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#44 Warning
 Gated clock check  
-Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[5]_P is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[5]_LDC_i_1__0/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[5]_LDC_i_1__0. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[9]_P_0 is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[9]_LDC_i_1/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/CNTR_SAMPLES/r_reg_reg[9]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#45 Warning
 Gated clock check  
-Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[6]_P is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[6]_LDC_i_1/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[6]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/load_state_data_reg_i_1_n_0 is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/load_state_data_reg_i_1/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/load_state_data_reg_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#46 Warning
 Gated clock check  
-Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[7]_P is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[7]_LDC_i_1/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[7]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[0]_P is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[0]_LDC_i_1__0/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[0]_LDC_i_1__0. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#47 Warning
 Gated clock check  
-Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[8]_P is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[8]_LDC_i_1/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[8]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[10]_P is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[10]_LDC_i_1__0/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[10]_LDC_i_1__0. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#48 Warning
 Gated clock check  
-Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[9]_P is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[9]_LDC_i_1/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[9]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[11]_P is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[11]_LDC_i_1__0/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[11]_LDC_i_1__0. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#49 Warning
+Gated clock check  
+Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[12]_P is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[12]_LDC_i_1__0/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[12]_LDC_i_1__0. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#50 Warning
+Gated clock check  
+Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[13]_P is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[13]_LDC_i_1__0/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[13]_LDC_i_1__0. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#51 Warning
+Gated clock check  
+Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[14]_P is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[14]_LDC_i_1__0/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[14]_LDC_i_1__0. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#52 Warning
+Gated clock check  
+Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[15]_P is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[15]_LDC_i_1__0/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[15]_LDC_i_1__0. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#53 Warning
+Gated clock check  
+Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[1]_P is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[1]_LDC_i_1__0/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[1]_LDC_i_1__0. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#54 Warning
+Gated clock check  
+Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[2]_P is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[2]_LDC_i_1__0/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[2]_LDC_i_1__0. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#55 Warning
+Gated clock check  
+Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[3]_P is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[3]_LDC_i_1__0/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[3]_LDC_i_1__0. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#56 Warning
+Gated clock check  
+Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[4]_P is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[5]_LDC_i_1/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[5]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#57 Warning
+Gated clock check  
+Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[4]_P_0 is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[4]_LDC_i_1__0/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[4]_LDC_i_1__0. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#58 Warning
+Gated clock check  
+Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[5]_P is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[5]_LDC_i_1__1/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[5]_LDC_i_1__1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#59 Warning
+Gated clock check  
+Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[6]_P is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[6]_LDC_i_1__0/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[6]_LDC_i_1__0. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#60 Warning
+Gated clock check  
+Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[7]_P is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[7]_LDC_i_1__0/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[7]_LDC_i_1__0. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#61 Warning
+Gated clock check  
+Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[8]_P is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[8]_LDC_i_1__0/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[8]_LDC_i_1__0. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#62 Warning
+Gated clock check  
+Net design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[9]_P is a gated clock net sourced by a combinational pin design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[9]_LDC_i_1__0/O, cell design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/r_reg_reg[9]_LDC_i_1__0. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PLHOLDVIO-2#1 Warning
 Non-Optimal connections which could lead to hold violations  
-A LUT design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/CLK_DIV2/ff0/data_out[31]_i_1 is driving clock pin of 115 cells. This could lead to large hold time violations. First few involved cells are:
+A LUT design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Packetizer/FF1/out[8]_i_1 is driving clock pin of 115 cells. This could lead to large hold time violations. First few involved cells are:
     design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Packetizer/Reg9/data_out_reg[0] {FDCE}
     design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Packetizer/Reg9/data_out_reg[10] {FDCE}
     design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Packetizer/Reg9/data_out_reg[11] {FDCE}
@@ -293,7 +363,7 @@ Related violations: <none>
 
 PLHOLDVIO-2#2 Warning
 Non-Optimal connections which could lead to hold violations  
-A LUT design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Packetizer/FSM/r_reg[0]_i_2 is driving clock pin of 16 cells. This could lead to large hold time violations. First few involved cells are:
+A LUT design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Packetizer/FF3/r_reg[0]_i_2 is driving clock pin of 16 cells. This could lead to large hold time violations. First few involved cells are:
     design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Debugger/CNTR2/r_reg_reg[0] {FDCE}
     design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Debugger/CNTR2/r_reg_reg[10] {FDCE}
     design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Debugger/CNTR2/r_reg_reg[11] {FDCE}
@@ -306,59 +376,24 @@ A LUT design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT
 
 Related violations: <none>
 
-PLHOLDVIO-2#3 Warning
-Non-Optimal connections which could lead to hold violations  
-A LUT design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Packetizer/SR9/tlast_INST_0 is driving clock pin of 16 cells. This could lead to large hold time violations. First few involved cells are:
-    design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Debugger/CNTR1/r_reg_reg[0] {FDCE}
-    design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Debugger/CNTR1/r_reg_reg[10] {FDCE}
-    design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Debugger/CNTR1/r_reg_reg[11] {FDCE}
-    design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Debugger/CNTR1/r_reg_reg[12] {FDCE}
-    design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Debugger/CNTR1/r_reg_reg[13] {FDCE}
-    design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Debugger/CNTR1/r_reg_reg[14] {FDCE}
-    design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Debugger/CNTR1/r_reg_reg[15] {FDCE}
-    design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Debugger/CNTR1/r_reg_reg[1] {FDCE}
-    design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Debugger/CNTR1/r_reg_reg[2] {FDCE}
-
-Related violations: <none>
-
 REQP-1839#1 Warning
 RAMB36 async control check  
-The RAMB36E1 design_1_i/axis_stream_fifo_0/inst/mem_reg_0 has an input control pin design_1_i/axis_stream_fifo_0/inst/mem_reg_0/ENARDEN (net: design_1_i/axis_stream_fifo_0/inst/tvalid) which is driven by a register (design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Packetizer/FSM/FSM_sequential_state_reg[0]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB36E1 design_1_i/axis_stream_fifo_0/inst/mem_reg_0 has an input control pin design_1_i/axis_stream_fifo_0/inst/mem_reg_0/ENARDEN (net: design_1_i/axis_stream_fifo_0/inst/tvalid) which is driven by a register (design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Packetizer/FF3/Q_reg) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1839#2 Warning
 RAMB36 async control check  
-The RAMB36E1 design_1_i/axis_stream_fifo_0/inst/mem_reg_0 has an input control pin design_1_i/axis_stream_fifo_0/inst/mem_reg_0/ENARDEN (net: design_1_i/axis_stream_fifo_0/inst/tvalid) which is driven by a register (design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Packetizer/FSM/FSM_sequential_state_reg[1]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB36E1 design_1_i/axis_stream_fifo_0/inst/mem_reg_1 has an input control pin design_1_i/axis_stream_fifo_0/inst/mem_reg_1/ENARDEN (net: design_1_i/axis_stream_fifo_0/inst/tvalid) which is driven by a register (design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Packetizer/FF3/Q_reg) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1839#3 Warning
 RAMB36 async control check  
-The RAMB36E1 design_1_i/axis_stream_fifo_0/inst/mem_reg_1 has an input control pin design_1_i/axis_stream_fifo_0/inst/mem_reg_1/ENARDEN (net: design_1_i/axis_stream_fifo_0/inst/tvalid) which is driven by a register (design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Packetizer/FSM/FSM_sequential_state_reg[0]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB36E1 design_1_i/axis_stream_fifo_0/inst/mem_reg_2 has an input control pin design_1_i/axis_stream_fifo_0/inst/mem_reg_2/ENARDEN (net: design_1_i/axis_stream_fifo_0/inst/tvalid) which is driven by a register (design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Packetizer/FF3/Q_reg) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1839#4 Warning
 RAMB36 async control check  
-The RAMB36E1 design_1_i/axis_stream_fifo_0/inst/mem_reg_1 has an input control pin design_1_i/axis_stream_fifo_0/inst/mem_reg_1/ENARDEN (net: design_1_i/axis_stream_fifo_0/inst/tvalid) which is driven by a register (design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Packetizer/FSM/FSM_sequential_state_reg[1]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
-Related violations: <none>
-
-REQP-1839#5 Warning
-RAMB36 async control check  
-The RAMB36E1 design_1_i/axis_stream_fifo_0/inst/mem_reg_2 has an input control pin design_1_i/axis_stream_fifo_0/inst/mem_reg_2/ENARDEN (net: design_1_i/axis_stream_fifo_0/inst/tvalid) which is driven by a register (design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Packetizer/FSM/FSM_sequential_state_reg[0]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
-Related violations: <none>
-
-REQP-1839#6 Warning
-RAMB36 async control check  
-The RAMB36E1 design_1_i/axis_stream_fifo_0/inst/mem_reg_2 has an input control pin design_1_i/axis_stream_fifo_0/inst/mem_reg_2/ENARDEN (net: design_1_i/axis_stream_fifo_0/inst/tvalid) which is driven by a register (design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Packetizer/FSM/FSM_sequential_state_reg[1]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
-Related violations: <none>
-
-REQP-1839#7 Warning
-RAMB36 async control check  
-The RAMB36E1 design_1_i/axis_stream_fifo_0/inst/mem_reg_3 has an input control pin design_1_i/axis_stream_fifo_0/inst/mem_reg_3/ENARDEN (net: design_1_i/axis_stream_fifo_0/inst/tvalid) which is driven by a register (design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Packetizer/FSM/FSM_sequential_state_reg[0]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
-Related violations: <none>
-
-REQP-1839#8 Warning
-RAMB36 async control check  
-The RAMB36E1 design_1_i/axis_stream_fifo_0/inst/mem_reg_3 has an input control pin design_1_i/axis_stream_fifo_0/inst/mem_reg_3/ENARDEN (net: design_1_i/axis_stream_fifo_0/inst/tvalid) which is driven by a register (design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Packetizer/FSM/FSM_sequential_state_reg[1]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB36E1 design_1_i/axis_stream_fifo_0/inst/mem_reg_3 has an input control pin design_1_i/axis_stream_fifo_0/inst/mem_reg_3/ENARDEN (net: design_1_i/axis_stream_fifo_0/inst/tvalid) which is driven by a register (design_1_i/axi_gyro_hsi_0/inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Packetizer/FF3/Q_reg) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-181#1 Advisory

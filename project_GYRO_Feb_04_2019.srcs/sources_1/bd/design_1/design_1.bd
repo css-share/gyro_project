@@ -1018,17 +1018,17 @@
         </spirit:configurableElementValues>
       </spirit:componentInstance>
       <spirit:componentInstance>
-        <spirit:instanceName>axi_gyro_hsi_0</spirit:instanceName>
-        <spirit:componentRef spirit:library="user" spirit:name="axi_gyro_hsi" spirit:vendor="xilinx.com" spirit:version="1.0"/>
-        <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">design_1_axi_gyro_hsi_0_0</spirit:configurableElementValue>
-        </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
         <spirit:instanceName>axis_stream_fifo_0</spirit:instanceName>
         <spirit:componentRef spirit:library="user" spirit:name="axis_stream_fifo" spirit:vendor="xilinx.com" spirit:version="1.0"/>
         <spirit:configurableElementValues>
           <spirit:configurableElementValue spirit:referenceId="bd:xciName">design_1_axis_stream_fifo_0_0</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>axi_gyro_hsi_0</spirit:instanceName>
+        <spirit:componentRef spirit:library="user" spirit:name="axi_gyro_hsi" spirit:vendor="xilinx.com" spirit:version="1.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">design_1_axi_gyro_hsi_0_0</spirit:configurableElementValue>
         </spirit:configurableElementValues>
       </spirit:componentInstance>
     </spirit:componentInstances>
@@ -1108,10 +1108,10 @@
         <spirit:internalPortReference spirit:componentRef="ps7_0_axi_periph" spirit:portRef="M02_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="ps7_0_axi_periph" spirit:portRef="M03_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="ps7_0_axi_periph" spirit:portRef="M04_ARESETN"/>
-        <spirit:internalPortReference spirit:componentRef="axi_gyro_hsi_0" spirit:portRef="s00_axi_aresetn"/>
         <spirit:internalPortReference spirit:componentRef="axis_stream_fifo_0" spirit:portRef="s00_axi_aresetn"/>
         <spirit:internalPortReference spirit:componentRef="axis_stream_fifo_0" spirit:portRef="m00_axis_aresetn"/>
         <spirit:internalPortReference spirit:componentRef="axis_stream_fifo_0" spirit:portRef="s00_axis_aresetn"/>
+        <spirit:internalPortReference spirit:componentRef="axi_gyro_hsi_0" spirit:portRef="s00_axi_aresetn"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>rst_ps7_0_100M_interconnect_aresetn</spirit:name>
@@ -1208,10 +1208,10 @@
         <spirit:internalPortReference spirit:componentRef="ps7_0_axi_periph" spirit:portRef="M02_ACLK"/>
         <spirit:internalPortReference spirit:componentRef="ps7_0_axi_periph" spirit:portRef="M03_ACLK"/>
         <spirit:internalPortReference spirit:componentRef="ps7_0_axi_periph" spirit:portRef="M04_ACLK"/>
-        <spirit:internalPortReference spirit:componentRef="axi_gyro_hsi_0" spirit:portRef="s00_axi_aclk"/>
         <spirit:internalPortReference spirit:componentRef="axis_stream_fifo_0" spirit:portRef="s00_axi_aclk"/>
         <spirit:internalPortReference spirit:componentRef="axis_stream_fifo_0" spirit:portRef="m00_axis_aclk"/>
         <spirit:internalPortReference spirit:componentRef="axis_stream_fifo_0" spirit:portRef="s00_axis_aclk"/>
+        <spirit:internalPortReference spirit:componentRef="axi_gyro_hsi_0" spirit:portRef="s00_axi_aclk"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>axi_gyro_hsi_0_HSICKA0</spirit:name>

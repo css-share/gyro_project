@@ -1,0 +1,600 @@
+
+*** Running vivado
+    with args -log design_1_axi_gyro_hsi_0_0.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source design_1_axi_gyro_hsi_0_0.tcl
+
+
+****** Vivado v2018.2 (64-bit)
+  **** SW Build 2258646 on Thu Jun 14 20:03:12 MDT 2018
+  **** IP Build 2256618 on Thu Jun 14 22:10:49 MDT 2018
+    ** Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+
+source design_1_axi_gyro_hsi_0_0.tcl -notrace
+Command: synth_design -top design_1_axi_gyro_hsi_0_0 -part xc7z020clg484-1 -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: Launching helper process for spawning children vivado processes
+INFO: Helper process launched with PID 4104 
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:08 . Memory (MB): peak = 406.008 ; gain = 96.344
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'design_1_axi_gyro_hsi_0_0' [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ip/design_1_axi_gyro_hsi_0_0/synth/design_1_axi_gyro_hsi_0_0.v:57]
+INFO: [Synth 8-6157] synthesizing module 'axi_gyro_hsi_v1_0' [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/hdl/axi_gyro_hsi_v1_0.v:5]
+	Parameter ADDR_WIDTH bound to: 12 - type: integer 
+	Parameter C_AXIS_TDATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_S00_AXI_DATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_S00_AXI_ADDR_WIDTH bound to: 4 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'axi_gyro_hsi_v1_0_S00_AXI' [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/axi_gyro_hsi_v1_0_S00_AXI.v:4]
+	Parameter ADDR_WIDTH bound to: 12 - type: integer 
+	Parameter C_AXIS_TDATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_S_AXI_DATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_S_AXI_ADDR_WIDTH bound to: 4 - type: integer 
+	Parameter ADDR_LSB bound to: 2 - type: integer 
+	Parameter OPT_MEM_ADDR_BITS bound to: 1 - type: integer 
+INFO: [Synth 8-226] default block is never used [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/axi_gyro_hsi_v1_0_S00_AXI.v:265]
+INFO: [Synth 8-226] default block is never used [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/axi_gyro_hsi_v1_0_S00_AXI.v:406]
+INFO: [Synth 8-6157] synthesizing module 'StreamPipeline' [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/StreamPipeline.v:61]
+INFO: [Synth 8-6157] synthesizing module 'demux_1_to_4_pol' [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/gyro_basics.v:33]
+INFO: [Synth 8-6155] done synthesizing module 'demux_1_to_4_pol' (1#1) [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/gyro_basics.v:33]
+INFO: [Synth 8-6157] synthesizing module 'mux_4_to_1' [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/gyro_basics.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'mux_4_to_1' (2#1) [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/gyro_basics.v:1]
+INFO: [Synth 8-6157] synthesizing module 'clock_divider_by_2' [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/gyro_basics.v:82]
+INFO: [Synth 8-6157] synthesizing module 'dff' [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/gyro_basics.v:65]
+INFO: [Synth 8-6155] done synthesizing module 'dff' (3#1) [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/gyro_basics.v:65]
+INFO: [Synth 8-6155] done synthesizing module 'clock_divider_by_2' (4#1) [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/gyro_basics.v:82]
+INFO: [Synth 8-6157] synthesizing module 'StreamGenerator' [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/StreamGenerator.v:407]
+INFO: [Synth 8-6157] synthesizing module 'register_2bits' [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/StreamGenerator.v:2]
+INFO: [Synth 8-6155] done synthesizing module 'register_2bits' (5#1) [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/StreamGenerator.v:2]
+INFO: [Synth 8-6157] synthesizing module 'register_16bits' [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/StreamGenerator.v:19]
+INFO: [Synth 8-6155] done synthesizing module 'register_16bits' (6#1) [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/StreamGenerator.v:19]
+INFO: [Synth 8-6157] synthesizing module 'downCounter16Bits' [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/StreamGenerator.v:71]
+INFO: [Synth 8-6155] done synthesizing module 'downCounter16Bits' (7#1) [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/StreamGenerator.v:71]
+INFO: [Synth 8-6157] synthesizing module 'downCounter8Bits' [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/StreamGenerator.v:36]
+INFO: [Synth 8-6155] done synthesizing module 'downCounter8Bits' (8#1) [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/StreamGenerator.v:36]
+INFO: [Synth 8-6157] synthesizing module 'serializer17bits' [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/StreamGenerator.v:107]
+INFO: [Synth 8-6155] done synthesizing module 'serializer17bits' (9#1) [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/StreamGenerator.v:107]
+INFO: [Synth 8-6157] synthesizing module 'StreamGenerator_fsm' [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/StreamGenerator.v:135]
+	Parameter S0 bound to: 4'b0000 
+	Parameter S1 bound to: 4'b0001 
+	Parameter S2 bound to: 4'b0010 
+	Parameter S3 bound to: 4'b0011 
+	Parameter S4 bound to: 4'b0100 
+	Parameter S5 bound to: 4'b0101 
+	Parameter S6 bound to: 4'b0110 
+	Parameter S7 bound to: 4'b0111 
+	Parameter S8 bound to: 4'b1000 
+	Parameter S9 bound to: 4'b1001 
+	Parameter S10 bound to: 4'b1010 
+	Parameter S11 bound to: 4'b1011 
+	Parameter S12 bound to: 4'b1100 
+	Parameter S13 bound to: 4'b1101 
+	Parameter S14 bound to: 4'b1110 
+	Parameter S15 bound to: 4'b1111 
+INFO: [Synth 8-6155] done synthesizing module 'StreamGenerator_fsm' (10#1) [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/StreamGenerator.v:135]
+INFO: [Synth 8-6155] done synthesizing module 'StreamGenerator' (11#1) [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/StreamGenerator.v:407]
+INFO: [Synth 8-6157] synthesizing module 'Tokenizer' [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/Tokenizer.v:107]
+INFO: [Synth 8-6157] synthesizing module 'tokenizerShiftRegister32bits' [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/Tokenizer.v:83]
+INFO: [Synth 8-6155] done synthesizing module 'tokenizerShiftRegister32bits' (12#1) [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/Tokenizer.v:83]
+INFO: [Synth 8-6157] synthesizing module 'register_32bits' [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/gyro_basics.v:134]
+INFO: [Synth 8-6155] done synthesizing module 'register_32bits' (13#1) [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/gyro_basics.v:134]
+INFO: [Synth 8-6155] done synthesizing module 'Tokenizer' (14#1) [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/Tokenizer.v:107]
+INFO: [Synth 8-6157] synthesizing module 'Packetizer' [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/Packetizer.v:130]
+INFO: [Synth 8-6157] synthesizing module 'Packetizer_fsm' [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/Packetizer.v:32]
+	Parameter S0 bound to: 2'b00 
+	Parameter S1 bound to: 2'b01 
+	Parameter S2 bound to: 2'b10 
+	Parameter S3 bound to: 2'b11 
+INFO: [Synth 8-226] default block is never used [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/Packetizer.v:68]
+INFO: [Synth 8-6155] done synthesizing module 'Packetizer_fsm' (15#1) [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/Packetizer.v:32]
+INFO: [Synth 8-6157] synthesizing module 'delay_line_8x32bits' [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/Packetizer.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'delay_line_8x32bits' (16#1) [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/Packetizer.v:3]
+INFO: [Synth 8-6157] synthesizing module 'shift_reg_9bits' [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/gyro_basics.v:152]
+INFO: [Synth 8-6155] done synthesizing module 'shift_reg_9bits' (17#1) [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/gyro_basics.v:152]
+INFO: [Synth 8-6157] synthesizing module 'mux_2x1_1bit' [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/gyro_basics.v:123]
+INFO: [Synth 8-6155] done synthesizing module 'mux_2x1_1bit' (18#1) [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/gyro_basics.v:123]
+INFO: [Synth 8-6155] done synthesizing module 'Packetizer' (19#1) [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/Packetizer.v:130]
+INFO: [Synth 8-6157] synthesizing module 'StreamDebugger' [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/StreamPipeline.v:30]
+INFO: [Synth 8-6157] synthesizing module 'upCounter16Bits' [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/StreamPipeline.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'upCounter16Bits' (20#1) [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/StreamPipeline.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'StreamDebugger' (21#1) [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/StreamPipeline.v:30]
+INFO: [Synth 8-6155] done synthesizing module 'StreamPipeline' (22#1) [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/StreamPipeline.v:61]
+WARNING: [Synth 8-6014] Unused sequential element slv_reg0_reg was removed.  [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/axi_gyro_hsi_v1_0_S00_AXI.v:257]
+WARNING: [Synth 8-6014] Unused sequential element slv_reg1_reg was removed.  [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/axi_gyro_hsi_v1_0_S00_AXI.v:258]
+INFO: [Synth 8-6155] done synthesizing module 'axi_gyro_hsi_v1_0_S00_AXI' (23#1) [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/axi_gyro_hsi_v1_0_S00_AXI.v:4]
+WARNING: [Synth 8-6104] Input port 'tready' has an internal driver [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/hdl/axi_gyro_hsi_v1_0.v:117]
+WARNING: [Synth 8-3848] Net tready_int in module/entity axi_gyro_hsi_v1_0 does not have driver. [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/hdl/axi_gyro_hsi_v1_0.v:69]
+INFO: [Synth 8-6155] done synthesizing module 'axi_gyro_hsi_v1_0' (24#1) [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/hdl/axi_gyro_hsi_v1_0.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_axi_gyro_hsi_0_0' (25#1) [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ip/design_1_axi_gyro_hsi_0_0/synth/design_1_axi_gyro_hsi_0_0.v:57]
+WARNING: [Synth 8-3331] design StreamDebugger has unconnected port clock
+WARNING: [Synth 8-3331] design axi_gyro_hsi_v1_0_S00_AXI has unconnected port HSIA0
+WARNING: [Synth 8-3331] design axi_gyro_hsi_v1_0_S00_AXI has unconnected port HSIA1
+WARNING: [Synth 8-3331] design axi_gyro_hsi_v1_0_S00_AXI has unconnected port tready
+WARNING: [Synth 8-3331] design axi_gyro_hsi_v1_0_S00_AXI has unconnected port S_AXI_AWPROT[2]
+WARNING: [Synth 8-3331] design axi_gyro_hsi_v1_0_S00_AXI has unconnected port S_AXI_AWPROT[1]
+WARNING: [Synth 8-3331] design axi_gyro_hsi_v1_0_S00_AXI has unconnected port S_AXI_AWPROT[0]
+WARNING: [Synth 8-3331] design axi_gyro_hsi_v1_0_S00_AXI has unconnected port S_AXI_ARPROT[2]
+WARNING: [Synth 8-3331] design axi_gyro_hsi_v1_0_S00_AXI has unconnected port S_AXI_ARPROT[1]
+WARNING: [Synth 8-3331] design axi_gyro_hsi_v1_0_S00_AXI has unconnected port S_AXI_ARPROT[0]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:08 ; elapsed = 00:00:11 . Memory (MB): peak = 461.523 ; gain = 151.859
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:09 ; elapsed = 00:00:12 . Memory (MB): peak = 461.523 ; gain = 151.859
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:09 ; elapsed = 00:00:12 . Memory (MB): peak = 461.523 ; gain = 151.859
+---------------------------------------------------------------------------------
+INFO: [Device 21-403] Loading part xc7z020clg484-1
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Completed Processing XDC Constraints
+
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+WARNING: [Constraints 18-5210] No constraint will be written out.
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.350 . Memory (MB): peak = 811.500 ; gain = 1.992
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:32 ; elapsed = 00:00:43 . Memory (MB): peak = 811.500 ; gain = 501.836
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7z020clg484-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:32 ; elapsed = 00:00:43 . Memory (MB): peak = 811.500 ; gain = 501.836
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:32 ; elapsed = 00:00:43 . Memory (MB): peak = 811.500 ; gain = 501.836
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'StreamGenerator_fsm'
+INFO: [Synth 8-5544] ROM "load_state_data" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "HSCK" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "done" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "load_data" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "en_cntr_samples" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "en_cntr_data" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "load_cntr_samples" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "load_cntr_data" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "next_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5546] ROM "next_state" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "next_state" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5544] ROM "next_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "next_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "next_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "free_run" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'Packetizer_fsm'
+INFO: [Synth 8-5544] ROM "rst_sr" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "valid" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "shift_sel" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "inj" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "next_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                      S0 |                    0000000000001 |                             0000
+                     S12 |                    0000000000010 |                             1100
+                      S1 |                    0000000000100 |                             0001
+                      S2 |                    0000000001000 |                             0010
+                      S3 |                    0000000010000 |                             0011
+                      S4 |                    0000000100000 |                             0100
+                      S5 |                    0000001000000 |                             0101
+                      S6 |                    0000010000000 |                             0110
+                      S7 |                    0000100000000 |                             0111
+                      S8 |                    0001000000000 |                             1000
+                      S9 |                    0010000000000 |                             1001
+                     S11 |                    0100000000000 |                             1011
+                     S10 |                    1000000000000 |                             1010
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'one-hot' in module 'StreamGenerator_fsm'
+WARNING: [Synth 8-327] inferring latch for variable 'load_state_data_reg' [c:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.srcs/sources_1/bd/design_1/ipshared/d602/src/StreamGenerator.v:202]
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                      S0 |                               00 |                               00
+                      S1 |                               01 |                               01
+                      S2 |                               10 |                               10
+                      S3 |                               11 |                               11
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'Packetizer_fsm'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:33 ; elapsed = 00:00:45 . Memory (MB): peak = 811.500 ; gain = 501.836
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     16 Bit       Adders := 1     
+	   2 Input      8 Bit       Adders := 1     
++---XORs : 
+	   2 Input      1 Bit         XORs := 6     
++---Registers : 
+	               33 Bit    Registers := 1     
+	               32 Bit    Registers := 13    
+	               17 Bit    Registers := 1     
+	               16 Bit    Registers := 2     
+	                9 Bit    Registers := 1     
+	                8 Bit    Registers := 1     
+	                4 Bit    Registers := 2     
+	                2 Bit    Registers := 3     
+	                1 Bit    Registers := 14    
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 2     
+	   4 Input     32 Bit        Muxes := 3     
+	   2 Input     17 Bit        Muxes := 4     
+	   2 Input     16 Bit        Muxes := 5     
+	  13 Input     13 Bit        Muxes := 1     
+	   2 Input     13 Bit        Muxes := 8     
+	   2 Input      8 Bit        Muxes := 5     
+	   4 Input      2 Bit        Muxes := 1     
+	   2 Input      2 Bit        Muxes := 2     
+	  13 Input      1 Bit        Muxes := 5     
+	   2 Input      1 Bit        Muxes := 8     
+	   4 Input      1 Bit        Muxes := 4     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Hierarchical Component Statistics 
+---------------------------------------------------------------------------------
+Hierarchical RTL Component report 
+Module demux_1_to_4_pol 
+Detailed RTL Component Info : 
++---XORs : 
+	   2 Input      1 Bit         XORs := 4     
+Module dff 
+Detailed RTL Component Info : 
++---Registers : 
+	                1 Bit    Registers := 1     
+Module register_2bits 
+Detailed RTL Component Info : 
++---Registers : 
+	                2 Bit    Registers := 1     
+Module register_16bits 
+Detailed RTL Component Info : 
++---Registers : 
+	               16 Bit    Registers := 1     
+Module downCounter16Bits 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     16 Bit       Adders := 1     
++---Registers : 
+	               16 Bit    Registers := 1     
++---Muxes : 
+	   2 Input     16 Bit        Muxes := 5     
+Module downCounter8Bits 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      8 Bit       Adders := 1     
++---Registers : 
+	                8 Bit    Registers := 1     
++---Muxes : 
+	   2 Input      8 Bit        Muxes := 5     
+Module serializer17bits 
+Detailed RTL Component Info : 
++---Registers : 
+	               17 Bit    Registers := 1     
++---Muxes : 
+	   2 Input     17 Bit        Muxes := 4     
+Module StreamGenerator_fsm 
+Detailed RTL Component Info : 
++---Muxes : 
+	  13 Input     13 Bit        Muxes := 1     
+	   2 Input     13 Bit        Muxes := 8     
+	  13 Input      1 Bit        Muxes := 5     
+Module StreamGenerator 
+Detailed RTL Component Info : 
++---XORs : 
+	   2 Input      1 Bit         XORs := 1     
++---Muxes : 
+	   2 Input      1 Bit        Muxes := 2     
+Module tokenizerShiftRegister32bits 
+Detailed RTL Component Info : 
++---Registers : 
+	               33 Bit    Registers := 1     
+Module register_32bits 
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 1     
+Module Tokenizer 
+Detailed RTL Component Info : 
++---XORs : 
+	   2 Input      1 Bit         XORs := 1     
+Module Packetizer_fsm 
+Detailed RTL Component Info : 
++---Muxes : 
+	   4 Input      2 Bit        Muxes := 1     
+	   2 Input      2 Bit        Muxes := 2     
+	   4 Input      1 Bit        Muxes := 4     
+Module shift_reg_9bits 
+Detailed RTL Component Info : 
++---Registers : 
+	                9 Bit    Registers := 1     
+Module mux_2x1_1bit 
+Detailed RTL Component Info : 
++---Muxes : 
+	   2 Input      1 Bit        Muxes := 1     
+Module axi_gyro_hsi_v1_0_S00_AXI 
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 3     
+	                4 Bit    Registers := 2     
+	                2 Bit    Registers := 2     
+	                1 Bit    Registers := 6     
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 2     
+	   4 Input     32 Bit        Muxes := 3     
+	   2 Input      1 Bit        Muxes := 5     
+---------------------------------------------------------------------------------
+Finished RTL Hierarchical Component Statistics
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 220 (col length:60)
+BRAMs: 280 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+Warning: Parallel synthesis criteria is not met 
+INFO: [Synth 8-5546] ROM "inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/next_state" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/FSM/next_state" won't be mapped to RAM because it is too sparse
+WARNING: [Synth 8-3331] design design_1_axi_gyro_hsi_0_0 has unconnected port HSIA0
+WARNING: [Synth 8-3331] design design_1_axi_gyro_hsi_0_0 has unconnected port HSIA1
+WARNING: [Synth 8-3331] design design_1_axi_gyro_hsi_0_0 has unconnected port tready
+WARNING: [Synth 8-3331] design design_1_axi_gyro_hsi_0_0 has unconnected port s00_axi_awprot[2]
+WARNING: [Synth 8-3331] design design_1_axi_gyro_hsi_0_0 has unconnected port s00_axi_awprot[1]
+WARNING: [Synth 8-3331] design design_1_axi_gyro_hsi_0_0 has unconnected port s00_axi_awprot[0]
+WARNING: [Synth 8-3331] design design_1_axi_gyro_hsi_0_0 has unconnected port s00_axi_arprot[2]
+WARNING: [Synth 8-3331] design design_1_axi_gyro_hsi_0_0 has unconnected port s00_axi_arprot[1]
+WARNING: [Synth 8-3331] design design_1_axi_gyro_hsi_0_0 has unconnected port s00_axi_arprot[0]
+INFO: [Synth 8-3886] merging instance 'inst/axi_gyro_hsi_v1_0_S00_AXI_inst/axi_rresp_reg[0]' (FDRE) to 'inst/axi_gyro_hsi_v1_0_S00_AXI_inst/axi_rresp_reg[1]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\inst/axi_gyro_hsi_v1_0_S00_AXI_inst/axi_rresp_reg[1] )
+INFO: [Synth 8-3886] merging instance 'inst/axi_gyro_hsi_v1_0_S00_AXI_inst/axi_bresp_reg[0]' (FDRE) to 'inst/axi_gyro_hsi_v1_0_S00_AXI_inst/axi_bresp_reg[1]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\inst/axi_gyro_hsi_v1_0_S00_AXI_inst/axi_bresp_reg[1] )
+INFO: [Synth 8-3332] Sequential element (inst/axi_gyro_hsi_v1_0_S00_AXI_inst/axi_awaddr_reg[1]) is unused and will be removed from module design_1_axi_gyro_hsi_0_0.
+INFO: [Synth 8-3332] Sequential element (inst/axi_gyro_hsi_v1_0_S00_AXI_inst/axi_awaddr_reg[0]) is unused and will be removed from module design_1_axi_gyro_hsi_0_0.
+INFO: [Synth 8-3332] Sequential element (inst/axi_gyro_hsi_v1_0_S00_AXI_inst/axi_bresp_reg[1]) is unused and will be removed from module design_1_axi_gyro_hsi_0_0.
+INFO: [Synth 8-3332] Sequential element (inst/axi_gyro_hsi_v1_0_S00_AXI_inst/axi_araddr_reg[1]) is unused and will be removed from module design_1_axi_gyro_hsi_0_0.
+INFO: [Synth 8-3332] Sequential element (inst/axi_gyro_hsi_v1_0_S00_AXI_inst/axi_araddr_reg[0]) is unused and will be removed from module design_1_axi_gyro_hsi_0_0.
+INFO: [Synth 8-3332] Sequential element (inst/axi_gyro_hsi_v1_0_S00_AXI_inst/axi_rresp_reg[1]) is unused and will be removed from module design_1_axi_gyro_hsi_0_0.
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/SR/r_reg_reg[0]_C )
+INFO: [Synth 8-3332] Sequential element (inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_StreamGenerator/SR/r_reg_reg[0]_C) is unused and will be removed from module design_1_axi_gyro_hsi_0_0.
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:36 ; elapsed = 00:00:50 . Memory (MB): peak = 811.500 ; gain = 501.836
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:57 ; elapsed = 00:01:13 . Memory (MB): peak = 811.500 ; gain = 501.836
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:57 ; elapsed = 00:01:13 . Memory (MB): peak = 811.766 ; gain = 502.102
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:57 ; elapsed = 00:01:14 . Memory (MB): peak = 824.723 ; gain = 515.059
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:01:00 ; elapsed = 00:01:17 . Memory (MB): peak = 824.723 ; gain = 515.059
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:01:00 ; elapsed = 00:01:17 . Memory (MB): peak = 824.723 ; gain = 515.059
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:01 ; elapsed = 00:01:17 . Memory (MB): peak = 824.723 ; gain = 515.059
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:01:01 ; elapsed = 00:01:17 . Memory (MB): peak = 824.723 ; gain = 515.059
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:01:01 ; elapsed = 00:01:17 . Memory (MB): peak = 824.723 ; gain = 515.059
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:01:01 ; elapsed = 00:01:17 . Memory (MB): peak = 824.723 ; gain = 515.059
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+Static Shift Register Report:
++--------------------------+-----------------------------------------------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|Module Name               | RTL Name                                                                                      | Length | Width | Reset Signal | Pull out first Reg | Pull out last Reg | SRL16E | SRLC32E | 
++--------------------------+-----------------------------------------------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|design_1_axi_gyro_hsi_0_0 | inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Packetizer/Reg9/data_out_reg[31] | 9      | 32    | YES          | NO                 | YES               | 32     | 0       | 
+|design_1_axi_gyro_hsi_0_0 | inst/axi_gyro_hsi_v1_0_S00_AXI_inst/GYRO_ADC_OUT_STREAM/GYRO_Packetizer/SR9/out_reg[7]        | 8      | 1     | YES          | NO                 | YES               | 1      | 0       | 
++--------------------------+-----------------------------------------------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |CARRY4 |    16|
+|2     |LUT1   |     6|
+|3     |LUT2   |    60|
+|4     |LUT3   |    67|
+|5     |LUT4   |    57|
+|6     |LUT5   |    22|
+|7     |LUT6   |    68|
+|8     |SRL16E |    33|
+|9     |FDCE   |   229|
+|10    |FDPE   |    35|
+|11    |FDRE   |   150|
+|12    |FDSE   |     2|
+|13    |LD     |     1|
+|14    |LDC    |    33|
++------+-------+------+
+
+Report Instance Areas: 
++------+-----------------------------------+-----------------------------+------+
+|      |Instance                           |Module                       |Cells |
++------+-----------------------------------+-----------------------------+------+
+|1     |top                                |                             |   779|
+|2     |  inst                             |axi_gyro_hsi_v1_0            |   778|
+|3     |    axi_gyro_hsi_v1_0_S00_AXI_inst |axi_gyro_hsi_v1_0_S00_AXI    |   778|
+|4     |      GYRO_ADC_OUT_STREAM          |StreamPipeline               |   652|
+|5     |        CLK_DIV2                   |clock_divider_by_2           |     2|
+|6     |          ff0                      |dff_17                       |     2|
+|7     |        GYRO_Debugger              |StreamDebugger               |    96|
+|8     |          CNTR0                    |upCounter16Bits              |    37|
+|9     |          CNTR1                    |upCounter16Bits_15           |    21|
+|10    |          CNTR2                    |upCounter16Bits_16           |    38|
+|11    |        GYRO_Packetizer            |Packetizer                   |   161|
+|12    |          FF0                      |dff_4                        |     1|
+|13    |          FF1                      |dff_5                        |     1|
+|14    |          FSM                      |Packetizer_fsm               |     7|
+|15    |          Reg9                     |register_32bits_6            |    33|
+|16    |          SR9                      |shift_reg_9bits              |    15|
+|17    |          delayLine                |delay_line_8x32bits          |   104|
+|18    |            Reg0                   |register_32bits_7            |     1|
+|19    |            Reg1                   |register_32bits_8            |     1|
+|20    |            Reg2                   |register_32bits_9            |     1|
+|21    |            Reg3                   |register_32bits_10           |     1|
+|22    |            Reg4                   |register_32bits_11           |     1|
+|23    |            Reg5                   |register_32bits_12           |     1|
+|24    |            Reg6                   |register_32bits_13           |    33|
+|25    |            Reg7                   |register_32bits_14           |    65|
+|26    |        GYRO_StreamGenerator       |StreamGenerator              |   325|
+|27    |          CNTR_DATA                |downCounter8Bits             |    30|
+|28    |          CNTR_SAMPLES             |downCounter16Bits            |   145|
+|29    |          FSM                      |StreamGenerator_fsm          |    59|
+|30    |          NSAMPLES_REG             |register_16bits              |    16|
+|31    |          SR                       |serializer17bits             |    66|
+|32    |          STATE_REG                |register_2bits               |     4|
+|33    |          ff0                      |dff_1                        |     2|
+|34    |          ff1                      |dff_2                        |     2|
+|35    |          ff2                      |dff_3                        |     1|
+|36    |        GYRO_Tokenizer             |Tokenizer                    |    68|
+|37    |          FF0                      |dff                          |     1|
+|38    |          FF1                      |dff_0                        |     2|
+|39    |          R                        |register_32bits              |    32|
+|40    |          SR                       |tokenizerShiftRegister32bits |    33|
++------+-----------------------------------+-----------------------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:01:01 ; elapsed = 00:01:17 . Memory (MB): peak = 824.723 ; gain = 515.059
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 10 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:35 ; elapsed = 00:00:53 . Memory (MB): peak = 824.723 ; gain = 165.082
+Synthesis Optimization Complete : Time (s): cpu = 00:01:01 ; elapsed = 00:01:18 . Memory (MB): peak = 824.723 ; gain = 515.059
+INFO: [Project 1-571] Translating synthesized netlist
+INFO: [Netlist 29-17] Analyzing 50 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 34 instances were transformed.
+  LD => LDCE: 1 instances
+  LDC => LDCE: 33 instances
+
+INFO: [Common 17-83] Releasing license: Synthesis
+102 Infos, 25 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:01:05 ; elapsed = 00:01:23 . Memory (MB): peak = 835.883 ; gain = 536.660
+WARNING: [Constraints 18-5210] No constraint will be written out.
+INFO: [Common 17-1381] The checkpoint 'C:/Xilinx_Projects/gyro_project/project_GYRO_Feb_04_2019.runs/design_1_axi_gyro_hsi_0_0_synth_1/design_1_axi_gyro_hsi_0_0.dcp' has been generated.

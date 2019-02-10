@@ -48,7 +48,7 @@
 
 
 // IP VLNV: xilinx.com:user:axi_gyro_hsi:1.0
-// IP Revision: 41
+// IP Revision: 45
 
 `timescale 1ns/1ps
 

@@ -288,8 +288,16 @@ int readSPI(unsigned int *data, unsigned int address){
 
 // -------------------------------------------------------------------
 
+void sendGyroPacket(){
 
+*(baseaddr_channel+2) = 0x80000000;
 
+ nops(100000);
+
+ *(baseaddr_channel+2) = 0x00000000;
+
+ }
+// -------------------------------------------------------------------
 // interrupt service routine for IRQ_F2P[0:0]
 void isr0 (void *intc_inst_ptr) {
     xil_printf("isr0 called\n\r");
@@ -778,10 +786,10 @@ static int CheckRxData(int debug_mode)
 	Xil_DCacheInvalidateRange((UINTPTR)RxPacket, MAX_PKT_LEN);
 #endif
 
-	for(Index = 0; Index < MAX_PKT_LEN; Index++) {
+	for(Index = 0; Index < MAX_PKT_LEN*2; Index+=2) {
 		if(debug_mode != 0){
-			xil_printf(" --- checking value index %d: %x\r\n",
-				Index, (unsigned int)RxPacket[Index]);
+			xil_printf(" --- 16 bits value index %d: %2x%2x\n",
+				Index/2,(unsigned int)RxPacket[Index+1],(unsigned int)RxPacket[Index]);
 		}
 	}
 
@@ -889,16 +897,9 @@ static int CheckDmaRxResult(XAxiDma * AxiDmaInstPtr, int debug_mode)
 	Xil_DCacheInvalidateRange((UINTPTR)RxPacket, MAX_PKT_LEN);
 #endif
 
-	RxPacket[0] = 0x00;
-	RxPacket[1] = 0x00;
-	RxPacket[2] = 0x00;
-	RxPacket[3] = 0x00;
-
 	TxRingPtr = XAxiDma_GetTxRing(AxiDmaInstPtr);
 	RxRingPtr = XAxiDma_GetRxRing(AxiDmaInstPtr);
-
 /*
-
 	while ((ProcessedBdCount = XAxiDma_BdRingFromHw(TxRingPtr, XAXIDMA_ALL_BDS,&BdPtr)) == 0) {
 	}
 
@@ -909,20 +910,20 @@ static int CheckDmaRxResult(XAxiDma * AxiDmaInstPtr, int debug_mode)
 		return XST_FAILURE;
 	}
 */
-	/* Wait until the data has been received by the Rx channel */
-	while (1){
-		ProcessedBdCount = XAxiDma_BdRingFromHw(RxRingPtr, XAXIDMA_ALL_BDS, &BdPtr);
-		xil_printf("First Pull: %d\r\n",ProcessedBdCount);
-		ProcessedBdCount = XAxiDma_BdRingFromHw(RxRingPtr, XAXIDMA_ALL_BDS, &BdPtr);
-		xil_printf("Second Pull: %d\r\n",ProcessedBdCount);
-		ProcessedBdCount = XAxiDma_BdRingFromHw(RxRingPtr, XAXIDMA_ALL_BDS, &BdPtr);
-		xil_printf("Third Pull: %d\r\n",ProcessedBdCount);
-		break;
-	}
+	sendGyroPacket();
 
+	/* Wait until the data has been received by the Rx channel */
+	//while (1){
+
+
+		ProcessedBdCount = XAxiDma_BdRingFromHw(RxRingPtr, XAXIDMA_ALL_BDS, &BdPtr);
+		xil_printf(" >>> Received Data (1) %d\r\n",ProcessedBdCount);
+
+		ProcessedBdCount = XAxiDma_BdRingFromHw(RxRingPtr, XAXIDMA_ALL_BDS, &BdPtr);
+		xil_printf(" >>> Received Data (2) %d\r\n",ProcessedBdCount);
+//}
 	/* Check received data */
 	if (CheckRxData(debug_mode) != XST_SUCCESS) {
-
 		return XST_FAILURE;
 	}
 
@@ -1122,7 +1123,7 @@ int main() {
     int readVal, writeVal;
 
     xil_printf("\n\r=====================\n\r");
-    xil_printf("== START version 14 ==\n\r");
+    xil_printf("== START version 15 ==\n\r");
     // set interrupt_0/1 of AXI PL interrupt generator to 0
 
     *(baseaddr_p+0) = 0x00000000;
@@ -1226,41 +1227,45 @@ int main() {
 
     xil_printf("== GYRO Channel reset ==\n\r");
 
-    *(baseaddr_channel+3) = 0x23000010;
+    *(baseaddr_channel+3) = 0x23000020;
     *(baseaddr_channel+2) = 0x10000000;
     *(baseaddr_channel+2) = 0x00000000;
 
     xil_printf("Channel Debug Word 0 (after clear): 0x%08x\n\r", *(baseaddr_channel+0));
     xil_printf("Channel Debug Word 1 (after clear): 0x%08x\n\r", *(baseaddr_channel+1));
 
+    xil_printf("FIFO Debug Word 0: 0x%08x\n\r", *(baseaddr_stream_fifo+0));
+    xil_printf("FIFO Debug Word 1: 0x%08x\n\r", *(baseaddr_stream_fifo+1));
     xil_printf("FIFO Debug Word 2: 0x%08x\n\r", *(baseaddr_stream_fifo+2));
     xil_printf("FIFO Debug Word 3: 0x%08x\n\r", *(baseaddr_stream_fifo+3));
 
-    xil_printf("== GYRO Channel test ==\n\r");
+    //xil_printf("== GYRO Channel test ==\n\r");
 
-    *(baseaddr_channel+2) = 0x80000000;
-
-     nops(100000);
-
-     *(baseaddr_channel+2) = 0x00000000;
+    // sendGyroPacket();
 
      xil_printf("Channel Debug Word 0: 0x%08x\n\r", *(baseaddr_channel+0));
      xil_printf("Channel Debug Word 1: 0x%08x\n\r", *(baseaddr_channel+1));
 
+     xil_printf("FIFO Debug Word 0: 0x%08x\n\r", *(baseaddr_stream_fifo+0));
+     xil_printf("FIFO Debug Word 1: 0x%08x\n\r", *(baseaddr_stream_fifo+1));
      xil_printf("FIFO Debug Word 2: 0x%08x\n\r", *(baseaddr_stream_fifo+2));
      xil_printf("FIFO Debug Word 3: 0x%08x\n\r", *(baseaddr_stream_fifo+3));
 
-    xil_printf("== Finished GYRO Channel test ++\n\r");
+    //xil_printf("== Finished GYRO Channel test ++\n\r");
 
     xil_printf("== Starting FIFO / DMA test ++\n\r");
 
     test_DMA_Rx(1);
 
-    xil_printf("== After first Rx ++\n\r");
+    xil_printf("== After Rx ++\n\r");
 
-    test_DMA_Rx(1);
+    xil_printf("Channel Debug Word 0: 0x%08x\n\r", *(baseaddr_channel+0));
+    xil_printf("Channel Debug Word 1: 0x%08x\n\r", *(baseaddr_channel+1));
 
-    xil_printf("== After second Rx ++\n\r");
+    xil_printf("FIFO Debug Word 0: 0x%08x\n\r", *(baseaddr_stream_fifo+0));
+    xil_printf("FIFO Debug Word 1: 0x%08x\n\r", *(baseaddr_stream_fifo+1));
+    xil_printf("FIFO Debug Word 2: 0x%08x\n\r", *(baseaddr_stream_fifo+2));
+    xil_printf("FIFO Debug Word 3: 0x%08x\n\r", *(baseaddr_stream_fifo+3));
 
     xil_printf("== STOP ==\n\r");
     xil_printf("=====================\n\n\r");

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenRun Id="impl_1" LaunchPart="xc7z020clg484-1" LaunchTime="1549403009">
-  <File Type="PA-TCL" Name="design_1_wrapper.tcl"/>
   <File Type="BITSTR-BMM" Name="design_1_wrapper_bd.bmm"/>
-  <File Type="REPORTS-TCL" Name="design_1_wrapper_reports.tcl"/>
+  <File Type="PA-TCL" Name="design_1_wrapper.tcl"/>
   <File Type="OPT-DCP" Name="design_1_wrapper_opt.dcp"/>
+  <File Type="REPORTS-TCL" Name="design_1_wrapper_reports.tcl"/>
   <File Type="OPT-HWDEF" Name="design_1_wrapper.hwdef"/>
-  <File Type="PWROPT-DCP" Name="design_1_wrapper_pwropt.dcp"/>
   <File Type="BG-BGN" Name="design_1_wrapper.bgn"/>
+  <File Type="PWROPT-DCP" Name="design_1_wrapper_pwropt.dcp"/>
   <File Type="PLACE-DCP" Name="design_1_wrapper_placed.dcp"/>
   <File Type="PLACE-PRE-SIMILARITY" Name="design_1_wrapper_incremental_reuse_pre_placed.rpt"/>
   <File Type="POSTPLACE-PWROPT-DCP" Name="design_1_wrapper_postplace_pwropt.dcp"/>
@@ -86,8 +86,8 @@
   <BlockFileSet Type="BlockSrcs" Name="design_1_axi_smc_0"/>
   <BlockFileSet Type="BlockSrcs" Name="design_1_axi_dma_0_0"/>
   <BlockFileSet Type="BlockSrcs" Name="design_1_axis_stream_fifo_0_0"/>
-  <BlockFileSet Type="BlockSrcs" Name="design_1_axi4_pl_interrupt_ge_0_0"/>
   <BlockFileSet Type="BlockSrcs" Name="design_1_xlconcat_0_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="design_1_axi4_pl_interrupt_ge_0_0"/>
   <BlockFileSet Type="BlockSrcs" Name="design_1_xbar_0"/>
   <BlockFileSet Type="BlockSrcs" Name="design_1_rst_ps7_0_100M_0"/>
   <BlockFileSet Type="BlockSrcs" Name="design_1_auto_pc_0"/>

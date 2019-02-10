@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Fri Feb  8 19:25:44 2019" VIVADOVERSION="2018.2">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Sun Feb 10 01:53:39 2019" VIVADOVERSION="2018.2">
 
   <SYSTEMINFO ARCH="zynq" BOARD="em.avnet.com:zed:part0:1.4" DEVICE="7z020" NAME="design_1" PACKAGE="clg484" SPEEDGRADE="-1"/>
 
@@ -4767,10 +4767,10 @@
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="M02_ACLK"/>
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="M03_ACLK"/>
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="M04_ACLK"/>
-            <CONNECTION INSTANCE="axi_gyro_hsi_0" PORT="s00_axi_aclk"/>
             <CONNECTION INSTANCE="axis_stream_fifo_0" PORT="s00_axi_aclk"/>
             <CONNECTION INSTANCE="axis_stream_fifo_0" PORT="m00_axis_aclk"/>
             <CONNECTION INSTANCE="axis_stream_fifo_0" PORT="s00_axis_aclk"/>
+            <CONNECTION INSTANCE="axi_gyro_hsi_0" PORT="s00_axi_aclk"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" NAME="FCLK_RESET0_N" SIGIS="rst" SIGNAME="processing_system7_0_FCLK_RESET0_N">
@@ -6276,10 +6276,10 @@
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="M02_ARESETN"/>
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="M03_ARESETN"/>
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="M04_ARESETN"/>
-            <CONNECTION INSTANCE="axi_gyro_hsi_0" PORT="s00_axi_aresetn"/>
             <CONNECTION INSTANCE="axis_stream_fifo_0" PORT="s00_axi_aresetn"/>
             <CONNECTION INSTANCE="axis_stream_fifo_0" PORT="m00_axis_aresetn"/>
             <CONNECTION INSTANCE="axis_stream_fifo_0" PORT="s00_axis_aresetn"/>
+            <CONNECTION INSTANCE="axi_gyro_hsi_0" PORT="s00_axi_aresetn"/>
           </CONNECTIONS>
         </PORT>
       </PORTS>
