@@ -787,10 +787,10 @@ static int CheckRxData(int debug_mode)
 #endif
 
 	for(Index = 0; Index < 16*2; Index+=2) {
-		idx = Index ^ 0x02;
+		idx = (Index+1) ^ 0x01;
 		if(debug_mode != 0){
 			xil_printf(" --- 16 bits value index %d: %2x%2x\n",
-				Index/2,(unsigned int)RxPacket[idx+1],(unsigned int)RxPacket[idx]);
+				idx/2,(unsigned int)RxPacket[idx+1],(unsigned int)RxPacket[idx]);
 		}
 	}
 

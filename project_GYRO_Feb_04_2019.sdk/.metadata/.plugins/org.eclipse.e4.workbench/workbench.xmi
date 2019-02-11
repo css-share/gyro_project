@@ -235,9 +235,15 @@
       <tags>categoryTag:Help</tags>
     </sharedElements>
     <sharedElements xsi:type="advanced:Area" xmi:id="_yUQ7eC0MEem7MqriYq94lQ" elementId="org.eclipse.ui.editorss" selectedElement="_yUQ7eS0MEem7MqriYq94lQ">
-      <children xsi:type="basic:PartStack" xmi:id="_yUQ7eS0MEem7MqriYq94lQ" elementId="org.eclipse.e4.primaryDataStack">
+      <children xsi:type="basic:PartStack" xmi:id="_yUQ7eS0MEem7MqriYq94lQ" elementId="org.eclipse.e4.primaryDataStack" selectedElement="_pTz2wC2PEemtDL9-dNNLtQ">
         <tags>org.eclipse.e4.primaryDataStack</tags>
         <tags>EditorStack</tags>
+        <children xsi:type="basic:Part" xmi:id="_pTz2wC2PEemtDL9-dNNLtQ" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="helloworld.c" iconURI="platform:/plugin/org.eclipse.cdt.ui/icons/obj16/c_file_obj.gif" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;helloworld.c&quot; partName=&quot;helloworld.c&quot; title=&quot;helloworld.c&quot; tooltip=&quot;axi4_gyro_test_0/src/helloworld.c&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/axi4_gyro_test_0/src/helloworld.c&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;21879&quot; selectionTopPixel=&quot;11613&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <tags>Editor</tags>
+          <tags>org.eclipse.cdt.ui.editor.CEditor</tags>
+          <tags>removeOnHide</tags>
+        </children>
       </children>
     </sharedElements>
     <sharedElements xsi:type="basic:Part" xmi:id="_yUQ7zS0MEem7MqriYq94lQ" elementId="org.eclipse.ui.navigator.ProjectExplorer" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" label="Project Explorer" iconURI="platform:/plugin/org.eclipse.ui.navigator.resources/icons/full/eview16/resource_persp.gif" tooltip="" closeable="true">
@@ -657,7 +663,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_yURhui0MEem7MqriYq94lQ" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_5OhV4C1hEemk0PbmyZvBdw" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_yUciiC0MEem7MqriYq94lQ"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_g4P_sC2PEemtDL9-dNNLtQ" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_yUciiC0MEem7MqriYq94lQ"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_yURhyi0MEem7MqriYq94lQ" elementId="additions" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -672,7 +678,7 @@
       <children xsi:type="menu:ToolBar" xmi:id="_yURh9y0MEem7MqriYq94lQ" elementId="org.eclipse.search.searchActionSet">
         <tags>Draggable</tags>
       </children>
-      <children xsi:type="menu:ToolBar" xmi:id="_yURh-y0MEem7MqriYq94lQ" elementId="org.eclipse.ui.edit.text.actionSet.presentation" visible="false">
+      <children xsi:type="menu:ToolBar" xmi:id="_yURh-y0MEem7MqriYq94lQ" elementId="org.eclipse.ui.edit.text.actionSet.presentation">
         <tags>Draggable</tags>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_yURiAi0MEem7MqriYq94lQ" elementId="group.nav" toBeRendered="false">
@@ -681,7 +687,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_yURiBC0MEem7MqriYq94lQ" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_5OoqoC1hEemk0PbmyZvBdw" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_yUciBC0MEem7MqriYq94lQ"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_g4ZJoC2PEemtDL9-dNNLtQ" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_yUciBC0MEem7MqriYq94lQ"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_yURiDy0MEem7MqriYq94lQ" elementId="group.editor" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -2672,6 +2678,7 @@
   <addons xmi:id="_0G_KEC0OEemOrN9LUHQyXA" elementId="com.xilinx.sdk.targetmanager.ui.addon.view" contributionURI="bundleclass://com.xilinx.sdk.targetmanager.ui/com.xilinx.sdk.targetmanager.ui.ViewVisibilityAdapterAddon"/>
   <addons xmi:id="_BThswS0jEemkM93C0rZSgw" elementId="com.xilinx.sdk.targetmanager.ui.addon.view" contributionURI="bundleclass://com.xilinx.sdk.targetmanager.ui/com.xilinx.sdk.targetmanager.ui.ViewVisibilityAdapterAddon"/>
   <addons xmi:id="_4U9QoS1hEemk0PbmyZvBdw" elementId="com.xilinx.sdk.targetmanager.ui.addon.view" contributionURI="bundleclass://com.xilinx.sdk.targetmanager.ui/com.xilinx.sdk.targetmanager.ui.ViewVisibilityAdapterAddon"/>
+  <addons xmi:id="_gHhtYS2PEemtDL9-dNNLtQ" elementId="com.xilinx.sdk.targetmanager.ui.addon.view" contributionURI="bundleclass://com.xilinx.sdk.targetmanager.ui/com.xilinx.sdk.targetmanager.ui.ViewVisibilityAdapterAddon"/>
   <categories xmi:id="_yUdudC0MEem7MqriYq94lQ" elementId="org.eclipse.team.ui.category.team" name="Team" description="Actions that apply when working with a Team"/>
   <categories xmi:id="_yUdudS0MEem7MqriYq94lQ" elementId="org.eclipse.ui.category.views" name="Views" description="Commands for opening views"/>
   <categories xmi:id="_yUdudi0MEem7MqriYq94lQ" elementId="org.eclipse.ui.category.edit" name="Edit"/>

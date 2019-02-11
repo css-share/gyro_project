@@ -769,7 +769,6 @@ static int CheckRxData(int debug_mode)
 {
 	u8 *RxPacket;
 	int Index = 0;
-	int idx = 0;
 	u8 Value;
 
 	if(debug_mode != 0){
@@ -786,11 +785,10 @@ static int CheckRxData(int debug_mode)
 	Xil_DCacheInvalidateRange((UINTPTR)RxPacket, MAX_PKT_LEN);
 #endif
 
-	for(Index = 0; Index < 16*2; Index+=2) {
-		idx = Index ^ 0x02;
+	for(Index = 0; Index < MAX_PKT_LEN*2; Index+=2) {
 		if(debug_mode != 0){
 			xil_printf(" --- 16 bits value index %d: %2x%2x\n",
-				Index/2,(unsigned int)RxPacket[idx+1],(unsigned int)RxPacket[idx]);
+				Index/2,(unsigned int)RxPacket[Index+1],(unsigned int)RxPacket[Index]);
 		}
 	}
 

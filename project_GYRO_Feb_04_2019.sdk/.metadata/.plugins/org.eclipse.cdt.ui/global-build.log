@@ -1,6 +1,3 @@
-'Building file: ../src/helloworld.c'
-'Invoking: ARM v7 gcc compiler'
-arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/helloworld.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../standalone_bsp_0/ps7_cortexa9_0/include -MMD -MP -MF"src/helloworld.d" -MT"src/helloworld.o" -o "src/helloworld.o" "../src/helloworld.c"
 In file included from ../src/helloworld.c:4:0:
 ../../standalone_bsp_0/ps7_cortexa9_0/include/xbasic_types.h:115:2: warning: #warning The xbasics_type.h file is deprecated and users should use xil_types.h and xil_assert. [-Wcpp]
  #warning  The xbasics_type.h file is deprecated and users should use xil_types.h and xil_assert.
@@ -20,17 +17,17 @@ In file included from ../src/helloworld.c:4:0:
   u8 Value;
      ^~~~~
 ../src/helloworld.c: In function 'CheckDmaRxResult':
-../src/helloworld.c:886:18: warning: variable 'TxRingPtr' set but not used [-Wunused-but-set-variable]
+../src/helloworld.c:887:18: warning: variable 'TxRingPtr' set but not used [-Wunused-but-set-variable]
   XAxiDma_BdRing *TxRingPtr;
                   ^~~~~~~~~
 ../src/helloworld.c: In function 'main':
-../src/helloworld.c:1123:18: warning: unused variable 'writeVal' [-Wunused-variable]
+../src/helloworld.c:1127:18: warning: unused variable 'writeVal' [-Wunused-variable]
      int readVal, writeVal;
                   ^~~~~~~~
-../src/helloworld.c:1123:9: warning: unused variable 'readVal' [-Wunused-variable]
+../src/helloworld.c:1127:9: warning: unused variable 'readVal' [-Wunused-variable]
      int readVal, writeVal;
          ^~~~~~~
-../src/helloworld.c:1121:6: warning: unused variable 'err' [-Wunused-variable]
+../src/helloworld.c:1125:6: warning: unused variable 'err' [-Wunused-variable]
   int err;
       ^~~
 'Finished building: ../src/helloworld.c'
@@ -43,72 +40,15 @@ arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=non
 'Invoking: ARM v7 Print Size'
 arm-none-eabi-size axi4_gyro_test_0.elf  |tee "axi4_gyro_test_0.elf.size"
    text	   data	    bss	    dec	    hex	filename
-  48192	   3848	  24536	  76576	  12b20	axi4_gyro_test_0.elf
+  48320	   3848	  24536	  76704	  12ba0	axi4_gyro_test_0.elf
 'Finished building: axi4_gyro_test_0.elf.size'
 ' '
-10:39:20 **** Incremental Build of configuration Debug for project axi4_gyro_test_0 ****
+16:23:18 **** Incremental Build of configuration Debug for project axi4_gyro_test_0 ****
 make pre-build main-build 
 a9-linaro-pre-build-step
 ' '
 make: Nothing to be done for `main-build'.
-10:39:37 **** Incremental Build of configuration Debug for project axi4_gyro_test_0 ****
-make pre-build main-build 
-a9-linaro-pre-build-step
-' '
-make: Nothing to be done for `main-build'.
-10:43:15 **** Auto Build of configuration Debug for project axi4_gyro_test_0 ****
-make pre-build main-build 
-a9-linaro-pre-build-step
-' '
-'Building file: ../src/helloworld.c'
-'Invoking: ARM v7 gcc compiler'
-arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/helloworld.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../standalone_bsp_0/ps7_cortexa9_0/include -MMD -MP -MF"src/helloworld.d" -MT"src/helloworld.o" -o "src/helloworld.o" "../src/helloworld.c"
-In file included from ../src/helloworld.c:4:0:
-../../standalone_bsp_0/ps7_cortexa9_0/include/xbasic_types.h:115:2: warning: #warning The xbasics_type.h file is deprecated and users should use xil_types.h and xil_assert. [-Wcpp]
- #warning  The xbasics_type.h file is deprecated and users should use xil_types.h and xil_assert.
-  ^~~~~~~
-../../standalone_bsp_0/ps7_cortexa9_0/include/xbasic_types.h:116:2: warning: #warning Please refer the Standalone BSP UG647 for further details [-Wcpp]
- #warning  Please refer the Standalone BSP UG647 for further details
-  ^~~~~~~
-../src/helloworld.c:45:2: warning: #warning CHECK FOR THE VALID DDR ADDRESS IN XPARAMETERS.H, DEFAULT SET TO 0x01000000 [-Wcpp]
- #warning CHECK FOR THE VALID DDR ADDRESS IN XPARAMETERS.H, \
-  ^~~~~~~
-../src/helloworld.c: In function 'setSPIClockDivision':
-../src/helloworld.c:163:7: warning: unused variable 'w' [-Wunused-variable]
-   int w;
-       ^
-../src/helloworld.c: In function 'CheckRxData':
-../src/helloworld.c:773:5: warning: variable 'Value' set but not used [-Wunused-but-set-variable]
-  u8 Value;
-     ^~~~~
-../src/helloworld.c: In function 'CheckDmaRxResult':
-../src/helloworld.c:886:18: warning: variable 'TxRingPtr' set but not used [-Wunused-but-set-variable]
-  XAxiDma_BdRing *TxRingPtr;
-                  ^~~~~~~~~
-../src/helloworld.c: In function 'main':
-../src/helloworld.c:1123:18: warning: unused variable 'writeVal' [-Wunused-variable]
-     int readVal, writeVal;
-                  ^~~~~~~~
-../src/helloworld.c:1123:9: warning: unused variable 'readVal' [-Wunused-variable]
-     int readVal, writeVal;
-         ^~~~~~~
-../src/helloworld.c:1121:6: warning: unused variable 'err' [-Wunused-variable]
-  int err;
-      ^~~
-'Finished building: ../src/helloworld.c'
-' '
-'Building target: axi4_gyro_test_0.elf'
-'Invoking: ARM v7 gcc linker'
-arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../standalone_bsp_0/ps7_cortexa9_0/lib -o "axi4_gyro_test_0.elf"  ./src/helloworld.o ./src/platform.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-'Finished building target: axi4_gyro_test_0.elf'
-' '
-'Invoking: ARM v7 Print Size'
-arm-none-eabi-size axi4_gyro_test_0.elf  |tee "axi4_gyro_test_0.elf.size"
-   text	   data	    bss	    dec	    hex	filename
-  48192	   3848	  24536	  76576	  12b20	axi4_gyro_test_0.elf
-'Finished building: axi4_gyro_test_0.elf.size'
-' '
-10:43:20 **** Incremental Build of configuration Debug for project axi4_gyro_test_0 ****
+16:23:23 **** Incremental Build of configuration Debug for project axi4_gyro_test_0 ****
 make pre-build main-build 
 a9-linaro-pre-build-step
 ' '
