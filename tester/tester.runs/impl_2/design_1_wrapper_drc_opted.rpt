@@ -1,0 +1,169 @@
+Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
+| Date         : Sun Feb 17 03:24:54 2019
+| Host         : DESKTOP-KC9HGNO running 64-bit major release  (build 9200)
+| Command      : report_drc -file design_1_wrapper_drc_opted.rpt -pb design_1_wrapper_drc_opted.pb -rpx design_1_wrapper_drc_opted.rpx
+| Design       : design_1_wrapper
+| Device       : xc7z020clg484-1
+| Speed File   : -1
+| Design State : Synthesized
+---------------------------------------------------------------------------------------------------------------------------------------
+
+Report DRC
+
+Table of Contents
+-----------------
+1. REPORT SUMMARY
+2. REPORT DETAILS
+
+1. REPORT SUMMARY
+-----------------
+            Netlist: netlist
+          Floorplan: design_1
+      Design limits: <entire design considered>
+           Ruledeck: default
+             Max violations: <unlimited>
+             Violations found: 14
++-------------+----------+-------------------------------------------------------------+------------+
+| Rule        | Severity | Description                                                 | Violations |
++-------------+----------+-------------------------------------------------------------+------------+
+| PLHOLDVIO-2 | Warning  | Non-Optimal connections which could lead to hold violations | 7          |
+| REQP-1839   | Warning  | RAMB36 async control check                                  | 5          |
+| REQP-181    | Advisory | writefirst                                                  | 2          |
++-------------+----------+-------------------------------------------------------------+------------+
+
+2. REPORT DETAILS
+-----------------
+PLHOLDVIO-2#1 Warning
+Non-Optimal connections which could lead to hold violations  
+A LUT design_1_i/BiDirChannels_0/inst/X0/CHANNELS/PULSE_CNTR/Q_i_1 is driving clock pin of 2 cells. This could lead to large hold time violations. First few involved cells are:
+    design_1_i/BiDirChannels_0/inst/X0/CHANNELS/MASK_HSCK/ff0/Q_reg {FDCE}
+    design_1_i/BiDirChannels_0/inst/X0/CHANNELS/MASK_HSCK/ff1/Q_reg {FDCE}
+
+Related violations: <none>
+
+PLHOLDVIO-2#2 Warning
+Non-Optimal connections which could lead to hold violations  
+A LUT design_1_i/BiDirChannels_0/inst/X0/CHANNELS/PULSE_CNTR/out[7]_i_1 is driving clock pin of 115 cells. This could lead to large hold time violations. First few involved cells are:
+    design_1_i/BiDirChannels_0/inst/X0/BUFFERS/outputDelayLine/Reg0/data_out_reg_c {FDCE}
+    design_1_i/BiDirChannels_0/inst/X0/BUFFERS/outputDelayLine/Reg1/data_out_reg_c {FDCE}
+    design_1_i/BiDirChannels_0/inst/X0/BUFFERS/outputDelayLine/Reg2/data_out_reg_c {FDCE}
+    design_1_i/BiDirChannels_0/inst/X0/BUFFERS/outputDelayLine/Reg3/data_out_reg_c {FDCE}
+    design_1_i/BiDirChannels_0/inst/X0/BUFFERS/outputDelayLine/Reg4/data_out_reg_c {FDCE}
+    design_1_i/BiDirChannels_0/inst/X0/BUFFERS/outputDelayLine/Reg5/data_out_reg[0]_srl6_inst_X0_BUFFERS_outputDelayLine_Reg5_data_out_reg_c {SRL16E}
+    design_1_i/BiDirChannels_0/inst/X0/BUFFERS/outputDelayLine/Reg5/data_out_reg[10]_srl6_inst_X0_BUFFERS_outputDelayLine_Reg5_data_out_reg_c {SRL16E}
+    design_1_i/BiDirChannels_0/inst/X0/BUFFERS/outputDelayLine/Reg5/data_out_reg[11]_srl6_inst_X0_BUFFERS_outputDelayLine_Reg5_data_out_reg_c {SRL16E}
+    design_1_i/BiDirChannels_0/inst/X0/BUFFERS/outputDelayLine/Reg5/data_out_reg[12]_srl6_inst_X0_BUFFERS_outputDelayLine_Reg5_data_out_reg_c {SRL16E}
+
+Related violations: <none>
+
+PLHOLDVIO-2#3 Warning
+Non-Optimal connections which could lead to hold violations  
+A LUT design_1_i/BiDirChannels_0/inst/X0/CHANNELS/PULSE_CNTR/r_reg[31]_i_1 is driving clock pin of 32 cells. This could lead to large hold time violations. First few involved cells are:
+    design_1_i/BiDirChannels_0/inst/X0/CHANNELS/IN_SHIFT_REG/r_reg_reg[0] {FDCE}
+    design_1_i/BiDirChannels_0/inst/X0/CHANNELS/IN_SHIFT_REG/r_reg_reg[10] {FDCE}
+    design_1_i/BiDirChannels_0/inst/X0/CHANNELS/IN_SHIFT_REG/r_reg_reg[11] {FDCE}
+    design_1_i/BiDirChannels_0/inst/X0/CHANNELS/IN_SHIFT_REG/r_reg_reg[12] {FDCE}
+    design_1_i/BiDirChannels_0/inst/X0/CHANNELS/IN_SHIFT_REG/r_reg_reg[13] {FDCE}
+    design_1_i/BiDirChannels_0/inst/X0/CHANNELS/IN_SHIFT_REG/r_reg_reg[14] {FDCE}
+    design_1_i/BiDirChannels_0/inst/X0/CHANNELS/IN_SHIFT_REG/r_reg_reg[15] {FDCE}
+    design_1_i/BiDirChannels_0/inst/X0/CHANNELS/IN_SHIFT_REG/r_reg_reg[16] {FDCE}
+    design_1_i/BiDirChannels_0/inst/X0/CHANNELS/IN_SHIFT_REG/r_reg_reg[17] {FDCE}
+
+Related violations: <none>
+
+PLHOLDVIO-2#4 Warning
+Non-Optimal connections which could lead to hold violations  
+A LUT design_1_i/BiDirChannels_0/inst/X0/CHANNELS/PULSE_CNTR/r_reg[32]_i_2 is driving clock pin of 65 cells. This could lead to large hold time violations. First few involved cells are:
+    design_1_i/BiDirChannels_0/inst/X0/CHANNELS/OUT_SHIFT_REG/r_reg_reg[0]_P {FDPE}
+    design_1_i/BiDirChannels_0/inst/X0/CHANNELS/OUT_SHIFT_REG/r_reg_reg[10]_C {FDCE}
+    design_1_i/BiDirChannels_0/inst/X0/CHANNELS/OUT_SHIFT_REG/r_reg_reg[10]_P {FDPE}
+    design_1_i/BiDirChannels_0/inst/X0/CHANNELS/OUT_SHIFT_REG/r_reg_reg[11]_C {FDCE}
+    design_1_i/BiDirChannels_0/inst/X0/CHANNELS/OUT_SHIFT_REG/r_reg_reg[11]_P {FDPE}
+    design_1_i/BiDirChannels_0/inst/X0/CHANNELS/OUT_SHIFT_REG/r_reg_reg[12]_C {FDCE}
+    design_1_i/BiDirChannels_0/inst/X0/CHANNELS/OUT_SHIFT_REG/r_reg_reg[12]_P {FDPE}
+    design_1_i/BiDirChannels_0/inst/X0/CHANNELS/OUT_SHIFT_REG/r_reg_reg[13]_C {FDCE}
+    design_1_i/BiDirChannels_0/inst/X0/CHANNELS/OUT_SHIFT_REG/r_reg_reg[13]_P {FDPE}
+
+Related violations: <none>
+
+PLHOLDVIO-2#5 Warning
+Non-Optimal connections which could lead to hold violations  
+A LUT design_1_i/BiDirChannels_0/inst/X0/CHANNELS/PULSE_CNTR/r_reg[7]_i_2 is driving clock pin of 114 cells. This could lead to large hold time violations. First few involved cells are:
+    design_1_i/BiDirChannels_0/inst/X0/BUFFERS/inputDelayLine/Reg5/data_out_reg[0]_srl6_inst_X0_BUFFERS_inputShiftRegister_out_reg_c_4 {SRL16E}
+    design_1_i/BiDirChannels_0/inst/X0/BUFFERS/inputDelayLine/Reg5/data_out_reg[10]_srl6_inst_X0_BUFFERS_inputShiftRegister_out_reg_c_4 {SRL16E}
+    design_1_i/BiDirChannels_0/inst/X0/BUFFERS/inputDelayLine/Reg5/data_out_reg[11]_srl6_inst_X0_BUFFERS_inputShiftRegister_out_reg_c_4 {SRL16E}
+    design_1_i/BiDirChannels_0/inst/X0/BUFFERS/inputDelayLine/Reg5/data_out_reg[12]_srl6_inst_X0_BUFFERS_inputShiftRegister_out_reg_c_4 {SRL16E}
+    design_1_i/BiDirChannels_0/inst/X0/BUFFERS/inputDelayLine/Reg5/data_out_reg[13]_srl6_inst_X0_BUFFERS_inputShiftRegister_out_reg_c_4 {SRL16E}
+    design_1_i/BiDirChannels_0/inst/X0/BUFFERS/inputDelayLine/Reg5/data_out_reg[14]_srl6_inst_X0_BUFFERS_inputShiftRegister_out_reg_c_4 {SRL16E}
+    design_1_i/BiDirChannels_0/inst/X0/BUFFERS/inputDelayLine/Reg5/data_out_reg[15]_srl6_inst_X0_BUFFERS_inputShiftRegister_out_reg_c_4 {SRL16E}
+    design_1_i/BiDirChannels_0/inst/X0/BUFFERS/inputDelayLine/Reg5/data_out_reg[16]_srl6_inst_X0_BUFFERS_inputShiftRegister_out_reg_c_4 {SRL16E}
+    design_1_i/BiDirChannels_0/inst/X0/BUFFERS/inputDelayLine/Reg5/data_out_reg[17]_srl6_inst_X0_BUFFERS_inputShiftRegister_out_reg_c_4 {SRL16E}
+
+Related violations: <none>
+
+PLHOLDVIO-2#6 Warning
+Non-Optimal connections which could lead to hold violations  
+A LUT design_1_i/BiDirChannels_0/inst/X0/CHANNELS/PULSE_CNTR/r_reg[7]_i_2__0 is driving clock pin of 8 cells. This could lead to large hold time violations. First few involved cells are:
+    design_1_i/BiDirChannels_0/inst/X0/DEBUGGER/CNTR1/r_reg_reg[0] {FDCE}
+    design_1_i/BiDirChannels_0/inst/X0/DEBUGGER/CNTR1/r_reg_reg[1] {FDCE}
+    design_1_i/BiDirChannels_0/inst/X0/DEBUGGER/CNTR1/r_reg_reg[2] {FDCE}
+    design_1_i/BiDirChannels_0/inst/X0/DEBUGGER/CNTR1/r_reg_reg[3] {FDCE}
+    design_1_i/BiDirChannels_0/inst/X0/DEBUGGER/CNTR1/r_reg_reg[4] {FDCE}
+    design_1_i/BiDirChannels_0/inst/X0/DEBUGGER/CNTR1/r_reg_reg[5] {FDCE}
+    design_1_i/BiDirChannels_0/inst/X0/DEBUGGER/CNTR1/r_reg_reg[6] {FDCE}
+    design_1_i/BiDirChannels_0/inst/X0/DEBUGGER/CNTR1/r_reg_reg[7] {FDCE}
+
+Related violations: <none>
+
+PLHOLDVIO-2#7 Warning
+Non-Optimal connections which could lead to hold violations  
+A LUT design_1_i/BiDirChannels_0/inst/X0/CHANNELS/PULSE_CNTR/r_reg[7]_i_2__1 is driving clock pin of 8 cells. This could lead to large hold time violations. First few involved cells are:
+    design_1_i/BiDirChannels_0/inst/X0/DEBUGGER/CNTR0/r_reg_reg[0] {FDCE}
+    design_1_i/BiDirChannels_0/inst/X0/DEBUGGER/CNTR0/r_reg_reg[1] {FDCE}
+    design_1_i/BiDirChannels_0/inst/X0/DEBUGGER/CNTR0/r_reg_reg[2] {FDCE}
+    design_1_i/BiDirChannels_0/inst/X0/DEBUGGER/CNTR0/r_reg_reg[3] {FDCE}
+    design_1_i/BiDirChannels_0/inst/X0/DEBUGGER/CNTR0/r_reg_reg[4] {FDCE}
+    design_1_i/BiDirChannels_0/inst/X0/DEBUGGER/CNTR0/r_reg_reg[5] {FDCE}
+    design_1_i/BiDirChannels_0/inst/X0/DEBUGGER/CNTR0/r_reg_reg[6] {FDCE}
+    design_1_i/BiDirChannels_0/inst/X0/DEBUGGER/CNTR0/r_reg_reg[7] {FDCE}
+
+Related violations: <none>
+
+REQP-1839#1 Warning
+RAMB36 async control check  
+The RAMB36E1 design_1_i/RxFIFO/inst/mem_reg_0 has an input control pin design_1_i/RxFIFO/inst/mem_reg_0/ENARDEN (net: design_1_i/RxFIFO/inst/s00_axis_tvalid) which is driven by a register (design_1_i/BiDirChannels_0/inst/X0/BUFFERS/outputFF/Q_reg) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+Related violations: <none>
+
+REQP-1839#2 Warning
+RAMB36 async control check  
+The RAMB36E1 design_1_i/RxFIFO/inst/mem_reg_1 has an input control pin design_1_i/RxFIFO/inst/mem_reg_1/ENARDEN (net: design_1_i/RxFIFO/inst/s00_axis_tvalid) which is driven by a register (design_1_i/BiDirChannels_0/inst/X0/BUFFERS/outputFF/Q_reg) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+Related violations: <none>
+
+REQP-1839#3 Warning
+RAMB36 async control check  
+The RAMB36E1 design_1_i/RxFIFO/inst/mem_reg_2 has an input control pin design_1_i/RxFIFO/inst/mem_reg_2/ENARDEN (net: design_1_i/RxFIFO/inst/s00_axis_tvalid) which is driven by a register (design_1_i/BiDirChannels_0/inst/X0/BUFFERS/outputFF/Q_reg) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+Related violations: <none>
+
+REQP-1839#4 Warning
+RAMB36 async control check  
+The RAMB36E1 design_1_i/RxFIFO/inst/mem_reg_3 has an input control pin design_1_i/RxFIFO/inst/mem_reg_3/ENARDEN (net: design_1_i/RxFIFO/inst/s00_axis_tvalid) which is driven by a register (design_1_i/BiDirChannels_0/inst/X0/BUFFERS/outputFF/Q_reg) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+Related violations: <none>
+
+REQP-1839#5 Warning
+RAMB36 async control check  
+The RAMB36E1 design_1_i/TxFIFO/inst/mem_reg has an input control pin design_1_i/TxFIFO/inst/mem_reg/ENBWREN (net: design_1_i/TxFIFO/inst/axis_stream_fifo_v1_0_S00_AXI_inst_n_27) which is driven by a register (design_1_i/BiDirChannels_0/inst/X0/BUFFERS/OutReadyReg/Q_reg) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+Related violations: <none>
+
+REQP-181#1 Advisory
+writefirst  
+Synchronous clocking is detected for BRAM (design_1_i/axi_dma_0/U0/I_PRMRY_DATAMOVER/GEN_MM2S_FULL.I_MM2S_FULL_WRAPPER/GEN_INCLUDE_MM2S_SF.I_RD_SF/I_DATA_FIFO/BLK_MEM.I_SYNC_FIFOGEN_FIFO/xpm_fifo_instance.xpm_fifo_sync_inst/xpm_fifo_base_inst/gen_sdpram.xpm_memory_base_inst/gen_wr_a.gen_word_narrow.mem_reg) in SDP mode with WRITE_FIRST write-mode. This is the preferred mode for best power characteristics, however it may exhibit address collisions if the same address appears on both read and write ports resulting in unknown or corrupted read data. It is suggested to confirm via simulation that an address collision never occurs and if so it is suggested to try and avoid this situation. If address collisions cannot be avoided, the write-mode may be set to READ_FIRST which guarantees that the read data is the prior contents of the memory at the cost of additional power in the design. See the FPGA Memory Resources User Guide for additional information.
+Related violations: <none>
+
+REQP-181#2 Advisory
+writefirst  
+Synchronous clocking is detected for BRAM (design_1_i/axi_dma_0/U0/I_PRMRY_DATAMOVER/GEN_S2MM_FULL.I_S2MM_FULL_WRAPPER/GEN_ENABLE_INDET_BTT_SF.I_INDET_BTT/I_DATA_FIFO/BLK_MEM.I_SYNC_FIFOGEN_FIFO/xpm_fifo_instance.xpm_fifo_sync_inst/xpm_fifo_base_inst/gen_sdpram.xpm_memory_base_inst/gen_wr_a.gen_word_narrow.mem_reg) in SDP mode with WRITE_FIRST write-mode. This is the preferred mode for best power characteristics, however it may exhibit address collisions if the same address appears on both read and write ports resulting in unknown or corrupted read data. It is suggested to confirm via simulation that an address collision never occurs and if so it is suggested to try and avoid this situation. If address collisions cannot be avoided, the write-mode may be set to READ_FIRST which guarantees that the read data is the prior contents of the memory at the cost of additional power in the design. See the FPGA Memory Resources User Guide for additional information.
+Related violations: <none>
+
+

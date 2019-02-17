@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Webtalk v2018.2 (64-bit)
+# SW Build 2258646 on Thu Jun 14 20:03:12 MDT 2018
+# 
+# Start of session at: Fri Feb  1 18:16:59 2019
+# Process ID: 10128
+# Current directory: C:/Xilinx/Vivado/projects/project_GYRO_Jan_25_2019/project_GYRO_Jan_25_2019.sdk/webtalk
+# Command line: wbtcv.exe -mode batch -source sdk_webtalk.tcl
+# Log file: C:/Xilinx/Vivado/projects/project_GYRO_Jan_25_2019/project_GYRO_Jan_25_2019.sdk/webtalk/webtalk.log
+# Journal file: C:/Xilinx/Vivado/projects/project_GYRO_Jan_25_2019/project_GYRO_Jan_25_2019.sdk/webtalk\webtalk.jou
+#-----------------------------------------------------------
+source sdk_webtalk.tcl

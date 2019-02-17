@@ -1,0 +1,10 @@
+
+
+OPTION psf_version = 2.1;
+
+BEGIN DRIVER BiDirChannels
+	OPTION supported_peripherals = (BiDirChannels);
+	OPTION copyfiles = all;
+	OPTION VERSION = 1.0;
+	OPTION NAME = BiDirChannels;
+END DRIVER

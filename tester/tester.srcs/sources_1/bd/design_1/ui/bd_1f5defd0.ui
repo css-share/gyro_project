@@ -1,0 +1,81 @@
+{
+   ExpandedHierarchyInLayout: "",
+   PinnedPorts: "",
+   guistr: "# # String gsaved with Nlview 6.8.5  2018-01-30 bk=1.4354 VDI=40 GEI=35 GUI=JA:1.6 non-TLS
+#  -string -flagsOSRD
+preplace port DDR -pg 1 -y -260 -defaultsOSRD
+preplace port HSICK -pg 1 -y -950 -defaultsOSRD
+preplace port LED0 -pg 1 -y 340 -defaultsOSRD
+preplace port MCK -pg 1 -y -890 -defaultsOSRD
+preplace port LED1 -pg 1 -y -370 -defaultsOSRD
+preplace port SPI_CS -pg 1 -y -390 -defaultsOSRD
+preplace port SPI_MOSI -pg 1 -y -430 -defaultsOSRD
+preplace port SW6 -pg 1 -y -210 -defaultsOSRD
+preplace port HSIA0 -pg 1 -y -620 -defaultsOSRD
+preplace port LED2 -pg 1 -y -350 -defaultsOSRD
+preplace port SW7 -pg 1 -y -190 -defaultsOSRD
+preplace port SPI_SCK -pg 1 -y -410 -defaultsOSRD
+preplace port SPI_MISO -pg 1 -y -400 -defaultsOSRD
+preplace port FIXED_IO -pg 1 -y -240 -defaultsOSRD
+preplace port LED7 -pg 1 -y 312 -defaultsOSRD
+preplace port HSID0 -pg 1 -y -970 -defaultsOSRD
+preplace inst TxFIFO -pg 1 -lvl 2 -y -1090 -defaultsOSRD
+preplace inst axi_dma_0 -pg 1 -lvl 2 -y -440 -defaultsOSRD
+preplace inst axi_smc -pg 1 -lvl 5 -y -400 -defaultsOSRD
+preplace inst SPI_ip_0 -pg 1 -lvl 5 -y -220 -defaultsOSRD
+preplace inst xlconcat_0 -pg 1 -lvl 2 -y -220 -defaultsOSRD
+preplace inst BiDirChannels_0 -pg 1 -lvl 3 -y -970 -defaultsOSRD
+preplace inst RxFIFO -pg 1 -lvl 2 -y -810 -defaultsOSRD
+preplace inst ps7_0_axi_periph -pg 1 -lvl 5 -y 80 -defaultsOSRD
+preplace inst axi4_pl_interrupt_ge_0 -pg 1 -lvl 1 -y -190 -defaultsOSRD
+preplace inst rst_ps7_0_100M -pg 1 -lvl 4 -y 100 -defaultsOSRD
+preplace inst processing_system7_0 -pg 1 -lvl 3 -y -60 -defaultsOSRD
+preplace netloc ps7_0_axi_periph_M02_AXI 1 2 4 930 350 NJ 350 NJ 350 2300
+preplace netloc processing_system7_0_DDR 1 3 3 1410J 340 N 340 2370
+preplace netloc BiDirChannels_0_MCK 1 3 3 1420 -890 NJ -890 NJ
+preplace netloc BiDirChannels_0_M00_AXIS 1 1 3 500 -1230 NJ -1230 1420
+preplace netloc SPI_ip_0_FSM_DONE 1 5 1 2360J
+preplace netloc SPI_ip_0_SPI_SCK 1 5 1 2330J
+preplace netloc processing_system7_0_M_AXI_GP0 1 3 2 NJ -80 N
+preplace netloc SPI_ip_0_SPI_CS 1 5 1 2340J
+preplace netloc axi4_pl_interrupt_ge_0_LED_7 1 1 5 420J -110 920J -210 NJ -210 1760J 400 2380J
+preplace netloc rst_ps7_0_100M_peripheral_aresetn 1 0 5 -110J -380 450J -940 900J -1110 NJ -1110 1800
+preplace netloc axis_stream_fifo_0_M00_AXIS 1 1 2 490J -600 860
+preplace netloc axi_smc_M00_AXI 1 2 4 940 310 NJ 310 NJ 310 2310
+preplace netloc SW7 1 0 1 NJ
+preplace netloc processing_system7_0_FCLK_RESET0_N 1 3 1 1400
+preplace netloc ps7_0_axi_periph_M03_AXI 1 1 5 480 360 NJ 360 NJ 360 NJ 360 2290
+preplace netloc axi_dma_0_M_AXI_SG 1 2 3 NJ -510 NJ -510 1840
+preplace netloc BiDirChannels_0_HS_Clock 1 3 3 NJ -960 NJ -960 2370
+preplace netloc ps7_0_axi_periph_M01_AXI 1 4 2 1840J 320 2270
+preplace netloc BiDirChannels_0_HS_DataOut 1 3 3 1420 -970 NJ -970 NJ
+preplace netloc axi_dma_0_s2mm_introut 1 1 2 510 -570 860
+preplace netloc SW6_1 1 0 1 NJ
+preplace netloc axi_dma_0_M_AXI_MM2S 1 2 3 NJ -490 NJ -490 1810
+preplace netloc xlconcat_0_dout 1 2 1 870
+preplace netloc processing_system7_0_FIXED_IO 1 3 3 NJ -120 1770 300 2380
+preplace netloc HSIA0_1 1 0 3 NJ -620 440J -960 890
+preplace netloc axi_dma_0_mm2s_introut 1 1 2 500 -580 870
+preplace netloc axi_dma_0_M_AXI_S2MM 1 2 3 NJ -470 NJ -470 1760
+preplace netloc axi4_pl_interrupt_ge_0_interrupt_0 1 1 1 420
+preplace netloc axi4_pl_interrupt_ge_0_LED_0 1 1 5 430J -120 890J -220 NJ -220 1780J 390 2390J
+preplace netloc TxFIFO_M00_AXIS 1 2 1 890
+preplace netloc ps7_0_axi_periph_M05_AXI 1 1 5 470 330 NJ 330 NJ 330 NJ 330 2260
+preplace netloc ps7_0_axi_periph_M04_AXI 1 1 5 460 370 N 370 NJ 370 NJ 370 2280
+preplace netloc axi4_pl_interrupt_ge_0_interrupt_1 1 1 1 420
+preplace netloc processing_system7_0_FCLK_CLK0 1 0 5 -120J -390 430J -950 910 -200 1420 -200 1830
+preplace netloc SPI_MISO_1 1 0 5 NJ -400 420J -590 NJ -590 NJ -590 1820J
+preplace netloc axi_dma_0_M_AXIS_MM2S 1 1 2 510 -1220 880
+preplace netloc ps7_0_axi_periph_M00_AXI 1 0 6 -100J 380 NJ 380 NJ 380 NJ 380 NJ 380 2340
+preplace netloc axi4_pl_interrupt_ge_0_interrupt_2 1 1 1 420
+preplace netloc SPI_ip_0_SPI_MOSI 1 5 1 2320J
+preplace netloc SPI_ip_0_FSM_START 1 5 1 2350J
+preplace netloc rst_ps7_0_100M_interconnect_aresetn 1 4 1 1790
+levelinfo -pg 1 -140 300 690 1170 1590 2110 2410 -top -1420 -bot 890
+",
+}
+{
+   da_axi4_cnt: "10",
+   da_clkrst_cnt: "6",
+   da_ps7_cnt: "1",
+}
