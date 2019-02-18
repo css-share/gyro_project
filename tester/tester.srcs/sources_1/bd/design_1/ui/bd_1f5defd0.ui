@@ -30,8 +30,8 @@ preplace inst ps7_0_axi_periph -pg 1 -lvl 5 -y 80 -defaultsOSRD
 preplace inst axi4_pl_interrupt_ge_0 -pg 1 -lvl 1 -y -190 -defaultsOSRD
 preplace inst rst_ps7_0_100M -pg 1 -lvl 4 -y 100 -defaultsOSRD
 preplace inst processing_system7_0 -pg 1 -lvl 3 -y -60 -defaultsOSRD
-preplace netloc ps7_0_axi_periph_M02_AXI 1 2 4 930 350 NJ 350 NJ 350 2300
 preplace netloc processing_system7_0_DDR 1 3 3 1410J 340 N 340 2370
+preplace netloc ps7_0_axi_periph_M02_AXI 1 2 4 930 350 NJ 350 NJ 350 2300
 preplace netloc BiDirChannels_0_MCK 1 3 3 1420 -890 NJ -890 NJ
 preplace netloc BiDirChannels_0_M00_AXIS 1 1 3 500 -1230 NJ -1230 1420
 preplace netloc SPI_ip_0_FSM_DONE 1 5 1 2360J

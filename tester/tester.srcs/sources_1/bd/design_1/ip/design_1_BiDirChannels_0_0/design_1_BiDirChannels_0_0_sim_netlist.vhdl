@@ -1,10 +1,10 @@
 -- Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
--- Date        : Sun Feb 17 03:18:19 2019
+-- Date        : Mon Feb 18 02:43:26 2019
 -- Host        : DESKTOP-KC9HGNO running 64-bit major release  (build 9200)
 -- Command     : write_vhdl -force -mode funcsim
---               c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ip/design_1_BiDirChannels_0_0/design_1_BiDirChannels_0_0_sim_netlist.vhdl
+--               C:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ip/design_1_BiDirChannels_0_0/design_1_BiDirChannels_0_0_sim_netlist.vhdl
 -- Design      : design_1_BiDirChannels_0_0
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -63,7 +63,8 @@ architecture STRUCTURE of design_1_BiDirChannels_0_0_BiDirChannels_v1_0_S00_AXI 
   signal \^axi_rdata_reg[28]_0\ : STD_LOGIC_VECTOR ( 1 downto 0 );
   signal axi_rvalid_i_1_n_0 : STD_LOGIC;
   signal axi_wready0 : STD_LOGIC;
-  signal data_word_0 : STD_LOGIC_VECTOR ( 0 to 0 );
+  signal data_in : STD_LOGIC_VECTOR ( 1 to 1 );
+  signal data_word_0 : STD_LOGIC_VECTOR ( 16 to 16 );
   signal p_0_in : STD_LOGIC_VECTOR ( 1 downto 0 );
   signal p_1_in : STD_LOGIC_VECTOR ( 28 downto 7 );
   signal reg_data_out : STD_LOGIC_VECTOR ( 31 downto 0 );
@@ -72,13 +73,13 @@ architecture STRUCTURE of design_1_BiDirChannels_0_0_BiDirChannels_v1_0_S00_AXI 
   signal \^s00_axi_bvalid\ : STD_LOGIC;
   signal \^s00_axi_rvalid\ : STD_LOGIC;
   signal \^s00_axi_wready\ : STD_LOGIC;
+  signal \slv_reg0_reg_n_0_[0]\ : STD_LOGIC;
   signal \slv_reg0_reg_n_0_[10]\ : STD_LOGIC;
   signal \slv_reg0_reg_n_0_[11]\ : STD_LOGIC;
   signal \slv_reg0_reg_n_0_[12]\ : STD_LOGIC;
   signal \slv_reg0_reg_n_0_[13]\ : STD_LOGIC;
   signal \slv_reg0_reg_n_0_[14]\ : STD_LOGIC;
   signal \slv_reg0_reg_n_0_[15]\ : STD_LOGIC;
-  signal \slv_reg0_reg_n_0_[16]\ : STD_LOGIC;
   signal \slv_reg0_reg_n_0_[17]\ : STD_LOGIC;
   signal \slv_reg0_reg_n_0_[18]\ : STD_LOGIC;
   signal \slv_reg0_reg_n_0_[19]\ : STD_LOGIC;
@@ -87,7 +88,6 @@ architecture STRUCTURE of design_1_BiDirChannels_0_0_BiDirChannels_v1_0_S00_AXI 
   signal \slv_reg0_reg_n_0_[21]\ : STD_LOGIC;
   signal \slv_reg0_reg_n_0_[22]\ : STD_LOGIC;
   signal \slv_reg0_reg_n_0_[23]\ : STD_LOGIC;
-  signal \slv_reg0_reg_n_0_[25]\ : STD_LOGIC;
   signal \slv_reg0_reg_n_0_[26]\ : STD_LOGIC;
   signal \slv_reg0_reg_n_0_[27]\ : STD_LOGIC;
   signal \slv_reg0_reg_n_0_[29]\ : STD_LOGIC;
@@ -318,7 +318,7 @@ axi_bvalid_reg: unisim.vcomponents.FDRE
       I2 => axi_araddr(2),
       I3 => \r_reg_reg[7]_0\(0),
       I4 => axi_araddr(3),
-      I5 => data_word_0(0),
+      I5 => \slv_reg0_reg_n_0_[0]\,
       O => reg_data_out(0)
     );
 \axi_rdata[10]_i_1\: unisim.vcomponents.LUT5
@@ -402,7 +402,7 @@ axi_bvalid_reg: unisim.vcomponents.FDRE
       I1 => axi_araddr(2),
       I2 => \r_reg_reg[7]_2\(0),
       I3 => axi_araddr(3),
-      I4 => \slv_reg0_reg_n_0_[16]\,
+      I4 => data_word_0(16),
       O => reg_data_out(16)
     );
 \axi_rdata[17]_i_1\: unisim.vcomponents.LUT5
@@ -525,7 +525,7 @@ axi_bvalid_reg: unisim.vcomponents.FDRE
       I2 => axi_araddr(2),
       I3 => \r_reg_reg[7]_4\(1),
       I4 => axi_araddr(3),
-      I5 => \slv_reg0_reg_n_0_[25]\,
+      I5 => data_in(1),
       O => reg_data_out(25)
     );
 \axi_rdata[26]_i_1\: unisim.vcomponents.LUT6
@@ -1007,7 +1007,7 @@ axi_wready_reg: unisim.vcomponents.FDRE
       INIT => X"B"
     )
         port map (
-      I0 => data_word_0(0),
+      I0 => data_word_0(16),
       I1 => s00_axi_aresetn,
       O => \r_reg_reg[7]\
     );
@@ -1071,7 +1071,7 @@ axi_wready_reg: unisim.vcomponents.FDRE
       C => s00_axi_aclk,
       CE => p_1_in(7),
       D => s00_axi_wdata(0),
-      Q => data_word_0(0),
+      Q => \slv_reg0_reg_n_0_[0]\,
       R => s00_axi_aresetn_0
     );
 \slv_reg0_reg[10]\: unisim.vcomponents.FDRE
@@ -1127,7 +1127,7 @@ axi_wready_reg: unisim.vcomponents.FDRE
       C => s00_axi_aclk,
       CE => p_1_in(23),
       D => s00_axi_wdata(16),
-      Q => \slv_reg0_reg_n_0_[16]\,
+      Q => data_word_0(16),
       R => s00_axi_aresetn_0
     );
 \slv_reg0_reg[17]\: unisim.vcomponents.FDRE
@@ -1207,7 +1207,7 @@ axi_wready_reg: unisim.vcomponents.FDRE
       C => s00_axi_aclk,
       CE => p_1_in(28),
       D => s00_axi_wdata(25),
-      Q => \slv_reg0_reg_n_0_[25]\,
+      Q => data_in(1),
       R => s00_axi_aresetn_0
     );
 \slv_reg0_reg[26]\: unisim.vcomponents.FDRE
@@ -3411,7 +3411,7 @@ entity design_1_BiDirChannels_0_0_outputShiftRegister32Bits is
     Q_reg_61 : in STD_LOGIC;
     Q_reg_62 : in STD_LOGIC;
     Q_reg_63 : in STD_LOGIC;
-    \slv_reg0_reg[24]\ : in STD_LOGIC_VECTOR ( 0 to 0 );
+    mode_int : in STD_LOGIC;
     HS_DataIn : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
@@ -3582,13 +3582,13 @@ architecture STRUCTURE of design_1_BiDirChannels_0_0_outputShiftRegister32Bits i
   attribute XILINX_LEGACY_PRIM of \r_reg_reg[9]_LDC\ : label is "LDC";
 begin
   HS_DataOut <= \^hs_dataout\;
-\r_reg[0]_i_1\: unisim.vcomponents.LUT3
+\r_reg[0]_i_1__5\: unisim.vcomponents.LUT3
     generic map(
       INIT => X"B8"
     )
         port map (
       I0 => \^hs_dataout\,
-      I1 => \slv_reg0_reg[24]\(0),
+      I1 => mode_int,
       I2 => HS_DataIn,
       O => D(0)
     );
@@ -4774,6 +4774,32 @@ begin
       D => \r_reg[9]_C_i_1_n_0\,
       PRE => Q_reg_44,
       Q => \r_reg_reg[9]_P_n_0\
+    );
+end STRUCTURE;
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+library UNISIM;
+use UNISIM.VCOMPONENTS.ALL;
+entity design_1_BiDirChannels_0_0_register_2bits is
+  port (
+    mode_int : out STD_LOGIC;
+    \slv_reg0_reg[24]\ : in STD_LOGIC_VECTOR ( 0 to 0 );
+    Q_reg : in STD_LOGIC;
+    s00_axi_aresetn : in STD_LOGIC
+  );
+  attribute ORIG_REF_NAME : string;
+  attribute ORIG_REF_NAME of design_1_BiDirChannels_0_0_register_2bits : entity is "register_2bits";
+end design_1_BiDirChannels_0_0_register_2bits;
+
+architecture STRUCTURE of design_1_BiDirChannels_0_0_register_2bits is
+begin
+\data_out_reg[0]\: unisim.vcomponents.FDCE
+     port map (
+      C => Q_reg,
+      CE => '1',
+      CLR => s00_axi_aresetn,
+      D => \slv_reg0_reg[24]\(0),
+      Q => mode_int
     );
 end STRUCTURE;
 library IEEE;
@@ -8664,7 +8690,7 @@ entity design_1_BiDirChannels_0_0_upCounter8Bits is
   port (
     Q : out STD_LOGIC_VECTOR ( 7 downto 0 );
     CLK : in STD_LOGIC;
-    \slv_reg0_reg[0]\ : in STD_LOGIC
+    \slv_reg0_reg[16]\ : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
   attribute ORIG_REF_NAME of design_1_BiDirChannels_0_0_upCounter8Bits : entity is "upCounter8Bits";
@@ -8683,7 +8709,7 @@ architecture STRUCTURE of design_1_BiDirChannels_0_0_upCounter8Bits is
   attribute SOFT_HLUTNM of \r_reg[7]_i_1\ : label is "soft_lutpair70";
 begin
   Q(7 downto 0) <= \^q\(7 downto 0);
-\r_reg[0]_i_1__0\: unisim.vcomponents.LUT1
+\r_reg[0]_i_1\: unisim.vcomponents.LUT1
     generic map(
       INIT => X"1"
     )
@@ -8782,7 +8808,7 @@ begin
      port map (
       C => CLK,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => r_next(0),
       Q => \^q\(0)
     );
@@ -8790,7 +8816,7 @@ begin
      port map (
       C => CLK,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => r_next(1),
       Q => \^q\(1)
     );
@@ -8798,7 +8824,7 @@ begin
      port map (
       C => CLK,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => r_next(2),
       Q => \^q\(2)
     );
@@ -8806,7 +8832,7 @@ begin
      port map (
       C => CLK,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => r_next(3),
       Q => \^q\(3)
     );
@@ -8814,7 +8840,7 @@ begin
      port map (
       C => CLK,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => r_next(4),
       Q => \^q\(4)
     );
@@ -8822,7 +8848,7 @@ begin
      port map (
       C => CLK,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => r_next(5),
       Q => \^q\(5)
     );
@@ -8830,7 +8856,7 @@ begin
      port map (
       C => CLK,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => r_next(6),
       Q => \^q\(6)
     );
@@ -8838,7 +8864,7 @@ begin
      port map (
       C => CLK,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => r_next(7),
       Q => \^q\(7)
     );
@@ -8851,7 +8877,7 @@ entity design_1_BiDirChannels_0_0_upCounter8Bits_0 is
   port (
     Q : out STD_LOGIC_VECTOR ( 7 downto 0 );
     Q_reg : in STD_LOGIC;
-    \slv_reg0_reg[0]\ : in STD_LOGIC
+    \slv_reg0_reg[16]\ : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
   attribute ORIG_REF_NAME of design_1_BiDirChannels_0_0_upCounter8Bits_0 : entity is "upCounter8Bits";
@@ -8870,7 +8896,7 @@ architecture STRUCTURE of design_1_BiDirChannels_0_0_upCounter8Bits_0 is
   attribute SOFT_HLUTNM of \r_reg[7]_i_1__0\ : label is "soft_lutpair73";
 begin
   Q(7 downto 0) <= \^q\(7 downto 0);
-\r_reg[0]_i_1__1\: unisim.vcomponents.LUT1
+\r_reg[0]_i_1__0\: unisim.vcomponents.LUT1
     generic map(
       INIT => X"1"
     )
@@ -8969,7 +8995,7 @@ begin
      port map (
       C => Q_reg,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => \r_next__0\(0),
       Q => \^q\(0)
     );
@@ -8977,7 +9003,7 @@ begin
      port map (
       C => Q_reg,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => \r_next__0\(1),
       Q => \^q\(1)
     );
@@ -8985,7 +9011,7 @@ begin
      port map (
       C => Q_reg,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => \r_next__0\(2),
       Q => \^q\(2)
     );
@@ -8993,7 +9019,7 @@ begin
      port map (
       C => Q_reg,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => \r_next__0\(3),
       Q => \^q\(3)
     );
@@ -9001,7 +9027,7 @@ begin
      port map (
       C => Q_reg,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => \r_next__0\(4),
       Q => \^q\(4)
     );
@@ -9009,7 +9035,7 @@ begin
      port map (
       C => Q_reg,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => \r_next__0\(5),
       Q => \^q\(5)
     );
@@ -9017,7 +9043,7 @@ begin
      port map (
       C => Q_reg,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => \r_next__0\(6),
       Q => \^q\(6)
     );
@@ -9025,7 +9051,7 @@ begin
      port map (
       C => Q_reg,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => \r_next__0\(7),
       Q => \^q\(7)
     );
@@ -9038,7 +9064,7 @@ entity design_1_BiDirChannels_0_0_upCounter8Bits_1 is
   port (
     Q : out STD_LOGIC_VECTOR ( 7 downto 0 );
     s00_axis_tlast : in STD_LOGIC;
-    \slv_reg0_reg[0]\ : in STD_LOGIC
+    \slv_reg0_reg[16]\ : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
   attribute ORIG_REF_NAME of design_1_BiDirChannels_0_0_upCounter8Bits_1 : entity is "upCounter8Bits";
@@ -9057,7 +9083,7 @@ architecture STRUCTURE of design_1_BiDirChannels_0_0_upCounter8Bits_1 is
   attribute SOFT_HLUTNM of \r_reg[7]_i_1__1\ : label is "soft_lutpair76";
 begin
   Q(7 downto 0) <= \^q\(7 downto 0);
-\r_reg[0]_i_1__2\: unisim.vcomponents.LUT1
+\r_reg[0]_i_1__1\: unisim.vcomponents.LUT1
     generic map(
       INIT => X"1"
     )
@@ -9156,7 +9182,7 @@ begin
      port map (
       C => s00_axis_tlast,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => \r_next__1\(0),
       Q => \^q\(0)
     );
@@ -9164,7 +9190,7 @@ begin
      port map (
       C => s00_axis_tlast,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => \r_next__1\(1),
       Q => \^q\(1)
     );
@@ -9172,7 +9198,7 @@ begin
      port map (
       C => s00_axis_tlast,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => \r_next__1\(2),
       Q => \^q\(2)
     );
@@ -9180,7 +9206,7 @@ begin
      port map (
       C => s00_axis_tlast,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => \r_next__1\(3),
       Q => \^q\(3)
     );
@@ -9188,7 +9214,7 @@ begin
      port map (
       C => s00_axis_tlast,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => \r_next__1\(4),
       Q => \^q\(4)
     );
@@ -9196,7 +9222,7 @@ begin
      port map (
       C => s00_axis_tlast,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => \r_next__1\(5),
       Q => \^q\(5)
     );
@@ -9204,7 +9230,7 @@ begin
      port map (
       C => s00_axis_tlast,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => \r_next__1\(6),
       Q => \^q\(6)
     );
@@ -9212,7 +9238,7 @@ begin
      port map (
       C => s00_axis_tlast,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => \r_next__1\(7),
       Q => \^q\(7)
     );
@@ -9225,7 +9251,7 @@ entity design_1_BiDirChannels_0_0_upCounter8Bits_2 is
   port (
     Q : out STD_LOGIC_VECTOR ( 7 downto 0 );
     Q_reg : in STD_LOGIC;
-    \slv_reg0_reg[0]\ : in STD_LOGIC
+    \slv_reg0_reg[16]\ : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
   attribute ORIG_REF_NAME of design_1_BiDirChannels_0_0_upCounter8Bits_2 : entity is "upCounter8Bits";
@@ -9244,7 +9270,7 @@ architecture STRUCTURE of design_1_BiDirChannels_0_0_upCounter8Bits_2 is
   attribute SOFT_HLUTNM of \r_reg[7]_i_1__3\ : label is "soft_lutpair79";
 begin
   Q(7 downto 0) <= \^q\(7 downto 0);
-\r_reg[0]_i_1__4\: unisim.vcomponents.LUT1
+\r_reg[0]_i_1__3\: unisim.vcomponents.LUT1
     generic map(
       INIT => X"1"
     )
@@ -9343,7 +9369,7 @@ begin
      port map (
       C => Q_reg,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => \r_next__3\(0),
       Q => \^q\(0)
     );
@@ -9351,7 +9377,7 @@ begin
      port map (
       C => Q_reg,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => \r_next__3\(1),
       Q => \^q\(1)
     );
@@ -9359,7 +9385,7 @@ begin
      port map (
       C => Q_reg,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => \r_next__3\(2),
       Q => \^q\(2)
     );
@@ -9367,7 +9393,7 @@ begin
      port map (
       C => Q_reg,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => \r_next__3\(3),
       Q => \^q\(3)
     );
@@ -9375,7 +9401,7 @@ begin
      port map (
       C => Q_reg,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => \r_next__3\(4),
       Q => \^q\(4)
     );
@@ -9383,7 +9409,7 @@ begin
      port map (
       C => Q_reg,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => \r_next__3\(5),
       Q => \^q\(5)
     );
@@ -9391,7 +9417,7 @@ begin
      port map (
       C => Q_reg,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => \r_next__3\(6),
       Q => \^q\(6)
     );
@@ -9399,7 +9425,7 @@ begin
      port map (
       C => Q_reg,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => \r_next__3\(7),
       Q => \^q\(7)
     );
@@ -9412,7 +9438,7 @@ entity design_1_BiDirChannels_0_0_upCounter8Bits_3 is
   port (
     Q : out STD_LOGIC_VECTOR ( 7 downto 0 );
     debug_out_shift_int : in STD_LOGIC;
-    \slv_reg0_reg[0]\ : in STD_LOGIC
+    \slv_reg0_reg[16]\ : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
   attribute ORIG_REF_NAME of design_1_BiDirChannels_0_0_upCounter8Bits_3 : entity is "upCounter8Bits";
@@ -9431,7 +9457,7 @@ architecture STRUCTURE of design_1_BiDirChannels_0_0_upCounter8Bits_3 is
   attribute SOFT_HLUTNM of \r_reg[7]_i_1__2\ : label is "soft_lutpair82";
 begin
   Q(7 downto 0) <= \^q\(7 downto 0);
-\r_reg[0]_i_1__3\: unisim.vcomponents.LUT1
+\r_reg[0]_i_1__2\: unisim.vcomponents.LUT1
     generic map(
       INIT => X"1"
     )
@@ -9530,7 +9556,7 @@ begin
      port map (
       C => debug_out_shift_int,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => \r_next__2\(0),
       Q => \^q\(0)
     );
@@ -9538,7 +9564,7 @@ begin
      port map (
       C => debug_out_shift_int,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => \r_next__2\(1),
       Q => \^q\(1)
     );
@@ -9546,7 +9572,7 @@ begin
      port map (
       C => debug_out_shift_int,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => \r_next__2\(2),
       Q => \^q\(2)
     );
@@ -9554,7 +9580,7 @@ begin
      port map (
       C => debug_out_shift_int,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => \r_next__2\(3),
       Q => \^q\(3)
     );
@@ -9562,7 +9588,7 @@ begin
      port map (
       C => debug_out_shift_int,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => \r_next__2\(4),
       Q => \^q\(4)
     );
@@ -9570,7 +9596,7 @@ begin
      port map (
       C => debug_out_shift_int,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => \r_next__2\(5),
       Q => \^q\(5)
     );
@@ -9578,7 +9604,7 @@ begin
      port map (
       C => debug_out_shift_int,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => \r_next__2\(6),
       Q => \^q\(6)
     );
@@ -9586,7 +9612,7 @@ begin
      port map (
       C => debug_out_shift_int,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => \r_next__2\(7),
       Q => \^q\(7)
     );
@@ -9599,7 +9625,7 @@ entity design_1_BiDirChannels_0_0_upCounter8Bits_4 is
   port (
     Q : out STD_LOGIC_VECTOR ( 7 downto 0 );
     debug_in_shift_int : in STD_LOGIC;
-    \slv_reg0_reg[0]\ : in STD_LOGIC
+    \slv_reg0_reg[16]\ : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
   attribute ORIG_REF_NAME of design_1_BiDirChannels_0_0_upCounter8Bits_4 : entity is "upCounter8Bits";
@@ -9618,7 +9644,7 @@ architecture STRUCTURE of design_1_BiDirChannels_0_0_upCounter8Bits_4 is
   attribute SOFT_HLUTNM of \r_reg[7]_i_1__4\ : label is "soft_lutpair85";
 begin
   Q(7 downto 0) <= \^q\(7 downto 0);
-\r_reg[0]_i_1__5\: unisim.vcomponents.LUT1
+\r_reg[0]_i_1__4\: unisim.vcomponents.LUT1
     generic map(
       INIT => X"1"
     )
@@ -9717,7 +9743,7 @@ begin
      port map (
       C => debug_in_shift_int,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => \r_next__4\(0),
       Q => \^q\(0)
     );
@@ -9725,7 +9751,7 @@ begin
      port map (
       C => debug_in_shift_int,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => \r_next__4\(1),
       Q => \^q\(1)
     );
@@ -9733,7 +9759,7 @@ begin
      port map (
       C => debug_in_shift_int,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => \r_next__4\(2),
       Q => \^q\(2)
     );
@@ -9741,7 +9767,7 @@ begin
      port map (
       C => debug_in_shift_int,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => \r_next__4\(3),
       Q => \^q\(3)
     );
@@ -9749,7 +9775,7 @@ begin
      port map (
       C => debug_in_shift_int,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => \r_next__4\(4),
       Q => \^q\(4)
     );
@@ -9757,7 +9783,7 @@ begin
      port map (
       C => debug_in_shift_int,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => \r_next__4\(5),
       Q => \^q\(5)
     );
@@ -9765,7 +9791,7 @@ begin
      port map (
       C => debug_in_shift_int,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => \r_next__4\(6),
       Q => \^q\(6)
     );
@@ -9773,7 +9799,7 @@ begin
      port map (
       C => debug_in_shift_int,
       CE => '1',
-      CLR => \slv_reg0_reg[0]\,
+      CLR => \slv_reg0_reg[16]\,
       D => \r_next__4\(7),
       Q => \^q\(7)
     );
@@ -9791,7 +9817,7 @@ entity design_1_BiDirChannels_0_0_GyroChannelDebugger is
     \r_reg_reg[7]_2\ : out STD_LOGIC_VECTOR ( 7 downto 0 );
     \r_reg_reg[7]_3\ : out STD_LOGIC_VECTOR ( 7 downto 0 );
     CLK : in STD_LOGIC;
-    \slv_reg0_reg[0]\ : in STD_LOGIC;
+    \slv_reg0_reg[16]\ : in STD_LOGIC;
     Q_reg : in STD_LOGIC;
     s00_axis_tlast : in STD_LOGIC;
     debug_out_shift_int : in STD_LOGIC;
@@ -9808,37 +9834,37 @@ CNTR0: entity work.design_1_BiDirChannels_0_0_upCounter8Bits
      port map (
       CLK => CLK,
       Q(7 downto 0) => Q(7 downto 0),
-      \slv_reg0_reg[0]\ => \slv_reg0_reg[0]\
+      \slv_reg0_reg[16]\ => \slv_reg0_reg[16]\
     );
 CNTR1: entity work.design_1_BiDirChannels_0_0_upCounter8Bits_0
      port map (
       Q(7 downto 0) => \r_reg_reg[7]\(7 downto 0),
       Q_reg => Q_reg,
-      \slv_reg0_reg[0]\ => \slv_reg0_reg[0]\
+      \slv_reg0_reg[16]\ => \slv_reg0_reg[16]\
     );
 CNTR2: entity work.design_1_BiDirChannels_0_0_upCounter8Bits_1
      port map (
       Q(7 downto 0) => \r_reg_reg[7]_0\(7 downto 0),
       s00_axis_tlast => s00_axis_tlast,
-      \slv_reg0_reg[0]\ => \slv_reg0_reg[0]\
+      \slv_reg0_reg[16]\ => \slv_reg0_reg[16]\
     );
 CNTR3: entity work.design_1_BiDirChannels_0_0_upCounter8Bits_2
      port map (
       Q(7 downto 0) => \r_reg_reg[7]_2\(7 downto 0),
       Q_reg => Q_reg_0,
-      \slv_reg0_reg[0]\ => \slv_reg0_reg[0]\
+      \slv_reg0_reg[16]\ => \slv_reg0_reg[16]\
     );
 CNTR4: entity work.design_1_BiDirChannels_0_0_upCounter8Bits_3
      port map (
       Q(7 downto 0) => \r_reg_reg[7]_1\(7 downto 0),
       debug_out_shift_int => debug_out_shift_int,
-      \slv_reg0_reg[0]\ => \slv_reg0_reg[0]\
+      \slv_reg0_reg[16]\ => \slv_reg0_reg[16]\
     );
 CNTR5: entity work.design_1_BiDirChannels_0_0_upCounter8Bits_4
      port map (
       Q(7 downto 0) => \r_reg_reg[7]_3\(7 downto 0),
       debug_in_shift_int => debug_in_shift_int,
-      \slv_reg0_reg[0]\ => \slv_reg0_reg[0]\
+      \slv_reg0_reg[16]\ => \slv_reg0_reg[16]\
     );
 end STRUCTURE;
 library IEEE;
@@ -10720,7 +10746,38 @@ end design_1_BiDirChannels_0_0_GyroBiDirTokenBuffer;
 architecture STRUCTURE of design_1_BiDirChannels_0_0_GyroBiDirTokenBuffer is
   signal D0 : STD_LOGIC;
   signal D0_0 : STD_LOGIC;
-  signal data_out : STD_LOGIC_VECTOR ( 31 downto 0 );
+  signal InDataReg_n_0 : STD_LOGIC;
+  signal InDataReg_n_1 : STD_LOGIC;
+  signal InDataReg_n_10 : STD_LOGIC;
+  signal InDataReg_n_11 : STD_LOGIC;
+  signal InDataReg_n_12 : STD_LOGIC;
+  signal InDataReg_n_13 : STD_LOGIC;
+  signal InDataReg_n_14 : STD_LOGIC;
+  signal InDataReg_n_15 : STD_LOGIC;
+  signal InDataReg_n_16 : STD_LOGIC;
+  signal InDataReg_n_17 : STD_LOGIC;
+  signal InDataReg_n_18 : STD_LOGIC;
+  signal InDataReg_n_19 : STD_LOGIC;
+  signal InDataReg_n_2 : STD_LOGIC;
+  signal InDataReg_n_20 : STD_LOGIC;
+  signal InDataReg_n_21 : STD_LOGIC;
+  signal InDataReg_n_22 : STD_LOGIC;
+  signal InDataReg_n_23 : STD_LOGIC;
+  signal InDataReg_n_24 : STD_LOGIC;
+  signal InDataReg_n_25 : STD_LOGIC;
+  signal InDataReg_n_26 : STD_LOGIC;
+  signal InDataReg_n_27 : STD_LOGIC;
+  signal InDataReg_n_28 : STD_LOGIC;
+  signal InDataReg_n_29 : STD_LOGIC;
+  signal InDataReg_n_3 : STD_LOGIC;
+  signal InDataReg_n_30 : STD_LOGIC;
+  signal InDataReg_n_31 : STD_LOGIC;
+  signal InDataReg_n_4 : STD_LOGIC;
+  signal InDataReg_n_5 : STD_LOGIC;
+  signal InDataReg_n_6 : STD_LOGIC;
+  signal InDataReg_n_7 : STD_LOGIC;
+  signal InDataReg_n_8 : STD_LOGIC;
+  signal InDataReg_n_9 : STD_LOGIC;
   signal \^data_out_reg[0]\ : STD_LOGIC;
   signal inputFF_n_1 : STD_LOGIC;
   signal inputShiftRegister_n_0 : STD_LOGIC;
@@ -10764,7 +10821,38 @@ begin
   \data_out_reg[0]\ <= \^data_out_reg[0]\;
 InDataReg: entity work.design_1_BiDirChannels_0_0_register_32bits
      port map (
-      Q(31 downto 0) => data_out(31 downto 0),
+      Q(31) => InDataReg_n_0,
+      Q(30) => InDataReg_n_1,
+      Q(29) => InDataReg_n_2,
+      Q(28) => InDataReg_n_3,
+      Q(27) => InDataReg_n_4,
+      Q(26) => InDataReg_n_5,
+      Q(25) => InDataReg_n_6,
+      Q(24) => InDataReg_n_7,
+      Q(23) => InDataReg_n_8,
+      Q(22) => InDataReg_n_9,
+      Q(21) => InDataReg_n_10,
+      Q(20) => InDataReg_n_11,
+      Q(19) => InDataReg_n_12,
+      Q(18) => InDataReg_n_13,
+      Q(17) => InDataReg_n_14,
+      Q(16) => InDataReg_n_15,
+      Q(15) => InDataReg_n_16,
+      Q(14) => InDataReg_n_17,
+      Q(13) => InDataReg_n_18,
+      Q(12) => InDataReg_n_19,
+      Q(11) => InDataReg_n_20,
+      Q(10) => InDataReg_n_21,
+      Q(9) => InDataReg_n_22,
+      Q(8) => InDataReg_n_23,
+      Q(7) => InDataReg_n_24,
+      Q(6) => InDataReg_n_25,
+      Q(5) => InDataReg_n_26,
+      Q(4) => InDataReg_n_27,
+      Q(3) => InDataReg_n_28,
+      Q(2) => InDataReg_n_29,
+      Q(1) => InDataReg_n_30,
+      Q(0) => InDataReg_n_31,
       s00_axi_aclk => s00_axi_aclk,
       s00_axi_aresetn => \^data_out_reg[0]\,
       s00_axis_tdata(31 downto 0) => s00_axis_tdata(31 downto 0)
@@ -10830,7 +10918,38 @@ OutReadyReg: entity work.design_1_BiDirChannels_0_0_dff_10
     );
 inputDelayLine: entity work.design_1_BiDirChannels_0_0_delay_line_8x32bits
      port map (
-      Q(31 downto 0) => data_out(31 downto 0),
+      Q(31) => InDataReg_n_0,
+      Q(30) => InDataReg_n_1,
+      Q(29) => InDataReg_n_2,
+      Q(28) => InDataReg_n_3,
+      Q(27) => InDataReg_n_4,
+      Q(26) => InDataReg_n_5,
+      Q(25) => InDataReg_n_6,
+      Q(24) => InDataReg_n_7,
+      Q(23) => InDataReg_n_8,
+      Q(22) => InDataReg_n_9,
+      Q(21) => InDataReg_n_10,
+      Q(20) => InDataReg_n_11,
+      Q(19) => InDataReg_n_12,
+      Q(18) => InDataReg_n_13,
+      Q(17) => InDataReg_n_14,
+      Q(16) => InDataReg_n_15,
+      Q(15) => InDataReg_n_16,
+      Q(14) => InDataReg_n_17,
+      Q(13) => InDataReg_n_18,
+      Q(12) => InDataReg_n_19,
+      Q(11) => InDataReg_n_20,
+      Q(10) => InDataReg_n_21,
+      Q(9) => InDataReg_n_22,
+      Q(8) => InDataReg_n_23,
+      Q(7) => InDataReg_n_24,
+      Q(6) => InDataReg_n_25,
+      Q(5) => InDataReg_n_26,
+      Q(4) => InDataReg_n_27,
+      Q(3) => InDataReg_n_28,
+      Q(2) => InDataReg_n_29,
+      Q(1) => InDataReg_n_30,
+      Q(0) => InDataReg_n_31,
       debug_in_shift_int => debug_in_shift_int,
       out_reg_c_5 => inputShiftRegister_n_0,
       \r_reg_reg[0]_P\ => \r_reg_reg[0]_P\,
@@ -10956,15 +11075,15 @@ entity design_1_BiDirChannels_0_0_GyroInputOutputChannel is
     \r_reg_reg[7]\ : out STD_LOGIC;
     HS_Clock : out STD_LOGIC;
     Q : out STD_LOGIC_VECTOR ( 31 downto 0 );
-    \slv_reg1_reg[4]\ : in STD_LOGIC_VECTOR ( 1 downto 0 );
-    s00_axi_aresetn_0 : in STD_LOGIC;
     Q_reg : in STD_LOGIC;
     s00_axi_aclk : in STD_LOGIC;
+    s00_axi_aresetn_0 : in STD_LOGIC;
+    \slv_reg0_reg[28]\ : in STD_LOGIC_VECTOR ( 1 downto 0 );
+    \slv_reg1_reg[4]\ : in STD_LOGIC_VECTOR ( 1 downto 0 );
     tx_token_valid_int : in STD_LOGIC;
     rx_fifo_valid_delayed : in STD_LOGIC;
     m00_axis_tready : in STD_LOGIC;
     m00_axis_tvalid : in STD_LOGIC;
-    \slv_reg0_reg[28]\ : in STD_LOGIC_VECTOR ( 1 downto 0 );
     HS_DataIn : in STD_LOGIC;
     s00_axi_aresetn : in STD_LOGIC;
     \data_out_reg[31]\ : in STD_LOGIC;
@@ -11076,6 +11195,7 @@ architecture STRUCTURE of design_1_BiDirChannels_0_0_GyroInputOutputChannel is
   signal hs_data_in_int : STD_LOGIC;
   signal in_start_stop_int : STD_LOGIC;
   signal masked_out_hsck_int : STD_LOGIC;
+  signal mode_int : STD_LOGIC;
   signal out_start_stop_int : STD_LOGIC;
 begin
   MCK <= \^mck\;
@@ -11270,7 +11390,7 @@ OUT_SHIFT_REG: entity work.design_1_BiDirChannels_0_0_outputShiftRegister32Bits
       Q_reg_8 => MASK_HSCK_n_6,
       Q_reg_9 => MASK_HSCK_n_38,
       masked_out_hsck_int => masked_out_hsck_int,
-      \slv_reg0_reg[24]\(0) => \slv_reg0_reg[28]\(0)
+      mode_int => mode_int
     );
 PULSE_CNTR: entity work.design_1_BiDirChannels_0_0_counter48Cycles
      port map (
@@ -11296,6 +11416,13 @@ PULSE_CNTR: entity work.design_1_BiDirChannels_0_0_counter48Cycles
       \slv_reg0_reg[28]\(0) => \slv_reg0_reg[28]\(1),
       tx_token_valid_int => tx_token_valid_int
     );
+STATE_REG: entity work.design_1_BiDirChannels_0_0_register_2bits
+     port map (
+      Q_reg => Q_reg,
+      mode_int => mode_int,
+      s00_axi_aresetn => s00_axi_aresetn_0,
+      \slv_reg0_reg[24]\(0) => \slv_reg0_reg[28]\(0)
+    );
 end STRUCTURE;
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
@@ -11319,15 +11446,15 @@ entity design_1_BiDirChannels_0_0_GyroBiDirChannelController is
     m00_axis_tdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
     s00_axi_aclk_0 : in STD_LOGIC;
     s00_axis_tvalid : in STD_LOGIC;
-    \slv_reg1_reg[4]\ : in STD_LOGIC_VECTOR ( 1 downto 0 );
     Q_reg : in STD_LOGIC;
     s00_axi_aclk : in STD_LOGIC;
-    m00_axis_tready : in STD_LOGIC;
     \slv_reg0_reg[28]\ : in STD_LOGIC_VECTOR ( 1 downto 0 );
+    \slv_reg1_reg[4]\ : in STD_LOGIC_VECTOR ( 1 downto 0 );
+    m00_axis_tready : in STD_LOGIC;
     HS_DataIn : in STD_LOGIC;
     s00_axi_aresetn : in STD_LOGIC;
     s00_axis_tdata : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    \slv_reg0_reg[0]\ : in STD_LOGIC;
+    \slv_reg0_reg[16]\ : in STD_LOGIC;
     s00_axis_tlast : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
@@ -11498,7 +11625,7 @@ DEBUGGER: entity work.design_1_BiDirChannels_0_0_GyroChannelDebugger
       \r_reg_reg[7]_2\(7 downto 0) => \r_reg_reg[7]_2\(7 downto 0),
       \r_reg_reg[7]_3\(7 downto 0) => \r_reg_reg[7]_3\(7 downto 0),
       s00_axis_tlast => s00_axis_tlast,
-      \slv_reg0_reg[0]\ => \slv_reg0_reg[0]\
+      \slv_reg0_reg[16]\ => \slv_reg0_reg[16]\
     );
 end STRUCTURE;
 library IEEE;
@@ -11554,7 +11681,8 @@ architecture STRUCTURE of design_1_BiDirChannels_0_0_BiDirChannels_v1_0 is
   signal \DEBUGGER/CNTR4/r_reg_reg__0\ : STD_LOGIC_VECTOR ( 7 downto 0 );
   signal \DEBUGGER/CNTR5/r_reg_reg__0\ : STD_LOGIC_VECTOR ( 7 downto 0 );
   signal X0_n_1 : STD_LOGIC;
-  signal data_word_0 : STD_LOGIC_VECTOR ( 28 downto 24 );
+  signal data_in : STD_LOGIC_VECTOR ( 0 to 0 );
+  signal data_word_0 : STD_LOGIC_VECTOR ( 28 to 28 );
 begin
 BiDirChannels_v1_0_S00_AXI_inst: entity work.design_1_BiDirChannels_0_0_BiDirChannels_v1_0_S00_AXI
      port map (
@@ -11562,7 +11690,7 @@ BiDirChannels_v1_0_S00_AXI_inst: entity work.design_1_BiDirChannels_0_0_BiDirCha
       Q_reg(1) => D,
       Q_reg(0) => BiDirChannels_v1_0_S00_AXI_inst_n_6,
       \axi_rdata_reg[28]_0\(1) => data_word_0(28),
-      \axi_rdata_reg[28]_0\(0) => data_word_0(24),
+      \axi_rdata_reg[28]_0\(0) => data_in(0),
       \r_reg_reg[7]\ => BiDirChannels_v1_0_S00_AXI_inst_n_9,
       \r_reg_reg[7]_0\(7 downto 0) => \DEBUGGER/CNTR2/r_reg_reg__0\(7 downto 0),
       \r_reg_reg[7]_1\(7 downto 0) => \DEBUGGER/CNTR4/r_reg_reg__0\(7 downto 0),
@@ -11613,9 +11741,9 @@ X0: entity work.design_1_BiDirChannels_0_0_GyroBiDirChannelController
       s00_axis_tlast => s00_axis_tlast,
       s00_axis_tready => s00_axis_tready,
       s00_axis_tvalid => s00_axis_tvalid,
-      \slv_reg0_reg[0]\ => BiDirChannels_v1_0_S00_AXI_inst_n_9,
+      \slv_reg0_reg[16]\ => BiDirChannels_v1_0_S00_AXI_inst_n_9,
       \slv_reg0_reg[28]\(1) => data_word_0(28),
-      \slv_reg0_reg[28]\(0) => data_word_0(24),
+      \slv_reg0_reg[28]\(0) => data_in(0),
       \slv_reg1_reg[4]\(1) => D,
       \slv_reg1_reg[4]\(0) => BiDirChannels_v1_0_S00_AXI_inst_n_6
     );

@@ -73,10 +73,11 @@ extern void xil_printf(const char *format, ...);
 static XScuGic intc;
 
 // address of AXI PL interrupt generator
-Xuint32* baseaddr_p = (Xuint32*) XPAR_AXI4_PL_INTERRUPT_GE_0_S00_AXI_BASEADDR;
+Xuint32* baseaddr_p           = (Xuint32*) XPAR_AXI4_PL_INTERRUPT_GE_0_S00_AXI_BASEADDR;
 Xuint32* baseaddr_spi         = (Xuint32*) 0x43C10000;
 Xuint32* baseaddr_channel     = (Xuint32*) 0x43C20000;
-Xuint32* baseaddr_stream_fifo = (Xuint32*) 0x43C30000;
+Xuint32* baseaddr_rx_fifo     = (Xuint32*) 0x43C30000;
+Xuint32* baseaddr_tx_fifo     = (Xuint32*) 0x43C40000;
 
 int flag;
 int setup_interrupt_system();
@@ -94,11 +95,26 @@ void nops(unsigned int num);
 static void Uart550_Setup(void);
 #endif
 
+static int  initSPI();
+static void readSPIStatus();
+static void setSPIControl(Xuint32 v);
+
 static int RxSetup(XAxiDma * AxiDmaInstPtr);
 static int TxSetup(XAxiDma * AxiDmaInstPtr);
-static int SendPacket(XAxiDma * AxiDmaInstPtr);
+static int SendPacket(XAxiDma * AxiDmaInstPtr, int id);
+static int ReceivePacket(XAxiDma * AxiDmaInstPtr);
 static int CheckData(int debug_mode);
 static int CheckDmaResult(XAxiDma * AxiDmaInstPtr, int debug_mode);
+
+static int readGyroTxFIFODebugData();
+static int readGyroRxFIFODebugData();
+
+static int  initGyroChannel();
+static void readGyroChannelStatus();
+static int  readGyroChannelDebugData();
+static int  setGyroChannelConfiguration(unsigned int v);
+static int  setGyroChannelControl(unsigned int v);
+
 
 /************************** Variable Definitions *****************************/
 /*
@@ -111,16 +127,8 @@ XAxiDma AxiDma;
  */
 u32 *Packet = (u32 *) TX_BUFFER_BASE;
 
-
-
-void startChannel(int channel_id){
-}
-
-void stopChannel(int channel_id){
-}
-
 // -------------------------------------------------------------------
-int initChannel(){
+int initGyroChannel(){
   // --- clear GYRO stream channel registers
   *(baseaddr_channel+0) = 0x00000000;
   *(baseaddr_channel+1) = 0x00000000;
@@ -128,14 +136,60 @@ int initChannel(){
   *(baseaddr_channel+3) = 0x00000000;
   return 0;
 }
+// -------------------------------------------------------------------
+void readGyroChannelStatus(){
+  xil_printf("Gyro Channel reg0: 0x%08x\n\r", *(baseaddr_channel+0));
+  xil_printf("Gyro Channel reg1: 0x%08x\n\r", *(baseaddr_channel+1));
+  xil_printf("Gyro Channel reg2: 0x%08x\n\r", *(baseaddr_channel+2));
+  xil_printf("Gyro Channel reg3: 0x%08x\n\r", *(baseaddr_channel+3));
+}
 
 // -------------------------------------------------------------------
-void dumpStatusChannel(){
-  xil_printf("Channel reg0: 0x%08x\n\r", *(baseaddr_channel+0));
-  xil_printf("Channel reg1: 0x%08x\n\r", *(baseaddr_channel+1));
-  xil_printf("Channel reg2: 0x%08x\n\r", *(baseaddr_channel+2));
-  xil_printf("Channel reg3: 0x%08x\n\r", *(baseaddr_channel+3));
+int setGyroChannelConfiguration(unsigned int v){
+  // --- clear GYRO stream channel registers
+	Xuint32 x;
+    x = (Xuint32)(v);
+  *(baseaddr_channel+0) = x;
+  return 0;
 }
+
+// -------------------------------------------------------------------
+int setGyroChannelControl(unsigned int v){
+  // --- clear GYRO stream channel registers
+	Xuint32 x;
+    x = (Xuint32)(v);
+  *(baseaddr_channel+1) = x;
+  return 0;
+}
+// -------------------------------------------------------------------
+int readGyroChannelDebugData(){
+  // ---
+  xil_printf("Gyro Channel Buffer Info: 0x%08x\n\r", *(baseaddr_channel+2));
+  xil_printf("Gyro Channel ClkGen Info: 0x%08x\n\r", *(baseaddr_channel+3));
+  return 0;
+}
+// -------------------------------------------------------------------
+int readGyroRxFIFODebugData(){
+  // ---
+  xil_printf("Gyro RxFIFO Debug Word 0: 0x%08x\n\r", *(baseaddr_rx_fifo+0));
+  xil_printf("Gyro RxFIFO Debug Word 1: 0x%08x\n\r", *(baseaddr_rx_fifo+1));
+  xil_printf("Gyro RxFIFO Debug Word 2: 0x%08x\n\r", *(baseaddr_rx_fifo+2));
+  xil_printf("Gyro RxFIFO Debug Word 3: 0x%08x\n\r", *(baseaddr_rx_fifo+3));
+  return 0;
+}
+// -------------------------------------------------------------------
+int readGyroTxFIFODebugData(){
+  // ---
+  xil_printf("Gyro TxFIFO Debug Word 0: 0x%08x\n\r", *(baseaddr_tx_fifo+0));
+  xil_printf("Gyro TxFIFO Debug Word 1: 0x%08x\n\r", *(baseaddr_tx_fifo+1));
+  xil_printf("Gyro TxFIFO Debug Word 2: 0x%08x\n\r", *(baseaddr_tx_fifo+2));
+  xil_printf("Gyro TxFIFO Debug Word 3: 0x%08x\n\r", *(baseaddr_tx_fifo+3));
+  return 0;
+}
+
+// -------------------------------------------------------------------
+//   SPI FUNCTIONS
+// -------------------------------------------------------------------
 int initSPI(){
     // clear SPI registers
     *(baseaddr_spi+0) = 0x00000000;
@@ -146,7 +200,7 @@ int initSPI(){
 }
 
 // -------------------------------------------------------------------
-void dumpStatusSPI(){
+void readSPIStatus(){
     xil_printf("SPI reg0: 0x%08x\n\r", *(baseaddr_spi+0));
     xil_printf("SPI reg1: 0x%08x\n\r", *(baseaddr_spi+1));
     xil_printf("SPI reg2: 0x%08x\n\r", *(baseaddr_spi+2));
@@ -154,13 +208,12 @@ void dumpStatusSPI(){
 }
 
 // -------------------------------------------------------------------
-void setControlSPI(Xuint32 v){
+void setSPIControl(Xuint32 v){
 	*(baseaddr_spi+3) = v;
 }
 
 // -------------------------------------------------------------------
  void setSPIClockDivision(unsigned int v){
-	 int w;
    Xuint32 x;
 
    x = (Xuint32)(v & 0x00000007);
@@ -174,6 +227,7 @@ void setControlSPI(Xuint32 v){
      return (((int)x) & 0x00000007);
 }
 
+// -------------------------------------------------------------------
 int writeSPI_blocking(unsigned int address, unsigned int data){
 	Xuint32 d, m;
 	int x, y, v;
@@ -287,7 +341,10 @@ int readSPI(unsigned int *data, unsigned int address){
 }
 
 // -------------------------------------------------------------------
-
+// NOTE: old code for the FEB_04 project where we had a sample generator
+// inside the FPGA.
+//
+/*
 void sendGyroPacket(int nsamples){
 
 *(baseaddr_channel+3) = 0x23000010;
@@ -296,6 +353,8 @@ void sendGyroPacket(int nsamples){
 *(baseaddr_channel+2) = 0x00000000;
 
  }
+*/
+
 // -------------------------------------------------------------------
 // interrupt service routine for IRQ_F2P[0:0]
 void isr0 (void *intc_inst_ptr) {
@@ -375,8 +434,6 @@ int setup_interrupt_system() {
     // enable interrupts for IRQ_F2P[2:2]
     XScuGic_Enable(intc_instance_ptr, INTC_INTERRUPT_ID_2);
 
-
-
     // initialize the exception table and register the interrupt controller handler with the exception table
     Xil_ExceptionInit();
 
@@ -388,7 +445,9 @@ int setup_interrupt_system() {
     return XST_SUCCESS;
 }
 
-// ---------- function from dma ------
+// -----------------------------------------------------------------------
+//   DMA FUNCTIONS
+// ---------- functions from dma -----------------------------------------
 
 #if defined(XPAR_UARTNS550_0_BASEADDR)
 /*****************************************************************************/
@@ -396,15 +455,9 @@ int setup_interrupt_system() {
 *
 * Uart16550 setup routine, need to set baudrate to 9600, and data bits to 8
 *
-* @param	None
-*
-* @return	None
-*
-* @note		None.
-*
-******************************************************************************/
-static void Uart550_Setup(void)
-{
+*/
+
+static void Uart550_Setup(void){
 
 	/* Set the baudrate to be predictable
 	 */
@@ -430,8 +483,7 @@ static void Uart550_Setup(void)
 * @note		None.
 *
 ******************************************************************************/
-static int RxSetup(XAxiDma * AxiDmaInstPtr)
-{
+static int RxSetup(XAxiDma * AxiDmaInstPtr){
 	XAxiDma_BdRing *RxRingPtr;
 	int Delay = 0;
 	int Coalesce = 1;
@@ -462,8 +514,7 @@ static int RxSetup(XAxiDma * AxiDmaInstPtr)
 				XAXIDMA_BD_MINIMUM_ALIGNMENT, BdCount);
 
 	if (Status != XST_SUCCESS) {
-		xil_printf("RX create BD ring failed %d\r\n", Status);
-
+		xil_printf(" *** Error: RX create BD ring failed %d\r\n", Status);
 		return XST_FAILURE;
 	}
 
@@ -474,8 +525,7 @@ static int RxSetup(XAxiDma * AxiDmaInstPtr)
 
 	Status = XAxiDma_BdRingClone(RxRingPtr, &BdTemplate);
 	if (Status != XST_SUCCESS) {
-		xil_printf("RX clone BD failed %d\r\n", Status);
-
+		xil_printf(" *** Error: RX clone BD failed %d\r\n", Status);
 		return XST_FAILURE;
 	}
 
@@ -485,8 +535,7 @@ static int RxSetup(XAxiDma * AxiDmaInstPtr)
 
 	Status = XAxiDma_BdRingAlloc(RxRingPtr, FreeBdCount, &BdPtr);
 	if (Status != XST_SUCCESS) {
-		xil_printf("RX alloc BD failed %d\r\n", Status);
-
+		xil_printf(" *** Error: RX alloc BD failed %d\r\n", Status);
 		return XST_FAILURE;
 	}
 
@@ -496,19 +545,16 @@ static int RxSetup(XAxiDma * AxiDmaInstPtr)
 		Status = XAxiDma_BdSetBufAddr(BdCurPtr, RxBufferPtr);
 
 		if (Status != XST_SUCCESS) {
-			xil_printf("Set buffer addr %x on BD %x failed %d\r\n",
-			    (unsigned int)RxBufferPtr,
-			    (UINTPTR)BdCurPtr, Status);
-
-			return XST_FAILURE;
+		  xil_printf(" *** Error: Set buffer addr %x on BD %x failed %d\r\n",
+			(unsigned int)RxBufferPtr,(UINTPTR)BdCurPtr, Status);
+		  return XST_FAILURE;
 		}
 
 		Status = XAxiDma_BdSetLength(BdCurPtr, MAX_PKT_LEN,
 				RxRingPtr->MaxTransferLen);
 		if (Status != XST_SUCCESS) {
-			xil_printf("Rx set length %d on BD %x failed %d\r\n",
+			xil_printf(" *** Error: Rx set length %d on BD %x failed %d\r\n",
 			    MAX_PKT_LEN, (UINTPTR)BdCurPtr, Status);
-
 			return XST_FAILURE;
 		}
 
@@ -526,22 +572,18 @@ static int RxSetup(XAxiDma * AxiDmaInstPtr)
 	 */
 	memset((void *)RX_BUFFER_BASE, 0, MAX_PKT_LEN);
 
-	Status = XAxiDma_BdRingToHw(RxRingPtr, FreeBdCount,
-						BdPtr);
+	Status = XAxiDma_BdRingToHw(RxRingPtr, FreeBdCount, BdPtr);
 	if (Status != XST_SUCCESS) {
-		xil_printf("RX submit hw failed %d\r\n", Status);
-
+		xil_printf(" *** Error: RX submit hw failed %d\r\n", Status);
 		return XST_FAILURE;
 	}
 
 	/* Start RX DMA channel */
 	Status = XAxiDma_BdRingStart(RxRingPtr);
 	if (Status != XST_SUCCESS) {
-		xil_printf("RX start hw failed %d\r\n", Status);
-
+		xil_printf(" *** Error: RX start hw failed %d\r\n", Status);
 		return XST_FAILURE;
 	}
-
 	return XST_SUCCESS;
 }
 
@@ -558,8 +600,7 @@ static int RxSetup(XAxiDma * AxiDmaInstPtr)
 * @note		None.
 *
 ******************************************************************************/
-static int TxSetup(XAxiDma * AxiDmaInstPtr)
-{
+static int TxSetup(XAxiDma * AxiDmaInstPtr){
 	XAxiDma_BdRing *TxRingPtr;
 	XAxiDma_Bd BdTemplate;
 	int Delay = 0;
@@ -584,8 +625,7 @@ static int TxSetup(XAxiDma * AxiDmaInstPtr)
 				TX_BD_SPACE_BASE,
 				XAXIDMA_BD_MINIMUM_ALIGNMENT, BdCount);
 	if (Status != XST_SUCCESS) {
-		xil_printf("failed create BD ring in txsetup\r\n");
-
+		xil_printf(" *** Error: failed to create BD ring in TxSetup\r\n");
 		return XST_FAILURE;
 	}
 
@@ -596,19 +636,16 @@ static int TxSetup(XAxiDma * AxiDmaInstPtr)
 
 	Status = XAxiDma_BdRingClone(TxRingPtr, &BdTemplate);
 	if (Status != XST_SUCCESS) {
-		xil_printf("failed bdring clone in txsetup %d\r\n", Status);
-
+		xil_printf(" ** Error: failed bdring clone in TxSetup %d\r\n", Status);
 		return XST_FAILURE;
 	}
 
 	/* Start the TX channel */
 	Status = XAxiDma_BdRingStart(TxRingPtr);
 	if (Status != XST_SUCCESS) {
-		xil_printf("failed start bdring txsetup %d\r\n", Status);
-
+		xil_printf(" *** Error: failed to start bdring TxSetup %d\r\n", Status);
 		return XST_FAILURE;
 	}
-
 	return XST_SUCCESS;
 }
 
@@ -625,8 +662,7 @@ static int TxSetup(XAxiDma * AxiDmaInstPtr)
 * @note     None.
 *
 ******************************************************************************/
-static int SendPacket(XAxiDma * AxiDmaInstPtr)
-{
+static int SendPacket(XAxiDma * AxiDmaInstPtr, int id){
 	XAxiDma_BdRing *TxRingPtr;
 	u8 *TxPacket;
 	u8 Value;
@@ -638,13 +674,12 @@ static int SendPacket(XAxiDma * AxiDmaInstPtr)
 
 	/* Create pattern in the packet to transmit */
 	TxPacket = (u8 *) Packet;
-
-	Value = TEST_START_VALUE;
+	//Value = TEST_START_VALUE;
+	Value = 0x01;
 
 	for(Index = 0; Index < MAX_PKT_LEN; Index ++) {
 		TxPacket[Index] = Value;
-
-		Value = (Value + 1) & 0xFF;
+	 Value = (Value + 1) & 0xFF;
 	}
 
 	/* Flush the SrcBuffer before the DMA transfer, in case the Data Cache
@@ -665,27 +700,22 @@ static int SendPacket(XAxiDma * AxiDmaInstPtr)
 	/* Set up the BD using the information of the packet to transmit */
 	Status = XAxiDma_BdSetBufAddr(BdPtr, (UINTPTR) Packet);
 	if (Status != XST_SUCCESS) {
-		xil_printf("Tx set buffer addr %x on BD %x failed %d\r\n",
+		xil_printf(" *** Error: Tx set buffer addr %x on BD %x failed %d\r\n",
 		    (UINTPTR)Packet, (UINTPTR)BdPtr, Status);
-
 		return XST_FAILURE;
 	}
 
-	Status = XAxiDma_BdSetLength(BdPtr, MAX_PKT_LEN,
-				TxRingPtr->MaxTransferLen);
+	Status = XAxiDma_BdSetLength(BdPtr, MAX_PKT_LEN, TxRingPtr->MaxTransferLen);
 	if (Status != XST_SUCCESS) {
-		xil_printf("Tx set length %d on BD %x failed %d\r\n",
+		xil_printf(" *** Error: Tx set length %d on BD %x failed %d\r\n",
 		    MAX_PKT_LEN, (UINTPTR)BdPtr, Status);
-
 		return XST_FAILURE;
 	}
 
 #if (XPAR_AXIDMA_0_SG_INCLUDE_STSCNTRL_STRM == 1)
-	Status = XAxiDma_BdSetAppWord(BdPtr,
-	    XAXIDMA_LAST_APPWORD, MAX_PKT_LEN);
+	Status = XAxiDma_BdSetAppWord(BdPtr, XAXIDMA_LAST_APPWORD, MAX_PKT_LEN);
 
-	/* If Set app length failed, it is not fatal
-	 */
+	/* If Set app length failed, it is not fatal */
 	if (Status != XST_SUCCESS) {
 		xil_printf("Set app word failed with %d\r\n", Status);
 	}
@@ -704,13 +734,10 @@ static int SendPacket(XAxiDma * AxiDmaInstPtr)
 		xil_printf("to hw failed %d\r\n", Status);
 		return XST_FAILURE;
 	}
-
-
-
 	return XST_SUCCESS;
 }
 
-/*****************************************************************************/
+
 /*
 *
 * This function checks data buffer after the DMA transfer is finished.
@@ -729,9 +756,6 @@ static int CheckData(int debug_mode)
 	int Index = 0;
 	u8 Value;
 
-	if(debug_mode != 0){
-	  xil_printf(" --- Begin checkData\r\n");
-	}
 
 	RxPacket = (u8 *) RX_BUFFER_BASE;
 	Value = TEST_START_VALUE;
@@ -744,10 +768,9 @@ static int CheckData(int debug_mode)
 #endif
 
 	for(Index = 0; Index < MAX_PKT_LEN; Index++) {
-		if(debug_mode != 0){
-			xil_printf(" --- checking value index %d: %x/%x\r\n",
-				Index, (unsigned int)RxPacket[Index], (unsigned int)Value);
-		}
+		xil_printf("Data received %d: %x\r\n",
+		    Index, (unsigned int)RxPacket[Index]);
+		/*
 		if (RxPacket[Index] != Value) {
 			xil_printf("Data error %d: %x/%x\r\n",
 			    Index, (unsigned int)RxPacket[Index],
@@ -756,46 +779,7 @@ static int CheckData(int debug_mode)
 			return XST_FAILURE;
 		}
 		Value = (Value + 1) & 0xFF;
-	}
-
-	if(debug_mode != 0){
-	  xil_printf(" --- End checkData\r\n");
-	}
-
-	return XST_SUCCESS;
-}
-
-static int CheckRxData(int debug_mode)
-{
-	u8 *RxPacket;
-	int Index = 0;
-	int idx = 0;
-	u8 Value;
-
-	if(debug_mode != 0){
-	  xil_printf(" --- Begin checkData\r\n");
-	}
-
-	RxPacket = (u8 *) RX_BUFFER_BASE;
-	Value = TEST_START_VALUE;
-
-	/* Invalidate the DestBuffer before receiving the data, in case the
-	 * Data Cache is enabled
-	 */
-#ifndef __aarch64__
-	Xil_DCacheInvalidateRange((UINTPTR)RxPacket, MAX_PKT_LEN);
-#endif
-
-	for(Index = 0; Index < 16*2; Index+=2) {
-		idx = Index ^ 0x02;
-		if(debug_mode != 0){
-			xil_printf(" --- 16 bits value index %d: %2x%2x\n",
-				Index/2,(unsigned int)RxPacket[idx+1],(unsigned int)RxPacket[idx]);
-		}
-	}
-
-	if(debug_mode != 0){
-	  xil_printf(" --- End checkData\r\n");
+		*/
 	}
 
 	return XST_SUCCESS;
@@ -848,8 +832,7 @@ static int CheckDmaResult(XAxiDma * AxiDmaInstPtr, int debug_mode)
 	}
 
 	/* Check received data */
-	if (CheckData(debug_mode) != XST_SUCCESS) {
-
+	if (CheckData(1) != XST_SUCCESS) {
 		return XST_FAILURE;
 	}
 
@@ -882,87 +865,11 @@ static int CheckDmaResult(XAxiDma * AxiDmaInstPtr, int debug_mode)
 	return XST_SUCCESS;
 }
 
-static int CheckDmaRxResult(XAxiDma * AxiDmaInstPtr, int debug_mode)
-{
-	XAxiDma_BdRing *TxRingPtr;
-	XAxiDma_BdRing *RxRingPtr;
-	XAxiDma_Bd *BdPtr;
-	int ProcessedBdCount;
-	int FreeBdCount;
-	int Status;
-
-	u8* RxPacket;
-
-	RxPacket = (u8 *) RX_BUFFER_BASE;
-#ifndef __aarch64__
-	Xil_DCacheInvalidateRange((UINTPTR)RxPacket, MAX_PKT_LEN);
-#endif
-
-	TxRingPtr = XAxiDma_GetTxRing(AxiDmaInstPtr);
-	RxRingPtr = XAxiDma_GetRxRing(AxiDmaInstPtr);
-/*
-	while ((ProcessedBdCount = XAxiDma_BdRingFromHw(TxRingPtr, XAXIDMA_ALL_BDS,&BdPtr)) == 0) {
-	}
-
-	Status = XAxiDma_BdRingFree(TxRingPtr, ProcessedBdCount, BdPtr);
-	if (Status != XST_SUCCESS) {
-		xil_printf("Failed to free %d tx BDs %d\r\n",
-		    ProcessedBdCount, Status);
-		return XST_FAILURE;
-	}
-*/
-
-	/* Wait until the data has been received by the Rx channel */
-	//while (1){
-
-	sendGyroPacket(16);
-	ProcessedBdCount = XAxiDma_BdRingFromHw(RxRingPtr, XAXIDMA_ALL_BDS, &BdPtr);
-	xil_printf(" >>> Received Data (1) %d\r\n",ProcessedBdCount);
-		/* Check received data */
-	if (CheckRxData(debug_mode) != XST_SUCCESS) {
-		return XST_FAILURE;
-	}
-
-	sendGyroPacket(16);
-	ProcessedBdCount = XAxiDma_BdRingFromHw(RxRingPtr, XAXIDMA_ALL_BDS, &BdPtr);
-	xil_printf(" >>> Received Data (2) %d\r\n",ProcessedBdCount);
-	if (CheckRxData(debug_mode) != XST_SUCCESS) {
-		return XST_FAILURE;
-	}
-//}
-
-	/* Free all processed RX BDs for future transmission */
-	Status = XAxiDma_BdRingFree(RxRingPtr, ProcessedBdCount, BdPtr);
-	if (Status != XST_SUCCESS) {
-		xil_printf("Failed to free %d rx BDs %d\r\n",
-		    ProcessedBdCount, Status);
-		return XST_FAILURE;
-	}
-
-	/* Return processed BDs to RX channel so we are ready to receive new
-	 * packets:
-	 *    - Allocate all free RX BDs
-	 *    - Pass the BDs to RX channel
-	 */
-	FreeBdCount = XAxiDma_BdRingGetFreeCnt(RxRingPtr);
-	Status = XAxiDma_BdRingAlloc(RxRingPtr, FreeBdCount, &BdPtr);
-	if (Status != XST_SUCCESS) {
-		xil_printf("bd alloc failed\r\n");
-		return XST_FAILURE;
-	}
-
-	Status = XAxiDma_BdRingToHw(RxRingPtr, FreeBdCount, BdPtr);
-	if (Status != XST_SUCCESS) {
-		xil_printf("Submit %d rx BDs failed %d\r\n", FreeBdCount, Status);
-		return XST_FAILURE;
-	}
-
-	return XST_SUCCESS;
-}
+// -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
-int test_DMA_loopback(int debug_mode){
-	int Status;
+int test_DMA_loopback( int num_packets, int debug_mode){
+	int Status, i;
 	XAxiDma_Config *Config;
 
 //#if defined(XPAR_UARTNS550_0_BASEADDR)
@@ -970,7 +877,7 @@ int test_DMA_loopback(int debug_mode){
 //#endif
 
 	if(debug_mode != 0){
-	  xil_printf("\r\n  --- Entering DMA Loopback main() --- \r\n");
+	  xil_printf("\r\n  --- Entering DMA Loopback Test for %d packets --- \r\n",num_packets);
 	}
 
 #ifdef __aarch64__
@@ -980,89 +887,19 @@ int test_DMA_loopback(int debug_mode){
 
 	Config = XAxiDma_LookupConfig(DMA_DEV_ID);
 	if (!Config) {
-		xil_printf("No config found for %d\r\n", DMA_DEV_ID);
+		xil_printf(" *** Error: No config found for %d\r\n", DMA_DEV_ID);
 		return XST_FAILURE;
+	} else {
+		xil_printf(" >>> config found for %d\r\n", DMA_DEV_ID);
 	}
 
 	/* Initialize DMA engine */
 	Status = XAxiDma_CfgInitialize(&AxiDma, Config);
 	if (Status != XST_SUCCESS) {
-	   xil_printf("Initialization failed %d\r\n", Status);
-	   return XST_FAILURE;
-	}
-
-	if(!XAxiDma_HasSg(&AxiDma)) {
-	   xil_printf("Device configured as Simple mode \r\n");
-	   return XST_FAILURE;
-	}
-
-	Status = TxSetup(&AxiDma);
-	if (Status != XST_SUCCESS) {
-	   return XST_FAILURE;
-	}
-
-	Status = RxSetup(&AxiDma);
-	if (Status != XST_SUCCESS) {
-	   return XST_FAILURE;
-	}
-
-	/* Send a packet */
-	Status = SendPacket(&AxiDma);
-	if (Status != XST_SUCCESS) {
-		return XST_FAILURE;
-	}
-
-	/* Check DMA transfer result */
-	Status = CheckDmaResult(&AxiDma, debug_mode);
-
-	if (Status != XST_SUCCESS) {
-		xil_printf("AXI DMA SG Polling Example Failed\r\n");
-		return XST_FAILURE;
-	}
-
-	xil_printf("Successfully ran AXI DMA SG Polling Example\r\n");
-	xil_printf("--- Exiting DMA Loopback main() --- \r\n");
-
-	if (Status != XST_SUCCESS) {
-		return XST_FAILURE;
-	}
-
-	return XST_SUCCESS;
-}
-
-// -------------------------------------------------------------------
-int test_DMA_Rx(int debug_mode){
-	int Status;
-	XAxiDma_Config *Config;
-
-//#if defined(XPAR_UARTNS550_0_BASEADDR)
-//	Uart550_Setup();
-//#endif
-
-	if(debug_mode != 0){
-	  xil_printf("\r\n  --- Entering DMA Rx main() --- \r\n");
-	}
-
-#ifdef __aarch64__
-	Xil_SetTlbAttributes(TX_BD_SPACE_BASE, MARK_UNCACHEABLE);
-	Xil_SetTlbAttributes(RX_BD_SPACE_BASE, MARK_UNCACHEABLE);
-#endif
-
-	Config = XAxiDma_LookupConfig(DMA_DEV_ID);
-	if (!Config) {
-		xil_printf("No config found for %d\r\n", DMA_DEV_ID);
-		return XST_FAILURE;
-	} else {
-		xil_printf("config found for %d\r\n", DMA_DEV_ID);
-	}
-
-	/* Initialize DMA engine */
-	Status = XAxiDma_CfgInitialize(&AxiDma, Config);
-	if (Status != XST_SUCCESS) {
-	   xil_printf("Initialization failed %d\r\n", Status);
+	   xil_printf(" *** Error: Initialization failed %d\r\n", Status);
 	   return XST_FAILURE;
 	} else {
-		xil_printf("Initialization succeeded\r\n");
+		xil_printf(" >>> Initialization succeeded\r\n");
 	}
 
 	if(!XAxiDma_HasSg(&AxiDma)) {
@@ -1086,24 +923,30 @@ int test_DMA_Rx(int debug_mode){
 		 xil_printf("RxSetup completed. \r\n");
 	}
 
-	/* Send a packet */
-	/*
-	Status = SendPacket(&AxiDma);
-	if (Status != XST_SUCCESS) {
+	for(i = 0; i < num_packets; i++){
+	  /* Send a packet */
+
+	  Status = SendPacket(&AxiDma, i);
+
+	  if (Status != XST_SUCCESS) {
+		  xil_printf(" Failed sending packet number: %d\r\n",i+1);
 		return XST_FAILURE;
-	}
-	*/
+	  }
 
-	/* Check DMA transfer result */
-	Status = CheckDmaRxResult(&AxiDma, debug_mode);
+    	setGyroChannelControl(0x00000011); // activate the channels
 
-	if (Status != XST_SUCCESS) {
-		xil_printf("AXI DMA SG Polling Example Failed\r\n");
+	  /* Check DMA transfer result */
+
+	  Status = CheckDmaResult(&AxiDma, debug_mode);
+	  if (Status != XST_SUCCESS) {
+		xil_printf(" Failed reading packet number: %d\r\n",i+1);
 		return XST_FAILURE;
+  	  }
+
 	}
 
-	xil_printf("Successfully ran AXI DMA SG Polling Example\r\n");
-	xil_printf("--- Exiting DMA Rx main() --- \r\n");
+	xil_printf(" >>> Successfully ran AXI DMA SG Polling Example\r\n");
+	xil_printf("--- Exiting DMA Loopback main() --- \r\n");
 
 	if (Status != XST_SUCCESS) {
 		return XST_FAILURE;
@@ -1122,12 +965,12 @@ void nops(unsigned int num) {
 
 // -------------------------------------------------------------------
 int main() {
-	int err;
+	//int err;
     init_platform();
-    int readVal, writeVal;
+    //int readVal, writeVal;
 
     xil_printf("\n\r=====================\n\r");
-    xil_printf("== START version 15 ==\n\r");
+    xil_printf("== START version 18 ==\n\r");
     // set interrupt_0/1 of AXI PL interrupt generator to 0
 
     *(baseaddr_p+0) = 0x00000000;
@@ -1151,15 +994,14 @@ int main() {
 
     // clear SPI registers
     initSPI();
-
-    dumpStatusSPI();
+    readSPIStatus();
 
     // set interrupt_0/1 of AXI PL interrupt generator to 0
     *(baseaddr_p+0) = 0x00000000;
     *(baseaddr_p+1) = 0x00000000;
     *(baseaddr_p+2) = 0x00000000;
 
-    xil_printf("Checkpoint 3\n\r");
+   // xil_printf("Checkpoint 3\n\r");
     // read interrupt_0/1 of AXI PL interrupt generator
 
 /*
@@ -1229,47 +1071,43 @@ int main() {
 
     */
 
-    xil_printf("== GYRO Channel reset ==\n\r");
+    xil_printf("== GYRO Channel test ==\n\r");
 
-    *(baseaddr_channel+3) = 0x23000020;
-    *(baseaddr_channel+2) = 0x10000000;
-    *(baseaddr_channel+2) = 0x00000000;
+    //readGyroTxFIFODebugData();
+    //readGyroRxFIFODebugData();
 
-    xil_printf("Channel Debug Word 0 (after clear): 0x%08x\n\r", *(baseaddr_channel+0));
-    xil_printf("Channel Debug Word 1 (after clear): 0x%08x\n\r", *(baseaddr_channel+1));
+    initGyroChannel();
+    // --- loopback mode, POL = 0, in and out channels = 00
+    setGyroChannelConfiguration(0x01000000);
+    setGyroChannelControl(0x00000000);
 
-    xil_printf("FIFO Debug Word 0: 0x%08x\n\r", *(baseaddr_stream_fifo+0));
-    xil_printf("FIFO Debug Word 1: 0x%08x\n\r", *(baseaddr_stream_fifo+1));
-    xil_printf("FIFO Debug Word 2: 0x%08x\n\r", *(baseaddr_stream_fifo+2));
-    xil_printf("FIFO Debug Word 3: 0x%08x\n\r", *(baseaddr_stream_fifo+3));
+    xil_printf(" - after initialization ==\n\r");
 
-    //xil_printf("== GYRO Channel test ==\n\r");
+    readGyroChannelStatus();
+    readGyroChannelDebugData();
+    readGyroTxFIFODebugData();
+    readGyroRxFIFODebugData();
 
-    // sendGyroPacket(16);
-
-     xil_printf("Channel Debug Word 0: 0x%08x\n\r", *(baseaddr_channel+0));
-     xil_printf("Channel Debug Word 1: 0x%08x\n\r", *(baseaddr_channel+1));
-
-     xil_printf("FIFO Debug Word 0: 0x%08x\n\r", *(baseaddr_stream_fifo+0));
-     xil_printf("FIFO Debug Word 1: 0x%08x\n\r", *(baseaddr_stream_fifo+1));
-     xil_printf("FIFO Debug Word 2: 0x%08x\n\r", *(baseaddr_stream_fifo+2));
-     xil_printf("FIFO Debug Word 3: 0x%08x\n\r", *(baseaddr_stream_fifo+3));
-
-    //xil_printf("== Finished GYRO Channel test ++\n\r");
+  //  xil_printf(" - after input burst ==\n\r");
+   // readGyroChannelDebugData();
+   // readGyroTxFIFODebugData();
+   // readGyroRxFIFODebugData();
 
     xil_printf("== Starting FIFO / DMA test ++\n\r");
+    // --- both in and out channels ON.
+    // setGyroChannelControl(0x00000011); // moved to the test DMA loopback
+    test_DMA_loopback(2,1);
+    // --- stopping both channels
+     setGyroChannelControl(0x00000000);
 
-    test_DMA_Rx(1);
+     readGyroChannelStatus();
+     readGyroChannelDebugData();
+     readGyroTxFIFODebugData();
+     readGyroRxFIFODebugData();
 
     xil_printf("== After Rx ++\n\r");
 
-    xil_printf("Channel Debug Word 0: 0x%08x\n\r", *(baseaddr_channel+0));
-    xil_printf("Channel Debug Word 1: 0x%08x\n\r", *(baseaddr_channel+1));
 
-    xil_printf("FIFO Debug Word 0: 0x%08x\n\r", *(baseaddr_stream_fifo+0));
-    xil_printf("FIFO Debug Word 1: 0x%08x\n\r", *(baseaddr_stream_fifo+1));
-    xil_printf("FIFO Debug Word 2: 0x%08x\n\r", *(baseaddr_stream_fifo+2));
-    xil_printf("FIFO Debug Word 3: 0x%08x\n\r", *(baseaddr_stream_fifo+3));
 
     xil_printf("== STOP ==\n\r");
     xil_printf("=====================\n\n\r");

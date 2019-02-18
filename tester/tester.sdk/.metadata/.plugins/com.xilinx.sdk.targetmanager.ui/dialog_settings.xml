@@ -5,20 +5,25 @@
 	<item value="" key="design_1_wrapper_hw_platform_2-bmmFile"/>
 	<item value="Auto Detect" key="design_1_wrapper_hw_platform_3-device"/>
 	<item value="Auto Detect" key="design_1_wrapper_hw_platform_4-device"/>
+	<item value="Auto Detect" key="design_1_wrapper_hw_platform_5-device"/>
 	<item value="design_1_wrapper.bit" key="design_1_wrapper_hw_platform_2-bitFile"/>
 	<item value="" key="design_1_wrapper_hw_platform_0-bmmFile"/>
 	<item value="design_1_wrapper.bit" key="design_1_wrapper_hw_platform_1-bitFile"/>
+	<item value="false" key="design_1_wrapper_hw_platform_5-partial_bit"/>
 	<item value="Local" key="design_1_wrapper_hw_platform_2-target"/>
 	<item value="Local" key="design_1_wrapper_hw_platform_3-target"/>
+	<item value="" key="design_1_wrapper_hw_platform_5-bmmFile"/>
 	<item value="Local" key="design_1_wrapper_hw_platform_0-target"/>
 	<item value="Local" key="design_1_wrapper_hw_platform_1-target"/>
 	<item value="Local" key="design_1_wrapper_hw_platform_4-target"/>
+	<item value="Local" key="design_1_wrapper_hw_platform_5-target"/>
 	<item value="" key="design_1_wrapper_hw_platform_4-bmmFile"/>
 	<item value="" key="design_1_wrapper_hw_platform_3-bmmFile"/>
+	<item value="design_1_wrapper.bit" key="design_1_wrapper_hw_platform_5-bitFile"/>
 	<item value="false" key="design_1_wrapper_hw_platform_4-partial_bit"/>
 	<item value="Auto Detect" key="design_1_wrapper_hw_platform_1-device"/>
 	<item value="Auto Detect" key="design_1_wrapper_hw_platform_0-device"/>
-	<item value="design_1_wrapper_hw_platform_1" key="programfpga.hwplatform"/>
+	<item value="design_1_wrapper_hw_platform_5" key="programfpga.hwplatform"/>
 	<item value="Auto Detect" key="design_1_wrapper_hw_platform_2-device"/>
 	<item value="false" key="design_1_wrapper_hw_platform_3-partial_bit"/>
 	<item value="design_1_wrapper.bit" key="design_1_wrapper_hw_platform_3-bitFile"/>

@@ -2,12 +2,13 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="MAX_PKT_LEN" key="selection"/>
+		<item value="RX_BUFFER" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="RX_BUFFER"/>
 			<item value="MAX_PKT_LEN"/>
 			<item value="failed"/>
 			<item value="XAxiDma_GetTxRing"/>
