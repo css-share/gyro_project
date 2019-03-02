@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-| Date             : Mon Feb 18 02:57:12 2019
+| Date             : Sat Mar  2 10:22:13 2019
 | Host             : DESKTOP-KC9HGNO running 64-bit major release  (build 9200)
 | Command          : report_power -file design_1_wrapper_power_routed.rpt -pb design_1_wrapper_power_summary_routed.pb -rpx design_1_wrapper_power_routed.rpx
 | Design           : design_1_wrapper
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 1.750        |
+| Total On-Chip Power (W)  | 1.749        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 1.601        |
+| Dynamic (W)              | 1.600        |
 | Device Static (W)        | 0.149        |
 | Effective TJA (C/W)      | 11.5         |
 | Max Ambient (C)          | 64.8         |
@@ -52,21 +52,21 @@ Table of Contents
 +--------------------------+-----------+----------+-----------+-----------------+
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
-| Clocks                   |     0.030 |        3 |       --- |             --- |
-| Slice Logic              |     0.012 |    18665 |       --- |             --- |
-|   LUT as Logic           |     0.010 |     5466 |     53200 |           10.27 |
+| Clocks                   |     0.029 |        3 |       --- |             --- |
+| Slice Logic              |     0.012 |    18592 |       --- |             --- |
+|   LUT as Logic           |     0.010 |     5464 |     53200 |           10.27 |
 |   LUT as Distributed RAM |     0.001 |      632 |     17400 |            3.63 |
-|   Register               |    <0.001 |     9363 |    106400 |            8.80 |
+|   Register               |    <0.001 |     9296 |    106400 |            8.74 |
 |   CARRY4                 |    <0.001 |       93 |     13300 |            0.70 |
 |   LUT as Shift Register  |    <0.001 |      256 |     17400 |            1.47 |
 |   F7/F8 Muxes            |    <0.001 |       11 |     53200 |            0.02 |
-|   Others                 |     0.000 |      832 |       --- |             --- |
-| Signals                  |     0.014 |    12705 |       --- |             --- |
+|   Others                 |     0.000 |      827 |       --- |             --- |
+| Signals                  |     0.014 |    12642 |       --- |             --- |
 | Block RAM                |     0.006 |        7 |       140 |            5.00 |
 | I/O                      |     0.005 |       14 |       200 |            7.00 |
 | PS7                      |     1.533 |        1 |       --- |             --- |
 | Static Power             |     0.149 |          |           |                 |
-| Total                    |     1.750 |          |           |                 |
+| Total                    |     1.749 |          |           |                 |
 +--------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -76,7 +76,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.078 |       0.062 |      0.015 |
+| Vccint    |       1.000 |     0.077 |       0.061 |      0.015 |
 | Vccaux    |       1.800 |     0.016 |       0.000 |      0.015 |
 | Vcco33    |       3.300 |     0.001 |       0.000 |      0.001 |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |
@@ -152,18 +152,13 @@ Table of Contents
 +---------------------------------------------------------------------------------------------------+-----------+
 | Name                                                                                              | Power (W) |
 +---------------------------------------------------------------------------------------------------+-----------+
-| design_1_wrapper                                                                                  |     1.601 |
-|   design_1_i                                                                                      |     1.596 |
-|     BiDirChannels_0                                                                               |     0.004 |
-|       inst                                                                                        |     0.004 |
+| design_1_wrapper                                                                                  |     1.600 |
+|   design_1_i                                                                                      |     1.595 |
+|     BiDirChannels_0                                                                               |     0.003 |
+|       inst                                                                                        |     0.003 |
 |         BiDirChannels_v1_0_S00_AXI_inst                                                           |    <0.001 |
-|         X0                                                                                        |     0.003 |
-|           BUFFERS                                                                                 |     0.002 |
-|             InDataReg                                                                             |    <0.001 |
-|             InValidReg                                                                            |    <0.001 |
-|             OutDataReg                                                                            |    <0.001 |
-|             OutLastReg                                                                            |    <0.001 |
-|             OutReadyReg                                                                           |    <0.001 |
+|         X1                                                                                        |     0.003 |
+|           BUFFERS                                                                                 |     0.001 |
 |             inputDelayLine                                                                        |    <0.001 |
 |               Reg5                                                                                |    <0.001 |
 |               Reg6                                                                                |    <0.001 |
@@ -184,13 +179,13 @@ Table of Contents
 |           CHANNELS                                                                                |    <0.001 |
 |             CLK_DIV2                                                                              |    <0.001 |
 |               ff0                                                                                 |    <0.001 |
+|             FF1                                                                                   |    <0.001 |
 |             IN_SHIFT_REG                                                                          |    <0.001 |
 |             MASK_HSCK                                                                             |    <0.001 |
 |               ff0                                                                                 |     0.000 |
 |               ff1                                                                                 |    <0.001 |
 |             OUT_SHIFT_REG                                                                         |    <0.001 |
 |             PULSE_CNTR                                                                            |    <0.001 |
-|             STATE_REG                                                                             |     0.000 |
 |           DEBUGGER                                                                                |    <0.001 |
 |             CNTR0                                                                                 |    <0.001 |
 |             CNTR1                                                                                 |    <0.001 |
@@ -297,7 +292,7 @@ Table of Contents
 |           GEN_MM2S_REGISTERS.I_MM2S_DMA_REGISTER                                                  |    <0.001 |
 |           GEN_S2MM_REGISTERS.GEN_INTROUT_ASYNC.PROC_REG_INTR2LITE                                 |    <0.001 |
 |           GEN_S2MM_REGISTERS.I_S2MM_DMA_REGISTER                                                  |    <0.001 |
-|         I_PRMRY_DATAMOVER                                                                         |     0.007 |
+|         I_PRMRY_DATAMOVER                                                                         |     0.006 |
 |           GEN_MM2S_FULL.I_MM2S_FULL_WRAPPER                                                       |     0.002 |
 |             ENABLE_AXIS_SKID.I_MM2S_SKID_BUF                                                      |    <0.001 |
 |             GEN_INCLUDE_MM2S_SF.I_RD_SF                                                           |    <0.001 |
@@ -962,8 +957,8 @@ Table of Contents
 |                   inst_pipeline_valid                                                             |    <0.001 |
 |               inst_si_handler                                                                     |    <0.001 |
 |                 inst_arb_stall_late                                                               |    <0.001 |
-|           s02_w_node                                                                              |     0.001 |
-|             inst                                                                                  |     0.001 |
+|           s02_w_node                                                                              |    <0.001 |
+|             inst                                                                                  |    <0.001 |
 |               inst_mi_handler                                                                     |    <0.001 |
 |                 gen_normal_area.gen_fi_regulator.inst_fi_regulator                                |    <0.001 |
 |                 gen_normal_area.gen_fifo_req.inst_fifo_req                                        |    <0.001 |

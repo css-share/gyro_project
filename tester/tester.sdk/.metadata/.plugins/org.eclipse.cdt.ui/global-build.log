@@ -1,82 +1,3 @@
-'Invoking: ARM v7 gcc compiler'
-arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/helloworld.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../standalone_bsp_0/ps7_cortexa9_0/include -MMD -MP -MF"src/helloworld.d" -MT"src/helloworld.o" -o "src/helloworld.o" "../src/helloworld.c"
-In file included from ../src/helloworld.c:4:0:
-../../standalone_bsp_0/ps7_cortexa9_0/include/xbasic_types.h:115:2: warning: #warning The xbasics_type.h file is deprecated and users should use xil_types.h and xil_assert. [-Wcpp]
- #warning  The xbasics_type.h file is deprecated and users should use xil_types.h and xil_assert.
-  ^~~~~~~
-../../standalone_bsp_0/ps7_cortexa9_0/include/xbasic_types.h:116:2: warning: #warning Please refer the Standalone BSP UG647 for further details [-Wcpp]
- #warning  Please refer the Standalone BSP UG647 for further details
-  ^~~~~~~
-../src/helloworld.c:45:2: warning: #warning CHECK FOR THE VALID DDR ADDRESS IN XPARAMETERS.H, DEFAULT SET TO 0x01000000 [-Wcpp]
- #warning CHECK FOR THE VALID DDR ADDRESS IN XPARAMETERS.H, \
-  ^~~~~~~
-../src/helloworld.c: In function 'CheckData':
-../src/helloworld.c:757:5: warning: variable 'Value' set but not used [-Wunused-but-set-variable]
-  u8 Value;
-     ^~~~~
-../src/helloworld.c: At top level:
-../src/helloworld.c:105:12: warning: 'ReceivePacket' declared 'static' but never defined [-Wunused-function]
- static int ReceivePacket(XAxiDma * AxiDmaInstPtr);
-            ^~~~~~~~~~~~~
-../src/helloworld.c:211:6: warning: 'setSPIControl' defined but not used [-Wunused-function]
- void setSPIControl(Xuint32 v){
-      ^~~~~~~~~~~~~
-'Finished building: ../src/helloworld.c'
-' '
-'Building target: axi4_gyro_test_0.elf'
-'Invoking: ARM v7 gcc linker'
-arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../standalone_bsp_0/ps7_cortexa9_0/lib -o "axi4_gyro_test_0.elf"  ./src/helloworld.o ./src/platform.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-'Finished building target: axi4_gyro_test_0.elf'
-' '
-'Invoking: ARM v7 Print Size'
-arm-none-eabi-size axi4_gyro_test_0.elf  |tee "axi4_gyro_test_0.elf.size"
-   text	   data	    bss	    dec	    hex	filename
-  47072	   3856	  24536	  75464	  126c8	axi4_gyro_test_0.elf
-'Finished building: axi4_gyro_test_0.elf.size'
-' '
-03:42:41 **** Incremental Build of configuration Debug for project axi4_gyro_test_0 ****
-make pre-build main-build 
-a9-linaro-pre-build-step
-' '
-make: Nothing to be done for `main-build'.
-03:42:52 **** Incremental Build of configuration Debug for project axi4_gyro_test_0 ****
-make pre-build main-build 
-a9-linaro-pre-build-step
-' '
-make: Nothing to be done for `main-build'.
-03:43:55 **** Auto Build of configuration Debug for project axi4_gyro_test_0 ****
-make pre-build main-build 
-a9-linaro-pre-build-step
-' '
-'Building file: ../src/helloworld.c'
-'Invoking: ARM v7 gcc compiler'
-arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/helloworld.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../standalone_bsp_0/ps7_cortexa9_0/include -MMD -MP -MF"src/helloworld.d" -MT"src/helloworld.o" -o "src/helloworld.o" "../src/helloworld.c"
-In file included from ../src/helloworld.c:4:0:
-../../standalone_bsp_0/ps7_cortexa9_0/include/xbasic_types.h:115:2: warning: #warning The xbasics_type.h file is deprecated and users should use xil_types.h and xil_assert. [-Wcpp]
- #warning  The xbasics_type.h file is deprecated and users should use xil_types.h and xil_assert.
-  ^~~~~~~
-../../standalone_bsp_0/ps7_cortexa9_0/include/xbasic_types.h:116:2: warning: #warning Please refer the Standalone BSP UG647 for further details [-Wcpp]
- #warning  Please refer the Standalone BSP UG647 for further details
-  ^~~~~~~
-../src/helloworld.c:45:2: warning: #warning CHECK FOR THE VALID DDR ADDRESS IN XPARAMETERS.H, DEFAULT SET TO 0x01000000 [-Wcpp]
- #warning CHECK FOR THE VALID DDR ADDRESS IN XPARAMETERS.H, \
-  ^~~~~~~
-../src/helloworld.c: In function 'CheckData':
-../src/helloworld.c:757:5: warning: variable 'Value' set but not used [-Wunused-but-set-variable]
-  u8 Value;
-     ^~~~~
-../src/helloworld.c: At top level:
-../src/helloworld.c:105:12: warning: 'ReceivePacket' declared 'static' but never defined [-Wunused-function]
- static int ReceivePacket(XAxiDma * AxiDmaInstPtr);
-            ^~~~~~~~~~~~~
-../src/helloworld.c:211:6: warning: 'setSPIControl' defined but not used [-Wunused-function]
- void setSPIControl(Xuint32 v){
-      ^~~~~~~~~~~~~
-'Finished building: ../src/helloworld.c'
-' '
-'Building target: axi4_gyro_test_0.elf'
-'Invoking: ARM v7 gcc linker'
-arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../standalone_bsp_0/ps7_cortexa9_0/lib -o "axi4_gyro_test_0.elf"  ./src/helloworld.o ./src/platform.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
 'Finished building target: axi4_gyro_test_0.elf'
 ' '
 'Invoking: ARM v7 Print Size'
@@ -85,7 +6,12 @@ arm-none-eabi-size axi4_gyro_test_0.elf  |tee "axi4_gyro_test_0.elf.size"
   47008	   3856	  24536	  75400	  12688	axi4_gyro_test_0.elf
 'Finished building: axi4_gyro_test_0.elf.size'
 ' '
-03:44:34 **** Incremental Build of configuration Debug for project axi4_gyro_test_0 ****
+12:09:48 **** Incremental Build of configuration Debug for project axi4_gyro_test_0 ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Nothing to be done for `main-build'.
+12:10:20 **** Incremental Build of configuration Debug for project axi4_gyro_test_0 ****
 make pre-build main-build 
 a9-linaro-pre-build-step
 ' '

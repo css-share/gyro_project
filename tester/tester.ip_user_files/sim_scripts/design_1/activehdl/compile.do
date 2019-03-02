@@ -246,8 +246,8 @@ vlog -work xil_defaultlib  -v2k5 "+incdir+../../../../tester.srcs/sources_1/bd/d
 "../../../bd/design_1/ipshared/a058/hdl/axis_stream_fifo_v1_0.v" \
 "../../../bd/design_1/ip/design_1_axis_stream_fifo_0_0/sim/design_1_axis_stream_fifo_0_0.v" \
 "../../../bd/design_1/ip/design_1_axis_stream_fifo_0_1/sim/design_1_axis_stream_fifo_0_1.v" \
-"../../../bd/design_1/ipshared/5910/hdl/BiDirChannels_v1_0_S00_AXI.v" \
-"../../../bd/design_1/ipshared/5910/hdl/BiDirChannels_v1_0.v" \
+"../../../bd/design_1/ipshared/1168/hdl/BiDirChannels_v1_0_S00_AXI.v" \
+"../../../bd/design_1/ipshared/1168/hdl/BiDirChannels_v1_0.v" \
 "../../../bd/design_1/ip/design_1_BiDirChannels_0_0/sim/design_1_BiDirChannels_0_0.v" \
 "../../../bd/design_1/sim/design_1.v" \
 

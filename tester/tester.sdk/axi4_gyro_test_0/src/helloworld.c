@@ -933,10 +933,11 @@ int test_DMA_loopback( int num_packets, int debug_mode){
 		return XST_FAILURE;
 	  }
 
-    	setGyroChannelControl(0x00000011); // activate the channels
-
 	  /* Check DMA transfer result */
-
+    if (i == 0){
+    	nops(400000);
+    	setGyroChannelControl(0x00000011);
+    }
 	  Status = CheckDmaResult(&AxiDma, debug_mode);
 	  if (Status != XST_SUCCESS) {
 		xil_printf(" Failed reading packet number: %d\r\n",i+1);
@@ -970,7 +971,7 @@ int main() {
     //int readVal, writeVal;
 
     xil_printf("\n\r=====================\n\r");
-    xil_printf("== START version 18 ==\n\r");
+    xil_printf("== START version 19 ==\n\r");
     // set interrupt_0/1 of AXI PL interrupt generator to 0
 
     *(baseaddr_p+0) = 0x00000000;
@@ -1095,8 +1096,8 @@ int main() {
 
     xil_printf("== Starting FIFO / DMA test ++\n\r");
     // --- both in and out channels ON.
-    // setGyroChannelControl(0x00000011); // moved to the test DMA loopback
-    test_DMA_loopback(2,1);
+    //setGyroChannelControl(0x00000011); // moved to the test DMA loopback
+    test_DMA_loopback(1,1);
     // --- stopping both channels
      setGyroChannelControl(0x00000000);
 

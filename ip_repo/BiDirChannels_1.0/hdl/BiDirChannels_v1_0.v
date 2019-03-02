@@ -214,6 +214,8 @@ module outputShiftRegister32Bits(
 endmodule
 
 // ----------------------------------------------------------------
+// Note: changed the edge for shifting to be the negative edge.
+//
 module inputShiftRegister32Bits(
   input  shift,
   input  reset_n,
@@ -224,7 +226,7 @@ module inputShiftRegister32Bits(
   reg  [31:0] r_reg;
   wire [31:0] r_next;
 
-  always @(posedge shift, negedge reset_n)
+  always @(negedge shift, negedge reset_n)
     begin
       if (reset_n == 1'b0)
         r_reg <= 32'h00000000;
@@ -408,15 +410,8 @@ module GyroBiDirTokenBuffer(
   wire out_shift;
   wire  in_shift;
 
-  wire        rx_fifo_valid_delayed;
-  //wire	      rx_fifo_last_delayed;
-  //wire         rx_fifo_last_delayed2;
-  wire [31:0] rx_fifo_data_delayed;
+  wire        rx_fifo_valid_masked;
   wire        rx_fifo_ready_int;
-
-  wire [31:0] tx_fifo_data_int;
-  wire        tx_fifo_valid_int;
-  wire        tx_fifo_last_int;
 
   wire [7:0] out_full;
   wire [7:0]  in_full;
@@ -428,60 +423,34 @@ module GyroBiDirTokenBuffer(
   wire  in_inj_bit;
 
   // --- INPUT SECTION: output of the FIFO into the GYRO chip
-  register_32bits InDataReg(
-    .clock(~clock),.reset_n(reset_n),
-    .data_in(rx_fifo_data),
-    .data_out(rx_fifo_data_delayed)
-  );
-
-  dff		InValidReg( 
-    .clk(~clock), .rst_n(reset_n),
-    .D(rx_fifo_valid),
-    .Q(rx_fifo_valid_delayed)
-  );
-
- // dff		InLastReg( 
- //   .clk(~clock), .rst_n(reset_n),
- //   .D(rx_fifo_last),
- //   .Q(rx_fifo_last_delayed)
- // );
-
- // dff		InLastReg2( 
- //   .clk(~clock), .rst_n(reset_n),
- //   .D(rx_fifo_last_delayed),
- //   .Q(rx_fifo_last_delayed2)
- // );
 
   delay_line_8x32bits inputDelayLine (.clock(in_shift),.reset_n(reset_n),
-    .data_in(rx_fifo_data_delayed),
-    .data_out(tx_token_data));
+    .data_in(rx_fifo_data),
+    .data_out(tx_token_data)
+  );
 
   shift_reg_8bits  inputShiftRegister(.clock(in_shift),.reset_n(reset_n),
     .en(1'b1),
     .d(in_inj_bit),
-    .out(in_full));
+    .out(in_full)
+  );
 
-  mux_2x1_1bit          inputShiftMux(
-  //  .in0((rx_fifo_valid_delayed & ~rx_fifo_last_delayed2) & clock),
-    .in0((rx_fifo_valid_delayed) & clock),
+  mux_2x1_1bit  inputShiftMux(
+    .in0((rx_fifo_valid_masked) & ~clock),
     .in1(tx_token_next),
     .sel(in_shift_sel),
-    .mux_out(in_shift));
+    .mux_out(in_shift)
+  );
 
-  dff                         inputFF( .clk(~clock), .rst_n(reset_n),
+  dff  inputFF( .clk(clock), .rst_n(reset_n),
     .D(in_full[7]),
-    .Q(in_shift_sel));
-
+    .Q(in_shift_sel)
+  );
 
   // --- OUTPUT SECTION: input into the FIFO and output from the GYRO chip
 
   delay_line_8x32bits outputDelayLine (.clock(out_shift),.reset_n(reset_n),
     .data_in(rx_token_data),
-    .data_out(tx_fifo_data_int));
-
-  register_32bits OutDataReg(
-    .clock(~clock),.reset_n(reset_n),
-    .data_in(tx_fifo_data_int),
     .data_out(tx_fifo_data)
   );
 
@@ -494,38 +463,25 @@ module GyroBiDirTokenBuffer(
     .in0(rx_token_next),
     .in1(tx_fifo_ready & clock),
     .sel(out_shift_sel),
-    .mux_out(out_shift));
+    .mux_out(out_shift)
+  );
 
   dff                   outputFF( .clk(~clock), .rst_n(reset_n), 
     .D(out_full[7]), 
-    .Q(out_shift_sel));
-
-  dff		OutValidReg( 
-    .clk(~clock), .rst_n(reset_n),
-    .D(out_full[7]),
-    .Q(tx_fifo_valid_int)
+    .Q(out_shift_sel)
   );
 
-  dff		OutLastReg( 
-    .clk(~clock), .rst_n(reset_n),
-    .D(out_full[7] & ~out_full[6]),
-    .Q(tx_fifo_last_int)
-  );
+  assign out_inj_bit     = ~out_shift_sel;
+  assign  in_inj_bit     = ~in_shift_sel;
 
- dff		OutReadyReg( 
-    .clk(~clock), .rst_n(reset_n),
-    .D(~in_full[7]),
-    .Q(rx_fifo_ready_int)
-  );
+  assign tx_fifo_valid   = out_full[7];
+  assign tx_token_valid  =  in_shift_sel;
 
- assign out_inj_bit    = ~out_shift_sel;
- assign  in_inj_bit    = ~in_shift_sel;
+  assign tx_fifo_last        = (out_full[7] & ~out_full[6]);
+  assign rx_fifo_ready_int   = ~in_shift_sel;
+  assign rx_fifo_ready       = ~in_shift_sel;
 
- assign tx_fifo_valid  = tx_fifo_valid_int;
- assign tx_token_valid =  in_shift_sel; // in_full[7];
-
- assign tx_fifo_last   = tx_fifo_last_int;
- assign rx_fifo_ready   = rx_fifo_ready_int; //~(in_full[7]);
+  assign rx_fifo_valid_masked = (rx_fifo_valid & ~in_shift_sel);
 
   assign debug_in_shift  = in_shift;
   assign debug_out_shift = out_shift;
@@ -561,16 +517,15 @@ module GyroInputOutputChannel (
 
   wire in_next_int;
   wire out_next_int;
+  wire tx_token_next_int;
   wire last_int;
-  //wire mask_int;
-  //wire hsck_int;
   wire masked_hsck_int;
 
   wire hs_data_out_int;
+  wire inSR_shift;
+  wire outSR_shift;
   wire hs_data_in_int;
   wire masked_in_hsck_int;
-  wire masked_out_hsck_int;
-
   wire [5:0] count_pulses;
 
   clock_divider_by_2 CLK_DIV2(
@@ -594,29 +549,28 @@ module GyroInputOutputChannel (
   );
 
   maskHSCK MASK_HSCK(
-   .clock(clock_div_2),
-   .reset_n(reset_n),
-   .in_start_stop(in_start_stop),
-   .out_start_stop(out_start_stop),
-   .count(count_pulses),
-   .last(last_int),
-  // .mask(mask_int),
-   .masked_hsck(masked_hsck_int),
-   .out_shift(masked_out_hsck_int),
-   .in_shift(masked_in_hsck_int),
-   .out_next(out_next_int),
-   .in_next(in_next_int)
+    .clock(clock_div_2),
+    .reset_n(reset_n),
+    .in_start_stop(in_start_stop),
+    .out_start_stop(out_start_stop),
+    .count(count_pulses),
+    .last(last_int),
+    .masked_hsck(masked_hsck_int),
+    .out_shift(outSR_shift),
+    .in_shift(inSR_shift),
+    .out_next(out_next_int),
+    .in_next(in_next_int)
   );
 
   inputShiftRegister32Bits IN_SHIFT_REG(
-    .shift(~masked_in_hsck_int),
+    .shift(inSR_shift),
     .reset_n(reset_n),
     .d_in(hs_data_in_int),
     .d_out(rx_token_data)
   );
 
  outputShiftRegister32Bits OUT_SHIFT_REG(
-    .shift(masked_out_hsck_int),
+    .shift(outSR_shift),
     .reset_n(reset_n),
     .load(out_next_int & tx_token_valid),
     .d_in(tx_token_data),
@@ -626,16 +580,22 @@ module GyroInputOutputChannel (
   mux_2x1_1bit          loopbackMux(
     .in0(HS_DATA_IN),
     .in1(hs_data_out_int),
-    .sel(mode_int[0]),
+    .sel(mode[0]),
     .mux_out(hs_data_in_int)
   );
 
+  dff  FF1(
+    .clk(clock_div_2), .rst_n(reset_n), 
+    .D(out_next_int), 
+    .Q(tx_token_next_int)
+  );
+
+
+  assign HSCK           = (masked_hsck_int ^ HSCK_POL);
   assign MCK            = clock_div_2;
-  assign HSCK           = masked_hsck_int ^ HSCK_POL;
   assign HS_DATA_OUT    = hs_data_out_int;
-  //assign hs_data_in_int = HS_DATA_IN;
-  assign rx_token_next = in_next_int;
-  assign tx_token_next = out_next_int;
+  assign rx_token_next  = in_next_int;
+  assign tx_token_next  = tx_token_next_int;
 
 endmodule
 
@@ -752,9 +712,9 @@ module GyroBiDirChannelController(
   );
 
   assign HSCK           = HSCK_int;
+  assign MCK            = MCK_int;
   assign HS_DATA_IN_int = HS_DATA_IN;
   assign HS_DATA_OUT    = HS_DATA_OUT_int;
-  assign MCK            = MCK_int;
 
   assign rx_fifo_data_int  = rx_fifo_data;
   assign rx_fifo_ready     = rx_fifo_ready_int;
@@ -770,8 +730,6 @@ module GyroBiDirChannelController(
   assign debug_word_buffer    = debug_word_buffer_int;
 
 endmodule
-
-
 
 
 // #####################################################################
@@ -914,7 +872,7 @@ endmodule
 	// Add user logic here
   // ------------------------------------------
   
-    GyroBiDirChannelController X0(
+    GyroBiDirChannelController X1(
       .clock(s00_axi_aclk),
       .reset_n(s00_axi_aresetn),
       
