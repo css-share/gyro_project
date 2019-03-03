@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Sat Mar  2 10:06:42 2019" VIVADOVERSION="2018.2">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Sat Mar  2 15:43:02 2019" VIVADOVERSION="2018.2">
 
   <SYSTEMINFO ARCH="zynq" BOARD="em.avnet.com:zed:part0:1.4" DEVICE="7z020" NAME="design_1" PACKAGE="clg484" SPEEDGRADE="-1"/>
 
@@ -5132,12 +5132,6 @@
             <CONNECTION INSTANCE="axi_dma_0" PORT="s_axi_lite_aclk"/>
             <CONNECTION INSTANCE="axi_dma_0" PORT="m_axi_mm2s_aclk"/>
             <CONNECTION INSTANCE="axi_dma_0" PORT="m_axi_s2mm_aclk"/>
-            <CONNECTION INSTANCE="RxFIFO" PORT="s00_axi_aclk"/>
-            <CONNECTION INSTANCE="RxFIFO" PORT="m00_axis_aclk"/>
-            <CONNECTION INSTANCE="RxFIFO" PORT="s00_axis_aclk"/>
-            <CONNECTION INSTANCE="TxFIFO" PORT="s00_axi_aclk"/>
-            <CONNECTION INSTANCE="TxFIFO" PORT="m00_axis_aclk"/>
-            <CONNECTION INSTANCE="TxFIFO" PORT="s00_axis_aclk"/>
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="ACLK"/>
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="S00_ACLK"/>
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="M00_ACLK"/>
@@ -5149,6 +5143,12 @@
             <CONNECTION INSTANCE="BiDirChannels_0" PORT="s00_axi_aclk"/>
             <CONNECTION INSTANCE="BiDirChannels_0" PORT="m00_axis_aclk"/>
             <CONNECTION INSTANCE="BiDirChannels_0" PORT="s00_axis_aclk"/>
+            <CONNECTION INSTANCE="RxFIFO" PORT="s00_axi_aclk"/>
+            <CONNECTION INSTANCE="RxFIFO" PORT="m00_axis_aclk"/>
+            <CONNECTION INSTANCE="RxFIFO" PORT="s00_axis_aclk"/>
+            <CONNECTION INSTANCE="TxFIFO" PORT="s00_axi_aclk"/>
+            <CONNECTION INSTANCE="TxFIFO" PORT="m00_axis_aclk"/>
+            <CONNECTION INSTANCE="TxFIFO" PORT="s00_axis_aclk"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" NAME="FCLK_RESET0_N" SIGIS="rst" SIGNAME="processing_system7_0_FCLK_RESET0_N">
@@ -6778,12 +6778,6 @@
             <CONNECTION INSTANCE="SPI_ip_0" PORT="s00_axi_aresetn"/>
             <CONNECTION INSTANCE="axi_smc" PORT="aresetn"/>
             <CONNECTION INSTANCE="axi_dma_0" PORT="axi_resetn"/>
-            <CONNECTION INSTANCE="RxFIFO" PORT="s00_axi_aresetn"/>
-            <CONNECTION INSTANCE="RxFIFO" PORT="m00_axis_aresetn"/>
-            <CONNECTION INSTANCE="RxFIFO" PORT="s00_axis_aresetn"/>
-            <CONNECTION INSTANCE="TxFIFO" PORT="s00_axi_aresetn"/>
-            <CONNECTION INSTANCE="TxFIFO" PORT="m00_axis_aresetn"/>
-            <CONNECTION INSTANCE="TxFIFO" PORT="s00_axis_aresetn"/>
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="S00_ARESETN"/>
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="M00_ARESETN"/>
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="M01_ARESETN"/>
@@ -6794,6 +6788,12 @@
             <CONNECTION INSTANCE="BiDirChannels_0" PORT="s00_axi_aresetn"/>
             <CONNECTION INSTANCE="BiDirChannels_0" PORT="m00_axis_aresetn"/>
             <CONNECTION INSTANCE="BiDirChannels_0" PORT="s00_axis_aresetn"/>
+            <CONNECTION INSTANCE="RxFIFO" PORT="s00_axi_aresetn"/>
+            <CONNECTION INSTANCE="RxFIFO" PORT="m00_axis_aresetn"/>
+            <CONNECTION INSTANCE="RxFIFO" PORT="s00_axis_aresetn"/>
+            <CONNECTION INSTANCE="TxFIFO" PORT="s00_axi_aresetn"/>
+            <CONNECTION INSTANCE="TxFIFO" PORT="m00_axis_aresetn"/>
+            <CONNECTION INSTANCE="TxFIFO" PORT="s00_axis_aresetn"/>
           </CONNECTIONS>
         </PORT>
       </PORTS>

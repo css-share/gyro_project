@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-| Date         : Sat Mar  2 10:22:22 2019
+| Date         : Sat Mar  2 15:58:15 2019
 | Host         : DESKTOP-KC9HGNO running 64-bit major release  (build 9200)
 | Command      : report_clock_utilization -file design_1_wrapper_clock_utilization_routed.rpt
 | Design       : design_1_wrapper
@@ -72,18 +72,18 @@ Table of Contents
 +----------+---------------------+------------+-----------------------+--------------+-------------+-----------------+--------------+-------+------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------+
 | Local Id | Driver Type/Pin     | Constraint | Site/BEL              | Clock Region | Clock Loads | Non-Clock Loads | Clock Period | Clock | Driver Pin                                                                                     | Net                                                                                   |
 +----------+---------------------+------------+-----------------------+--------------+-------------+-----------------+--------------+-------+------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------||
-| 0        | FDRE/Q              | None       | SLICE_X52Y82/AFF      | X1Y1         |          49 |               2 |              |       | design_1_i/SPI_ip_0/inst/SPI_ip_v1_0_S00_AXI_inst/user_SPI_Block/FSM/FSM_onehot_state_reg[3]/Q | design_1_i/SPI_ip_0/inst/SPI_ip_v1_0_S00_AXI_inst/user_SPI_Block/FSM/out[0]           - Static -
-| 1        | FDCE/Q              | None       | SLICE_X38Y77/AFF      | X0Y1         |           8 |               1 |              |       | design_1_i/BiDirChannels_0/inst/X1/CHANNELS/FF1/Q_reg/Q                                        | design_1_i/BiDirChannels_0/inst/X1/CHANNELS/FF1/tx_token_next_int                     - Static -
-| 2        | RAMB36E1/DOPBDOP[0] | None       | RAMB36_X2Y14/RAMB36E1 | X0Y1         |           8 |               0 |              |       | design_1_i/TxFIFO/inst/mem_reg/DOPBDOP[0]                                                      | design_1_i/TxFIFO/inst/m00_axis_tlast                                                 - Static -
-| 3        | FDCE/Q              | None       | SLICE_X55Y80/AFF      | X1Y1         |           7 |               5 |              |       | design_1_i/BiDirChannels_0/inst/X1/CHANNELS/CLK_DIV2/ff0/Q_reg/Q                               | design_1_i/BiDirChannels_0/inst/X1/CHANNELS/CLK_DIV2/ff0/MCK                          - Static -
-| 4        | FDRE/Q              | None       | SLICE_X52Y81/DFF      | X1Y1         |           7 |               2 |              |       | design_1_i/SPI_ip_0/inst/SPI_ip_v1_0_S00_AXI_inst/user_SPI_Block/FSM/FSM_onehot_state_reg[5]/Q | design_1_i/SPI_ip_0/inst/SPI_ip_v1_0_S00_AXI_inst/user_SPI_Block/FSM/out[2]           - Static -
-| 5        | FDCE/Q              | None       | SLICE_X51Y83/AFF      | X1Y1         |           1 |               2 |              |       | design_1_i/SPI_ip_0/inst/SPI_ip_v1_0_S00_AXI_inst/user_SPI_Block/CLOCKDIV/ff0/Q_reg/Q          | design_1_i/SPI_ip_0/inst/SPI_ip_v1_0_S00_AXI_inst/user_SPI_Block/CLOCKDIV/ff0/Q_int_0 - Static -
-| 6        | FDCE/Q              | None       | SLICE_X51Y85/AFF      | X1Y1         |           1 |               2 |              |       | design_1_i/SPI_ip_0/inst/SPI_ip_v1_0_S00_AXI_inst/user_SPI_Block/CLOCKDIV/ff1/Q_reg/Q          | design_1_i/SPI_ip_0/inst/SPI_ip_v1_0_S00_AXI_inst/user_SPI_Block/CLOCKDIV/ff1/Q_int_1 - Static -
-| 7        | FDCE/Q              | None       | SLICE_X52Y86/AFF      | X1Y1         |           1 |               2 |              |       | design_1_i/SPI_ip_0/inst/SPI_ip_v1_0_S00_AXI_inst/user_SPI_Block/CLOCKDIV/ff2/Q_reg/Q          | design_1_i/SPI_ip_0/inst/SPI_ip_v1_0_S00_AXI_inst/user_SPI_Block/CLOCKDIV/ff2/Q_int_2 - Static -
-| 8        | FDCE/Q              | None       | SLICE_X53Y86/AFF      | X1Y1         |           1 |               2 |              |       | design_1_i/SPI_ip_0/inst/SPI_ip_v1_0_S00_AXI_inst/user_SPI_Block/CLOCKDIV/ff3/Q_reg/Q          | design_1_i/SPI_ip_0/inst/SPI_ip_v1_0_S00_AXI_inst/user_SPI_Block/CLOCKDIV/ff3/Q_int_3 - Static -
-| 9        | FDCE/Q              | None       | SLICE_X53Y87/AFF      | X1Y1         |           1 |               2 |              |       | design_1_i/SPI_ip_0/inst/SPI_ip_v1_0_S00_AXI_inst/user_SPI_Block/CLOCKDIV/ff4/Q_reg/Q          | design_1_i/SPI_ip_0/inst/SPI_ip_v1_0_S00_AXI_inst/user_SPI_Block/CLOCKDIV/ff4/Q_int_4 - Static -
-| 10       | FDCE/Q              | None       | SLICE_X50Y87/AFF      | X1Y1         |           1 |               2 |              |       | design_1_i/SPI_ip_0/inst/SPI_ip_v1_0_S00_AXI_inst/user_SPI_Block/CLOCKDIV/ff5/Q_reg/Q          | design_1_i/SPI_ip_0/inst/SPI_ip_v1_0_S00_AXI_inst/user_SPI_Block/CLOCKDIV/ff5/Q_int_5 - Static -
-| 11       | FDCE/Q              | None       | SLICE_X50Y86/AFF      | X1Y1         |           1 |               2 |              |       | design_1_i/SPI_ip_0/inst/SPI_ip_v1_0_S00_AXI_inst/user_SPI_Block/CLOCKDIV/ff6/Q_reg/Q          | design_1_i/SPI_ip_0/inst/SPI_ip_v1_0_S00_AXI_inst/user_SPI_Block/CLOCKDIV/ff6/Q_int_6 - Static -
+| 0        | FDRE/Q              | None       | SLICE_X53Y81/AFF      | X1Y1         |          49 |               2 |              |       | design_1_i/SPI_ip_0/inst/SPI_ip_v1_0_S00_AXI_inst/user_SPI_Block/FSM/FSM_onehot_state_reg[3]/Q | design_1_i/SPI_ip_0/inst/SPI_ip_v1_0_S00_AXI_inst/user_SPI_Block/FSM/out[0]           - Static -
+| 1        | FDCE/Q              | None       | SLICE_X42Y73/AFF      | X0Y1         |           8 |               1 |              |       | design_1_i/BiDirChannels_0/inst/X1/CHANNELS/FF1/Q_reg/Q                                        | design_1_i/BiDirChannels_0/inst/X1/CHANNELS/FF1/tx_token_next_int                     - Static -
+| 2        | RAMB36E1/DOPBDOP[0] | None       | RAMB36_X2Y13/RAMB36E1 | X0Y1         |           8 |               0 |              |       | design_1_i/TxFIFO/inst/mem_reg/DOPBDOP[0]                                                      | design_1_i/TxFIFO/inst/m00_axis_tlast                                                 - Static -
+| 3        | FDCE/Q              | None       | SLICE_X56Y71/AFF      | X1Y1         |           7 |               5 |              |       | design_1_i/BiDirChannels_0/inst/X1/CHANNELS/CLK_DIV2/ff0/Q_reg/Q                               | design_1_i/BiDirChannels_0/inst/X1/CHANNELS/CLK_DIV2/ff0/MCK                          - Static -
+| 4        | FDRE/Q              | None       | SLICE_X53Y80/CFF      | X1Y1         |           7 |               2 |              |       | design_1_i/SPI_ip_0/inst/SPI_ip_v1_0_S00_AXI_inst/user_SPI_Block/FSM/FSM_onehot_state_reg[5]/Q | design_1_i/SPI_ip_0/inst/SPI_ip_v1_0_S00_AXI_inst/user_SPI_Block/FSM/out[2]           - Static -
+| 5        | FDCE/Q              | None       | SLICE_X53Y75/AFF      | X1Y1         |           1 |               2 |              |       | design_1_i/SPI_ip_0/inst/SPI_ip_v1_0_S00_AXI_inst/user_SPI_Block/CLOCKDIV/ff0/Q_reg/Q          | design_1_i/SPI_ip_0/inst/SPI_ip_v1_0_S00_AXI_inst/user_SPI_Block/CLOCKDIV/ff0/Q_int_0 - Static -
+| 6        | FDCE/Q              | None       | SLICE_X52Y76/AFF      | X1Y1         |           1 |               2 |              |       | design_1_i/SPI_ip_0/inst/SPI_ip_v1_0_S00_AXI_inst/user_SPI_Block/CLOCKDIV/ff1/Q_reg/Q          | design_1_i/SPI_ip_0/inst/SPI_ip_v1_0_S00_AXI_inst/user_SPI_Block/CLOCKDIV/ff1/Q_int_1 - Static -
+| 7        | FDCE/Q              | None       | SLICE_X52Y75/AFF      | X1Y1         |           1 |               2 |              |       | design_1_i/SPI_ip_0/inst/SPI_ip_v1_0_S00_AXI_inst/user_SPI_Block/CLOCKDIV/ff2/Q_reg/Q          | design_1_i/SPI_ip_0/inst/SPI_ip_v1_0_S00_AXI_inst/user_SPI_Block/CLOCKDIV/ff2/Q_int_2 - Static -
+| 8        | FDCE/Q              | None       | SLICE_X51Y75/BFF      | X1Y1         |           1 |               2 |              |       | design_1_i/SPI_ip_0/inst/SPI_ip_v1_0_S00_AXI_inst/user_SPI_Block/CLOCKDIV/ff3/Q_reg/Q          | design_1_i/SPI_ip_0/inst/SPI_ip_v1_0_S00_AXI_inst/user_SPI_Block/CLOCKDIV/ff3/Q_int_3 - Static -
+| 9        | FDCE/Q              | None       | SLICE_X50Y76/AFF      | X1Y1         |           1 |               2 |              |       | design_1_i/SPI_ip_0/inst/SPI_ip_v1_0_S00_AXI_inst/user_SPI_Block/CLOCKDIV/ff4/Q_reg/Q          | design_1_i/SPI_ip_0/inst/SPI_ip_v1_0_S00_AXI_inst/user_SPI_Block/CLOCKDIV/ff4/Q_int_4 - Static -
+| 10       | FDCE/Q              | None       | SLICE_X50Y77/AFF      | X1Y1         |           1 |               2 |              |       | design_1_i/SPI_ip_0/inst/SPI_ip_v1_0_S00_AXI_inst/user_SPI_Block/CLOCKDIV/ff5/Q_reg/Q          | design_1_i/SPI_ip_0/inst/SPI_ip_v1_0_S00_AXI_inst/user_SPI_Block/CLOCKDIV/ff5/Q_int_5 - Static -
+| 11       | FDCE/Q              | None       | SLICE_X51Y76/AFF      | X1Y1         |           1 |               2 |              |       | design_1_i/SPI_ip_0/inst/SPI_ip_v1_0_S00_AXI_inst/user_SPI_Block/CLOCKDIV/ff6/Q_reg/Q          | design_1_i/SPI_ip_0/inst/SPI_ip_v1_0_S00_AXI_inst/user_SPI_Block/CLOCKDIV/ff6/Q_int_6 - Static -
 +----------+---------------------+------------+-----------------------+--------------+-------------+-----------------+--------------+-------+------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------||
 * Local Clocks in this context represents only clocks driven by non-global buffers
 ** Clock Loads column represents the clock pin loads (pin count)
@@ -98,11 +98,11 @@ Table of Contents
 +-------------------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+
 | Clock Region Name | Used | Avail | Used | Avail | Used | Avail | Used | Avail | Used | Avail | Used | Avail | Used | Avail | Used | Avail | Used | Avail | Used | Avail | Used | Avail | Used | Avail | Used | Avail | Used | Avail | Used | Avail |
 +-------------------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+
-| X0Y0              |    1 |    12 |    0 |     4 |    0 |     2 |    0 |     4 |    0 |     1 |    0 |     1 |    0 |     0 |    0 |     0 |    0 |    50 |    0 |    50 | 2255 |  2500 |  987 |  1000 |    0 |    60 |    0 |    30 |    0 |    60 |
-| X1Y0              |    1 |    12 |    0 |     4 |    0 |     2 |    0 |     4 |    0 |     1 |    0 |     1 |    0 |     0 |    0 |     0 |    0 |    50 |    0 |    50 | 1445 |  3200 |  444 |   850 |    0 |    60 |    1 |    30 |    0 |    40 |
-| X0Y1              |    1 |    12 |    0 |     0 |    0 |     0 |    0 |     0 |    0 |     0 |    0 |     0 |    0 |     0 |    0 |     0 |    0 |     0 |    0 |     0 | 3201 |  1200 | 1222 |   400 |    0 |    20 |    2 |    10 |    0 |    20 |
-| X1Y1              |    1 |    12 |    0 |     4 |    0 |     2 |    0 |     4 |    0 |     1 |    0 |     1 |    0 |     0 |    0 |     0 |    0 |    50 |    0 |    50 | 1910 |  2600 |  579 |   850 |    0 |    60 |    4 |    30 |    0 |    40 |
-| X0Y2              |    1 |    12 |    0 |     0 |    0 |     0 |    0 |     0 |    0 |     0 |    0 |     0 |    0 |     0 |    0 |     0 |    0 |     0 |    0 |     0 |  144 |  1200 |   70 |   400 |    0 |    20 |    0 |    10 |    0 |    20 |
+| X0Y0              |    1 |    12 |    0 |     4 |    0 |     2 |    0 |     4 |    0 |     1 |    0 |     1 |    0 |     0 |    0 |     0 |    0 |    50 |    0 |    50 | 2521 |  2500 | 1055 |  1000 |    0 |    60 |    0 |    30 |    0 |    60 |
+| X1Y0              |    1 |    12 |    0 |     4 |    0 |     2 |    0 |     4 |    0 |     1 |    0 |     1 |    0 |     0 |    0 |     0 |    0 |    50 |    0 |    50 | 1938 |  3200 |  587 |   850 |    0 |    60 |    1 |    30 |    0 |    40 |
+| X0Y1              |    1 |    12 |    0 |     0 |    0 |     0 |    0 |     0 |    0 |     0 |    0 |     0 |    0 |     0 |    0 |     0 |    0 |     0 |    0 |     0 | 2742 |  1200 | 1052 |   400 |    0 |    20 |    2 |    10 |    0 |    20 |
+| X1Y1              |    1 |    12 |    0 |     4 |    0 |     2 |    0 |     4 |    0 |     1 |    0 |     1 |    0 |     0 |    0 |     0 |    0 |    50 |    0 |    50 | 1637 |  2600 |  496 |   850 |    0 |    60 |    4 |    30 |    0 |    40 |
+| X0Y2              |    1 |    12 |    0 |     0 |    0 |     0 |    0 |     0 |    0 |     0 |    0 |     0 |    0 |     0 |    0 |     0 |    0 |     0 |    0 |     0 |  117 |  1200 |   57 |   400 |    0 |    20 |    0 |    10 |    0 |    20 |
 | X1Y2              |    0 |    12 |    0 |     4 |    0 |     2 |    0 |     4 |    0 |     1 |    0 |     1 |    0 |     0 |    0 |     0 |    0 |    50 |    0 |    50 |    0 |  2600 |    0 |   850 |    0 |    60 |    0 |    30 |    0 |    40 |
 +-------------------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+------+-------+
 * Global Clock column represents track count; while other columns represents cell counts
@@ -138,9 +138,9 @@ All Modules
 +----+-------+-------+
 |    | X0    | X1    |
 +----+-------+-------+
-| Y2 |   163 |     0 |
-| Y1 |  3220 |  1924 |
-| Y0 |  2292 |  1564 |
+| Y2 |   136 |     0 |
+| Y1 |  2766 |  1641 |
+| Y0 |  2558 |  2062 |
 +----+-------+-------+
 
 
@@ -150,7 +150,7 @@ All Modules
 +-----------+-------+-----------------+------------+-------------+-----------------+------+--------+------+-----+----+------+-----+---------+------------------------------------------------+
 | Global Id | Track | Driver Type/Pin | Constraint | Clock Loads | Non-Clock Loads | FF   | LUTRAM | RAMB | DSP | GT | MMCM | PLL | Hard IP | Net                                            |
 +-----------+-------+-----------------+------------+-------------+-----------------+------+--------+------+-----+----+------+-----+---------+------------------------------------------------+
-| g0        | n/a   | BUFG/O          | None       |        2292 |               0 | 2255 |     37 |    0 |   0 |  0 |    0 |   0 |       0 | design_1_i/processing_system7_0/inst/FCLK_CLK0 |
+| g0        | n/a   | BUFG/O          | None       |        2558 |               0 | 2521 |     37 |    0 |   0 |  0 |    0 |   0 |       0 | design_1_i/processing_system7_0/inst/FCLK_CLK0 |
 +-----------+-------+-----------------+------------+-------------+-----------------+------+--------+------+-----+----+------+-----+---------+------------------------------------------------+
 * Clock Loads column represents the clock pin loads (pin count)
 ** Non-Clock Loads column represents the non-clock pin loads (pin count)
@@ -163,7 +163,7 @@ All Modules
 +-----------+-------+-----------------+------------+-------------+-----------------+------+--------+------+-----+----+------+-----+---------+------------------------------------------------+
 | Global Id | Track | Driver Type/Pin | Constraint | Clock Loads | Non-Clock Loads | FF   | LUTRAM | RAMB | DSP | GT | MMCM | PLL | Hard IP | Net                                            |
 +-----------+-------+-----------------+------------+-------------+-----------------+------+--------+------+-----+----+------+-----+---------+------------------------------------------------+
-| g0        | n/a   | BUFG/O          | None       |        1564 |               0 | 1445 |    118 |    1 |   0 |  0 |    0 |   0 |       0 | design_1_i/processing_system7_0/inst/FCLK_CLK0 |
+| g0        | n/a   | BUFG/O          | None       |        2062 |               0 | 1938 |    123 |    1 |   0 |  0 |    0 |   0 |       0 | design_1_i/processing_system7_0/inst/FCLK_CLK0 |
 +-----------+-------+-----------------+------------+-------------+-----------------+------+--------+------+-----+----+------+-----+---------+------------------------------------------------+
 * Clock Loads column represents the clock pin loads (pin count)
 ** Non-Clock Loads column represents the non-clock pin loads (pin count)
@@ -176,7 +176,7 @@ All Modules
 +-----------+-------+-----------------+------------+-------------+-----------------+------+--------+------+-----+----+------+-----+---------+------------------------------------------------+
 | Global Id | Track | Driver Type/Pin | Constraint | Clock Loads | Non-Clock Loads | FF   | LUTRAM | RAMB | DSP | GT | MMCM | PLL | Hard IP | Net                                            |
 +-----------+-------+-----------------+------------+-------------+-----------------+------+--------+------+-----+----+------+-----+---------+------------------------------------------------+
-| g0        | n/a   | BUFG/O          | None       |        3218 |               2 | 3150 |     66 |    2 |   0 |  0 |    0 |   0 |       0 | design_1_i/processing_system7_0/inst/FCLK_CLK0 |
+| g0        | n/a   | BUFG/O          | None       |        2765 |               1 | 2697 |     66 |    2 |   0 |  0 |    0 |   0 |       0 | design_1_i/processing_system7_0/inst/FCLK_CLK0 |
 +-----------+-------+-----------------+------------+-------------+-----------------+------+--------+------+-----+----+------+-----+---------+------------------------------------------------+
 * Clock Loads column represents the clock pin loads (pin count)
 ** Non-Clock Loads column represents the non-clock pin loads (pin count)
@@ -189,7 +189,7 @@ All Modules
 +-----------+-------+-----------------+------------+-------------+-----------------+------+--------+------+-----+----+------+-----+---------+------------------------------------------------+
 | Global Id | Track | Driver Type/Pin | Constraint | Clock Loads | Non-Clock Loads | FF   | LUTRAM | RAMB | DSP | GT | MMCM | PLL | Hard IP | Net                                            |
 +-----------+-------+-----------------+------------+-------------+-----------------+------+--------+------+-----+----+------+-----+---------+------------------------------------------------+
-| g0        | n/a   | BUFG/O          | None       |        1924 |               0 | 1875 |     45 |    4 |   0 |  0 |    0 |   0 |       0 | design_1_i/processing_system7_0/inst/FCLK_CLK0 |
+| g0        | n/a   | BUFG/O          | None       |        1640 |               1 | 1596 |     40 |    4 |   0 |  0 |    0 |   0 |       0 | design_1_i/processing_system7_0/inst/FCLK_CLK0 |
 +-----------+-------+-----------------+------------+-------------+-----------------+------+--------+------+-----+----+------+-----+---------+------------------------------------------------+
 * Clock Loads column represents the clock pin loads (pin count)
 ** Non-Clock Loads column represents the non-clock pin loads (pin count)
@@ -202,7 +202,7 @@ All Modules
 +-----------+-------+-----------------+------------+-------------+-----------------+-----+--------+------+-----+----+------+-----+---------+------------------------------------------------+
 | Global Id | Track | Driver Type/Pin | Constraint | Clock Loads | Non-Clock Loads | FF  | LUTRAM | RAMB | DSP | GT | MMCM | PLL | Hard IP | Net                                            |
 +-----------+-------+-----------------+------------+-------------+-----------------+-----+--------+------+-----+----+------+-----+---------+------------------------------------------------+
-| g0        | n/a   | BUFG/O          | None       |         163 |               0 | 144 |     18 |    0 |   0 |  0 |    0 |   0 |       0 | design_1_i/processing_system7_0/inst/FCLK_CLK0 |
+| g0        | n/a   | BUFG/O          | None       |         136 |               0 | 117 |     18 |    0 |   0 |  0 |    0 |   0 |       0 | design_1_i/processing_system7_0/inst/FCLK_CLK0 |
 +-----------+-------+-----------------+------------+-------------+-----------------+-----+--------+------+-----+----+------+-----+---------+------------------------------------------------+
 * Clock Loads column represents the clock pin loads (pin count)
 ** Non-Clock Loads column represents the non-clock pin loads (pin count)

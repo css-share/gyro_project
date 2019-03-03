@@ -1,10 +1,10 @@
 -- Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
--- Date        : Sun Feb 17 02:18:48 2019
+-- Date        : Sat Mar  2 15:45:31 2019
 -- Host        : DESKTOP-KC9HGNO running 64-bit major release  (build 9200)
--- Command     : write_vhdl -force -mode funcsim -rename_top design_1_axis_stream_fifo_0_0 -prefix
---               design_1_axis_stream_fifo_0_0_ design_1_axis_stream_fifo_0_0_sim_netlist.vhdl
+-- Command     : write_vhdl -force -mode funcsim
+--               C:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ip/design_1_axis_stream_fifo_0_0/design_1_axis_stream_fifo_0_0_sim_netlist.vhdl
 -- Design      : design_1_axis_stream_fifo_0_0
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -16,8 +16,8 @@ library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
 entity design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0_S00_AXI is
   port (
-    s00_axi_wready : out STD_LOGIC;
     s00_axi_awready : out STD_LOGIC;
+    s00_axi_wready : out STD_LOGIC;
     s00_axi_arready : out STD_LOGIC;
     s00_axi_bvalid : out STD_LOGIC;
     s00_axi_rvalid : out STD_LOGIC;
@@ -58,6 +58,8 @@ entity design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0_S00_AXI is
     s00_axi_rready : in STD_LOGIC;
     s00_axi_araddr : in STD_LOGIC_VECTOR ( 1 downto 0 )
   );
+  attribute ORIG_REF_NAME : string;
+  attribute ORIG_REF_NAME of design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0_S00_AXI : entity is "axis_stream_fifo_v1_0_S00_AXI";
 end design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0_S00_AXI;
 
 architecture STRUCTURE of design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0_S00_AXI is
@@ -132,13 +134,13 @@ begin
   \wr_ptr_reg_reg[12]\(12 downto 0) <= \^wr_ptr_reg_reg[12]\(12 downto 0);
 aw_en_i_1: unisim.vcomponents.LUT6
     generic map(
-      INIT => X"F7FFF700F700F700"
+      INIT => X"F7FFC4CCC4CCC4CC"
     )
         port map (
       I0 => s00_axi_awvalid,
-      I1 => s00_axi_wvalid,
+      I1 => aw_en_reg_n_0,
       I2 => \^s00_axi_awready\,
-      I3 => aw_en_reg_n_0,
+      I3 => s00_axi_wvalid,
       I4 => s00_axi_bready,
       I5 => \^s00_axi_bvalid\,
       O => aw_en_i_1_n_0
@@ -211,9 +213,9 @@ axi_awready0: unisim.vcomponents.LUT4
       INIT => X"2000"
     )
         port map (
-      I0 => aw_en_reg_n_0,
+      I0 => s00_axi_wvalid,
       I1 => \^s00_axi_awready\,
-      I2 => s00_axi_wvalid,
+      I2 => aw_en_reg_n_0,
       I3 => s00_axi_awvalid,
       O => \axi_awready0__0\
     );
@@ -238,10 +240,10 @@ axi_bvalid_i_1: unisim.vcomponents.LUT6
       INIT => X"0000FFFF80008000"
     )
         port map (
-      I0 => \^s00_axi_awready\,
-      I1 => \^s00_axi_wready\,
-      I2 => s00_axi_awvalid,
-      I3 => s00_axi_wvalid,
+      I0 => s00_axi_awvalid,
+      I1 => s00_axi_wvalid,
+      I2 => \^s00_axi_awready\,
+      I3 => \^s00_axi_wready\,
       I4 => s00_axi_bready,
       I5 => \^s00_axi_bvalid\,
       O => axi_bvalid_i_1_n_0
@@ -878,13 +880,13 @@ axi_rvalid_reg: unisim.vcomponents.FDRE
     );
 axi_wready0: unisim.vcomponents.LUT4
     generic map(
-      INIT => X"2000"
+      INIT => X"0800"
     )
         port map (
-      I0 => aw_en_reg_n_0,
-      I1 => \^s00_axi_wready\,
-      I2 => s00_axi_wvalid,
-      I3 => s00_axi_awvalid,
+      I0 => s00_axi_awvalid,
+      I1 => s00_axi_wvalid,
+      I2 => \^s00_axi_wready\,
+      I3 => aw_en_reg_n_0,
       O => \axi_wready0__0\
     );
 axi_wready_reg: unisim.vcomponents.FDRE
@@ -1643,8 +1645,8 @@ use UNISIM.VCOMPONENTS.ALL;
 entity design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0 is
   port (
     mem_read_data_reg : out STD_LOGIC_VECTOR ( 32 downto 0 );
-    s00_axi_wready : out STD_LOGIC;
     s00_axi_awready : out STD_LOGIC;
+    s00_axi_wready : out STD_LOGIC;
     s00_axi_arready : out STD_LOGIC;
     s00_axi_rdata : out STD_LOGIC_VECTOR ( 28 downto 0 );
     s00_axi_rvalid : out STD_LOGIC;
@@ -1658,8 +1660,8 @@ entity design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0 is
     s00_axi_aclk : in STD_LOGIC;
     s00_axi_araddr : in STD_LOGIC_VECTOR ( 1 downto 0 );
     s00_axi_arvalid : in STD_LOGIC;
-    s00_axi_wvalid : in STD_LOGIC;
     s00_axi_awvalid : in STD_LOGIC;
+    s00_axi_wvalid : in STD_LOGIC;
     m00_axis_tready : in STD_LOGIC;
     s00_axi_aresetn : in STD_LOGIC;
     s00_axis_aresetn : in STD_LOGIC;
@@ -1667,6 +1669,8 @@ entity design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0 is
     s00_axi_bready : in STD_LOGIC;
     s00_axi_rready : in STD_LOGIC
   );
+  attribute ORIG_REF_NAME : string;
+  attribute ORIG_REF_NAME of design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0 : entity is "axis_stream_fifo_v1_0";
 end design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0;
 
 architecture STRUCTURE of design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0 is
