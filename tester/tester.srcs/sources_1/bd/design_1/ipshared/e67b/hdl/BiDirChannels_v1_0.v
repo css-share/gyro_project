@@ -375,7 +375,6 @@ module GyroChannelDebugger(
   upCounter8Bits CNTR4(.clock(debug_out_shift),.reset_n(reset_n & ~debug_clear),.enable(1'b1),.count(data4_int));
   upCounter8Bits CNTR5(.clock( debug_in_shift),.reset_n(reset_n & ~debug_clear),.enable(1'b1),.count(data5_int));
 
-
   assign debug_word_generator = { data1_int, 16'h0000, data0_int};
   assign debug_word_buffer    = { data5_int, data3_int, data4_int, data2_int};
 
@@ -411,7 +410,6 @@ module GyroBiDirTokenBuffer(
   wire  in_shift;
 
   wire        rx_fifo_valid_masked;
-  wire        rx_fifo_ready_int;
 
   wire [7:0] out_full;
   wire [7:0]  in_full;
@@ -436,13 +434,13 @@ module GyroBiDirTokenBuffer(
   );
 
   mux_2x1_1bit  inputShiftMux(
-    .in0((rx_fifo_valid_masked) & ~clock),
+    .in0((rx_fifo_valid_masked) & clock),
     .in1(tx_token_next),
     .sel(in_shift_sel),
     .mux_out(in_shift)
   );
 
-  dff  inputFF( .clk(clock), .rst_n(reset_n),
+  dff  inputFF( .clk(~clock), .rst_n(reset_n),
     .D(in_full[7]),
     .Q(in_shift_sel)
   );
@@ -483,8 +481,7 @@ module GyroBiDirTokenBuffer(
   assign tx_token_valid  =  in_shift_sel;
 
   assign tx_fifo_last        = (out_full[7] & ~out_full[6]);
-  //assign rx_fifo_ready_int   = ~in_full[7];  // Mar. 2, 2019 was ~in_shift_sel
-  assign rx_fifo_ready       =  ~in_full[7];
+  assign rx_fifo_ready       =  ~in_shift_sel;
 
   assign rx_fifo_valid_masked = (rx_fifo_valid & ~in_shift_sel);
 

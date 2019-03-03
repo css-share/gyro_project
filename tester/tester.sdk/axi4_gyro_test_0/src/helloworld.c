@@ -58,7 +58,7 @@ extern void xil_printf(const char *format, ...);
 #define RX_BUFFER_HIGH		(MEM_BASE_ADDR + 0x004FFFFF)
 
 
-#define MAX_PKT_LEN		0x40
+#define MAX_PKT_LEN		0x20
 #define MARK_UNCACHEABLE        0x701
 
 #define TEST_START_VALUE	0xC
@@ -696,8 +696,8 @@ static int SendPacket(XAxiDma * AxiDmaInstPtr, int id){
 	Value = 0x01;
 
 	if(id == 0){
-	  for(Index = 0; Index < MAX_PKT_LEN-4; Index ++) {
-		TxPacket[Index+4] = Value;
+	  for(Index = 0; Index < MAX_PKT_LEN; Index ++) {
+		TxPacket[Index] = Value;
 		  Value = (Value + 1) & 0xFF;
 	  }
 	} else {
@@ -997,7 +997,7 @@ int main() {
     //int readVal, writeVal;
 
     xil_printf("\n\r=====================\n\r");
-    xil_printf("== START version 22 ==\n\r");
+    xil_printf("== START version 23 ==\n\r");
     // set interrupt_0/1 of AXI PL interrupt generator to 0
 
     *(baseaddr_p+0) = 0x00000000;

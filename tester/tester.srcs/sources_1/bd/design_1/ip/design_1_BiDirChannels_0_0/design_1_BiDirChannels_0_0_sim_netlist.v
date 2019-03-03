@@ -1,7 +1,7 @@
 // Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-// Date        : Sat Mar  2 21:14:08 2019
+// Date        : Sat Mar  2 22:44:58 2019
 // Host        : DESKTOP-KC9HGNO running 64-bit major release  (build 9200)
 // Command     : write_verilog -force -mode funcsim
 //               C:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ip/design_1_BiDirChannels_0_0/design_1_BiDirChannels_0_0_sim_netlist.v
@@ -100,7 +100,7 @@ module design_1_BiDirChannels_0_0
   wire HS_DataIn;
   wire HS_DataOut;
   wire MCK;
-  wire \X1/BUFFERS/in01 ;
+  wire clk0;
   wire [31:0]m00_axis_tdata;
   wire m00_axis_tlast;
   wire m00_axis_tready;
@@ -146,14 +146,14 @@ module design_1_BiDirChannels_0_0
     .INIT(2'h1)) 
     Q_reg_i_1__0
        (.I0(s00_axi_aclk),
-        .O(\X1/BUFFERS/in01 ));
+        .O(clk0));
   design_1_BiDirChannels_0_0_BiDirChannels_v1_0 inst
        (.CLK(D0),
         .HS_Clock(HS_Clock),
         .HS_DataIn(HS_DataIn),
         .HS_DataOut(HS_DataOut),
         .MCK(MCK),
-        .in01(\X1/BUFFERS/in01 ),
+        .clk0(clk0),
         .m00_axis_tdata(m00_axis_tdata),
         .m00_axis_tlast(m00_axis_tlast),
         .m00_axis_tready(m00_axis_tready),
@@ -191,14 +191,14 @@ module design_1_BiDirChannels_0_0_BiDirChannels_v1_0
     HS_DataOut,
     s00_axi_bvalid,
     s00_axi_rvalid,
+    s00_axis_tready,
     m00_axis_tdata,
     m00_axis_tlast,
     HS_Clock,
-    s00_axis_tready,
     s00_axi_rdata,
     s00_axi_aclk,
     CLK,
-    in01,
+    clk0,
     s00_axis_tdata,
     s00_axis_tvalid,
     m00_axis_tready,
@@ -222,14 +222,14 @@ module design_1_BiDirChannels_0_0_BiDirChannels_v1_0
   output HS_DataOut;
   output s00_axi_bvalid;
   output s00_axi_rvalid;
+  output s00_axis_tready;
   output [31:0]m00_axis_tdata;
   output m00_axis_tlast;
   output HS_Clock;
-  output s00_axis_tready;
   output [31:0]s00_axi_rdata;
   input s00_axi_aclk;
   input CLK;
-  input in01;
+  input clk0;
   input [31:0]s00_axis_tdata;
   input s00_axis_tvalid;
   input m00_axis_tready;
@@ -248,9 +248,9 @@ module design_1_BiDirChannels_0_0_BiDirChannels_v1_0
 
   wire BiDirChannels_v1_0_S00_AXI_inst_n_10;
   wire BiDirChannels_v1_0_S00_AXI_inst_n_11;
+  wire BiDirChannels_v1_0_S00_AXI_inst_n_5;
   wire BiDirChannels_v1_0_S00_AXI_inst_n_6;
   wire CLK;
-  wire D;
   wire [7:0]\DEBUGGER/CNTR0/r_reg_reg__0 ;
   wire [7:0]\DEBUGGER/CNTR1/r_reg_reg__0 ;
   wire [7:0]\DEBUGGER/CNTR2/r_reg_reg__0 ;
@@ -261,8 +261,8 @@ module design_1_BiDirChannels_0_0_BiDirChannels_v1_0
   wire HS_DataIn;
   wire HS_DataOut;
   wire MCK;
+  wire clk0;
   wire [31:24]data_word_0;
-  wire in01;
   wire [31:0]m00_axis_tdata;
   wire m00_axis_tlast;
   wire m00_axis_tready;
@@ -291,7 +291,7 @@ module design_1_BiDirChannels_0_0_BiDirChannels_v1_0
 
   design_1_BiDirChannels_0_0_BiDirChannels_v1_0_S00_AXI BiDirChannels_v1_0_S00_AXI_inst
        (.Q(\DEBUGGER/CNTR0/r_reg_reg__0 ),
-        .Q_reg({D,BiDirChannels_v1_0_S00_AXI_inst_n_6}),
+        .Q_reg({BiDirChannels_v1_0_S00_AXI_inst_n_5,BiDirChannels_v1_0_S00_AXI_inst_n_6}),
         .\r_reg_reg[4] ({data_word_0[31],data_word_0[28],data_word_0[24]}),
         .\r_reg_reg[4]_0 (BiDirChannels_v1_0_S00_AXI_inst_n_10),
         .\r_reg_reg[7] (BiDirChannels_v1_0_S00_AXI_inst_n_11),
@@ -324,7 +324,7 @@ module design_1_BiDirChannels_0_0_BiDirChannels_v1_0
         .HS_DataOut(HS_DataOut),
         .MCK(MCK),
         .Q(\DEBUGGER/CNTR0/r_reg_reg__0 ),
-        .in01(in01),
+        .clk0(clk0),
         .m00_axis_tdata(m00_axis_tdata),
         .m00_axis_tlast(m00_axis_tlast),
         .m00_axis_tready(m00_axis_tready),
@@ -343,7 +343,7 @@ module design_1_BiDirChannels_0_0_BiDirChannels_v1_0
         .\slv_reg0_reg[16] (BiDirChannels_v1_0_S00_AXI_inst_n_11),
         .\slv_reg0_reg[31] (BiDirChannels_v1_0_S00_AXI_inst_n_10),
         .\slv_reg0_reg[31]_0 ({data_word_0[31],data_word_0[28],data_word_0[24]}),
-        .\slv_reg1_reg[4] ({D,BiDirChannels_v1_0_S00_AXI_inst_n_6}));
+        .\slv_reg1_reg[4] ({BiDirChannels_v1_0_S00_AXI_inst_n_5,BiDirChannels_v1_0_S00_AXI_inst_n_6}));
 endmodule
 
 (* ORIG_REF_NAME = "BiDirChannels_v1_0_S00_AXI" *) 
@@ -411,7 +411,6 @@ module design_1_BiDirChannels_0_0_BiDirChannels_v1_0_S00_AXI
   wire \axi_araddr[2]_i_1_n_0 ;
   wire \axi_araddr[3]_i_1_n_0 ;
   wire axi_arready0;
-  wire [3:2]axi_awaddr;
   wire \axi_awaddr[2]_i_1_n_0 ;
   wire \axi_awaddr[3]_i_1_n_0 ;
   wire axi_awready0;
@@ -420,6 +419,7 @@ module design_1_BiDirChannels_0_0_BiDirChannels_v1_0_S00_AXI
   wire axi_rvalid_i_1_n_0;
   wire axi_wready0;
   wire [16:16]data_word_0;
+  wire [1:0]p_0_in;
   wire [28:7]p_1_in;
   wire [2:0]\r_reg_reg[4] ;
   wire \r_reg_reg[4]_0 ;
@@ -585,7 +585,7 @@ module design_1_BiDirChannels_0_0_BiDirChannels_v1_0_S00_AXI
         .I2(s00_axi_awready),
         .I3(aw_en_reg_n_0),
         .I4(s00_axi_awvalid),
-        .I5(axi_awaddr[2]),
+        .I5(p_0_in[0]),
         .O(\axi_awaddr[2]_i_1_n_0 ));
   LUT6 #(
     .INIT(64'hFBFFFFFF08000000)) 
@@ -595,19 +595,19 @@ module design_1_BiDirChannels_0_0_BiDirChannels_v1_0_S00_AXI
         .I2(s00_axi_awready),
         .I3(aw_en_reg_n_0),
         .I4(s00_axi_awvalid),
-        .I5(axi_awaddr[3]),
+        .I5(p_0_in[1]),
         .O(\axi_awaddr[3]_i_1_n_0 ));
   FDRE \axi_awaddr_reg[2] 
        (.C(s00_axi_aclk),
         .CE(1'b1),
         .D(\axi_awaddr[2]_i_1_n_0 ),
-        .Q(axi_awaddr[2]),
+        .Q(p_0_in[0]),
         .R(axi_awready_i_1_n_0));
   FDRE \axi_awaddr_reg[3] 
        (.C(s00_axi_aclk),
         .CE(1'b1),
         .D(\axi_awaddr[3]_i_1_n_0 ),
-        .Q(axi_awaddr[3]),
+        .Q(p_0_in[1]),
         .R(axi_awready_i_1_n_0));
   LUT1 #(
     .INIT(2'h1)) 
@@ -1182,24 +1182,24 @@ module design_1_BiDirChannels_0_0_BiDirChannels_v1_0_S00_AXI
     .INIT(16'h0200)) 
     \slv_reg0[15]_i_1 
        (.I0(slv_reg_wren__0),
-        .I1(axi_awaddr[3]),
-        .I2(axi_awaddr[2]),
+        .I1(p_0_in[1]),
+        .I2(p_0_in[0]),
         .I3(s00_axi_wstrb[1]),
         .O(p_1_in[15]));
   LUT4 #(
     .INIT(16'h0200)) 
     \slv_reg0[23]_i_1 
        (.I0(slv_reg_wren__0),
-        .I1(axi_awaddr[3]),
-        .I2(axi_awaddr[2]),
+        .I1(p_0_in[1]),
+        .I2(p_0_in[0]),
         .I3(s00_axi_wstrb[2]),
         .O(p_1_in[23]));
   LUT4 #(
     .INIT(16'h0200)) 
     \slv_reg0[31]_i_1 
        (.I0(slv_reg_wren__0),
-        .I1(axi_awaddr[3]),
-        .I2(axi_awaddr[2]),
+        .I1(p_0_in[1]),
+        .I2(p_0_in[0]),
         .I3(s00_axi_wstrb[3]),
         .O(p_1_in[28]));
   LUT4 #(
@@ -1214,8 +1214,8 @@ module design_1_BiDirChannels_0_0_BiDirChannels_v1_0_S00_AXI
     .INIT(16'h0200)) 
     \slv_reg0[7]_i_1 
        (.I0(slv_reg_wren__0),
-        .I1(axi_awaddr[3]),
-        .I2(axi_awaddr[2]),
+        .I1(p_0_in[1]),
+        .I2(p_0_in[0]),
         .I3(s00_axi_wstrb[0]),
         .O(p_1_in[7]));
   FDRE \slv_reg0_reg[0] 
@@ -1415,32 +1415,32 @@ module design_1_BiDirChannels_0_0_BiDirChannels_v1_0_S00_AXI
     \slv_reg1[15]_i_1 
        (.I0(slv_reg_wren__0),
         .I1(s00_axi_wstrb[1]),
-        .I2(axi_awaddr[2]),
-        .I3(axi_awaddr[3]),
+        .I2(p_0_in[0]),
+        .I3(p_0_in[1]),
         .O(\slv_reg1[15]_i_1_n_0 ));
   LUT4 #(
     .INIT(16'h0080)) 
     \slv_reg1[23]_i_1 
        (.I0(slv_reg_wren__0),
         .I1(s00_axi_wstrb[2]),
-        .I2(axi_awaddr[2]),
-        .I3(axi_awaddr[3]),
+        .I2(p_0_in[0]),
+        .I3(p_0_in[1]),
         .O(\slv_reg1[23]_i_1_n_0 ));
   LUT4 #(
     .INIT(16'h0080)) 
     \slv_reg1[31]_i_1 
        (.I0(slv_reg_wren__0),
         .I1(s00_axi_wstrb[3]),
-        .I2(axi_awaddr[2]),
-        .I3(axi_awaddr[3]),
+        .I2(p_0_in[0]),
+        .I3(p_0_in[1]),
         .O(\slv_reg1[31]_i_1_n_0 ));
   LUT4 #(
     .INIT(16'h0080)) 
     \slv_reg1[7]_i_1 
        (.I0(slv_reg_wren__0),
         .I1(s00_axi_wstrb[0]),
-        .I2(axi_awaddr[2]),
-        .I3(axi_awaddr[3]),
+        .I2(p_0_in[0]),
+        .I3(p_0_in[1]),
         .O(\slv_reg1[7]_i_1_n_0 ));
   FDRE \slv_reg1_reg[0] 
        (.C(s00_axi_aclk),
@@ -1648,6 +1648,7 @@ module design_1_BiDirChannels_0_0_GyroBiDirChannelController
    (MCK,
     m00_axis_tvalid,
     HS_DataOut,
+    s00_axis_tready,
     m00_axis_tdata,
     m00_axis_tlast,
     HS_Clock,
@@ -1657,11 +1658,10 @@ module design_1_BiDirChannels_0_0_GyroBiDirChannelController
     \r_reg_reg[7]_1 ,
     \r_reg_reg[7]_2 ,
     \r_reg_reg[7]_3 ,
-    s00_axis_tready,
     CLK,
     s00_axi_aclk,
     \slv_reg0_reg[31] ,
-    in01,
+    clk0,
     \slv_reg1_reg[4] ,
     s00_axis_tdata,
     s00_axis_tvalid,
@@ -1674,6 +1674,7 @@ module design_1_BiDirChannels_0_0_GyroBiDirChannelController
   output MCK;
   output m00_axis_tvalid;
   output HS_DataOut;
+  output s00_axis_tready;
   output [31:0]m00_axis_tdata;
   output m00_axis_tlast;
   output HS_Clock;
@@ -1683,11 +1684,10 @@ module design_1_BiDirChannels_0_0_GyroBiDirChannelController
   output [7:0]\r_reg_reg[7]_1 ;
   output [7:0]\r_reg_reg[7]_2 ;
   output [7:0]\r_reg_reg[7]_3 ;
-  output s00_axis_tready;
   input CLK;
   input s00_axi_aclk;
   input \slv_reg0_reg[31] ;
-  input in01;
+  input clk0;
   input [1:0]\slv_reg1_reg[4] ;
   input [31:0]s00_axis_tdata;
   input s00_axis_tvalid;
@@ -1718,12 +1718,12 @@ module design_1_BiDirChannels_0_0_GyroBiDirChannelController
   wire BUFFERS_n_27;
   wire BUFFERS_n_28;
   wire BUFFERS_n_29;
-  wire BUFFERS_n_3;
   wire BUFFERS_n_30;
   wire BUFFERS_n_31;
   wire BUFFERS_n_32;
   wire BUFFERS_n_33;
   wire BUFFERS_n_34;
+  wire BUFFERS_n_35;
   wire BUFFERS_n_4;
   wire BUFFERS_n_5;
   wire BUFFERS_n_6;
@@ -1736,9 +1736,9 @@ module design_1_BiDirChannels_0_0_GyroBiDirChannelController
   wire HS_DataOut;
   wire MCK;
   wire [7:0]Q;
+  wire clk0;
   wire debug_in_shift_int;
   wire debug_out_shift_int;
-  wire in01;
   wire [31:0]m00_axis_tdata;
   wire m00_axis_tlast;
   wire m00_axis_tready;
@@ -1767,45 +1767,44 @@ module design_1_BiDirChannels_0_0_GyroBiDirChannelController
   design_1_BiDirChannels_0_0_GyroBiDirTokenBuffer BUFFERS
        (.CLK(m00_axis_tlast),
         .Q(r_reg),
+        .clk0(clk0),
         .debug_in_shift_int(debug_in_shift_int),
         .debug_out_shift_int(debug_out_shift_int),
-        .in01(in01),
         .m00_axis_tdata(m00_axis_tdata),
         .m00_axis_tvalid(m00_axis_tvalid),
         .out_shift_sel(out_shift_sel),
-        .\r_reg_reg[0]_P (BUFFERS_n_34),
-        .\r_reg_reg[10]_P (BUFFERS_n_24),
-        .\r_reg_reg[11]_P (BUFFERS_n_23),
-        .\r_reg_reg[12]_P (BUFFERS_n_22),
-        .\r_reg_reg[13]_P (BUFFERS_n_21),
-        .\r_reg_reg[14]_P (BUFFERS_n_20),
-        .\r_reg_reg[15]_P (BUFFERS_n_19),
-        .\r_reg_reg[16]_P (BUFFERS_n_18),
-        .\r_reg_reg[17]_P (BUFFERS_n_17),
-        .\r_reg_reg[18]_P (BUFFERS_n_16),
-        .\r_reg_reg[19]_P (BUFFERS_n_15),
-        .\r_reg_reg[1]_P (BUFFERS_n_33),
-        .\r_reg_reg[20]_P (BUFFERS_n_14),
-        .\r_reg_reg[21]_P (BUFFERS_n_13),
-        .\r_reg_reg[22]_P (BUFFERS_n_12),
-        .\r_reg_reg[23]_P (BUFFERS_n_11),
-        .\r_reg_reg[24]_P (BUFFERS_n_10),
-        .\r_reg_reg[25]_P (BUFFERS_n_9),
-        .\r_reg_reg[26]_P (BUFFERS_n_8),
-        .\r_reg_reg[27]_P (BUFFERS_n_7),
-        .\r_reg_reg[28]_P (BUFFERS_n_6),
-        .\r_reg_reg[29]_P (BUFFERS_n_5),
-        .\r_reg_reg[2]_P (BUFFERS_n_32),
-        .\r_reg_reg[30]_P (BUFFERS_n_4),
-        .\r_reg_reg[31]_P (BUFFERS_n_3),
-        .\r_reg_reg[3]_P (BUFFERS_n_31),
-        .\r_reg_reg[4]_P (BUFFERS_n_30),
-        .\r_reg_reg[5]_P (BUFFERS_n_29),
-        .\r_reg_reg[6]_P (BUFFERS_n_28),
-        .\r_reg_reg[7]_P (BUFFERS_n_27),
-        .\r_reg_reg[8]_P (BUFFERS_n_26),
-        .\r_reg_reg[9]_P (BUFFERS_n_25),
-        .s00_axi_aclk(s00_axi_aclk),
+        .\r_reg_reg[0]_P (BUFFERS_n_35),
+        .\r_reg_reg[10]_P (BUFFERS_n_25),
+        .\r_reg_reg[11]_P (BUFFERS_n_24),
+        .\r_reg_reg[12]_P (BUFFERS_n_23),
+        .\r_reg_reg[13]_P (BUFFERS_n_22),
+        .\r_reg_reg[14]_P (BUFFERS_n_21),
+        .\r_reg_reg[15]_P (BUFFERS_n_20),
+        .\r_reg_reg[16]_P (BUFFERS_n_19),
+        .\r_reg_reg[17]_P (BUFFERS_n_18),
+        .\r_reg_reg[18]_P (BUFFERS_n_17),
+        .\r_reg_reg[19]_P (BUFFERS_n_16),
+        .\r_reg_reg[1]_P (BUFFERS_n_34),
+        .\r_reg_reg[20]_P (BUFFERS_n_15),
+        .\r_reg_reg[21]_P (BUFFERS_n_14),
+        .\r_reg_reg[22]_P (BUFFERS_n_13),
+        .\r_reg_reg[23]_P (BUFFERS_n_12),
+        .\r_reg_reg[24]_P (BUFFERS_n_11),
+        .\r_reg_reg[25]_P (BUFFERS_n_10),
+        .\r_reg_reg[26]_P (BUFFERS_n_9),
+        .\r_reg_reg[27]_P (BUFFERS_n_8),
+        .\r_reg_reg[28]_P (BUFFERS_n_7),
+        .\r_reg_reg[29]_P (BUFFERS_n_6),
+        .\r_reg_reg[2]_P (BUFFERS_n_33),
+        .\r_reg_reg[30]_P (BUFFERS_n_5),
+        .\r_reg_reg[31]_P (BUFFERS_n_4),
+        .\r_reg_reg[3]_P (BUFFERS_n_32),
+        .\r_reg_reg[4]_P (BUFFERS_n_31),
+        .\r_reg_reg[5]_P (BUFFERS_n_30),
+        .\r_reg_reg[6]_P (BUFFERS_n_29),
+        .\r_reg_reg[7]_P (BUFFERS_n_28),
+        .\r_reg_reg[8]_P (BUFFERS_n_27),
+        .\r_reg_reg[9]_P (BUFFERS_n_26),
         .s00_axis_tdata(s00_axis_tdata),
         .s00_axis_tready(s00_axis_tready),
         .\slv_reg0_reg[31] (\slv_reg0_reg[31] ),
@@ -1817,38 +1816,38 @@ module design_1_BiDirChannels_0_0_GyroBiDirChannelController
         .HS_DataOut(HS_DataOut),
         .MCK(MCK),
         .Q(r_reg),
-        .\data_out_reg[0] (BUFFERS_n_34),
-        .\data_out_reg[10] (BUFFERS_n_24),
-        .\data_out_reg[11] (BUFFERS_n_23),
-        .\data_out_reg[12] (BUFFERS_n_22),
-        .\data_out_reg[13] (BUFFERS_n_21),
-        .\data_out_reg[14] (BUFFERS_n_20),
-        .\data_out_reg[15] (BUFFERS_n_19),
-        .\data_out_reg[16] (BUFFERS_n_18),
-        .\data_out_reg[17] (BUFFERS_n_17),
-        .\data_out_reg[18] (BUFFERS_n_16),
-        .\data_out_reg[19] (BUFFERS_n_15),
-        .\data_out_reg[1] (BUFFERS_n_33),
-        .\data_out_reg[20] (BUFFERS_n_14),
-        .\data_out_reg[21] (BUFFERS_n_13),
-        .\data_out_reg[22] (BUFFERS_n_12),
-        .\data_out_reg[23] (BUFFERS_n_11),
-        .\data_out_reg[24] (BUFFERS_n_10),
-        .\data_out_reg[25] (BUFFERS_n_9),
-        .\data_out_reg[26] (BUFFERS_n_8),
-        .\data_out_reg[27] (BUFFERS_n_7),
-        .\data_out_reg[28] (BUFFERS_n_6),
-        .\data_out_reg[29] (BUFFERS_n_5),
-        .\data_out_reg[2] (BUFFERS_n_32),
-        .\data_out_reg[30] (BUFFERS_n_4),
-        .\data_out_reg[31] (BUFFERS_n_3),
-        .\data_out_reg[3] (BUFFERS_n_31),
-        .\data_out_reg[4] (BUFFERS_n_30),
-        .\data_out_reg[5] (BUFFERS_n_29),
-        .\data_out_reg[6] (BUFFERS_n_28),
-        .\data_out_reg[7] (BUFFERS_n_27),
-        .\data_out_reg[8] (BUFFERS_n_26),
-        .\data_out_reg[9] (BUFFERS_n_25),
+        .\data_out_reg[0] (BUFFERS_n_35),
+        .\data_out_reg[10] (BUFFERS_n_25),
+        .\data_out_reg[11] (BUFFERS_n_24),
+        .\data_out_reg[12] (BUFFERS_n_23),
+        .\data_out_reg[13] (BUFFERS_n_22),
+        .\data_out_reg[14] (BUFFERS_n_21),
+        .\data_out_reg[15] (BUFFERS_n_20),
+        .\data_out_reg[16] (BUFFERS_n_19),
+        .\data_out_reg[17] (BUFFERS_n_18),
+        .\data_out_reg[18] (BUFFERS_n_17),
+        .\data_out_reg[19] (BUFFERS_n_16),
+        .\data_out_reg[1] (BUFFERS_n_34),
+        .\data_out_reg[20] (BUFFERS_n_15),
+        .\data_out_reg[21] (BUFFERS_n_14),
+        .\data_out_reg[22] (BUFFERS_n_13),
+        .\data_out_reg[23] (BUFFERS_n_12),
+        .\data_out_reg[24] (BUFFERS_n_11),
+        .\data_out_reg[25] (BUFFERS_n_10),
+        .\data_out_reg[26] (BUFFERS_n_9),
+        .\data_out_reg[27] (BUFFERS_n_8),
+        .\data_out_reg[28] (BUFFERS_n_7),
+        .\data_out_reg[29] (BUFFERS_n_6),
+        .\data_out_reg[2] (BUFFERS_n_33),
+        .\data_out_reg[30] (BUFFERS_n_5),
+        .\data_out_reg[31] (BUFFERS_n_4),
+        .\data_out_reg[3] (BUFFERS_n_32),
+        .\data_out_reg[4] (BUFFERS_n_31),
+        .\data_out_reg[5] (BUFFERS_n_30),
+        .\data_out_reg[6] (BUFFERS_n_29),
+        .\data_out_reg[7] (BUFFERS_n_28),
+        .\data_out_reg[8] (BUFFERS_n_27),
+        .\data_out_reg[9] (BUFFERS_n_26),
         .debug_in_shift_int(debug_in_shift_int),
         .debug_out_shift_int(debug_out_shift_int),
         .m00_axis_tready(m00_axis_tready),
@@ -1883,6 +1882,7 @@ module design_1_BiDirChannels_0_0_GyroBiDirTokenBuffer
    (tx_token_valid_int,
     out_shift_sel,
     m00_axis_tvalid,
+    s00_axis_tready,
     \r_reg_reg[31]_P ,
     \r_reg_reg[30]_P ,
     \r_reg_reg[29]_P ,
@@ -1917,10 +1917,8 @@ module design_1_BiDirChannels_0_0_GyroBiDirTokenBuffer
     \r_reg_reg[0]_P ,
     m00_axis_tdata,
     CLK,
-    s00_axis_tready,
-    s00_axi_aclk,
+    clk0,
     \slv_reg0_reg[31] ,
-    in01,
     debug_out_shift_int,
     debug_in_shift_int,
     s00_axis_tdata,
@@ -1928,6 +1926,7 @@ module design_1_BiDirChannels_0_0_GyroBiDirTokenBuffer
   output tx_token_valid_int;
   output out_shift_sel;
   output m00_axis_tvalid;
+  output s00_axis_tready;
   output \r_reg_reg[31]_P ;
   output \r_reg_reg[30]_P ;
   output \r_reg_reg[29]_P ;
@@ -1962,23 +1961,20 @@ module design_1_BiDirChannels_0_0_GyroBiDirTokenBuffer
   output \r_reg_reg[0]_P ;
   output [31:0]m00_axis_tdata;
   output CLK;
-  output s00_axis_tready;
-  input s00_axi_aclk;
+  input clk0;
   input \slv_reg0_reg[31] ;
-  input in01;
   input debug_out_shift_int;
   input debug_in_shift_int;
   input [31:0]s00_axis_tdata;
   input [31:0]Q;
 
   wire CLK;
+  wire D;
   wire [31:0]Q;
+  wire clk0;
   wire debug_in_shift_int;
   wire debug_out_shift_int;
-  wire in01;
-  wire in_inj_bit;
   wire inputShiftRegister_n_0;
-  wire inputShiftRegister_n_1;
   wire [31:0]m00_axis_tdata;
   wire m00_axis_tvalid;
   wire out_shift_sel;
@@ -2016,7 +2012,6 @@ module design_1_BiDirChannels_0_0_GyroBiDirTokenBuffer
   wire \r_reg_reg[7]_P ;
   wire \r_reg_reg[8]_P ;
   wire \r_reg_reg[9]_P ;
-  wire s00_axi_aclk;
   wire [31:0]s00_axis_tdata;
   wire s00_axis_tready;
   wire \slv_reg0_reg[31] ;
@@ -2060,15 +2055,14 @@ module design_1_BiDirChannels_0_0_GyroBiDirTokenBuffer
         .s00_axis_tdata(s00_axis_tdata),
         .\slv_reg0_reg[31] (\slv_reg0_reg[31] ));
   design_1_BiDirChannels_0_0_dff_8 inputFF
-       (.in_inj_bit(in_inj_bit),
-        .\out_reg[7] (inputShiftRegister_n_1),
-        .s00_axi_aclk(s00_axi_aclk),
+       (.D(D),
+        .clk0(clk0),
+        .s00_axis_tready(s00_axis_tready),
         .\slv_reg0_reg[31] (\slv_reg0_reg[31] ),
         .tx_token_valid_int(tx_token_valid_int));
   design_1_BiDirChannels_0_0_shift_reg_8bits inputShiftRegister
-       (.Q_reg(inputShiftRegister_n_1),
+       (.D(D),
         .debug_in_shift_int(debug_in_shift_int),
-        .in_inj_bit(in_inj_bit),
         .\out_reg[7]_0 (inputShiftRegister_n_0),
         .s00_axis_tready(s00_axis_tready),
         .\slv_reg0_reg[31] (\slv_reg0_reg[31] ));
@@ -2079,7 +2073,7 @@ module design_1_BiDirChannels_0_0_GyroBiDirTokenBuffer
         .m00_axis_tdata(m00_axis_tdata),
         .\slv_reg0_reg[31] (\slv_reg0_reg[31] ));
   design_1_BiDirChannels_0_0_dff_10 outputFF
-       (.in01(in01),
+       (.clk0(clk0),
         .m00_axis_tvalid(m00_axis_tvalid),
         .\out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (outputFF_n_1),
         .out_shift_sel(out_shift_sel),
@@ -3496,7 +3490,7 @@ module design_1_BiDirChannels_0_0_dff
         .D(out_next_int),
         .Q(tx_token_next_int));
   LUT4 #(
-    .INIT(16'h88B8)) 
+    .INIT(16'hB888)) 
     \r_reg[7]_i_2 
        (.I0(tx_token_next_int),
         .I1(tx_token_valid_int),
@@ -3510,22 +3504,22 @@ module design_1_BiDirChannels_0_0_dff_10
    (out_shift_sel,
     \out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
     m00_axis_tvalid,
-    in01,
+    clk0,
     \slv_reg0_reg[31] );
   output out_shift_sel;
   output \out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
   input m00_axis_tvalid;
-  input in01;
+  input clk0;
   input \slv_reg0_reg[31] ;
 
-  wire in01;
+  wire clk0;
   wire m00_axis_tvalid;
   wire \out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
   wire out_shift_sel;
   wire \slv_reg0_reg[31] ;
 
   FDCE Q_reg
-       (.C(in01),
+       (.C(clk0),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
         .D(m00_axis_tvalid),
@@ -4549,33 +4543,33 @@ endmodule
 (* ORIG_REF_NAME = "dff" *) 
 module design_1_BiDirChannels_0_0_dff_8
    (tx_token_valid_int,
-    in_inj_bit,
-    \out_reg[7] ,
-    s00_axi_aclk,
+    s00_axis_tready,
+    D,
+    clk0,
     \slv_reg0_reg[31] );
   output tx_token_valid_int;
-  output in_inj_bit;
-  input \out_reg[7] ;
-  input s00_axi_aclk;
+  output s00_axis_tready;
+  input D;
+  input clk0;
   input \slv_reg0_reg[31] ;
 
-  wire in_inj_bit;
-  wire \out_reg[7] ;
-  wire s00_axi_aclk;
+  wire D;
+  wire clk0;
+  wire s00_axis_tready;
   wire \slv_reg0_reg[31] ;
   wire tx_token_valid_int;
 
   FDCE Q_reg
-       (.C(s00_axi_aclk),
+       (.C(clk0),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\out_reg[7] ),
+        .D(D),
         .Q(tx_token_valid_int));
   LUT1 #(
     .INIT(2'h1)) 
-    \out_reg[5]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4_i_1 
+    s00_axis_tready_INST_0
        (.I0(tx_token_valid_int),
-        .O(in_inj_bit));
+        .O(s00_axis_tready));
 endmodule
 
 (* ORIG_REF_NAME = "inputShiftRegister32Bits" *) 
@@ -9592,21 +9586,18 @@ endmodule
 (* ORIG_REF_NAME = "shift_reg_8bits" *) 
 module design_1_BiDirChannels_0_0_shift_reg_8bits
    (\out_reg[7]_0 ,
-    Q_reg,
-    s00_axis_tready,
+    D,
     debug_in_shift_int,
     \slv_reg0_reg[31] ,
-    in_inj_bit);
+    s00_axis_tready);
   output \out_reg[7]_0 ;
-  output Q_reg;
-  output s00_axis_tready;
+  output D;
   input debug_in_shift_int;
   input \slv_reg0_reg[31] ;
-  input in_inj_bit;
+  input s00_axis_tready;
 
-  wire Q_reg;
+  wire D;
   wire debug_in_shift_int;
-  wire in_inj_bit;
   wire \out_reg[5]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4_n_0 ;
   wire \out_reg[6]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ;
   wire \out_reg[7]_0 ;
@@ -9629,7 +9620,7 @@ module design_1_BiDirChannels_0_0_shift_reg_8bits
         .A3(1'b0),
         .CE(1'b1),
         .CLK(debug_in_shift_int),
-        .D(in_inj_bit),
+        .D(s00_axis_tready),
         .Q(\out_reg[5]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4_n_0 ));
   FDRE \out_reg[6]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 
        (.C(debug_in_shift_int),
@@ -9642,7 +9633,7 @@ module design_1_BiDirChannels_0_0_shift_reg_8bits
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
         .D(out_reg_gate_n_0),
-        .Q(Q_reg));
+        .Q(D));
   FDCE out_reg_c
        (.C(debug_in_shift_int),
         .CE(1'b1),
@@ -9691,11 +9682,6 @@ module design_1_BiDirChannels_0_0_shift_reg_8bits
        (.I0(\out_reg[6]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
         .I1(\out_reg[7]_0 ),
         .O(out_reg_gate_n_0));
-  LUT1 #(
-    .INIT(2'h1)) 
-    s00_axis_tready_INST_0
-       (.I0(Q_reg),
-        .O(s00_axis_tready));
 endmodule
 
 (* ORIG_REF_NAME = "shift_reg_8bits" *) 
