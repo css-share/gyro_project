@@ -58,7 +58,7 @@ extern void xil_printf(const char *format, ...);
 #define RX_BUFFER_HIGH		(MEM_BASE_ADDR + 0x004FFFFF)
 
 
-#define MAX_PKT_LEN		0x20
+#define MAX_PKT_LEN		0x40
 #define MARK_UNCACHEABLE        0x701
 
 #define TEST_START_VALUE	0xC
@@ -696,10 +696,9 @@ static int SendPacket(XAxiDma * AxiDmaInstPtr, int id){
 	Value = 0x01;
 
 	if(id == 0){
-	  for(Index = 0; Index < MAX_PKT_LEN; Index ++) {
+	  for(Index = 0; Index < MAX_PKT_LEN-4; Index ++) {
+		TxPacket[Index+4] = Value;
 		  Value = (Value + 1) & 0xFF;
-		TxPacket[Index] = Value;
-
 	  }
 	} else {
 		  for(Index = 0; Index < MAX_PKT_LEN; Index ++) {
@@ -959,18 +958,19 @@ int test_DMA_loopback( int num_packets, int debug_mode){
 		return XST_FAILURE;
 	  }
 
-	  if(i == 0){
+
+	 // if(i == 0){
 	    setGyroChannelControl(0x00000011);
-	  }
+	  //}
 
 	  /* Check DMA transfer result */
 	  Status = CheckDmaResult(&AxiDma, debug_mode);
 	  if (Status != XST_SUCCESS) {
-		xil_printf(" Failed reading packet number: %d\r\n",i+1);
+		xil_printf(" Failed reading packet number: %d\r\n",1);
 		return XST_FAILURE;
-  	  }
-
+	  }
 	}
+
 
 	xil_printf(" >>> Successfully ran AXI DMA SG Polling Example\r\n");
 	xil_printf("--- Exiting DMA Loopback main() --- \r\n");
@@ -1125,7 +1125,7 @@ int main() {
     xil_printf("== Starting FIFO / DMA test ++\n\r");
     // --- both in and out channels ON.
     //setGyroChannelControl(0x00000011); // moved to the test DMA loopback
-    test_DMA_loopback(2,1);
+    test_DMA_loopback(1,1);
     // --- stopping both channels
      setGyroChannelControl(0x00000000);
 

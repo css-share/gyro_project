@@ -193,8 +193,8 @@
   "../../../bd/design_1/ipshared/65e4/hdl/axis_stream_fifo_v1_0.v" \
   "../../../bd/design_1/ip/design_1_axis_stream_fifo_0_0/sim/design_1_axis_stream_fifo_0_0.v" \
   "../../../bd/design_1/ip/design_1_axis_stream_fifo_0_1/sim/design_1_axis_stream_fifo_0_1.v" \
-  "../../../bd/design_1/ipshared/ba9e/hdl/BiDirChannels_v1_0_S00_AXI.v" \
-  "../../../bd/design_1/ipshared/ba9e/hdl/BiDirChannels_v1_0.v" \
+  "../../../bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0_S00_AXI.v" \
+  "../../../bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0.v" \
   "../../../bd/design_1/ip/design_1_BiDirChannels_0_0/sim/design_1_BiDirChannels_0_0.v" \
   "../../../bd/design_1/sim/design_1.v" \
 -endlib

@@ -6,7 +6,7 @@
 <Project Version="7" Minor="38" Path="c:/xilinx_projects/gyro_project/tester/tester.tmp/bidirchannels_v1_0_project/BiDirChannels_v1_0_project.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
-    <Option Name="Id" Val="d487991747ec42a6a52d98b2c9ea7d18"/>
+    <Option Name="Id" Val="a2e36f38cf1146c4934aee2597aaf328"/>
     <Option Name="Part" Val="xc7z020clg484-1"/>
     <Option Name="CompiledLibDir" Val="$PCACHEDIR/compile_simlib"/>
     <Option Name="CompiledLibDirXSim" Val=""/>

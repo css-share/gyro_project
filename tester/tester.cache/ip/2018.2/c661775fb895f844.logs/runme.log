@@ -1,0 +1,501 @@
+
+*** Running vivado
+    with args -log design_1_BiDirChannels_0_0.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source design_1_BiDirChannels_0_0.tcl
+
+
+****** Vivado v2018.2 (64-bit)
+  **** SW Build 2258646 on Thu Jun 14 20:03:12 MDT 2018
+  **** IP Build 2256618 on Thu Jun 14 22:10:49 MDT 2018
+    ** Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+
+source design_1_BiDirChannels_0_0.tcl -notrace
+Command: synth_design -top design_1_BiDirChannels_0_0 -part xc7z020clg484-1 -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: Launching helper process for spawning children vivado processes
+INFO: Helper process launched with PID 2972 
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:07 ; elapsed = 00:00:09 . Memory (MB): peak = 405.660 ; gain = 96.223
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'design_1_BiDirChannels_0_0' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ip/design_1_BiDirChannels_0_0/synth/design_1_BiDirChannels_0_0.v:57]
+INFO: [Synth 8-6157] synthesizing module 'BiDirChannels_v1_0' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0.v:742]
+	Parameter C_S00_AXI_DATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_S00_AXI_ADDR_WIDTH bound to: 4 - type: integer 
+	Parameter C_S00_AXIS_TDATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_M00_AXIS_TDATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_M00_AXIS_START_COUNT bound to: 32 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'BiDirChannels_v1_0_S00_AXI' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0_S00_AXI.v:4]
+	Parameter C_S_AXI_DATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_S_AXI_ADDR_WIDTH bound to: 4 - type: integer 
+	Parameter ADDR_LSB bound to: 2 - type: integer 
+	Parameter OPT_MEM_ADDR_BITS bound to: 1 - type: integer 
+INFO: [Synth 8-226] default block is never used [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0_S00_AXI.v:234]
+INFO: [Synth 8-226] default block is never used [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0_S00_AXI.v:375]
+WARNING: [Synth 8-6014] Unused sequential element slv_reg2_reg was removed.  [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0_S00_AXI.v:228]
+WARNING: [Synth 8-6014] Unused sequential element slv_reg3_reg was removed.  [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0_S00_AXI.v:229]
+INFO: [Synth 8-6155] done synthesizing module 'BiDirChannels_v1_0_S00_AXI' (1#1) [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0_S00_AXI.v:4]
+INFO: [Synth 8-6157] synthesizing module 'GyroBiDirChannelController' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0.v:608]
+INFO: [Synth 8-6157] synthesizing module 'GyroBiDirTokenBuffer' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0.v:385]
+INFO: [Synth 8-6157] synthesizing module 'delay_line_8x32bits' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0.v:295]
+INFO: [Synth 8-6157] synthesizing module 'register_32bits' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0.v:255]
+INFO: [Synth 8-6155] done synthesizing module 'register_32bits' (2#1) [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0.v:255]
+INFO: [Synth 8-6155] done synthesizing module 'delay_line_8x32bits' (3#1) [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0.v:295]
+INFO: [Synth 8-6157] synthesizing module 'shift_reg_8bits' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0.v:273]
+INFO: [Synth 8-6155] done synthesizing module 'shift_reg_8bits' (4#1) [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0.v:273]
+INFO: [Synth 8-6157] synthesizing module 'mux_2x1_1bit' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0.v:243]
+INFO: [Synth 8-6155] done synthesizing module 'mux_2x1_1bit' (5#1) [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0.v:243]
+INFO: [Synth 8-6157] synthesizing module 'dff' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0.v:7]
+INFO: [Synth 8-6155] done synthesizing module 'dff' (6#1) [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0.v:7]
+INFO: [Synth 8-6155] done synthesizing module 'GyroBiDirTokenBuffer' (7#1) [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0.v:385]
+INFO: [Synth 8-6157] synthesizing module 'GyroInputOutputChannel' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0.v:498]
+INFO: [Synth 8-6157] synthesizing module 'clock_divider_by_2' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0.v:25]
+INFO: [Synth 8-6155] done synthesizing module 'clock_divider_by_2' (8#1) [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0.v:25]
+INFO: [Synth 8-6157] synthesizing module 'register_2bits' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0.v:137]
+INFO: [Synth 8-6155] done synthesizing module 'register_2bits' (9#1) [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0.v:137]
+INFO: [Synth 8-6157] synthesizing module 'counter48Cycles' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0.v:68]
+INFO: [Synth 8-6155] done synthesizing module 'counter48Cycles' (10#1) [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0.v:68]
+INFO: [Synth 8-6157] synthesizing module 'maskHSCK' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0.v:98]
+INFO: [Synth 8-6155] done synthesizing module 'maskHSCK' (11#1) [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0.v:98]
+INFO: [Synth 8-6157] synthesizing module 'inputShiftRegister32Bits' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0.v:219]
+INFO: [Synth 8-6155] done synthesizing module 'inputShiftRegister32Bits' (12#1) [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0.v:219]
+INFO: [Synth 8-6157] synthesizing module 'outputShiftRegister32Bits' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0.v:189]
+INFO: [Synth 8-6155] done synthesizing module 'outputShiftRegister32Bits' (13#1) [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0.v:189]
+INFO: [Synth 8-6155] done synthesizing module 'GyroInputOutputChannel' (14#1) [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0.v:498]
+INFO: [Synth 8-6157] synthesizing module 'GyroChannelDebugger' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0.v:328]
+INFO: [Synth 8-6157] synthesizing module 'upCounter8Bits' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0.v:41]
+INFO: [Synth 8-6155] done synthesizing module 'upCounter8Bits' (15#1) [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0.v:41]
+INFO: [Synth 8-6155] done synthesizing module 'GyroChannelDebugger' (16#1) [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0.v:328]
+INFO: [Synth 8-6155] done synthesizing module 'GyroBiDirChannelController' (17#1) [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0.v:608]
+INFO: [Synth 8-6155] done synthesizing module 'BiDirChannels_v1_0' (18#1) [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0.v:742]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_BiDirChannels_0_0' (19#1) [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ip/design_1_BiDirChannels_0_0/synth/design_1_BiDirChannels_0_0.v:57]
+WARNING: [Synth 8-3331] design GyroChannelDebugger has unconnected port tx_fifo_valid
+WARNING: [Synth 8-3331] design GyroChannelDebugger has unconnected port rx_fifo_valid
+WARNING: [Synth 8-3331] design GyroInputOutputChannel has unconnected port in_channel[2]
+WARNING: [Synth 8-3331] design GyroInputOutputChannel has unconnected port in_channel[1]
+WARNING: [Synth 8-3331] design GyroInputOutputChannel has unconnected port in_channel[0]
+WARNING: [Synth 8-3331] design GyroInputOutputChannel has unconnected port out_channel[2]
+WARNING: [Synth 8-3331] design GyroInputOutputChannel has unconnected port out_channel[1]
+WARNING: [Synth 8-3331] design GyroInputOutputChannel has unconnected port out_channel[0]
+WARNING: [Synth 8-3331] design GyroBiDirTokenBuffer has unconnected port rx_fifo_last
+WARNING: [Synth 8-3331] design BiDirChannels_v1_0_S00_AXI has unconnected port S_AXI_AWPROT[2]
+WARNING: [Synth 8-3331] design BiDirChannels_v1_0_S00_AXI has unconnected port S_AXI_AWPROT[1]
+WARNING: [Synth 8-3331] design BiDirChannels_v1_0_S00_AXI has unconnected port S_AXI_AWPROT[0]
+WARNING: [Synth 8-3331] design BiDirChannels_v1_0_S00_AXI has unconnected port S_AXI_ARPROT[2]
+WARNING: [Synth 8-3331] design BiDirChannels_v1_0_S00_AXI has unconnected port S_AXI_ARPROT[1]
+WARNING: [Synth 8-3331] design BiDirChannels_v1_0_S00_AXI has unconnected port S_AXI_ARPROT[0]
+WARNING: [Synth 8-3331] design BiDirChannels_v1_0 has unconnected port s00_axis_aclk
+WARNING: [Synth 8-3331] design BiDirChannels_v1_0 has unconnected port s00_axis_aresetn
+WARNING: [Synth 8-3331] design BiDirChannels_v1_0 has unconnected port s00_axis_tstrb[3]
+WARNING: [Synth 8-3331] design BiDirChannels_v1_0 has unconnected port s00_axis_tstrb[2]
+WARNING: [Synth 8-3331] design BiDirChannels_v1_0 has unconnected port s00_axis_tstrb[1]
+WARNING: [Synth 8-3331] design BiDirChannels_v1_0 has unconnected port s00_axis_tstrb[0]
+WARNING: [Synth 8-3331] design BiDirChannels_v1_0 has unconnected port m00_axis_aclk
+WARNING: [Synth 8-3331] design BiDirChannels_v1_0 has unconnected port m00_axis_aresetn
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:09 ; elapsed = 00:00:12 . Memory (MB): peak = 460.637 ; gain = 151.199
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:09 ; elapsed = 00:00:12 . Memory (MB): peak = 460.637 ; gain = 151.199
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:09 ; elapsed = 00:00:12 . Memory (MB): peak = 460.637 ; gain = 151.199
+---------------------------------------------------------------------------------
+INFO: [Device 21-403] Loading part xc7z020clg484-1
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Completed Processing XDC Constraints
+
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+WARNING: [Constraints 18-5210] No constraint will be written out.
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.330 . Memory (MB): peak = 809.910 ; gain = 1.668
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:33 ; elapsed = 00:00:53 . Memory (MB): peak = 809.910 ; gain = 500.473
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7z020clg484-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:33 ; elapsed = 00:00:53 . Memory (MB): peak = 809.910 ; gain = 500.473
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:33 ; elapsed = 00:00:53 . Memory (MB): peak = 809.910 ; gain = 500.473
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:33 ; elapsed = 00:00:54 . Memory (MB): peak = 809.910 ; gain = 500.473
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      8 Bit       Adders := 6     
+	   2 Input      6 Bit       Adders := 1     
++---XORs : 
+	   2 Input      1 Bit         XORs := 2     
++---Registers : 
+	               33 Bit    Registers := 1     
+	               32 Bit    Registers := 20    
+	                8 Bit    Registers := 8     
+	                6 Bit    Registers := 1     
+	                4 Bit    Registers := 2     
+	                2 Bit    Registers := 3     
+	                1 Bit    Registers := 13    
++---Muxes : 
+	   2 Input     33 Bit        Muxes := 4     
+	   2 Input     32 Bit        Muxes := 2     
+	   4 Input     32 Bit        Muxes := 3     
+	   2 Input      6 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 8     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Hierarchical Component Statistics 
+---------------------------------------------------------------------------------
+Hierarchical RTL Component report 
+Module BiDirChannels_v1_0_S00_AXI 
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 3     
+	                4 Bit    Registers := 2     
+	                2 Bit    Registers := 2     
+	                1 Bit    Registers := 6     
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 2     
+	   4 Input     32 Bit        Muxes := 3     
+	   2 Input      1 Bit        Muxes := 5     
+Module register_32bits 
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 1     
+Module shift_reg_8bits 
+Detailed RTL Component Info : 
++---Registers : 
+	                8 Bit    Registers := 1     
+Module mux_2x1_1bit 
+Detailed RTL Component Info : 
++---Muxes : 
+	   2 Input      1 Bit        Muxes := 1     
+Module dff 
+Detailed RTL Component Info : 
++---Registers : 
+	                1 Bit    Registers := 1     
+Module register_2bits 
+Detailed RTL Component Info : 
++---Registers : 
+	                2 Bit    Registers := 1     
+Module counter48Cycles 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      6 Bit       Adders := 1     
++---Registers : 
+	                6 Bit    Registers := 1     
++---Muxes : 
+	   2 Input      6 Bit        Muxes := 1     
+Module maskHSCK 
+Detailed RTL Component Info : 
++---XORs : 
+	   2 Input      1 Bit         XORs := 1     
+Module inputShiftRegister32Bits 
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 1     
+Module outputShiftRegister32Bits 
+Detailed RTL Component Info : 
++---Registers : 
+	               33 Bit    Registers := 1     
++---Muxes : 
+	   2 Input     33 Bit        Muxes := 4     
+Module GyroInputOutputChannel 
+Detailed RTL Component Info : 
++---XORs : 
+	   2 Input      1 Bit         XORs := 1     
+Module upCounter8Bits 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      8 Bit       Adders := 1     
++---Registers : 
+	                8 Bit    Registers := 1     
+---------------------------------------------------------------------------------
+Finished RTL Hierarchical Component Statistics
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 220 (col length:60)
+BRAMs: 280 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+Warning: Parallel synthesis criteria is not met 
+WARNING: [Synth 8-6014] Unused sequential element inst/X1/CHANNELS/STATE_REG/data_out_reg was removed.  [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0.v:147]
+WARNING: [Synth 8-6014] Unused sequential element inst/X1/DEBUGGER/InLastReg/Q_reg was removed.  [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ipshared/3242/hdl/BiDirChannels_v1_0.v:17]
+INFO: [Synth 8-3917] design design_1_BiDirChannels_0_0 has port m00_axis_tstrb[3] driven by constant 0
+INFO: [Synth 8-3917] design design_1_BiDirChannels_0_0 has port m00_axis_tstrb[2] driven by constant 0
+INFO: [Synth 8-3917] design design_1_BiDirChannels_0_0 has port m00_axis_tstrb[1] driven by constant 0
+INFO: [Synth 8-3917] design design_1_BiDirChannels_0_0 has port m00_axis_tstrb[0] driven by constant 0
+WARNING: [Synth 8-3331] design design_1_BiDirChannels_0_0 has unconnected port s00_axi_awprot[2]
+WARNING: [Synth 8-3331] design design_1_BiDirChannels_0_0 has unconnected port s00_axi_awprot[1]
+WARNING: [Synth 8-3331] design design_1_BiDirChannels_0_0 has unconnected port s00_axi_awprot[0]
+WARNING: [Synth 8-3331] design design_1_BiDirChannels_0_0 has unconnected port s00_axi_arprot[2]
+WARNING: [Synth 8-3331] design design_1_BiDirChannels_0_0 has unconnected port s00_axi_arprot[1]
+WARNING: [Synth 8-3331] design design_1_BiDirChannels_0_0 has unconnected port s00_axi_arprot[0]
+WARNING: [Synth 8-3331] design design_1_BiDirChannels_0_0 has unconnected port m00_axis_aclk
+WARNING: [Synth 8-3331] design design_1_BiDirChannels_0_0 has unconnected port m00_axis_aresetn
+WARNING: [Synth 8-3331] design design_1_BiDirChannels_0_0 has unconnected port s00_axis_tstrb[3]
+WARNING: [Synth 8-3331] design design_1_BiDirChannels_0_0 has unconnected port s00_axis_tstrb[2]
+WARNING: [Synth 8-3331] design design_1_BiDirChannels_0_0 has unconnected port s00_axis_tstrb[1]
+WARNING: [Synth 8-3331] design design_1_BiDirChannels_0_0 has unconnected port s00_axis_tstrb[0]
+WARNING: [Synth 8-3331] design design_1_BiDirChannels_0_0 has unconnected port s00_axis_aclk
+WARNING: [Synth 8-3331] design design_1_BiDirChannels_0_0 has unconnected port s00_axis_aresetn
+INFO: [Synth 8-3886] merging instance 'inst/BiDirChannels_v1_0_S00_AXI_inst/axi_rresp_reg[0]' (FDRE) to 'inst/BiDirChannels_v1_0_S00_AXI_inst/axi_rresp_reg[1]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\inst/BiDirChannels_v1_0_S00_AXI_inst/axi_rresp_reg[1] )
+INFO: [Synth 8-3886] merging instance 'inst/BiDirChannels_v1_0_S00_AXI_inst/axi_bresp_reg[0]' (FDRE) to 'inst/BiDirChannels_v1_0_S00_AXI_inst/axi_bresp_reg[1]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\inst/BiDirChannels_v1_0_S00_AXI_inst/axi_bresp_reg[1] )
+INFO: [Synth 8-3332] Sequential element (inst/BiDirChannels_v1_0_S00_AXI_inst/axi_awaddr_reg[1]) is unused and will be removed from module design_1_BiDirChannels_0_0.
+INFO: [Synth 8-3332] Sequential element (inst/BiDirChannels_v1_0_S00_AXI_inst/axi_awaddr_reg[0]) is unused and will be removed from module design_1_BiDirChannels_0_0.
+INFO: [Synth 8-3332] Sequential element (inst/BiDirChannels_v1_0_S00_AXI_inst/axi_bresp_reg[1]) is unused and will be removed from module design_1_BiDirChannels_0_0.
+INFO: [Synth 8-3332] Sequential element (inst/BiDirChannels_v1_0_S00_AXI_inst/axi_araddr_reg[1]) is unused and will be removed from module design_1_BiDirChannels_0_0.
+INFO: [Synth 8-3332] Sequential element (inst/BiDirChannels_v1_0_S00_AXI_inst/axi_araddr_reg[0]) is unused and will be removed from module design_1_BiDirChannels_0_0.
+INFO: [Synth 8-3332] Sequential element (inst/BiDirChannels_v1_0_S00_AXI_inst/axi_rresp_reg[1]) is unused and will be removed from module design_1_BiDirChannels_0_0.
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\inst/X1/CHANNELS/OUT_SHIFT_REG/r_reg_reg[0]_C )
+INFO: [Synth 8-3332] Sequential element (inst/X1/CHANNELS/OUT_SHIFT_REG/r_reg_reg[0]_C) is unused and will be removed from module design_1_BiDirChannels_0_0.
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:37 ; elapsed = 00:00:59 . Memory (MB): peak = 809.910 ; gain = 500.473
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:57 ; elapsed = 00:01:23 . Memory (MB): peak = 809.910 ; gain = 500.473
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:58 ; elapsed = 00:01:23 . Memory (MB): peak = 809.910 ; gain = 500.473
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:58 ; elapsed = 00:01:23 . Memory (MB): peak = 820.363 ; gain = 510.926
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:01:01 ; elapsed = 00:01:27 . Memory (MB): peak = 820.363 ; gain = 510.926
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:01:01 ; elapsed = 00:01:27 . Memory (MB): peak = 820.363 ; gain = 510.926
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:01 ; elapsed = 00:01:27 . Memory (MB): peak = 820.363 ; gain = 510.926
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:01:01 ; elapsed = 00:01:27 . Memory (MB): peak = 820.363 ; gain = 510.926
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:01:01 ; elapsed = 00:01:27 . Memory (MB): peak = 820.363 ; gain = 510.926
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:01:01 ; elapsed = 00:01:27 . Memory (MB): peak = 820.363 ; gain = 510.926
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+Static Shift Register Report:
++---------------------------+-------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|Module Name                | RTL Name                                              | Length | Width | Reset Signal | Pull out first Reg | Pull out last Reg | SRL16E | SRLC32E | 
++---------------------------+-------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|design_1_BiDirChannels_0_0 | inst/X1/BUFFERS/inputShiftRegister/out_reg[7]         | 8      | 1     | YES          | NO                 | YES               | 1      | 0       | 
+|design_1_BiDirChannels_0_0 | inst/X1/BUFFERS/inputDelayLine/Reg7/data_out_reg[31]  | 8      | 32    | YES          | NO                 | YES               | 32     | 0       | 
+|design_1_BiDirChannels_0_0 | inst/X1/BUFFERS/outputShiftRegister/out_reg[6]        | 7      | 1     | YES          | NO                 | YES               | 1      | 0       | 
+|design_1_BiDirChannels_0_0 | inst/X1/BUFFERS/outputDelayLine/Reg7/data_out_reg[31] | 8      | 32    | YES          | NO                 | YES               | 32     | 0       | 
++---------------------------+-------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |LUT1   |    13|
+|2     |LUT2   |    85|
+|3     |LUT3   |    47|
+|4     |LUT4   |    22|
+|5     |LUT5   |    27|
+|6     |LUT6   |    99|
+|7     |SRL16E |    66|
+|8     |FDCE   |   205|
+|9     |FDPE   |    32|
+|10    |FDRE   |   171|
+|11    |FDSE   |     1|
+|12    |LDC    |    32|
++------+-------+------+
+
+Report Instance Areas: 
++------+------------------------------------+---------------------------+------+
+|      |Instance                            |Module                     |Cells |
++------+------------------------------------+---------------------------+------+
+|1     |top                                 |                           |   800|
+|2     |  inst                              |BiDirChannels_v1_0         |   798|
+|3     |    BiDirChannels_v1_0_S00_AXI_inst |BiDirChannels_v1_0_S00_AXI |   161|
+|4     |    X1                              |GyroBiDirChannelController |   637|
+|5     |      BUFFERS                       |GyroBiDirTokenBuffer       |   285|
+|6     |        inputDelayLine              |delay_line_8x32bits        |   128|
+|7     |          Reg5                      |register_32bits_19         |    32|
+|8     |          Reg6                      |register_32bits_20         |    64|
+|9     |          Reg7                      |register_32bits_21         |    32|
+|10    |        inputFF                     |dff_8                      |     2|
+|11    |        inputShiftRegister          |shift_reg_8bits            |    12|
+|12    |        outputDelayLine             |delay_line_8x32bits_9      |   135|
+|13    |          Reg0                      |register_32bits            |     1|
+|14    |          Reg1                      |register_32bits_12         |     1|
+|15    |          Reg2                      |register_32bits_13         |     1|
+|16    |          Reg3                      |register_32bits_14         |     1|
+|17    |          Reg4                      |register_32bits_15         |     1|
+|18    |          Reg5                      |register_32bits_16         |    33|
+|19    |          Reg6                      |register_32bits_17         |    65|
+|20    |          Reg7                      |register_32bits_18         |    32|
+|21    |        outputFF                    |dff_10                     |     2|
+|22    |        outputShiftRegister         |shift_reg_8bits_11         |     6|
+|23    |      CHANNELS                      |GyroInputOutputChannel     |   250|
+|24    |        CLK_DIV2                    |clock_divider_by_2         |     1|
+|25    |          ff0                       |dff_7                      |     1|
+|26    |        FF1                         |dff                        |     2|
+|27    |        IN_SHIFT_REG                |inputShiftRegister32Bits   |    32|
+|28    |        MASK_HSCK                   |maskHSCK                   |    66|
+|29    |          ff0                       |dff_5                      |     1|
+|30    |          ff1                       |dff_6                      |    65|
+|31    |        OUT_SHIFT_REG               |outputShiftRegister32Bits  |   129|
+|32    |        PULSE_CNTR                  |counter48Cycles            |    20|
+|33    |      DEBUGGER                      |GyroChannelDebugger        |   102|
+|34    |        CNTR0                       |upCounter8Bits             |    17|
+|35    |        CNTR1                       |upCounter8Bits_0           |    17|
+|36    |        CNTR2                       |upCounter8Bits_1           |    17|
+|37    |        CNTR3                       |upCounter8Bits_2           |    17|
+|38    |        CNTR4                       |upCounter8Bits_3           |    17|
+|39    |        CNTR5                       |upCounter8Bits_4           |    17|
++------+------------------------------------+---------------------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:01:01 ; elapsed = 00:01:27 . Memory (MB): peak = 820.363 ; gain = 510.926
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 16 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:35 ; elapsed = 00:00:55 . Memory (MB): peak = 820.363 ; gain = 161.652
+Synthesis Optimization Complete : Time (s): cpu = 00:01:02 ; elapsed = 00:01:28 . Memory (MB): peak = 820.363 ; gain = 510.926
+INFO: [Project 1-571] Translating synthesized netlist
+INFO: [Netlist 29-17] Analyzing 32 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 32 instances were transformed.
+  LDC => LDCE: 32 instances
+
+INFO: [Common 17-83] Releasing license: Synthesis
+67 Infos, 42 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:01:06 ; elapsed = 00:01:35 . Memory (MB): peak = 832.262 ; gain = 532.797
+WARNING: [Constraints 18-5210] No constraint will be written out.
+INFO: [Common 17-1381] The checkpoint 'C:/Xilinx_Projects/gyro_project/tester/tester.runs/design_1_BiDirChannels_0_0_synth_1/design_1_BiDirChannels_0_0.dcp' has been generated.

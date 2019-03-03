@@ -1,7 +1,7 @@
 -- Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
--- Date        : Sat Mar  2 14:29:16 2019
+-- Date        : Sat Mar  2 21:14:08 2019
 -- Host        : DESKTOP-KC9HGNO running 64-bit major release  (build 9200)
 -- Command     : write_vhdl -force -mode funcsim
 --               C:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ip/design_1_BiDirChannels_0_0/design_1_BiDirChannels_0_0_sim_netlist.vhdl
@@ -56,6 +56,7 @@ architecture STRUCTURE of design_1_BiDirChannels_0_0_BiDirChannels_v1_0_S00_AXI 
   signal \axi_araddr[2]_i_1_n_0\ : STD_LOGIC;
   signal \axi_araddr[3]_i_1_n_0\ : STD_LOGIC;
   signal axi_arready0 : STD_LOGIC;
+  signal axi_awaddr : STD_LOGIC_VECTOR ( 3 downto 2 );
   signal \axi_awaddr[2]_i_1_n_0\ : STD_LOGIC;
   signal \axi_awaddr[3]_i_1_n_0\ : STD_LOGIC;
   signal axi_awready0 : STD_LOGIC;
@@ -64,7 +65,6 @@ architecture STRUCTURE of design_1_BiDirChannels_0_0_BiDirChannels_v1_0_S00_AXI 
   signal axi_rvalid_i_1_n_0 : STD_LOGIC;
   signal axi_wready0 : STD_LOGIC;
   signal data_word_0 : STD_LOGIC_VECTOR ( 16 to 16 );
-  signal p_0_in : STD_LOGIC_VECTOR ( 1 downto 0 );
   signal p_1_in : STD_LOGIC_VECTOR ( 28 downto 7 );
   signal \^r_reg_reg[4]\ : STD_LOGIC_VECTOR ( 2 downto 0 );
   signal reg_data_out : STD_LOGIC_VECTOR ( 31 downto 0 );
@@ -247,7 +247,7 @@ axi_arready_reg: unisim.vcomponents.FDRE
       I2 => \^s00_axi_awready\,
       I3 => aw_en_reg_n_0,
       I4 => s00_axi_awvalid,
-      I5 => p_0_in(0),
+      I5 => axi_awaddr(2),
       O => \axi_awaddr[2]_i_1_n_0\
     );
 \axi_awaddr[3]_i_1\: unisim.vcomponents.LUT6
@@ -260,7 +260,7 @@ axi_arready_reg: unisim.vcomponents.FDRE
       I2 => \^s00_axi_awready\,
       I3 => aw_en_reg_n_0,
       I4 => s00_axi_awvalid,
-      I5 => p_0_in(1),
+      I5 => axi_awaddr(3),
       O => \axi_awaddr[3]_i_1_n_0\
     );
 \axi_awaddr_reg[2]\: unisim.vcomponents.FDRE
@@ -268,7 +268,7 @@ axi_arready_reg: unisim.vcomponents.FDRE
       C => s00_axi_aclk,
       CE => '1',
       D => \axi_awaddr[2]_i_1_n_0\,
-      Q => p_0_in(0),
+      Q => axi_awaddr(2),
       R => axi_awready_i_1_n_0
     );
 \axi_awaddr_reg[3]\: unisim.vcomponents.FDRE
@@ -276,7 +276,7 @@ axi_arready_reg: unisim.vcomponents.FDRE
       C => s00_axi_aclk,
       CE => '1',
       D => \axi_awaddr[3]_i_1_n_0\,
-      Q => p_0_in(1),
+      Q => axi_awaddr(3),
       R => axi_awready_i_1_n_0
     );
 axi_awready_i_1: unisim.vcomponents.LUT1
@@ -1037,8 +1037,8 @@ axi_wready_reg: unisim.vcomponents.FDRE
     )
         port map (
       I0 => \slv_reg_wren__0\,
-      I1 => p_0_in(1),
-      I2 => p_0_in(0),
+      I1 => axi_awaddr(3),
+      I2 => axi_awaddr(2),
       I3 => s00_axi_wstrb(1),
       O => p_1_in(15)
     );
@@ -1048,8 +1048,8 @@ axi_wready_reg: unisim.vcomponents.FDRE
     )
         port map (
       I0 => \slv_reg_wren__0\,
-      I1 => p_0_in(1),
-      I2 => p_0_in(0),
+      I1 => axi_awaddr(3),
+      I2 => axi_awaddr(2),
       I3 => s00_axi_wstrb(2),
       O => p_1_in(23)
     );
@@ -1059,8 +1059,8 @@ axi_wready_reg: unisim.vcomponents.FDRE
     )
         port map (
       I0 => \slv_reg_wren__0\,
-      I1 => p_0_in(1),
-      I2 => p_0_in(0),
+      I1 => axi_awaddr(3),
+      I2 => axi_awaddr(2),
       I3 => s00_axi_wstrb(3),
       O => p_1_in(28)
     );
@@ -1081,8 +1081,8 @@ axi_wready_reg: unisim.vcomponents.FDRE
     )
         port map (
       I0 => \slv_reg_wren__0\,
-      I1 => p_0_in(1),
-      I2 => p_0_in(0),
+      I1 => axi_awaddr(3),
+      I2 => axi_awaddr(2),
       I3 => s00_axi_wstrb(0),
       O => p_1_in(7)
     );
@@ -1349,8 +1349,8 @@ axi_wready_reg: unisim.vcomponents.FDRE
         port map (
       I0 => \slv_reg_wren__0\,
       I1 => s00_axi_wstrb(1),
-      I2 => p_0_in(0),
-      I3 => p_0_in(1),
+      I2 => axi_awaddr(2),
+      I3 => axi_awaddr(3),
       O => \slv_reg1[15]_i_1_n_0\
     );
 \slv_reg1[23]_i_1\: unisim.vcomponents.LUT4
@@ -1360,8 +1360,8 @@ axi_wready_reg: unisim.vcomponents.FDRE
         port map (
       I0 => \slv_reg_wren__0\,
       I1 => s00_axi_wstrb(2),
-      I2 => p_0_in(0),
-      I3 => p_0_in(1),
+      I2 => axi_awaddr(2),
+      I3 => axi_awaddr(3),
       O => \slv_reg1[23]_i_1_n_0\
     );
 \slv_reg1[31]_i_1\: unisim.vcomponents.LUT4
@@ -1371,8 +1371,8 @@ axi_wready_reg: unisim.vcomponents.FDRE
         port map (
       I0 => \slv_reg_wren__0\,
       I1 => s00_axi_wstrb(3),
-      I2 => p_0_in(0),
-      I3 => p_0_in(1),
+      I2 => axi_awaddr(2),
+      I3 => axi_awaddr(3),
       O => \slv_reg1[31]_i_1_n_0\
     );
 \slv_reg1[7]_i_1\: unisim.vcomponents.LUT4
@@ -1382,8 +1382,8 @@ axi_wready_reg: unisim.vcomponents.FDRE
         port map (
       I0 => \slv_reg_wren__0\,
       I1 => s00_axi_wstrb(0),
-      I2 => p_0_in(0),
-      I3 => p_0_in(1),
+      I2 => axi_awaddr(2),
+      I3 => axi_awaddr(3),
       O => \slv_reg1[7]_i_1_n_0\
     );
 \slv_reg1_reg[0]\: unisim.vcomponents.FDRE
@@ -3005,8 +3005,8 @@ use UNISIM.VCOMPONENTS.ALL;
 entity design_1_BiDirChannels_0_0_dff_8 is
   port (
     tx_token_valid_int : out STD_LOGIC;
-    s00_axis_tready : out STD_LOGIC;
-    D : in STD_LOGIC;
+    in_inj_bit : out STD_LOGIC;
+    \out_reg[7]\ : in STD_LOGIC;
     s00_axi_aclk : in STD_LOGIC;
     \slv_reg0_reg[31]\ : in STD_LOGIC
   );
@@ -3023,16 +3023,16 @@ Q_reg: unisim.vcomponents.FDCE
       C => s00_axi_aclk,
       CE => '1',
       CLR => \slv_reg0_reg[31]\,
-      D => D,
+      D => \out_reg[7]\,
       Q => \^tx_token_valid_int\
     );
-s00_axis_tready_INST_0: unisim.vcomponents.LUT1
+\out_reg[5]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4_i_1\: unisim.vcomponents.LUT1
     generic map(
       INIT => X"1"
     )
         port map (
       I0 => \^tx_token_valid_int\,
-      O => s00_axis_tready
+      O => in_inj_bit
     );
 end STRUCTURE;
 library IEEE;
@@ -7954,16 +7954,18 @@ use UNISIM.VCOMPONENTS.ALL;
 entity design_1_BiDirChannels_0_0_shift_reg_8bits is
   port (
     \out_reg[7]_0\ : out STD_LOGIC;
-    D : out STD_LOGIC;
+    Q_reg : out STD_LOGIC;
+    s00_axis_tready : out STD_LOGIC;
     debug_in_shift_int : in STD_LOGIC;
     \slv_reg0_reg[31]\ : in STD_LOGIC;
-    s00_axis_tready : in STD_LOGIC
+    in_inj_bit : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
   attribute ORIG_REF_NAME of design_1_BiDirChannels_0_0_shift_reg_8bits : entity is "shift_reg_8bits";
 end design_1_BiDirChannels_0_0_shift_reg_8bits;
 
 architecture STRUCTURE of design_1_BiDirChannels_0_0_shift_reg_8bits is
+  signal \^q_reg\ : STD_LOGIC;
   signal \out_reg[5]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4_n_0\ : STD_LOGIC;
   signal \out_reg[6]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0\ : STD_LOGIC;
   signal \^out_reg[7]_0\ : STD_LOGIC;
@@ -7979,6 +7981,7 @@ architecture STRUCTURE of design_1_BiDirChannels_0_0_shift_reg_8bits is
   attribute srl_name : string;
   attribute srl_name of \out_reg[5]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4\ : label is "\inst/X1/BUFFERS/inputShiftRegister/out_reg[5]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 ";
 begin
+  Q_reg <= \^q_reg\;
   \out_reg[7]_0\ <= \^out_reg[7]_0\;
 \out_reg[5]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4\: unisim.vcomponents.SRL16E
      port map (
@@ -7988,7 +7991,7 @@ begin
       A3 => '0',
       CE => '1',
       CLK => debug_in_shift_int,
-      D => s00_axis_tready,
+      D => in_inj_bit,
       Q => \out_reg[5]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4_n_0\
     );
 \out_reg[6]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5\: unisim.vcomponents.FDRE
@@ -8005,7 +8008,7 @@ begin
       CE => '1',
       CLR => \slv_reg0_reg[31]\,
       D => out_reg_gate_n_0,
-      Q => D
+      Q => \^q_reg\
     );
 out_reg_c: unisim.vcomponents.FDCE
      port map (
@@ -8071,6 +8074,14 @@ out_reg_gate: unisim.vcomponents.LUT2
       I0 => \out_reg[6]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0\,
       I1 => \^out_reg[7]_0\,
       O => out_reg_gate_n_0
+    );
+s00_axis_tready_INST_0: unisim.vcomponents.LUT1
+    generic map(
+      INIT => X"1"
+    )
+        port map (
+      I0 => \^q_reg\,
+      O => s00_axis_tready
     );
 end STRUCTURE;
 library IEEE;
@@ -10167,7 +10178,6 @@ entity design_1_BiDirChannels_0_0_GyroBiDirTokenBuffer is
     tx_token_valid_int : out STD_LOGIC;
     out_shift_sel : out STD_LOGIC;
     m00_axis_tvalid : out STD_LOGIC;
-    s00_axis_tready : out STD_LOGIC;
     \r_reg_reg[31]_P\ : out STD_LOGIC;
     \r_reg_reg[30]_P\ : out STD_LOGIC;
     \r_reg_reg[29]_P\ : out STD_LOGIC;
@@ -10202,6 +10212,7 @@ entity design_1_BiDirChannels_0_0_GyroBiDirTokenBuffer is
     \r_reg_reg[0]_P\ : out STD_LOGIC;
     m00_axis_tdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
     CLK : out STD_LOGIC;
+    s00_axis_tready : out STD_LOGIC;
     s00_axi_aclk : in STD_LOGIC;
     \slv_reg0_reg[31]\ : in STD_LOGIC;
     in01 : in STD_LOGIC;
@@ -10215,15 +10226,14 @@ entity design_1_BiDirChannels_0_0_GyroBiDirTokenBuffer is
 end design_1_BiDirChannels_0_0_GyroBiDirTokenBuffer;
 
 architecture STRUCTURE of design_1_BiDirChannels_0_0_GyroBiDirTokenBuffer is
-  signal D : STD_LOGIC;
+  signal in_inj_bit : STD_LOGIC;
   signal inputShiftRegister_n_0 : STD_LOGIC;
+  signal inputShiftRegister_n_1 : STD_LOGIC;
   signal \^m00_axis_tvalid\ : STD_LOGIC;
   signal outputDelayLine_n_0 : STD_LOGIC;
   signal outputFF_n_1 : STD_LOGIC;
-  signal \^s00_axis_tready\ : STD_LOGIC;
 begin
   m00_axis_tvalid <= \^m00_axis_tvalid\;
-  s00_axis_tready <= \^s00_axis_tready\;
 inputDelayLine: entity work.design_1_BiDirChannels_0_0_delay_line_8x32bits
      port map (
       debug_in_shift_int => debug_in_shift_int,
@@ -10265,18 +10275,19 @@ inputDelayLine: entity work.design_1_BiDirChannels_0_0_delay_line_8x32bits
     );
 inputFF: entity work.design_1_BiDirChannels_0_0_dff_8
      port map (
-      D => D,
+      in_inj_bit => in_inj_bit,
+      \out_reg[7]\ => inputShiftRegister_n_1,
       s00_axi_aclk => s00_axi_aclk,
-      s00_axis_tready => \^s00_axis_tready\,
       \slv_reg0_reg[31]\ => \slv_reg0_reg[31]\,
       tx_token_valid_int => tx_token_valid_int
     );
 inputShiftRegister: entity work.design_1_BiDirChannels_0_0_shift_reg_8bits
      port map (
-      D => D,
+      Q_reg => inputShiftRegister_n_1,
       debug_in_shift_int => debug_in_shift_int,
+      in_inj_bit => in_inj_bit,
       \out_reg[7]_0\ => inputShiftRegister_n_0,
-      s00_axis_tready => \^s00_axis_tready\,
+      s00_axis_tready => s00_axis_tready,
       \slv_reg0_reg[31]\ => \slv_reg0_reg[31]\
     );
 outputDelayLine: entity work.design_1_BiDirChannels_0_0_delay_line_8x32bits_9
@@ -10680,7 +10691,6 @@ entity design_1_BiDirChannels_0_0_GyroBiDirChannelController is
     MCK : out STD_LOGIC;
     m00_axis_tvalid : out STD_LOGIC;
     HS_DataOut : out STD_LOGIC;
-    s00_axis_tready : out STD_LOGIC;
     m00_axis_tdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
     m00_axis_tlast : out STD_LOGIC;
     HS_Clock : out STD_LOGIC;
@@ -10690,6 +10700,7 @@ entity design_1_BiDirChannels_0_0_GyroBiDirChannelController is
     \r_reg_reg[7]_1\ : out STD_LOGIC_VECTOR ( 7 downto 0 );
     \r_reg_reg[7]_2\ : out STD_LOGIC_VECTOR ( 7 downto 0 );
     \r_reg_reg[7]_3\ : out STD_LOGIC_VECTOR ( 7 downto 0 );
+    s00_axis_tready : out STD_LOGIC;
     CLK : in STD_LOGIC;
     s00_axi_aclk : in STD_LOGIC;
     \slv_reg0_reg[31]\ : in STD_LOGIC;
@@ -10729,12 +10740,12 @@ architecture STRUCTURE of design_1_BiDirChannels_0_0_GyroBiDirChannelController 
   signal BUFFERS_n_27 : STD_LOGIC;
   signal BUFFERS_n_28 : STD_LOGIC;
   signal BUFFERS_n_29 : STD_LOGIC;
+  signal BUFFERS_n_3 : STD_LOGIC;
   signal BUFFERS_n_30 : STD_LOGIC;
   signal BUFFERS_n_31 : STD_LOGIC;
   signal BUFFERS_n_32 : STD_LOGIC;
   signal BUFFERS_n_33 : STD_LOGIC;
   signal BUFFERS_n_34 : STD_LOGIC;
-  signal BUFFERS_n_35 : STD_LOGIC;
   signal BUFFERS_n_4 : STD_LOGIC;
   signal BUFFERS_n_5 : STD_LOGIC;
   signal BUFFERS_n_6 : STD_LOGIC;
@@ -10761,38 +10772,38 @@ BUFFERS: entity work.design_1_BiDirChannels_0_0_GyroBiDirTokenBuffer
       m00_axis_tdata(31 downto 0) => m00_axis_tdata(31 downto 0),
       m00_axis_tvalid => m00_axis_tvalid,
       out_shift_sel => out_shift_sel,
-      \r_reg_reg[0]_P\ => BUFFERS_n_35,
-      \r_reg_reg[10]_P\ => BUFFERS_n_25,
-      \r_reg_reg[11]_P\ => BUFFERS_n_24,
-      \r_reg_reg[12]_P\ => BUFFERS_n_23,
-      \r_reg_reg[13]_P\ => BUFFERS_n_22,
-      \r_reg_reg[14]_P\ => BUFFERS_n_21,
-      \r_reg_reg[15]_P\ => BUFFERS_n_20,
-      \r_reg_reg[16]_P\ => BUFFERS_n_19,
-      \r_reg_reg[17]_P\ => BUFFERS_n_18,
-      \r_reg_reg[18]_P\ => BUFFERS_n_17,
-      \r_reg_reg[19]_P\ => BUFFERS_n_16,
-      \r_reg_reg[1]_P\ => BUFFERS_n_34,
-      \r_reg_reg[20]_P\ => BUFFERS_n_15,
-      \r_reg_reg[21]_P\ => BUFFERS_n_14,
-      \r_reg_reg[22]_P\ => BUFFERS_n_13,
-      \r_reg_reg[23]_P\ => BUFFERS_n_12,
-      \r_reg_reg[24]_P\ => BUFFERS_n_11,
-      \r_reg_reg[25]_P\ => BUFFERS_n_10,
-      \r_reg_reg[26]_P\ => BUFFERS_n_9,
-      \r_reg_reg[27]_P\ => BUFFERS_n_8,
-      \r_reg_reg[28]_P\ => BUFFERS_n_7,
-      \r_reg_reg[29]_P\ => BUFFERS_n_6,
-      \r_reg_reg[2]_P\ => BUFFERS_n_33,
-      \r_reg_reg[30]_P\ => BUFFERS_n_5,
-      \r_reg_reg[31]_P\ => BUFFERS_n_4,
-      \r_reg_reg[3]_P\ => BUFFERS_n_32,
-      \r_reg_reg[4]_P\ => BUFFERS_n_31,
-      \r_reg_reg[5]_P\ => BUFFERS_n_30,
-      \r_reg_reg[6]_P\ => BUFFERS_n_29,
-      \r_reg_reg[7]_P\ => BUFFERS_n_28,
-      \r_reg_reg[8]_P\ => BUFFERS_n_27,
-      \r_reg_reg[9]_P\ => BUFFERS_n_26,
+      \r_reg_reg[0]_P\ => BUFFERS_n_34,
+      \r_reg_reg[10]_P\ => BUFFERS_n_24,
+      \r_reg_reg[11]_P\ => BUFFERS_n_23,
+      \r_reg_reg[12]_P\ => BUFFERS_n_22,
+      \r_reg_reg[13]_P\ => BUFFERS_n_21,
+      \r_reg_reg[14]_P\ => BUFFERS_n_20,
+      \r_reg_reg[15]_P\ => BUFFERS_n_19,
+      \r_reg_reg[16]_P\ => BUFFERS_n_18,
+      \r_reg_reg[17]_P\ => BUFFERS_n_17,
+      \r_reg_reg[18]_P\ => BUFFERS_n_16,
+      \r_reg_reg[19]_P\ => BUFFERS_n_15,
+      \r_reg_reg[1]_P\ => BUFFERS_n_33,
+      \r_reg_reg[20]_P\ => BUFFERS_n_14,
+      \r_reg_reg[21]_P\ => BUFFERS_n_13,
+      \r_reg_reg[22]_P\ => BUFFERS_n_12,
+      \r_reg_reg[23]_P\ => BUFFERS_n_11,
+      \r_reg_reg[24]_P\ => BUFFERS_n_10,
+      \r_reg_reg[25]_P\ => BUFFERS_n_9,
+      \r_reg_reg[26]_P\ => BUFFERS_n_8,
+      \r_reg_reg[27]_P\ => BUFFERS_n_7,
+      \r_reg_reg[28]_P\ => BUFFERS_n_6,
+      \r_reg_reg[29]_P\ => BUFFERS_n_5,
+      \r_reg_reg[2]_P\ => BUFFERS_n_32,
+      \r_reg_reg[30]_P\ => BUFFERS_n_4,
+      \r_reg_reg[31]_P\ => BUFFERS_n_3,
+      \r_reg_reg[3]_P\ => BUFFERS_n_31,
+      \r_reg_reg[4]_P\ => BUFFERS_n_30,
+      \r_reg_reg[5]_P\ => BUFFERS_n_29,
+      \r_reg_reg[6]_P\ => BUFFERS_n_28,
+      \r_reg_reg[7]_P\ => BUFFERS_n_27,
+      \r_reg_reg[8]_P\ => BUFFERS_n_26,
+      \r_reg_reg[9]_P\ => BUFFERS_n_25,
       s00_axi_aclk => s00_axi_aclk,
       s00_axis_tdata(31 downto 0) => s00_axis_tdata(31 downto 0),
       s00_axis_tready => s00_axis_tready,
@@ -10807,38 +10818,38 @@ CHANNELS: entity work.design_1_BiDirChannels_0_0_GyroInputOutputChannel
       HS_DataOut => HS_DataOut,
       MCK => MCK,
       Q(31 downto 0) => r_reg(31 downto 0),
-      \data_out_reg[0]\ => BUFFERS_n_35,
-      \data_out_reg[10]\ => BUFFERS_n_25,
-      \data_out_reg[11]\ => BUFFERS_n_24,
-      \data_out_reg[12]\ => BUFFERS_n_23,
-      \data_out_reg[13]\ => BUFFERS_n_22,
-      \data_out_reg[14]\ => BUFFERS_n_21,
-      \data_out_reg[15]\ => BUFFERS_n_20,
-      \data_out_reg[16]\ => BUFFERS_n_19,
-      \data_out_reg[17]\ => BUFFERS_n_18,
-      \data_out_reg[18]\ => BUFFERS_n_17,
-      \data_out_reg[19]\ => BUFFERS_n_16,
-      \data_out_reg[1]\ => BUFFERS_n_34,
-      \data_out_reg[20]\ => BUFFERS_n_15,
-      \data_out_reg[21]\ => BUFFERS_n_14,
-      \data_out_reg[22]\ => BUFFERS_n_13,
-      \data_out_reg[23]\ => BUFFERS_n_12,
-      \data_out_reg[24]\ => BUFFERS_n_11,
-      \data_out_reg[25]\ => BUFFERS_n_10,
-      \data_out_reg[26]\ => BUFFERS_n_9,
-      \data_out_reg[27]\ => BUFFERS_n_8,
-      \data_out_reg[28]\ => BUFFERS_n_7,
-      \data_out_reg[29]\ => BUFFERS_n_6,
-      \data_out_reg[2]\ => BUFFERS_n_33,
-      \data_out_reg[30]\ => BUFFERS_n_5,
-      \data_out_reg[31]\ => BUFFERS_n_4,
-      \data_out_reg[3]\ => BUFFERS_n_32,
-      \data_out_reg[4]\ => BUFFERS_n_31,
-      \data_out_reg[5]\ => BUFFERS_n_30,
-      \data_out_reg[6]\ => BUFFERS_n_29,
-      \data_out_reg[7]\ => BUFFERS_n_28,
-      \data_out_reg[8]\ => BUFFERS_n_27,
-      \data_out_reg[9]\ => BUFFERS_n_26,
+      \data_out_reg[0]\ => BUFFERS_n_34,
+      \data_out_reg[10]\ => BUFFERS_n_24,
+      \data_out_reg[11]\ => BUFFERS_n_23,
+      \data_out_reg[12]\ => BUFFERS_n_22,
+      \data_out_reg[13]\ => BUFFERS_n_21,
+      \data_out_reg[14]\ => BUFFERS_n_20,
+      \data_out_reg[15]\ => BUFFERS_n_19,
+      \data_out_reg[16]\ => BUFFERS_n_18,
+      \data_out_reg[17]\ => BUFFERS_n_17,
+      \data_out_reg[18]\ => BUFFERS_n_16,
+      \data_out_reg[19]\ => BUFFERS_n_15,
+      \data_out_reg[1]\ => BUFFERS_n_33,
+      \data_out_reg[20]\ => BUFFERS_n_14,
+      \data_out_reg[21]\ => BUFFERS_n_13,
+      \data_out_reg[22]\ => BUFFERS_n_12,
+      \data_out_reg[23]\ => BUFFERS_n_11,
+      \data_out_reg[24]\ => BUFFERS_n_10,
+      \data_out_reg[25]\ => BUFFERS_n_9,
+      \data_out_reg[26]\ => BUFFERS_n_8,
+      \data_out_reg[27]\ => BUFFERS_n_7,
+      \data_out_reg[28]\ => BUFFERS_n_6,
+      \data_out_reg[29]\ => BUFFERS_n_5,
+      \data_out_reg[2]\ => BUFFERS_n_32,
+      \data_out_reg[30]\ => BUFFERS_n_4,
+      \data_out_reg[31]\ => BUFFERS_n_3,
+      \data_out_reg[3]\ => BUFFERS_n_31,
+      \data_out_reg[4]\ => BUFFERS_n_30,
+      \data_out_reg[5]\ => BUFFERS_n_29,
+      \data_out_reg[6]\ => BUFFERS_n_28,
+      \data_out_reg[7]\ => BUFFERS_n_27,
+      \data_out_reg[8]\ => BUFFERS_n_26,
+      \data_out_reg[9]\ => BUFFERS_n_25,
       debug_in_shift_int => debug_in_shift_int,
       debug_out_shift_int => debug_out_shift_int,
       m00_axis_tready => m00_axis_tready,
@@ -10884,10 +10895,10 @@ entity design_1_BiDirChannels_0_0_BiDirChannels_v1_0 is
     HS_DataOut : out STD_LOGIC;
     s00_axi_bvalid : out STD_LOGIC;
     s00_axi_rvalid : out STD_LOGIC;
-    s00_axis_tready : out STD_LOGIC;
     m00_axis_tdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
     m00_axis_tlast : out STD_LOGIC;
     HS_Clock : out STD_LOGIC;
+    s00_axis_tready : out STD_LOGIC;
     s00_axi_rdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
     s00_axi_aclk : in STD_LOGIC;
     CLK : in STD_LOGIC;
@@ -10915,8 +10926,8 @@ end design_1_BiDirChannels_0_0_BiDirChannels_v1_0;
 architecture STRUCTURE of design_1_BiDirChannels_0_0_BiDirChannels_v1_0 is
   signal BiDirChannels_v1_0_S00_AXI_inst_n_10 : STD_LOGIC;
   signal BiDirChannels_v1_0_S00_AXI_inst_n_11 : STD_LOGIC;
-  signal BiDirChannels_v1_0_S00_AXI_inst_n_5 : STD_LOGIC;
   signal BiDirChannels_v1_0_S00_AXI_inst_n_6 : STD_LOGIC;
+  signal D : STD_LOGIC;
   signal \DEBUGGER/CNTR0/r_reg_reg__0\ : STD_LOGIC_VECTOR ( 7 downto 0 );
   signal \DEBUGGER/CNTR1/r_reg_reg__0\ : STD_LOGIC_VECTOR ( 7 downto 0 );
   signal \DEBUGGER/CNTR2/r_reg_reg__0\ : STD_LOGIC_VECTOR ( 7 downto 0 );
@@ -10928,7 +10939,7 @@ begin
 BiDirChannels_v1_0_S00_AXI_inst: entity work.design_1_BiDirChannels_0_0_BiDirChannels_v1_0_S00_AXI
      port map (
       Q(7 downto 0) => \DEBUGGER/CNTR0/r_reg_reg__0\(7 downto 0),
-      Q_reg(1) => BiDirChannels_v1_0_S00_AXI_inst_n_5,
+      Q_reg(1) => D,
       Q_reg(0) => BiDirChannels_v1_0_S00_AXI_inst_n_6,
       \r_reg_reg[4]\(2) => data_word_0(31),
       \r_reg_reg[4]\(1) => data_word_0(28),
@@ -10987,7 +10998,7 @@ X1: entity work.design_1_BiDirChannels_0_0_GyroBiDirChannelController
       \slv_reg0_reg[31]_0\(2) => data_word_0(31),
       \slv_reg0_reg[31]_0\(1) => data_word_0(28),
       \slv_reg0_reg[31]_0\(0) => data_word_0(24),
-      \slv_reg1_reg[4]\(1) => BiDirChannels_v1_0_S00_AXI_inst_n_5,
+      \slv_reg1_reg[4]\(1) => D,
       \slv_reg1_reg[4]\(0) => BiDirChannels_v1_0_S00_AXI_inst_n_6
     );
 end STRUCTURE;

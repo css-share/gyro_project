@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-| Date             : Sat Mar  2 15:58:05 2019
+| Date             : Sat Mar  2 21:36:40 2019
 | Host             : DESKTOP-KC9HGNO running 64-bit major release  (build 9200)
 | Command          : report_power -file design_1_wrapper_power_routed.rpt -pb design_1_wrapper_power_summary_routed.pb -rpx design_1_wrapper_power_routed.rpx
 | Design           : design_1_wrapper
@@ -61,7 +61,7 @@ Table of Contents
 |   LUT as Shift Register  |    <0.001 |      256 |     17400 |            1.47 |
 |   F7/F8 Muxes            |    <0.001 |       11 |     53200 |            0.02 |
 |   Others                 |     0.000 |      827 |       --- |             --- |
-| Signals                  |     0.014 |    12646 |       --- |             --- |
+| Signals                  |     0.014 |    12651 |       --- |             --- |
 | Block RAM                |     0.005 |        7 |       140 |            5.00 |
 | I/O                      |     0.005 |       14 |       200 |            7.00 |
 | PS7                      |     1.533 |        1 |       --- |             --- |
@@ -154,8 +154,8 @@ Table of Contents
 +---------------------------------------------------------------------------------------------------+-----------+
 | design_1_wrapper                                                                                  |     1.600 |
 |   design_1_i                                                                                      |     1.595 |
-|     BiDirChannels_0                                                                               |     0.004 |
-|       inst                                                                                        |     0.004 |
+|     BiDirChannels_0                                                                               |     0.003 |
+|       inst                                                                                        |     0.003 |
 |         BiDirChannels_v1_0_S00_AXI_inst                                                           |    <0.001 |
 |         X1                                                                                        |     0.003 |
 |           BUFFERS                                                                                 |     0.002 |
@@ -445,7 +445,7 @@ Table of Contents
 |                 gen_w_cmd_fifo.w_cmd_fifo                                                         |    <0.001 |
 |                   gen_srls[1].srl_nx1                                                             |    <0.001 |
 |                   gen_srls[2].srl_nx1                                                             |    <0.001 |
-|               r_reg                                                                               |    <0.001 |
+|               r_reg                                                                               |     0.001 |
 |               splitter_inst                                                                       |     0.002 |
 |                 gen_axi3.axi3_conv_inst                                                           |     0.002 |
 |                   USE_READ.USE_SPLIT_R.read_addr_inst                                             |    <0.001 |
@@ -667,7 +667,7 @@ Table of Contents
 |         s00_nodes                                                                                 |     0.006 |
 |           s00_ar_node                                                                             |     0.001 |
 |             inst                                                                                  |     0.001 |
-|               inst_mi_handler                                                                     |    <0.001 |
+|               inst_mi_handler                                                                     |     0.001 |
 |                 gen_normal_area.gen_fifo_req.inst_fifo_req                                        |    <0.001 |
 |                   gen_xpm_memory_fifo.inst_fifo                                                   |    <0.001 |
 |                     gen_mem_rep[0].inst_rd_addrb                                                  |    <0.001 |
@@ -726,7 +726,7 @@ Table of Contents
 |                 inst_arb_stall_late                                                               |    <0.001 |
 |           s00_b_node                                                                              |     0.001 |
 |             inst                                                                                  |     0.001 |
-|               inst_mi_handler                                                                     |    <0.001 |
+|               inst_mi_handler                                                                     |     0.001 |
 |                 gen_normal_area.gen_node_prog_full.inst_node_prog_full                            |    <0.001 |
 |                   gen_xpm_memory_fifo.inst_fifo                                                   |    <0.001 |
 |                     gen_mem_rep[0].inst_rd_addrb                                                  |    <0.001 |
@@ -888,8 +888,8 @@ Table of Contents
 |               inst_si_handler                                                                     |    <0.001 |
 |                 inst_arb_stall_late                                                               |    <0.001 |
 |         s02_entry_pipeline                                                                        |     0.002 |
-|           s02_mmu                                                                                 |     0.001 |
-|             inst                                                                                  |     0.001 |
+|           s02_mmu                                                                                 |     0.002 |
+|             inst                                                                                  |     0.002 |
 |               aw_reg_stall                                                                        |    <0.001 |
 |               aw_sreg                                                                             |    <0.001 |
 |               b_sreg                                                                              |    <0.001 |
