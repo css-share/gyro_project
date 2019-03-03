@@ -45,13 +45,13 @@
     <Option Name="WTVcsLaunchSim" Val="0"/>
     <Option Name="WTRivieraLaunchSim" Val="0"/>
     <Option Name="WTActivehdlLaunchSim" Val="0"/>
-    <Option Name="WTXSimExportSim" Val="89"/>
-    <Option Name="WTModelSimExportSim" Val="89"/>
-    <Option Name="WTQuestaExportSim" Val="89"/>
-    <Option Name="WTIesExportSim" Val="89"/>
-    <Option Name="WTVcsExportSim" Val="89"/>
-    <Option Name="WTRivieraExportSim" Val="89"/>
-    <Option Name="WTActivehdlExportSim" Val="89"/>
+    <Option Name="WTXSimExportSim" Val="90"/>
+    <Option Name="WTModelSimExportSim" Val="90"/>
+    <Option Name="WTQuestaExportSim" Val="90"/>
+    <Option Name="WTIesExportSim" Val="90"/>
+    <Option Name="WTVcsExportSim" Val="90"/>
+    <Option Name="WTRivieraExportSim" Val="90"/>
+    <Option Name="WTActivehdlExportSim" Val="90"/>
     <Option Name="GenerateIPUpgradeLog" Val="TRUE"/>
     <Option Name="XSimRadix" Val="hex"/>
     <Option Name="XSimTimeUnit" Val="ns"/>
@@ -77,11 +77,11 @@
         <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_stream_fifo_0_0/design_1_axis_stream_fifo_0_0.xci">
           <Proxy FileSetName="design_1_axis_stream_fifo_0_0"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_BiDirChannels_0_0/design_1_BiDirChannels_0_0.xci">
-          <Proxy FileSetName="design_1_BiDirChannels_0_0"/>
-        </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_stream_fifo_0_1/design_1_axis_stream_fifo_0_1.xci">
           <Proxy FileSetName="design_1_axis_stream_fifo_0_1"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_BiDirChannels_0_0/design_1_BiDirChannels_0_0.xci">
+          <Proxy FileSetName="design_1_BiDirChannels_0_0"/>
         </CompFileExtendedInfo>
       </File>
       <File Path="$PSRCDIR/sources_1/bd/design_1/hdl/design_1_wrapper.v">

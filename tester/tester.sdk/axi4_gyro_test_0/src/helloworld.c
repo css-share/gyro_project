@@ -140,6 +140,7 @@ int initGyroChannel(){
   *(baseaddr_channel+3) = 0x00000000;
   return 0;
 }
+
 // -------------------------------------------------------------------
 void readGyroChannelStatus(){
   xil_printf("Gyro Channel reg0: 0x%08x\n\r", *(baseaddr_channel+0));

@@ -380,7 +380,6 @@ module GyroChannelDebugger(
 
 endmodule
 
-// -----------------------------------------------------------------------
 module GyroBiDirTokenBuffer(
   input  wire         clock,
   input  wire         reset_n,
@@ -410,6 +409,7 @@ module GyroBiDirTokenBuffer(
   wire  in_shift;
 
   wire        rx_fifo_valid_masked;
+  wire        rx_fifo_ready_int;
 
   wire [7:0] out_full;
   wire [7:0]  in_full;
@@ -434,21 +434,16 @@ module GyroBiDirTokenBuffer(
   );
 
   mux_2x1_1bit  inputShiftMux(
-    .in0((rx_fifo_valid_masked) & clock),
+    .in0((rx_fifo_valid_masked) & ~clock),
     .in1(tx_token_next),
     .sel(in_shift_sel),
     .mux_out(in_shift)
   );
 
-  dff  inputFF( .clk(~clock), .rst_n(reset_n),
+  dff  inputFF( .clk(clock), .rst_n(reset_n),
     .D(in_full[7]),
     .Q(in_shift_sel)
   );
-  
- //   dff  readyFF( .clk(clock), .rst_n(reset_n),
- //   .D(~in_full[6]),
- //   .Q(rx_fifo_ready_int)
- // );
 
   // --- OUTPUT SECTION: input into the FIFO and output from the GYRO chip
 
@@ -469,7 +464,7 @@ module GyroBiDirTokenBuffer(
     .mux_out(out_shift)
   );
 
-  dff                   outputFF( .clk(~clock), .rst_n(reset_n), 
+  dff                   outputFF( .clk(clock), .rst_n(reset_n), 
     .D(out_full[7]), 
     .Q(out_shift_sel)
   );
@@ -481,7 +476,8 @@ module GyroBiDirTokenBuffer(
   assign tx_token_valid  =  in_shift_sel;
 
   assign tx_fifo_last        = (out_full[7] & ~out_full[6]);
-  assign rx_fifo_ready       =  ~in_shift_sel;
+  //assign rx_fifo_ready_int   = ~in_shift_sel;
+  assign rx_fifo_ready       = ~in_full[7];   // ~in_shift_sel;
 
   assign rx_fifo_valid_masked = (rx_fifo_valid & ~in_shift_sel);
 
