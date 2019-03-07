@@ -1103,8 +1103,8 @@ int main() {
 
     //readGyroTxFIFODebugData();
     //readGyroRxFIFODebugData();
-    //resetGyroTxFIFO();
-   //resetGyroRxFIFO();
+    resetGyroTxFIFO();
+   resetGyroRxFIFO();
 
     initGyroChannel();
     // --- loopback mode, POL = 0, in and out channels = 00

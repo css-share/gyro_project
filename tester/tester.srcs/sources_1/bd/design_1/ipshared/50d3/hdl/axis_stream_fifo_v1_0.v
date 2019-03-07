@@ -155,7 +155,7 @@ assign {m00_axis_tlast, m00_axis_tdata} = m00_data_reg;
 //always @(posedge tclk or negedge tresetn) begin    
 // was s00_axis_aclk and only posedge tclk
 always @(posedge s00_axis_aclk) begin
-    if (!s00_axis_aresetn) begin
+    if (~s00_axis_aresetn | ~resetn_int) begin
         s00_rst_sync1_reg <= 1'b1;  
         s00_rst_sync2_reg <= 1'b1; 
         s00_rst_sync3_reg <= 1'b1;  
@@ -167,7 +167,7 @@ always @(posedge s00_axis_aclk) begin
 end 
  
 always @(posedge m00_axis_aclk) begin 
-    if (!m00_axis_aresetn) begin 
+    if (~m00_axis_aresetn | ~resetn_int) begin 
         m00_rst_sync1_reg <= 1'b1;  
         m00_rst_sync2_reg <= 1'b1; 
         m00_rst_sync3_reg <= 1'b1;  

@@ -1,10 +1,10 @@
 // Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-// Date        : Sat Mar  2 15:45:31 2019
+// Date        : Wed Mar  6 16:38:04 2019
 // Host        : DESKTOP-KC9HGNO running 64-bit major release  (build 9200)
-// Command     : write_verilog -force -mode funcsim
-//               C:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ip/design_1_axis_stream_fifo_0_0/design_1_axis_stream_fifo_0_0_sim_netlist.v
+// Command     : write_verilog -force -mode funcsim -rename_top decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix -prefix
+//               decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_ design_1_axis_stream_fifo_0_0_sim_netlist.v
 // Design      : design_1_axis_stream_fifo_0_0
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -12,148 +12,7 @@
 // --------------------------------------------------------------------------------
 `timescale 1 ps / 1 ps
 
-(* CHECK_LICENSE_TYPE = "design_1_axis_stream_fifo_0_0,axis_stream_fifo_v1_0,{}" *) (* DowngradeIPIdentifiedWarnings = "yes" *) (* X_CORE_INFO = "axis_stream_fifo_v1_0,Vivado 2018.2" *) 
-(* NotValidForBitStream *)
-module design_1_axis_stream_fifo_0_0
-   (s00_axi_awaddr,
-    s00_axi_awprot,
-    s00_axi_awvalid,
-    s00_axi_awready,
-    s00_axi_wdata,
-    s00_axi_wstrb,
-    s00_axi_wvalid,
-    s00_axi_wready,
-    s00_axi_bresp,
-    s00_axi_bvalid,
-    s00_axi_bready,
-    s00_axi_araddr,
-    s00_axi_arprot,
-    s00_axi_arvalid,
-    s00_axi_arready,
-    s00_axi_rdata,
-    s00_axi_rresp,
-    s00_axi_rvalid,
-    s00_axi_rready,
-    s00_axi_aclk,
-    s00_axi_aresetn,
-    m00_axis_tdata,
-    m00_axis_tstrb,
-    m00_axis_tlast,
-    m00_axis_tvalid,
-    m00_axis_tready,
-    m00_axis_aclk,
-    m00_axis_aresetn,
-    s00_axis_tdata,
-    s00_axis_tstrb,
-    s00_axis_tlast,
-    s00_axis_tvalid,
-    s00_axis_tready,
-    s00_axis_aclk,
-    s00_axis_aresetn);
-  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI AWADDR" *) input [3:0]s00_axi_awaddr;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI AWPROT" *) input [2:0]s00_axi_awprot;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI AWVALID" *) input s00_axi_awvalid;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI AWREADY" *) output s00_axi_awready;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI WDATA" *) input [31:0]s00_axi_wdata;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI WSTRB" *) input [3:0]s00_axi_wstrb;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI WVALID" *) input s00_axi_wvalid;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI WREADY" *) output s00_axi_wready;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI BRESP" *) output [1:0]s00_axi_bresp;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI BVALID" *) output s00_axi_bvalid;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI BREADY" *) input s00_axi_bready;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI ARADDR" *) input [3:0]s00_axi_araddr;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI ARPROT" *) input [2:0]s00_axi_arprot;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI ARVALID" *) input s00_axi_arvalid;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI ARREADY" *) output s00_axi_arready;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI RDATA" *) output [31:0]s00_axi_rdata;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI RRESP" *) output [1:0]s00_axi_rresp;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI RVALID" *) output s00_axi_rvalid;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI RREADY" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME S00_AXI, WIZ_DATA_WIDTH 32, WIZ_NUM_REG 4, SUPPORTS_NARROW_BURST 0, DATA_WIDTH 32, PROTOCOL AXI4LITE, FREQ_HZ 100000000, ID_WIDTH 0, ADDR_WIDTH 4, AWUSER_WIDTH 0, ARUSER_WIDTH 0, WUSER_WIDTH 0, RUSER_WIDTH 0, BUSER_WIDTH 0, READ_WRITE_MODE READ_WRITE, HAS_BURST 0, HAS_LOCK 0, HAS_PROT 1, HAS_CACHE 0, HAS_QOS 0, HAS_REGION 0, HAS_WSTRB 1, HAS_BRESP 1, HAS_RRESP 1, NUM_READ_OUTSTANDING 1, NUM_WRITE_OUTSTANDING 1, MAX_BURST_LENGTH 1, PHASE 0.000, CLK_DOMAIN design_1_processing_system7_0_0_FCLK_CLK0, NUM_READ_THREADS 1, NUM_WRITE_THREADS 1, RUSER_BITS_PER_BYTE 0, WUSER_BITS_PER_BYTE 0" *) input s00_axi_rready;
-  (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 S00_AXI_CLK CLK" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME S00_AXI_CLK, ASSOCIATED_BUSIF S00_AXI, ASSOCIATED_RESET s00_axi_aresetn, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN design_1_processing_system7_0_0_FCLK_CLK0" *) input s00_axi_aclk;
-  (* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 S00_AXI_RST RST" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME S00_AXI_RST, POLARITY ACTIVE_LOW" *) input s00_axi_aresetn;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M00_AXIS TDATA" *) output [31:0]m00_axis_tdata;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M00_AXIS TSTRB" *) output [3:0]m00_axis_tstrb;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M00_AXIS TLAST" *) output m00_axis_tlast;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M00_AXIS TVALID" *) output m00_axis_tvalid;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M00_AXIS TREADY" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME M00_AXIS, WIZ_DATA_WIDTH 32, TDATA_NUM_BYTES 4, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 1, HAS_TKEEP 0, HAS_TLAST 1, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN design_1_processing_system7_0_0_FCLK_CLK0, LAYERED_METADATA undef" *) input m00_axis_tready;
-  (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 M00_AXIS_CLK CLK" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME M00_AXIS_CLK, ASSOCIATED_BUSIF M00_AXIS, ASSOCIATED_RESET m00_axis_aresetn, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN design_1_processing_system7_0_0_FCLK_CLK0" *) input m00_axis_aclk;
-  (* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 M00_AXIS_RST RST" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME M00_AXIS_RST, POLARITY ACTIVE_LOW" *) input m00_axis_aresetn;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 S00_AXIS TDATA" *) input [31:0]s00_axis_tdata;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 S00_AXIS TSTRB" *) input [3:0]s00_axis_tstrb;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 S00_AXIS TLAST" *) input s00_axis_tlast;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 S00_AXIS TVALID" *) input s00_axis_tvalid;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 S00_AXIS TREADY" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME S00_AXIS, WIZ_DATA_WIDTH 32, TDATA_NUM_BYTES 4, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 1, HAS_TKEEP 0, HAS_TLAST 1, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN design_1_processing_system7_0_0_FCLK_CLK0, LAYERED_METADATA undef" *) output s00_axis_tready;
-  (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 S00_AXIS_CLK CLK" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME S00_AXIS_CLK, ASSOCIATED_BUSIF S00_AXIS, ASSOCIATED_RESET s00_axis_aresetn, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN design_1_processing_system7_0_0_FCLK_CLK0" *) input s00_axis_aclk;
-  (* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 S00_AXIS_RST RST" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME S00_AXIS_RST, POLARITY ACTIVE_LOW" *) input s00_axis_aresetn;
-
-  wire \<const0> ;
-  wire m00_axis_aclk;
-  wire m00_axis_aresetn;
-  wire [31:0]m00_axis_tdata;
-  wire m00_axis_tlast;
-  wire m00_axis_tready;
-  wire m00_axis_tvalid;
-  wire s00_axi_aclk;
-  wire [3:0]s00_axi_araddr;
-  wire s00_axi_aresetn;
-  wire s00_axi_arready;
-  wire s00_axi_arvalid;
-  wire s00_axi_awready;
-  wire s00_axi_awvalid;
-  wire s00_axi_bready;
-  wire s00_axi_bvalid;
-  wire [31:0]\^s00_axi_rdata ;
-  wire s00_axi_rready;
-  wire s00_axi_rvalid;
-  wire s00_axi_wready;
-  wire s00_axi_wvalid;
-  wire s00_axis_aclk;
-  wire s00_axis_aresetn;
-  wire [31:0]s00_axis_tdata;
-  wire s00_axis_tlast;
-  wire s00_axis_tready;
-  wire s00_axis_tvalid;
-
-  assign s00_axi_bresp[1] = \<const0> ;
-  assign s00_axi_bresp[0] = \<const0> ;
-  assign s00_axi_rdata[31:16] = \^s00_axi_rdata [31:16];
-  assign s00_axi_rdata[15] = \<const0> ;
-  assign s00_axi_rdata[14] = \<const0> ;
-  assign s00_axi_rdata[13] = \<const0> ;
-  assign s00_axi_rdata[12:0] = \^s00_axi_rdata [12:0];
-  assign s00_axi_rresp[1] = \<const0> ;
-  assign s00_axi_rresp[0] = \<const0> ;
-  GND GND
-       (.G(\<const0> ));
-  design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0 inst
-       (.m00_axis_aclk(m00_axis_aclk),
-        .m00_axis_aresetn(m00_axis_aresetn),
-        .m00_axis_tready(m00_axis_tready),
-        .m00_axis_tvalid(m00_axis_tvalid),
-        .mem_read_data_reg({m00_axis_tlast,m00_axis_tdata}),
-        .mem_write_data({s00_axis_tlast,s00_axis_tdata}),
-        .s00_axi_aclk(s00_axi_aclk),
-        .s00_axi_araddr(s00_axi_araddr[3:2]),
-        .s00_axi_aresetn(s00_axi_aresetn),
-        .s00_axi_arready(s00_axi_arready),
-        .s00_axi_arvalid(s00_axi_arvalid),
-        .s00_axi_awready(s00_axi_awready),
-        .s00_axi_awvalid(s00_axi_awvalid),
-        .s00_axi_bready(s00_axi_bready),
-        .s00_axi_bvalid(s00_axi_bvalid),
-        .s00_axi_rdata({\^s00_axi_rdata [31:16],\^s00_axi_rdata [12:0]}),
-        .s00_axi_rready(s00_axi_rready),
-        .s00_axi_rvalid(s00_axi_rvalid),
-        .s00_axi_wready(s00_axi_wready),
-        .s00_axi_wvalid(s00_axi_wvalid),
-        .s00_axis_aclk(s00_axis_aclk),
-        .s00_axis_aresetn(s00_axis_aresetn),
-        .s00_axis_tready(s00_axis_tready),
-        .s00_axis_tvalid(s00_axis_tvalid));
-endmodule
-
-(* ORIG_REF_NAME = "axis_stream_fifo_v1_0" *) 
-module design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0
+module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_axis_stream_fifo_v1_0
    (mem_read_data_reg,
     s00_axi_awready,
     s00_axi_wready,
@@ -170,14 +29,17 @@ module design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0
     s00_axi_aclk,
     s00_axi_araddr,
     s00_axi_arvalid,
-    s00_axi_awvalid,
+    s00_axi_awaddr,
     s00_axi_wvalid,
-    m00_axis_tready,
-    s00_axi_aresetn,
+    s00_axi_awvalid,
     s00_axis_aresetn,
     m00_axis_aresetn,
+    m00_axis_tready,
+    s00_axi_aresetn,
     s00_axi_bready,
-    s00_axi_rready);
+    s00_axi_rready,
+    s00_axi_wdata,
+    s00_axi_wstrb);
   output [32:0]mem_read_data_reg;
   output s00_axi_awready;
   output s00_axi_wready;
@@ -194,14 +56,17 @@ module design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0
   input s00_axi_aclk;
   input [1:0]s00_axi_araddr;
   input s00_axi_arvalid;
-  input s00_axi_awvalid;
+  input [1:0]s00_axi_awaddr;
   input s00_axi_wvalid;
-  input m00_axis_tready;
-  input s00_axi_aresetn;
+  input s00_axi_awvalid;
   input s00_axis_aresetn;
   input m00_axis_aresetn;
+  input m00_axis_tready;
+  input s00_axi_aresetn;
   input s00_axi_bready;
   input s00_axi_rready;
+  input [0:0]s00_axi_wdata;
+  input [0:0]s00_axi_wstrb;
 
   wire axis_stream_fifo_v1_0_S00_AXI_inst_n_19;
   wire axis_stream_fifo_v1_0_S00_AXI_inst_n_20;
@@ -238,6 +103,10 @@ module design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0
   wire axis_stream_fifo_v1_0_S00_AXI_inst_n_64;
   wire axis_stream_fifo_v1_0_S00_AXI_inst_n_65;
   wire axis_stream_fifo_v1_0_S00_AXI_inst_n_66;
+  wire axis_stream_fifo_v1_0_S00_AXI_inst_n_67;
+  wire axis_stream_fifo_v1_0_S00_AXI_inst_n_68;
+  wire axis_stream_fifo_v1_0_S00_AXI_inst_n_69;
+  wire axis_stream_fifo_v1_0_S00_AXI_inst_n_70;
   wire [30:12]dbg_word0_int;
   wire [28:0]dbg_word1_int;
   wire [30:16]dbg_word2_int;
@@ -257,9 +126,7 @@ module design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0
   wire m00_axis_tvalid;
   wire m00_axis_tvalid_reg_i_1_n_0;
   wire m00_rst_sync1_reg;
-  wire m00_rst_sync1_reg_i_1_n_0;
-  wire m00_rst_sync2_reg_i_1_n_0;
-  wire m00_rst_sync3_reg_i_1_n_0;
+  wire m00_rst_sync1_reg0;
   wire [32:0]mem_read_data_reg;
   wire mem_read_data_valid_reg;
   wire mem_read_data_valid_reg_i_1_n_0;
@@ -299,6 +166,7 @@ module design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0
   wire s00_axi_aresetn;
   wire s00_axi_arready;
   wire s00_axi_arvalid;
+  wire [1:0]s00_axi_awaddr;
   wire s00_axi_awready;
   wire s00_axi_awvalid;
   wire s00_axi_bready;
@@ -306,7 +174,9 @@ module design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0
   wire [28:0]s00_axi_rdata;
   wire s00_axi_rready;
   wire s00_axi_rvalid;
+  wire [0:0]s00_axi_wdata;
   wire s00_axi_wready;
+  wire [0:0]s00_axi_wstrb;
   wire s00_axi_wvalid;
   wire s00_axis_aclk;
   wire s00_axis_aresetn;
@@ -314,10 +184,8 @@ module design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0
   wire s00_axis_tready02_in;
   wire s00_axis_tvalid;
   wire s00_rst_sync1_reg;
-  wire s00_rst_sync1_reg_i_1_n_0;
-  wire s00_rst_sync2_reg_i_1_n_0;
+  wire s00_rst_sync1_reg0;
   wire s00_rst_sync3_reg;
-  wire s00_rst_sync3_reg_i_1_n_0;
   wire [12:0]wr_addr_reg;
   wire \wr_ptr_gray_reg_reg_n_0_[0] ;
   wire \wr_ptr_gray_reg_reg_n_0_[10] ;
@@ -399,7 +267,7 @@ module design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0
   wire [3:3]NLW_rd_ptr_next0_carry__1_CO_UNCONNECTED;
   wire [3:3]NLW_wr_ptr_next0_carry__1_CO_UNCONNECTED;
 
-  design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0_S00_AXI axis_stream_fifo_v1_0_S00_AXI_inst
+  decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_axis_stream_fifo_v1_0_S00_AXI axis_stream_fifo_v1_0_S00_AXI_inst
        (.CO(empty),
         .D(dbg_word1_int[12:0]),
         .Q(wr_ptr_gray_sync2_reg),
@@ -408,9 +276,13 @@ module design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0
         .dbg_word0_int(dbg_word0_int[30:16]),
         .dbg_word1_int(dbg_word1_int[28:16]),
         .dbg_word2_int({dbg_word2_int[30],dbg_word2_int[28:16]}),
+        .m00_axis_aresetn(m00_axis_aresetn),
         .m00_axis_tready(m00_axis_tready),
         .m00_axis_tvalid_reg_reg(m00_axis_tvalid),
         .m00_rst_sync1_reg(m00_rst_sync1_reg),
+        .m00_rst_sync1_reg0(m00_rst_sync1_reg0),
+        .m00_rst_sync2_reg_reg(axis_stream_fifo_v1_0_S00_AXI_inst_n_70),
+        .m00_rst_sync3_reg_reg(axis_stream_fifo_v1_0_S00_AXI_inst_n_69),
         .mem_read_data_valid_reg(mem_read_data_valid_reg),
         .mem_reg_0({axis_stream_fifo_v1_0_S00_AXI_inst_n_63,axis_stream_fifo_v1_0_S00_AXI_inst_n_64,axis_stream_fifo_v1_0_S00_AXI_inst_n_65,axis_stream_fifo_v1_0_S00_AXI_inst_n_66}),
         .mem_reg_3(axis_stream_fifo_v1_0_S00_AXI_inst_n_58),
@@ -424,6 +296,7 @@ module design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0
         .s00_axi_aresetn(s00_axi_aresetn),
         .s00_axi_arready(s00_axi_arready),
         .s00_axi_arvalid(s00_axi_arvalid),
+        .s00_axi_awaddr(s00_axi_awaddr),
         .s00_axi_awready(s00_axi_awready),
         .s00_axi_awvalid(s00_axi_awvalid),
         .s00_axi_bready(s00_axi_bready),
@@ -431,10 +304,16 @@ module design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0
         .s00_axi_rdata(s00_axi_rdata),
         .s00_axi_rready(s00_axi_rready),
         .s00_axi_rvalid(s00_axi_rvalid),
+        .s00_axi_wdata(s00_axi_wdata),
         .s00_axi_wready(s00_axi_wready),
+        .s00_axi_wstrb(s00_axi_wstrb),
         .s00_axi_wvalid(s00_axi_wvalid),
+        .s00_axis_aresetn(s00_axis_aresetn),
         .s00_axis_tvalid(s00_axis_tvalid),
         .s00_rst_sync1_reg(s00_rst_sync1_reg),
+        .s00_rst_sync1_reg0(s00_rst_sync1_reg0),
+        .s00_rst_sync2_reg_reg(axis_stream_fifo_v1_0_S00_AXI_inst_n_68),
+        .s00_rst_sync3_reg_reg(axis_stream_fifo_v1_0_S00_AXI_inst_n_67),
         .\wr_addr_reg_reg[12] (wr_addr_reg),
         .\wr_ptr_gray_reg_reg[12] (dbg_word3_int),
         .\wr_ptr_gray_reg_reg[12]_0 ({p_1_in1_in,p_1_in,\wr_ptr_gray_reg_reg_n_0_[10] ,\wr_ptr_gray_reg_reg_n_0_[9] ,\wr_ptr_gray_reg_reg_n_0_[8] ,\wr_ptr_gray_reg_reg_n_0_[7] ,\wr_ptr_gray_reg_reg_n_0_[6] ,\wr_ptr_gray_reg_reg_n_0_[5] ,\wr_ptr_gray_reg_reg_n_0_[4] ,\wr_ptr_gray_reg_reg_n_0_[3] ,\wr_ptr_gray_reg_reg_n_0_[2] ,\wr_ptr_gray_reg_reg_n_0_[1] ,\wr_ptr_gray_reg_reg_n_0_[0] }),
@@ -462,7 +341,7 @@ module design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0
         .DI({1'b0,1'b0,1'b0,1'b0}),
         .O(NLW_full0_carry_O_UNCONNECTED[3:0]),
         .S({axis_stream_fifo_v1_0_S00_AXI_inst_n_63,axis_stream_fifo_v1_0_S00_AXI_inst_n_64,axis_stream_fifo_v1_0_S00_AXI_inst_n_65,axis_stream_fifo_v1_0_S00_AXI_inst_n_66}));
-  (* SOFT_HLUTNM = "soft_lutpair16" *) 
+  (* SOFT_HLUTNM = "soft_lutpair19" *) 
   LUT3 #(
     .INIT(8'hBA)) 
     m00_axis_tvalid_reg_i_1
@@ -478,51 +357,31 @@ module design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0
         .D(m00_axis_tvalid_reg_i_1_n_0),
         .Q(m00_axis_tvalid),
         .R(dbg_word0_int[29]));
-  LUT1 #(
-    .INIT(2'h1)) 
-    m00_rst_sync1_reg_i_1
-       (.I0(m00_axis_aresetn),
-        .O(m00_rst_sync1_reg_i_1_n_0));
   FDRE #(
     .INIT(1'b1)) 
     m00_rst_sync1_reg_reg
        (.C(m00_axis_aclk),
         .CE(1'b1),
-        .D(m00_rst_sync1_reg_i_1_n_0),
+        .D(m00_rst_sync1_reg0),
         .Q(m00_rst_sync1_reg),
         .R(1'b0));
-  (* SOFT_HLUTNM = "soft_lutpair18" *) 
-  LUT3 #(
-    .INIT(8'hEF)) 
-    m00_rst_sync2_reg_i_1
-       (.I0(m00_rst_sync1_reg),
-        .I1(s00_rst_sync1_reg),
-        .I2(m00_axis_aresetn),
-        .O(m00_rst_sync2_reg_i_1_n_0));
   FDRE #(
     .INIT(1'b1)) 
     m00_rst_sync2_reg_reg
        (.C(m00_axis_aclk),
         .CE(1'b1),
-        .D(m00_rst_sync2_reg_i_1_n_0),
+        .D(axis_stream_fifo_v1_0_S00_AXI_inst_n_70),
         .Q(dbg_word0_int[30]),
         .R(1'b0));
-  (* SOFT_HLUTNM = "soft_lutpair18" *) 
-  LUT2 #(
-    .INIT(4'hB)) 
-    m00_rst_sync3_reg_i_1
-       (.I0(dbg_word0_int[30]),
-        .I1(m00_axis_aresetn),
-        .O(m00_rst_sync3_reg_i_1_n_0));
   FDRE #(
     .INIT(1'b1)) 
     m00_rst_sync3_reg_reg
        (.C(m00_axis_aclk),
         .CE(1'b1),
-        .D(m00_rst_sync3_reg_i_1_n_0),
+        .D(axis_stream_fifo_v1_0_S00_AXI_inst_n_69),
         .Q(dbg_word0_int[29]),
         .R(1'b0));
-  (* SOFT_HLUTNM = "soft_lutpair16" *) 
+  (* SOFT_HLUTNM = "soft_lutpair19" *) 
   LUT4 #(
     .INIT(16'h5D55)) 
     mem_read_data_valid_reg_i_1
@@ -1367,48 +1226,28 @@ module design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0
         .I4(p_0_in0_in),
         .I5(full0),
         .O(s00_axis_tready));
-  LUT1 #(
-    .INIT(2'h1)) 
-    s00_rst_sync1_reg_i_1
-       (.I0(s00_axis_aresetn),
-        .O(s00_rst_sync1_reg_i_1_n_0));
   FDRE #(
     .INIT(1'b1)) 
     s00_rst_sync1_reg_reg
        (.C(s00_axis_aclk),
         .CE(1'b1),
-        .D(s00_rst_sync1_reg_i_1_n_0),
+        .D(s00_rst_sync1_reg0),
         .Q(s00_rst_sync1_reg),
         .R(1'b0));
-  (* SOFT_HLUTNM = "soft_lutpair17" *) 
-  LUT3 #(
-    .INIT(8'hEF)) 
-    s00_rst_sync2_reg_i_1
-       (.I0(m00_rst_sync1_reg),
-        .I1(s00_rst_sync1_reg),
-        .I2(s00_axis_aresetn),
-        .O(s00_rst_sync2_reg_i_1_n_0));
   FDRE #(
     .INIT(1'b1)) 
     s00_rst_sync2_reg_reg
        (.C(s00_axis_aclk),
         .CE(1'b1),
-        .D(s00_rst_sync2_reg_i_1_n_0),
+        .D(axis_stream_fifo_v1_0_S00_AXI_inst_n_68),
         .Q(dbg_word2_int[30]),
         .R(1'b0));
-  (* SOFT_HLUTNM = "soft_lutpair17" *) 
-  LUT2 #(
-    .INIT(4'hB)) 
-    s00_rst_sync3_reg_i_1
-       (.I0(dbg_word2_int[30]),
-        .I1(s00_axis_aresetn),
-        .O(s00_rst_sync3_reg_i_1_n_0));
   FDRE #(
     .INIT(1'b1)) 
     s00_rst_sync3_reg_reg
        (.C(s00_axis_aclk),
         .CE(1'b1),
-        .D(s00_rst_sync3_reg_i_1_n_0),
+        .D(axis_stream_fifo_v1_0_S00_AXI_inst_n_67),
         .Q(s00_rst_sync3_reg),
         .R(1'b0));
   FDRE #(
@@ -1954,8 +1793,7 @@ module design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0
         .R(s00_rst_sync3_reg));
 endmodule
 
-(* ORIG_REF_NAME = "axis_stream_fifo_v1_0_S00_AXI" *) 
-module design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0_S00_AXI
+module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_axis_stream_fifo_v1_0_S00_AXI
    (s00_axi_awready,
     s00_axi_wready,
     s00_axi_arready,
@@ -1969,7 +1807,13 @@ module design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0_S00_AXI
     mem_reg_3,
     \rd_addr_reg_reg[0] ,
     mem_reg_0,
+    s00_rst_sync3_reg_reg,
+    s00_rst_sync2_reg_reg,
+    m00_rst_sync3_reg_reg,
+    m00_rst_sync2_reg_reg,
     s00_axi_rdata,
+    s00_rst_sync1_reg0,
+    m00_rst_sync1_reg0,
     s00_axi_aclk,
     Q,
     \rd_ptr_gray_reg_reg[12] ,
@@ -1996,7 +1840,12 @@ module design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0_S00_AXI
     s00_axi_bready,
     s00_axi_arvalid,
     s00_axi_rready,
-    s00_axi_araddr);
+    s00_axi_wdata,
+    s00_axi_wstrb,
+    s00_axis_aresetn,
+    m00_axis_aresetn,
+    s00_axi_araddr,
+    s00_axi_awaddr);
   output s00_axi_awready;
   output s00_axi_wready;
   output s00_axi_arready;
@@ -2010,7 +1859,13 @@ module design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0_S00_AXI
   output mem_reg_3;
   output [3:0]\rd_addr_reg_reg[0] ;
   output [3:0]mem_reg_0;
+  output s00_rst_sync3_reg_reg;
+  output s00_rst_sync2_reg_reg;
+  output m00_rst_sync3_reg_reg;
+  output m00_rst_sync2_reg_reg;
   output [28:0]s00_axi_rdata;
+  output s00_rst_sync1_reg0;
+  output m00_rst_sync1_reg0;
   input s00_axi_aclk;
   input [12:0]Q;
   input [12:0]\rd_ptr_gray_reg_reg[12] ;
@@ -2037,7 +1892,12 @@ module design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0_S00_AXI
   input s00_axi_bready;
   input s00_axi_arvalid;
   input s00_axi_rready;
+  input [0:0]s00_axi_wdata;
+  input [0:0]s00_axi_wstrb;
+  input s00_axis_aresetn;
+  input m00_axis_aresetn;
   input [1:0]s00_axi_araddr;
+  input [1:0]s00_axi_awaddr;
 
   wire [0:0]CO;
   wire [12:0]D;
@@ -2050,17 +1910,24 @@ module design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0_S00_AXI
   wire \axi_araddr[2]_i_1_n_0 ;
   wire \axi_araddr[3]_i_1_n_0 ;
   wire axi_arready0;
-  wire axi_awready0__0;
+  wire [3:2]axi_awaddr;
+  wire \axi_awaddr[2]_i_1_n_0 ;
+  wire \axi_awaddr[3]_i_1_n_0 ;
+  wire axi_awready0;
   wire axi_awready_i_1_n_0;
   wire axi_bvalid_i_1_n_0;
   wire axi_rvalid_i_1_n_0;
-  wire axi_wready0__0;
+  wire axi_wready0;
   wire [14:0]dbg_word0_int;
   wire [12:0]dbg_word1_int;
   wire [13:0]dbg_word2_int;
+  wire m00_axis_aresetn;
   wire m00_axis_tready;
   wire m00_axis_tvalid_reg_reg;
   wire m00_rst_sync1_reg;
+  wire m00_rst_sync1_reg0;
+  wire m00_rst_sync2_reg_reg;
+  wire m00_rst_sync3_reg_reg;
   wire mem_read_data_valid_reg;
   wire [3:0]mem_reg_0;
   wire mem_reg_3;
@@ -2076,6 +1943,7 @@ module design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0_S00_AXI
   wire s00_axi_aresetn;
   wire s00_axi_arready;
   wire s00_axi_arvalid;
+  wire [1:0]s00_axi_awaddr;
   wire s00_axi_awready;
   wire s00_axi_awvalid;
   wire s00_axi_bready;
@@ -2083,11 +1951,20 @@ module design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0_S00_AXI
   wire [28:0]s00_axi_rdata;
   wire s00_axi_rready;
   wire s00_axi_rvalid;
+  wire [0:0]s00_axi_wdata;
   wire s00_axi_wready;
+  wire [0:0]s00_axi_wstrb;
   wire s00_axi_wvalid;
+  wire s00_axis_aresetn;
   wire s00_axis_tvalid;
   wire s00_rst_sync1_reg;
+  wire s00_rst_sync1_reg0;
+  wire s00_rst_sync1_reg1;
+  wire s00_rst_sync2_reg_reg;
+  wire s00_rst_sync3_reg_reg;
+  wire \slv_reg0[0]_i_1_n_0 ;
   wire slv_reg_rden__0;
+  wire slv_reg_wren__0;
   wire \wr_addr_reg[12]_i_2_n_0 ;
   wire [12:0]\wr_addr_reg_reg[12] ;
   wire [12:0]\wr_ptr_gray_reg_reg[12] ;
@@ -2112,7 +1989,6 @@ module design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0_S00_AXI
         .D(aw_en_i_1_n_0),
         .Q(aw_en_reg_n_0),
         .S(axi_awready_i_1_n_0));
-  (* SOFT_HLUTNM = "soft_lutpair14" *) 
   LUT4 #(
     .INIT(16'hFB08)) 
     \axi_araddr[2]_i_1 
@@ -2154,24 +2030,56 @@ module design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0_S00_AXI
         .D(axi_arready0),
         .Q(s00_axi_arready),
         .R(axi_awready_i_1_n_0));
-  (* SOFT_HLUTNM = "soft_lutpair1" *) 
-  LUT4 #(
-    .INIT(16'h2000)) 
-    axi_awready0
-       (.I0(s00_axi_wvalid),
-        .I1(s00_axi_awready),
-        .I2(aw_en_reg_n_0),
-        .I3(s00_axi_awvalid),
-        .O(axi_awready0__0));
+  LUT6 #(
+    .INIT(64'hFBFFFFFF08000000)) 
+    \axi_awaddr[2]_i_1 
+       (.I0(s00_axi_awaddr[0]),
+        .I1(s00_axi_wvalid),
+        .I2(s00_axi_awready),
+        .I3(aw_en_reg_n_0),
+        .I4(s00_axi_awvalid),
+        .I5(axi_awaddr[2]),
+        .O(\axi_awaddr[2]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hFBFFFFFF08000000)) 
+    \axi_awaddr[3]_i_1 
+       (.I0(s00_axi_awaddr[1]),
+        .I1(s00_axi_wvalid),
+        .I2(s00_axi_awready),
+        .I3(aw_en_reg_n_0),
+        .I4(s00_axi_awvalid),
+        .I5(axi_awaddr[3]),
+        .O(\axi_awaddr[3]_i_1_n_0 ));
+  FDRE \axi_awaddr_reg[2] 
+       (.C(s00_axi_aclk),
+        .CE(1'b1),
+        .D(\axi_awaddr[2]_i_1_n_0 ),
+        .Q(axi_awaddr[2]),
+        .R(axi_awready_i_1_n_0));
+  FDRE \axi_awaddr_reg[3] 
+       (.C(s00_axi_aclk),
+        .CE(1'b1),
+        .D(\axi_awaddr[3]_i_1_n_0 ),
+        .Q(axi_awaddr[3]),
+        .R(axi_awready_i_1_n_0));
   LUT1 #(
     .INIT(2'h1)) 
     axi_awready_i_1
        (.I0(s00_axi_aresetn),
         .O(axi_awready_i_1_n_0));
+  (* SOFT_HLUTNM = "soft_lutpair1" *) 
+  LUT4 #(
+    .INIT(16'h2000)) 
+    axi_awready_i_2
+       (.I0(s00_axi_wvalid),
+        .I1(s00_axi_awready),
+        .I2(aw_en_reg_n_0),
+        .I3(s00_axi_awvalid),
+        .O(axi_awready0));
   FDRE axi_awready_reg
        (.C(s00_axi_aclk),
         .CE(1'b1),
-        .D(axi_awready0__0),
+        .D(axi_awready0),
         .Q(s00_axi_awready),
         .R(axi_awready_i_1_n_0));
   LUT6 #(
@@ -2648,6 +2556,7 @@ module design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0_S00_AXI
         .D(reg_data_out[9]),
         .Q(s00_axi_rdata[9]),
         .R(axi_awready_i_1_n_0));
+  (* SOFT_HLUTNM = "soft_lutpair14" *) 
   LUT4 #(
     .INIT(16'h08F8)) 
     axi_rvalid_i_1
@@ -2665,16 +2574,16 @@ module design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0_S00_AXI
   (* SOFT_HLUTNM = "soft_lutpair1" *) 
   LUT4 #(
     .INIT(16'h0800)) 
-    axi_wready0
+    axi_wready_i_1
        (.I0(s00_axi_awvalid),
         .I1(s00_axi_wvalid),
         .I2(s00_axi_wready),
         .I3(aw_en_reg_n_0),
-        .O(axi_wready0__0));
+        .O(axi_wready0));
   FDRE axi_wready_reg
        (.C(s00_axi_aclk),
         .CE(1'b1),
-        .D(axi_wready0__0),
+        .D(axi_wready0),
         .Q(s00_axi_wready),
         .R(axi_awready_i_1_n_0));
   LUT2 #(
@@ -2761,6 +2670,30 @@ module design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0_S00_AXI
         .I4(\rd_ptr_gray_sync2_reg_reg[12] [2]),
         .I5(\wr_ptr_gray_reg_reg[12]_0 [2]),
         .O(mem_reg_0[0]));
+  (* SOFT_HLUTNM = "soft_lutpair17" *) 
+  LUT2 #(
+    .INIT(4'hB)) 
+    m00_rst_sync1_reg_i_1
+       (.I0(s00_rst_sync1_reg1),
+        .I1(m00_axis_aresetn),
+        .O(m00_rst_sync1_reg0));
+  (* SOFT_HLUTNM = "soft_lutpair15" *) 
+  LUT4 #(
+    .INIT(16'hFFEF)) 
+    m00_rst_sync2_reg_i_1
+       (.I0(m00_rst_sync1_reg),
+        .I1(s00_rst_sync1_reg),
+        .I2(m00_axis_aresetn),
+        .I3(s00_rst_sync1_reg1),
+        .O(m00_rst_sync2_reg_reg));
+  (* SOFT_HLUTNM = "soft_lutpair17" *) 
+  LUT3 #(
+    .INIT(8'hFB)) 
+    m00_rst_sync3_reg_i_1
+       (.I0(dbg_word0_int[14]),
+        .I1(m00_axis_aresetn),
+        .I2(s00_rst_sync1_reg1),
+        .O(m00_rst_sync3_reg_reg));
   LUT2 #(
     .INIT(4'hB)) 
     mem_reg_3_i_2
@@ -3014,6 +2947,54 @@ module design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0_S00_AXI
         .I4(m00_axis_tvalid_reg_reg),
         .I5(rd_ptr_next0[8]),
         .O(\rd_addr_reg_reg[12] [9]));
+  (* SOFT_HLUTNM = "soft_lutpair16" *) 
+  LUT2 #(
+    .INIT(4'hB)) 
+    s00_rst_sync1_reg_i_1
+       (.I0(s00_rst_sync1_reg1),
+        .I1(s00_axis_aresetn),
+        .O(s00_rst_sync1_reg0));
+  (* SOFT_HLUTNM = "soft_lutpair15" *) 
+  LUT4 #(
+    .INIT(16'hFFEF)) 
+    s00_rst_sync2_reg_i_1
+       (.I0(m00_rst_sync1_reg),
+        .I1(s00_rst_sync1_reg),
+        .I2(s00_axis_aresetn),
+        .I3(s00_rst_sync1_reg1),
+        .O(s00_rst_sync2_reg_reg));
+  (* SOFT_HLUTNM = "soft_lutpair16" *) 
+  LUT3 #(
+    .INIT(8'hFB)) 
+    s00_rst_sync3_reg_i_1
+       (.I0(dbg_word2_int[13]),
+        .I1(s00_axis_aresetn),
+        .I2(s00_rst_sync1_reg1),
+        .O(s00_rst_sync3_reg_reg));
+  LUT6 #(
+    .INIT(64'hFFFBFFFF00080000)) 
+    \slv_reg0[0]_i_1 
+       (.I0(s00_axi_wdata),
+        .I1(slv_reg_wren__0),
+        .I2(axi_awaddr[3]),
+        .I3(axi_awaddr[2]),
+        .I4(s00_axi_wstrb),
+        .I5(s00_rst_sync1_reg1),
+        .O(\slv_reg0[0]_i_1_n_0 ));
+  LUT4 #(
+    .INIT(16'h8000)) 
+    \slv_reg0[0]_i_2 
+       (.I0(s00_axi_wready),
+        .I1(s00_axi_awready),
+        .I2(s00_axi_awvalid),
+        .I3(s00_axi_wvalid),
+        .O(slv_reg_wren__0));
+  FDRE \slv_reg0_reg[0] 
+       (.C(s00_axi_aclk),
+        .CE(1'b1),
+        .D(\slv_reg0[0]_i_1_n_0 ),
+        .Q(s00_rst_sync1_reg1),
+        .R(axi_awready_i_1_n_0));
   LUT3 #(
     .INIT(8'h20)) 
     slv_reg_rden
@@ -3021,7 +3002,7 @@ module design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0_S00_AXI
         .I1(s00_axi_rvalid),
         .I2(s00_axi_arready),
         .O(slv_reg_rden__0));
-  (* SOFT_HLUTNM = "soft_lutpair15" *) 
+  (* SOFT_HLUTNM = "soft_lutpair18" *) 
   LUT2 #(
     .INIT(4'h9)) 
     \wr_addr_reg[0]_i_1 
@@ -3161,7 +3142,7 @@ module design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0_S00_AXI
         .I2(wr_ptr_next0[10]),
         .I3(wr_ptr_next0[11]),
         .O(\wr_ptr_gray_reg_reg[12] [11]));
-  (* SOFT_HLUTNM = "soft_lutpair15" *) 
+  (* SOFT_HLUTNM = "soft_lutpair18" *) 
   LUT3 #(
     .INIT(8'hB8)) 
     \wr_ptr_gray_reg[12]_i_1 
@@ -3250,6 +3231,152 @@ module design_1_axis_stream_fifo_0_0_axis_stream_fifo_v1_0_S00_AXI
         .I2(wr_ptr_next0[8]),
         .I3(wr_ptr_next0[9]),
         .O(\wr_ptr_gray_reg_reg[12] [9]));
+endmodule
+
+(* CHECK_LICENSE_TYPE = "design_1_axis_stream_fifo_0_0,axis_stream_fifo_v1_0,{}" *) (* DowngradeIPIdentifiedWarnings = "yes" *) (* X_CORE_INFO = "axis_stream_fifo_v1_0,Vivado 2018.2" *) 
+(* NotValidForBitStream *)
+module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix
+   (s00_axi_awaddr,
+    s00_axi_awprot,
+    s00_axi_awvalid,
+    s00_axi_awready,
+    s00_axi_wdata,
+    s00_axi_wstrb,
+    s00_axi_wvalid,
+    s00_axi_wready,
+    s00_axi_bresp,
+    s00_axi_bvalid,
+    s00_axi_bready,
+    s00_axi_araddr,
+    s00_axi_arprot,
+    s00_axi_arvalid,
+    s00_axi_arready,
+    s00_axi_rdata,
+    s00_axi_rresp,
+    s00_axi_rvalid,
+    s00_axi_rready,
+    s00_axi_aclk,
+    s00_axi_aresetn,
+    m00_axis_tdata,
+    m00_axis_tstrb,
+    m00_axis_tlast,
+    m00_axis_tvalid,
+    m00_axis_tready,
+    m00_axis_aclk,
+    m00_axis_aresetn,
+    s00_axis_tdata,
+    s00_axis_tstrb,
+    s00_axis_tlast,
+    s00_axis_tvalid,
+    s00_axis_tready,
+    s00_axis_aclk,
+    s00_axis_aresetn);
+  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI AWADDR" *) input [3:0]s00_axi_awaddr;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI AWPROT" *) input [2:0]s00_axi_awprot;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI AWVALID" *) input s00_axi_awvalid;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI AWREADY" *) output s00_axi_awready;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI WDATA" *) input [31:0]s00_axi_wdata;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI WSTRB" *) input [3:0]s00_axi_wstrb;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI WVALID" *) input s00_axi_wvalid;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI WREADY" *) output s00_axi_wready;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI BRESP" *) output [1:0]s00_axi_bresp;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI BVALID" *) output s00_axi_bvalid;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI BREADY" *) input s00_axi_bready;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI ARADDR" *) input [3:0]s00_axi_araddr;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI ARPROT" *) input [2:0]s00_axi_arprot;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI ARVALID" *) input s00_axi_arvalid;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI ARREADY" *) output s00_axi_arready;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI RDATA" *) output [31:0]s00_axi_rdata;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI RRESP" *) output [1:0]s00_axi_rresp;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI RVALID" *) output s00_axi_rvalid;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI RREADY" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME S00_AXI, WIZ_DATA_WIDTH 32, WIZ_NUM_REG 4, SUPPORTS_NARROW_BURST 0, DATA_WIDTH 32, PROTOCOL AXI4LITE, FREQ_HZ 100000000, ID_WIDTH 0, ADDR_WIDTH 4, AWUSER_WIDTH 0, ARUSER_WIDTH 0, WUSER_WIDTH 0, RUSER_WIDTH 0, BUSER_WIDTH 0, READ_WRITE_MODE READ_WRITE, HAS_BURST 0, HAS_LOCK 0, HAS_PROT 1, HAS_CACHE 0, HAS_QOS 0, HAS_REGION 0, HAS_WSTRB 1, HAS_BRESP 1, HAS_RRESP 1, NUM_READ_OUTSTANDING 1, NUM_WRITE_OUTSTANDING 1, MAX_BURST_LENGTH 1, PHASE 0.000, CLK_DOMAIN design_1_processing_system7_0_0_FCLK_CLK0, NUM_READ_THREADS 1, NUM_WRITE_THREADS 1, RUSER_BITS_PER_BYTE 0, WUSER_BITS_PER_BYTE 0" *) input s00_axi_rready;
+  (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 S00_AXI_CLK CLK" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME S00_AXI_CLK, ASSOCIATED_BUSIF S00_AXI, ASSOCIATED_RESET s00_axi_aresetn, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN design_1_processing_system7_0_0_FCLK_CLK0" *) input s00_axi_aclk;
+  (* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 S00_AXI_RST RST" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME S00_AXI_RST, POLARITY ACTIVE_LOW" *) input s00_axi_aresetn;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M00_AXIS TDATA" *) output [31:0]m00_axis_tdata;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M00_AXIS TSTRB" *) output [3:0]m00_axis_tstrb;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M00_AXIS TLAST" *) output m00_axis_tlast;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M00_AXIS TVALID" *) output m00_axis_tvalid;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M00_AXIS TREADY" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME M00_AXIS, WIZ_DATA_WIDTH 32, TDATA_NUM_BYTES 4, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 1, HAS_TKEEP 0, HAS_TLAST 1, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN design_1_processing_system7_0_0_FCLK_CLK0, LAYERED_METADATA undef" *) input m00_axis_tready;
+  (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 M00_AXIS_CLK CLK" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME M00_AXIS_CLK, ASSOCIATED_BUSIF M00_AXIS, ASSOCIATED_RESET m00_axis_aresetn, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN design_1_processing_system7_0_0_FCLK_CLK0" *) input m00_axis_aclk;
+  (* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 M00_AXIS_RST RST" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME M00_AXIS_RST, POLARITY ACTIVE_LOW" *) input m00_axis_aresetn;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 S00_AXIS TDATA" *) input [31:0]s00_axis_tdata;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 S00_AXIS TSTRB" *) input [3:0]s00_axis_tstrb;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 S00_AXIS TLAST" *) input s00_axis_tlast;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 S00_AXIS TVALID" *) input s00_axis_tvalid;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 S00_AXIS TREADY" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME S00_AXIS, WIZ_DATA_WIDTH 32, TDATA_NUM_BYTES 4, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 1, HAS_TKEEP 0, HAS_TLAST 1, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN design_1_processing_system7_0_0_FCLK_CLK0, LAYERED_METADATA undef" *) output s00_axis_tready;
+  (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 S00_AXIS_CLK CLK" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME S00_AXIS_CLK, ASSOCIATED_BUSIF S00_AXIS, ASSOCIATED_RESET s00_axis_aresetn, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN design_1_processing_system7_0_0_FCLK_CLK0" *) input s00_axis_aclk;
+  (* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 S00_AXIS_RST RST" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME S00_AXIS_RST, POLARITY ACTIVE_LOW" *) input s00_axis_aresetn;
+
+  wire \<const0> ;
+  wire m00_axis_aclk;
+  wire m00_axis_aresetn;
+  wire [31:0]m00_axis_tdata;
+  wire m00_axis_tlast;
+  wire m00_axis_tready;
+  wire m00_axis_tvalid;
+  wire s00_axi_aclk;
+  wire [3:0]s00_axi_araddr;
+  wire s00_axi_aresetn;
+  wire s00_axi_arready;
+  wire s00_axi_arvalid;
+  wire [3:0]s00_axi_awaddr;
+  wire s00_axi_awready;
+  wire s00_axi_awvalid;
+  wire s00_axi_bready;
+  wire s00_axi_bvalid;
+  wire [31:0]\^s00_axi_rdata ;
+  wire s00_axi_rready;
+  wire s00_axi_rvalid;
+  wire [31:0]s00_axi_wdata;
+  wire s00_axi_wready;
+  wire [3:0]s00_axi_wstrb;
+  wire s00_axi_wvalid;
+  wire s00_axis_aclk;
+  wire s00_axis_aresetn;
+  wire [31:0]s00_axis_tdata;
+  wire s00_axis_tlast;
+  wire s00_axis_tready;
+  wire s00_axis_tvalid;
+
+  assign s00_axi_bresp[1] = \<const0> ;
+  assign s00_axi_bresp[0] = \<const0> ;
+  assign s00_axi_rdata[31:16] = \^s00_axi_rdata [31:16];
+  assign s00_axi_rdata[15] = \<const0> ;
+  assign s00_axi_rdata[14] = \<const0> ;
+  assign s00_axi_rdata[13] = \<const0> ;
+  assign s00_axi_rdata[12:0] = \^s00_axi_rdata [12:0];
+  assign s00_axi_rresp[1] = \<const0> ;
+  assign s00_axi_rresp[0] = \<const0> ;
+  GND GND
+       (.G(\<const0> ));
+  decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_axis_stream_fifo_v1_0 inst
+       (.m00_axis_aclk(m00_axis_aclk),
+        .m00_axis_aresetn(m00_axis_aresetn),
+        .m00_axis_tready(m00_axis_tready),
+        .m00_axis_tvalid(m00_axis_tvalid),
+        .mem_read_data_reg({m00_axis_tlast,m00_axis_tdata}),
+        .mem_write_data({s00_axis_tlast,s00_axis_tdata}),
+        .s00_axi_aclk(s00_axi_aclk),
+        .s00_axi_araddr(s00_axi_araddr[3:2]),
+        .s00_axi_aresetn(s00_axi_aresetn),
+        .s00_axi_arready(s00_axi_arready),
+        .s00_axi_arvalid(s00_axi_arvalid),
+        .s00_axi_awaddr(s00_axi_awaddr[3:2]),
+        .s00_axi_awready(s00_axi_awready),
+        .s00_axi_awvalid(s00_axi_awvalid),
+        .s00_axi_bready(s00_axi_bready),
+        .s00_axi_bvalid(s00_axi_bvalid),
+        .s00_axi_rdata({\^s00_axi_rdata [31:16],\^s00_axi_rdata [12:0]}),
+        .s00_axi_rready(s00_axi_rready),
+        .s00_axi_rvalid(s00_axi_rvalid),
+        .s00_axi_wdata(s00_axi_wdata[0]),
+        .s00_axi_wready(s00_axi_wready),
+        .s00_axi_wstrb(s00_axi_wstrb[0]),
+        .s00_axi_wvalid(s00_axi_wvalid),
+        .s00_axis_aclk(s00_axis_aclk),
+        .s00_axis_aresetn(s00_axis_aresetn),
+        .s00_axis_tready(s00_axis_tready),
+        .s00_axis_tvalid(s00_axis_tvalid));
 endmodule
 `ifndef GLBL
 `define GLBL

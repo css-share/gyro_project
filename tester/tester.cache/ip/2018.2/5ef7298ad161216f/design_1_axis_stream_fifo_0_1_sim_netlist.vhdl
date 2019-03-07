@@ -1,10 +1,10 @@
 -- Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
--- Date        : Sat Mar  2 15:45:31 2019
+-- Date        : Wed Mar  6 16:38:05 2019
 -- Host        : DESKTOP-KC9HGNO running 64-bit major release  (build 9200)
--- Command     : write_vhdl -force -mode funcsim
---               C:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ip/design_1_axis_stream_fifo_0_1/design_1_axis_stream_fifo_0_1_sim_netlist.vhdl
+-- Command     : write_vhdl -force -mode funcsim -rename_top decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix -prefix
+--               decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_ design_1_axis_stream_fifo_0_1_sim_netlist.vhdl
 -- Design      : design_1_axis_stream_fifo_0_1
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -14,7 +14,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity design_1_axis_stream_fifo_0_1_axis_stream_fifo_v1_0_S00_AXI is
+entity decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_axis_stream_fifo_v1_0_S00_AXI is
   port (
     s00_axi_awready : out STD_LOGIC;
     s00_axi_wready : out STD_LOGIC;
@@ -43,7 +43,13 @@ entity design_1_axis_stream_fifo_0_1_axis_stream_fifo_v1_0_S00_AXI is
     \wr_ptr_gray_reg_reg[6]_1\ : out STD_LOGIC;
     S : out STD_LOGIC_VECTOR ( 3 downto 0 );
     mem_reg_1 : out STD_LOGIC_VECTOR ( 2 downto 0 );
+    s00_rst_sync3_reg_reg : out STD_LOGIC;
+    s00_rst_sync2_reg_reg : out STD_LOGIC;
+    m00_rst_sync3_reg_reg : out STD_LOGIC;
+    m00_rst_sync2_reg_reg : out STD_LOGIC;
     s00_axi_rdata : out STD_LOGIC_VECTOR ( 24 downto 0 );
+    s00_rst_sync1_reg0 : out STD_LOGIC;
+    m00_rst_sync1_reg0 : out STD_LOGIC;
     s00_axi_aclk : in STD_LOGIC;
     dbg_word0_int : in STD_LOGIC_VECTOR ( 12 downto 0 );
     CO : in STD_LOGIC_VECTOR ( 0 to 0 );
@@ -68,13 +74,16 @@ entity design_1_axis_stream_fifo_0_1_axis_stream_fifo_v1_0_S00_AXI is
     s00_axi_bready : in STD_LOGIC;
     s00_axi_arvalid : in STD_LOGIC;
     s00_axi_rready : in STD_LOGIC;
-    s00_axi_araddr : in STD_LOGIC_VECTOR ( 1 downto 0 )
+    s00_axi_wdata : in STD_LOGIC_VECTOR ( 0 to 0 );
+    s00_axi_wstrb : in STD_LOGIC_VECTOR ( 0 to 0 );
+    s00_axis_aresetn : in STD_LOGIC;
+    m00_axis_aresetn : in STD_LOGIC;
+    s00_axi_araddr : in STD_LOGIC_VECTOR ( 1 downto 0 );
+    s00_axi_awaddr : in STD_LOGIC_VECTOR ( 1 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of design_1_axis_stream_fifo_0_1_axis_stream_fifo_v1_0_S00_AXI : entity is "axis_stream_fifo_v1_0_S00_AXI";
-end design_1_axis_stream_fifo_0_1_axis_stream_fifo_v1_0_S00_AXI;
+end decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_axis_stream_fifo_v1_0_S00_AXI;
 
-architecture STRUCTURE of design_1_axis_stream_fifo_0_1_axis_stream_fifo_v1_0_S00_AXI is
+architecture STRUCTURE of decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_axis_stream_fifo_v1_0_S00_AXI is
   signal \^d\ : STD_LOGIC_VECTOR ( 8 downto 0 );
   signal aw_en_i_1_n_0 : STD_LOGIC;
   signal aw_en_reg_n_0 : STD_LOGIC;
@@ -82,7 +91,10 @@ architecture STRUCTURE of design_1_axis_stream_fifo_0_1_axis_stream_fifo_v1_0_S0
   signal \axi_araddr[2]_i_1_n_0\ : STD_LOGIC;
   signal \axi_araddr[3]_i_1_n_0\ : STD_LOGIC;
   signal axi_arready0 : STD_LOGIC;
-  signal \axi_awready0__0\ : STD_LOGIC;
+  signal axi_awaddr : STD_LOGIC_VECTOR ( 3 downto 2 );
+  signal \axi_awaddr[2]_i_1_n_0\ : STD_LOGIC;
+  signal \axi_awaddr[3]_i_1_n_0\ : STD_LOGIC;
+  signal axi_awready0 : STD_LOGIC;
   signal axi_awready_i_1_n_0 : STD_LOGIC;
   signal axi_bvalid_i_1_n_0 : STD_LOGIC;
   signal \axi_rdata[0]_i_2_n_0\ : STD_LOGIC;
@@ -118,7 +130,7 @@ architecture STRUCTURE of design_1_axis_stream_fifo_0_1_axis_stream_fifo_v1_0_S0
   signal \axi_rdata[9]_i_7_n_0\ : STD_LOGIC;
   signal \axi_rdata[9]_i_8_n_0\ : STD_LOGIC;
   signal axi_rvalid_i_1_n_0 : STD_LOGIC;
-  signal \axi_wready0__0\ : STD_LOGIC;
+  signal axi_wready0 : STD_LOGIC;
   signal \^mem_reg\ : STD_LOGIC;
   signal \^mem_reg_0\ : STD_LOGIC;
   signal \rd_ptr_gray_reg[2]_i_2_n_0\ : STD_LOGIC;
@@ -137,7 +149,10 @@ architecture STRUCTURE of design_1_axis_stream_fifo_0_1_axis_stream_fifo_v1_0_S0
   signal \^s00_axi_bvalid\ : STD_LOGIC;
   signal \^s00_axi_rvalid\ : STD_LOGIC;
   signal \^s00_axi_wready\ : STD_LOGIC;
+  signal s00_rst_sync1_reg1 : STD_LOGIC;
+  signal \slv_reg0[0]_i_1_n_0\ : STD_LOGIC;
   signal \slv_reg_rden__0\ : STD_LOGIC;
+  signal \slv_reg_wren__0\ : STD_LOGIC;
   signal \^wr_addr_reg_reg[2]\ : STD_LOGIC;
   signal \^wr_addr_reg_reg[5]\ : STD_LOGIC;
   signal \^wr_addr_reg_reg[6]\ : STD_LOGIC;
@@ -152,28 +167,34 @@ architecture STRUCTURE of design_1_axis_stream_fifo_0_1_axis_stream_fifo_v1_0_S0
   signal \^wr_ptr_reg_reg[3]\ : STD_LOGIC;
   signal \^wr_ptr_reg_reg[4]\ : STD_LOGIC;
   attribute SOFT_HLUTNM : string;
-  attribute SOFT_HLUTNM of \axi_araddr[3]_i_1\ : label is "soft_lutpair4";
-  attribute SOFT_HLUTNM of axi_arready_i_1 : label is "soft_lutpair4";
-  attribute SOFT_HLUTNM of axi_awready0 : label is "soft_lutpair5";
+  attribute SOFT_HLUTNM of \axi_araddr[2]_i_1\ : label is "soft_lutpair5";
+  attribute SOFT_HLUTNM of axi_arready_i_1 : label is "soft_lutpair5";
   attribute SOFT_HLUTNM of \axi_rdata[10]_i_4\ : label is "soft_lutpair2";
   attribute SOFT_HLUTNM of \axi_rdata[3]_i_4\ : label is "soft_lutpair0";
   attribute SOFT_HLUTNM of \axi_rdata[7]_i_4\ : label is "soft_lutpair7";
   attribute SOFT_HLUTNM of \axi_rdata[8]_i_4\ : label is "soft_lutpair7";
   attribute SOFT_HLUTNM of \axi_rdata[9]_i_8\ : label is "soft_lutpair2";
-  attribute SOFT_HLUTNM of axi_wready0 : label is "soft_lutpair5";
-  attribute SOFT_HLUTNM of \rd_ptr_gray_reg[10]_i_2\ : label is "soft_lutpair6";
-  attribute SOFT_HLUTNM of \rd_ptr_gray_reg[2]_i_2\ : label is "soft_lutpair8";
-  attribute SOFT_HLUTNM of \rd_ptr_gray_reg[3]_i_2\ : label is "soft_lutpair8";
+  attribute SOFT_HLUTNM of axi_wready_i_1 : label is "soft_lutpair3";
+  attribute SOFT_HLUTNM of m00_rst_sync1_reg_i_1 : label is "soft_lutpair11";
+  attribute SOFT_HLUTNM of m00_rst_sync2_reg_i_1 : label is "soft_lutpair6";
+  attribute SOFT_HLUTNM of m00_rst_sync3_reg_i_1 : label is "soft_lutpair11";
+  attribute SOFT_HLUTNM of \rd_ptr_gray_reg[10]_i_2\ : label is "soft_lutpair8";
+  attribute SOFT_HLUTNM of \rd_ptr_gray_reg[2]_i_2\ : label is "soft_lutpair13";
+  attribute SOFT_HLUTNM of \rd_ptr_gray_reg[3]_i_2\ : label is "soft_lutpair13";
   attribute SOFT_HLUTNM of \rd_ptr_gray_reg[4]_i_2\ : label is "soft_lutpair1";
   attribute SOFT_HLUTNM of \rd_ptr_gray_reg[5]_i_2\ : label is "soft_lutpair1";
-  attribute SOFT_HLUTNM of \rd_ptr_gray_reg[8]_i_2\ : label is "soft_lutpair6";
+  attribute SOFT_HLUTNM of \rd_ptr_gray_reg[8]_i_2\ : label is "soft_lutpair8";
+  attribute SOFT_HLUTNM of s00_rst_sync1_reg_i_1 : label is "soft_lutpair10";
+  attribute SOFT_HLUTNM of s00_rst_sync2_reg_i_1 : label is "soft_lutpair6";
+  attribute SOFT_HLUTNM of s00_rst_sync3_reg_i_1 : label is "soft_lutpair10";
+  attribute SOFT_HLUTNM of \slv_reg0[0]_i_2\ : label is "soft_lutpair3";
   attribute SOFT_HLUTNM of \wr_addr_reg[2]_i_2\ : label is "soft_lutpair9";
-  attribute SOFT_HLUTNM of \wr_addr_reg[3]_i_2\ : label is "soft_lutpair3";
-  attribute SOFT_HLUTNM of \wr_addr_reg[4]_i_2\ : label is "soft_lutpair3";
+  attribute SOFT_HLUTNM of \wr_addr_reg[3]_i_2\ : label is "soft_lutpair4";
+  attribute SOFT_HLUTNM of \wr_addr_reg[4]_i_2\ : label is "soft_lutpair4";
   attribute SOFT_HLUTNM of \wr_addr_reg[5]_i_2\ : label is "soft_lutpair0";
-  attribute SOFT_HLUTNM of \wr_addr_reg[9]_i_2\ : label is "soft_lutpair10";
+  attribute SOFT_HLUTNM of \wr_addr_reg[9]_i_2\ : label is "soft_lutpair12";
   attribute SOFT_HLUTNM of \wr_ptr_gray_reg[1]_i_2\ : label is "soft_lutpair9";
-  attribute SOFT_HLUTNM of \wr_ptr_gray_reg[6]_i_2\ : label is "soft_lutpair10";
+  attribute SOFT_HLUTNM of \wr_ptr_gray_reg[6]_i_2\ : label is "soft_lutpair12";
 begin
   D(8 downto 0) <= \^d\(8 downto 0);
   mem_reg <= \^mem_reg\;
@@ -276,16 +297,47 @@ axi_arready_reg: unisim.vcomponents.FDRE
       Q => \^s00_axi_arready\,
       R => axi_awready_i_1_n_0
     );
-axi_awready0: unisim.vcomponents.LUT4
+\axi_awaddr[2]_i_1\: unisim.vcomponents.LUT6
     generic map(
-      INIT => X"2000"
+      INIT => X"FBFFFFFF08000000"
     )
         port map (
-      I0 => s00_axi_wvalid,
-      I1 => \^s00_axi_awready\,
-      I2 => aw_en_reg_n_0,
-      I3 => s00_axi_awvalid,
-      O => \axi_awready0__0\
+      I0 => s00_axi_awaddr(0),
+      I1 => s00_axi_wvalid,
+      I2 => \^s00_axi_awready\,
+      I3 => aw_en_reg_n_0,
+      I4 => s00_axi_awvalid,
+      I5 => axi_awaddr(2),
+      O => \axi_awaddr[2]_i_1_n_0\
+    );
+\axi_awaddr[3]_i_1\: unisim.vcomponents.LUT6
+    generic map(
+      INIT => X"FBFFFFFF08000000"
+    )
+        port map (
+      I0 => s00_axi_awaddr(1),
+      I1 => s00_axi_wvalid,
+      I2 => \^s00_axi_awready\,
+      I3 => aw_en_reg_n_0,
+      I4 => s00_axi_awvalid,
+      I5 => axi_awaddr(3),
+      O => \axi_awaddr[3]_i_1_n_0\
+    );
+\axi_awaddr_reg[2]\: unisim.vcomponents.FDRE
+     port map (
+      C => s00_axi_aclk,
+      CE => '1',
+      D => \axi_awaddr[2]_i_1_n_0\,
+      Q => axi_awaddr(2),
+      R => axi_awready_i_1_n_0
+    );
+\axi_awaddr_reg[3]\: unisim.vcomponents.FDRE
+     port map (
+      C => s00_axi_aclk,
+      CE => '1',
+      D => \axi_awaddr[3]_i_1_n_0\,
+      Q => axi_awaddr(3),
+      R => axi_awready_i_1_n_0
     );
 axi_awready_i_1: unisim.vcomponents.LUT1
     generic map(
@@ -295,11 +347,22 @@ axi_awready_i_1: unisim.vcomponents.LUT1
       I0 => s00_axi_aresetn,
       O => axi_awready_i_1_n_0
     );
+axi_awready_i_2: unisim.vcomponents.LUT4
+    generic map(
+      INIT => X"2000"
+    )
+        port map (
+      I0 => s00_axi_wvalid,
+      I1 => \^s00_axi_awready\,
+      I2 => aw_en_reg_n_0,
+      I3 => s00_axi_awvalid,
+      O => axi_awready0
+    );
 axi_awready_reg: unisim.vcomponents.FDRE
      port map (
       C => s00_axi_aclk,
       CE => '1',
-      D => \axi_awready0__0\,
+      D => axi_awready0,
       Q => \^s00_axi_awready\,
       R => axi_awready_i_1_n_0
     );
@@ -1197,7 +1260,7 @@ axi_rvalid_reg: unisim.vcomponents.FDRE
       Q => \^s00_axi_rvalid\,
       R => axi_awready_i_1_n_0
     );
-axi_wready0: unisim.vcomponents.LUT4
+axi_wready_i_1: unisim.vcomponents.LUT4
     generic map(
       INIT => X"0800"
     )
@@ -1206,13 +1269,13 @@ axi_wready0: unisim.vcomponents.LUT4
       I1 => s00_axi_wvalid,
       I2 => \^s00_axi_wready\,
       I3 => aw_en_reg_n_0,
-      O => \axi_wready0__0\
+      O => axi_wready0
     );
 axi_wready_reg: unisim.vcomponents.FDRE
      port map (
       C => s00_axi_aclk,
       CE => '1',
-      D => \axi_wready0__0\,
+      D => axi_wready0,
       Q => \^s00_axi_wready\,
       R => axi_awready_i_1_n_0
     );
@@ -1304,6 +1367,36 @@ full0_carry_i_3: unisim.vcomponents.LUT6
       I4 => \rd_ptr_gray_sync2_reg_reg[10]\(2),
       I5 => \wr_ptr_gray_reg_reg[10]\(2),
       O => mem_reg_1(0)
+    );
+m00_rst_sync1_reg_i_1: unisim.vcomponents.LUT2
+    generic map(
+      INIT => X"B"
+    )
+        port map (
+      I0 => s00_rst_sync1_reg1,
+      I1 => m00_axis_aresetn,
+      O => m00_rst_sync1_reg0
+    );
+m00_rst_sync2_reg_i_1: unisim.vcomponents.LUT4
+    generic map(
+      INIT => X"FFEF"
+    )
+        port map (
+      I0 => s00_rst_sync1_reg,
+      I1 => m00_rst_sync1_reg,
+      I2 => m00_axis_aresetn,
+      I3 => s00_rst_sync1_reg1,
+      O => m00_rst_sync2_reg_reg
+    );
+m00_rst_sync3_reg_i_1: unisim.vcomponents.LUT3
+    generic map(
+      INIT => X"FB"
+    )
+        port map (
+      I0 => dbg_word0_int(12),
+      I1 => m00_axis_aresetn,
+      I2 => s00_rst_sync1_reg1,
+      O => m00_rst_sync3_reg_reg
     );
 mem_reg_i_1: unisim.vcomponents.LUT4
     generic map(
@@ -1667,6 +1760,68 @@ mem_reg_i_2: unisim.vcomponents.LUT2
       I5 => mem_read_data_valid_reg,
       O => \^d\(7)
     );
+s00_rst_sync1_reg_i_1: unisim.vcomponents.LUT2
+    generic map(
+      INIT => X"B"
+    )
+        port map (
+      I0 => s00_rst_sync1_reg1,
+      I1 => s00_axis_aresetn,
+      O => s00_rst_sync1_reg0
+    );
+s00_rst_sync2_reg_i_1: unisim.vcomponents.LUT4
+    generic map(
+      INIT => X"FFEF"
+    )
+        port map (
+      I0 => s00_rst_sync1_reg,
+      I1 => m00_rst_sync1_reg,
+      I2 => s00_axis_aresetn,
+      I3 => s00_rst_sync1_reg1,
+      O => s00_rst_sync2_reg_reg
+    );
+s00_rst_sync3_reg_i_1: unisim.vcomponents.LUT3
+    generic map(
+      INIT => X"FB"
+    )
+        port map (
+      I0 => dbg_word2_int(11),
+      I1 => s00_axis_aresetn,
+      I2 => s00_rst_sync1_reg1,
+      O => s00_rst_sync3_reg_reg
+    );
+\slv_reg0[0]_i_1\: unisim.vcomponents.LUT6
+    generic map(
+      INIT => X"FFFBFFFF00080000"
+    )
+        port map (
+      I0 => s00_axi_wdata(0),
+      I1 => \slv_reg_wren__0\,
+      I2 => axi_awaddr(3),
+      I3 => axi_awaddr(2),
+      I4 => s00_axi_wstrb(0),
+      I5 => s00_rst_sync1_reg1,
+      O => \slv_reg0[0]_i_1_n_0\
+    );
+\slv_reg0[0]_i_2\: unisim.vcomponents.LUT4
+    generic map(
+      INIT => X"8000"
+    )
+        port map (
+      I0 => \^s00_axi_wready\,
+      I1 => \^s00_axi_awready\,
+      I2 => s00_axi_awvalid,
+      I3 => s00_axi_wvalid,
+      O => \slv_reg_wren__0\
+    );
+\slv_reg0_reg[0]\: unisim.vcomponents.FDRE
+     port map (
+      C => s00_axi_aclk,
+      CE => '1',
+      D => \slv_reg0[0]_i_1_n_0\,
+      Q => s00_rst_sync1_reg1,
+      R => axi_awready_i_1_n_0
+    );
 slv_reg_rden: unisim.vcomponents.LUT3
     generic map(
       INIT => X"20"
@@ -1826,7 +1981,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity design_1_axis_stream_fifo_0_1_axis_stream_fifo_v1_0 is
+entity decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_axis_stream_fifo_v1_0 is
   port (
     m00_axis_tvalid : out STD_LOGIC;
     m00_axis_tdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
@@ -1847,19 +2002,20 @@ entity design_1_axis_stream_fifo_0_1_axis_stream_fifo_v1_0 is
     s00_axi_aclk : in STD_LOGIC;
     s00_axi_araddr : in STD_LOGIC_VECTOR ( 1 downto 0 );
     s00_axi_arvalid : in STD_LOGIC;
-    s00_axi_awvalid : in STD_LOGIC;
+    s00_axi_awaddr : in STD_LOGIC_VECTOR ( 1 downto 0 );
     s00_axi_wvalid : in STD_LOGIC;
-    s00_axi_aresetn : in STD_LOGIC;
+    s00_axi_awvalid : in STD_LOGIC;
     s00_axis_aresetn : in STD_LOGIC;
     m00_axis_aresetn : in STD_LOGIC;
+    s00_axi_aresetn : in STD_LOGIC;
     s00_axi_bready : in STD_LOGIC;
-    s00_axi_rready : in STD_LOGIC
+    s00_axi_rready : in STD_LOGIC;
+    s00_axi_wdata : in STD_LOGIC_VECTOR ( 0 to 0 );
+    s00_axi_wstrb : in STD_LOGIC_VECTOR ( 0 to 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of design_1_axis_stream_fifo_0_1_axis_stream_fifo_v1_0 : entity is "axis_stream_fifo_v1_0";
-end design_1_axis_stream_fifo_0_1_axis_stream_fifo_v1_0;
+end decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_axis_stream_fifo_v1_0;
 
-architecture STRUCTURE of design_1_axis_stream_fifo_0_1_axis_stream_fifo_v1_0 is
+architecture STRUCTURE of decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_axis_stream_fifo_v1_0 is
   signal axis_stream_fifo_v1_0_S00_AXI_inst_n_10 : STD_LOGIC;
   signal axis_stream_fifo_v1_0_S00_AXI_inst_n_11 : STD_LOGIC;
   signal axis_stream_fifo_v1_0_S00_AXI_inst_n_12 : STD_LOGIC;
@@ -1894,6 +2050,10 @@ architecture STRUCTURE of design_1_axis_stream_fifo_0_1_axis_stream_fifo_v1_0 is
   signal axis_stream_fifo_v1_0_S00_AXI_inst_n_46 : STD_LOGIC;
   signal axis_stream_fifo_v1_0_S00_AXI_inst_n_47 : STD_LOGIC;
   signal axis_stream_fifo_v1_0_S00_AXI_inst_n_48 : STD_LOGIC;
+  signal axis_stream_fifo_v1_0_S00_AXI_inst_n_49 : STD_LOGIC;
+  signal axis_stream_fifo_v1_0_S00_AXI_inst_n_50 : STD_LOGIC;
+  signal axis_stream_fifo_v1_0_S00_AXI_inst_n_51 : STD_LOGIC;
+  signal axis_stream_fifo_v1_0_S00_AXI_inst_n_52 : STD_LOGIC;
   signal axis_stream_fifo_v1_0_S00_AXI_inst_n_6 : STD_LOGIC;
   signal axis_stream_fifo_v1_0_S00_AXI_inst_n_7 : STD_LOGIC;
   signal axis_stream_fifo_v1_0_S00_AXI_inst_n_8 : STD_LOGIC;
@@ -1912,9 +2072,7 @@ architecture STRUCTURE of design_1_axis_stream_fifo_0_1_axis_stream_fifo_v1_0 is
   signal \^m00_axis_tvalid\ : STD_LOGIC;
   signal m00_axis_tvalid_reg_i_1_n_0 : STD_LOGIC;
   signal m00_rst_sync1_reg : STD_LOGIC;
-  signal m00_rst_sync1_reg_i_1_n_0 : STD_LOGIC;
-  signal m00_rst_sync2_reg_i_1_n_0 : STD_LOGIC;
-  signal m00_rst_sync3_reg_i_1_n_0 : STD_LOGIC;
+  signal m00_rst_sync1_reg0 : STD_LOGIC;
   signal mem_read_data_valid_reg : STD_LOGIC;
   signal mem_read_data_valid_reg_i_1_n_0 : STD_LOGIC;
   signal p_0_in : STD_LOGIC;
@@ -1936,10 +2094,8 @@ architecture STRUCTURE of design_1_axis_stream_fifo_0_1_axis_stream_fifo_v1_0 is
   signal \rd_ptr_reg[9]_i_1_n_0\ : STD_LOGIC;
   signal s00_axis_tready02_in : STD_LOGIC;
   signal s00_rst_sync1_reg : STD_LOGIC;
-  signal s00_rst_sync1_reg_i_1_n_0 : STD_LOGIC;
-  signal s00_rst_sync2_reg_i_1_n_0 : STD_LOGIC;
+  signal s00_rst_sync1_reg0 : STD_LOGIC;
   signal s00_rst_sync3_reg : STD_LOGIC;
-  signal s00_rst_sync3_reg_i_1_n_0 : STD_LOGIC;
   signal wr_addr_reg : STD_LOGIC_VECTOR ( 10 downto 0 );
   signal \wr_addr_reg[0]_i_1_n_0\ : STD_LOGIC;
   signal \wr_addr_reg[10]_i_1_n_0\ : STD_LOGIC;
@@ -1985,9 +2141,7 @@ architecture STRUCTURE of design_1_axis_stream_fifo_0_1_axis_stream_fifo_v1_0 is
   signal NLW_mem_reg_ECCPARITY_UNCONNECTED : STD_LOGIC_VECTOR ( 7 downto 0 );
   signal NLW_mem_reg_RDADDRECC_UNCONNECTED : STD_LOGIC_VECTOR ( 8 downto 0 );
   attribute SOFT_HLUTNM : string;
-  attribute SOFT_HLUTNM of m00_rst_sync2_reg_i_1 : label is "soft_lutpair15";
-  attribute SOFT_HLUTNM of m00_rst_sync3_reg_i_1 : label is "soft_lutpair15";
-  attribute SOFT_HLUTNM of mem_read_data_valid_reg_i_1 : label is "soft_lutpair11";
+  attribute SOFT_HLUTNM of mem_read_data_valid_reg_i_1 : label is "soft_lutpair16";
   attribute \MEM.PORTA.DATA_BIT_LAYOUT\ : string;
   attribute \MEM.PORTA.DATA_BIT_LAYOUT\ of mem_reg : label is "p1_d32";
   attribute \MEM.PORTB.DATA_BIT_LAYOUT\ : string;
@@ -2006,16 +2160,14 @@ architecture STRUCTURE of design_1_axis_stream_fifo_0_1_axis_stream_fifo_v1_0 is
   attribute bram_slice_begin of mem_reg : label is 0;
   attribute bram_slice_end : integer;
   attribute bram_slice_end of mem_reg : label is 32;
-  attribute SOFT_HLUTNM of \rd_ptr_reg[0]_i_1\ : label is "soft_lutpair11";
-  attribute SOFT_HLUTNM of s00_rst_sync2_reg_i_1 : label is "soft_lutpair14";
-  attribute SOFT_HLUTNM of s00_rst_sync3_reg_i_1 : label is "soft_lutpair14";
-  attribute SOFT_HLUTNM of \wr_addr_reg[9]_i_1\ : label is "soft_lutpair12";
-  attribute SOFT_HLUTNM of \wr_ptr_gray_reg[2]_i_2\ : label is "soft_lutpair13";
-  attribute SOFT_HLUTNM of \wr_ptr_gray_reg[3]_i_2\ : label is "soft_lutpair13";
-  attribute SOFT_HLUTNM of \wr_ptr_gray_reg[8]_i_1\ : label is "soft_lutpair12";
+  attribute SOFT_HLUTNM of \rd_ptr_reg[0]_i_1\ : label is "soft_lutpair16";
+  attribute SOFT_HLUTNM of \wr_addr_reg[9]_i_1\ : label is "soft_lutpair14";
+  attribute SOFT_HLUTNM of \wr_ptr_gray_reg[2]_i_2\ : label is "soft_lutpair15";
+  attribute SOFT_HLUTNM of \wr_ptr_gray_reg[3]_i_2\ : label is "soft_lutpair15";
+  attribute SOFT_HLUTNM of \wr_ptr_gray_reg[8]_i_1\ : label is "soft_lutpair14";
 begin
   m00_axis_tvalid <= \^m00_axis_tvalid\;
-axis_stream_fifo_v1_0_S00_AXI_inst: entity work.design_1_axis_stream_fifo_0_1_axis_stream_fifo_v1_0_S00_AXI
+axis_stream_fifo_v1_0_S00_AXI_inst: entity work.decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_axis_stream_fifo_v1_0_S00_AXI
      port map (
       CO(0) => empty,
       D(8) => dbg_word0_int(10),
@@ -2037,9 +2189,13 @@ axis_stream_fifo_v1_0_S00_AXI_inst: entity work.design_1_axis_stream_fifo_0_1_ax
       dbg_word1_int(10 downto 0) => dbg_word1_int(24 downto 14),
       dbg_word2_int(11) => dbg_word2_int(26),
       dbg_word2_int(10 downto 0) => dbg_word2_int(24 downto 14),
+      m00_axis_aresetn => m00_axis_aresetn,
       m00_axis_tready => m00_axis_tready,
       m00_axis_tvalid_reg_reg => \^m00_axis_tvalid\,
       m00_rst_sync1_reg => m00_rst_sync1_reg,
+      m00_rst_sync1_reg0 => m00_rst_sync1_reg0,
+      m00_rst_sync2_reg_reg => axis_stream_fifo_v1_0_S00_AXI_inst_n_52,
+      m00_rst_sync3_reg_reg => axis_stream_fifo_v1_0_S00_AXI_inst_n_51,
       mem_read_data_valid_reg => mem_read_data_valid_reg,
       mem_reg => axis_stream_fifo_v1_0_S00_AXI_inst_n_14,
       mem_reg_0 => axis_stream_fifo_v1_0_S00_AXI_inst_n_27,
@@ -2075,6 +2231,7 @@ axis_stream_fifo_v1_0_S00_AXI_inst: entity work.design_1_axis_stream_fifo_0_1_ax
       s00_axi_aresetn => s00_axi_aresetn,
       s00_axi_arready => s00_axi_arready,
       s00_axi_arvalid => s00_axi_arvalid,
+      s00_axi_awaddr(1 downto 0) => s00_axi_awaddr(1 downto 0),
       s00_axi_awready => s00_axi_awready,
       s00_axi_awvalid => s00_axi_awvalid,
       s00_axi_bready => s00_axi_bready,
@@ -2082,10 +2239,16 @@ axis_stream_fifo_v1_0_S00_AXI_inst: entity work.design_1_axis_stream_fifo_0_1_ax
       s00_axi_rdata(24 downto 0) => s00_axi_rdata(24 downto 0),
       s00_axi_rready => s00_axi_rready,
       s00_axi_rvalid => s00_axi_rvalid,
+      s00_axi_wdata(0) => s00_axi_wdata(0),
       s00_axi_wready => s00_axi_wready,
+      s00_axi_wstrb(0) => s00_axi_wstrb(0),
       s00_axi_wvalid => s00_axi_wvalid,
+      s00_axis_aresetn => s00_axis_aresetn,
       s00_axis_tvalid => s00_axis_tvalid,
       s00_rst_sync1_reg => s00_rst_sync1_reg,
+      s00_rst_sync1_reg0 => s00_rst_sync1_reg0,
+      s00_rst_sync2_reg_reg => axis_stream_fifo_v1_0_S00_AXI_inst_n_50,
+      s00_rst_sync3_reg_reg => axis_stream_fifo_v1_0_S00_AXI_inst_n_49,
       \wr_addr_reg_reg[10]\(10 downto 0) => wr_addr_reg(10 downto 0),
       \wr_addr_reg_reg[2]\ => axis_stream_fifo_v1_0_S00_AXI_inst_n_40,
       \wr_addr_reg_reg[5]\ => axis_stream_fifo_v1_0_S00_AXI_inst_n_32,
@@ -2164,14 +2327,6 @@ m00_axis_tvalid_reg_reg: unisim.vcomponents.FDRE
       Q => \^m00_axis_tvalid\,
       R => dbg_word0_int(25)
     );
-m00_rst_sync1_reg_i_1: unisim.vcomponents.LUT1
-    generic map(
-      INIT => X"1"
-    )
-        port map (
-      I0 => m00_axis_aresetn,
-      O => m00_rst_sync1_reg_i_1_n_0
-    );
 m00_rst_sync1_reg_reg: unisim.vcomponents.FDRE
     generic map(
       INIT => '1'
@@ -2179,19 +2334,9 @@ m00_rst_sync1_reg_reg: unisim.vcomponents.FDRE
         port map (
       C => m00_axis_aclk,
       CE => '1',
-      D => m00_rst_sync1_reg_i_1_n_0,
+      D => m00_rst_sync1_reg0,
       Q => m00_rst_sync1_reg,
       R => '0'
-    );
-m00_rst_sync2_reg_i_1: unisim.vcomponents.LUT3
-    generic map(
-      INIT => X"EF"
-    )
-        port map (
-      I0 => s00_rst_sync1_reg,
-      I1 => m00_rst_sync1_reg,
-      I2 => m00_axis_aresetn,
-      O => m00_rst_sync2_reg_i_1_n_0
     );
 m00_rst_sync2_reg_reg: unisim.vcomponents.FDRE
     generic map(
@@ -2200,18 +2345,9 @@ m00_rst_sync2_reg_reg: unisim.vcomponents.FDRE
         port map (
       C => m00_axis_aclk,
       CE => '1',
-      D => m00_rst_sync2_reg_i_1_n_0,
+      D => axis_stream_fifo_v1_0_S00_AXI_inst_n_52,
       Q => dbg_word0_int(26),
       R => '0'
-    );
-m00_rst_sync3_reg_i_1: unisim.vcomponents.LUT2
-    generic map(
-      INIT => X"B"
-    )
-        port map (
-      I0 => dbg_word0_int(26),
-      I1 => m00_axis_aresetn,
-      O => m00_rst_sync3_reg_i_1_n_0
     );
 m00_rst_sync3_reg_reg: unisim.vcomponents.FDRE
     generic map(
@@ -2220,7 +2356,7 @@ m00_rst_sync3_reg_reg: unisim.vcomponents.FDRE
         port map (
       C => m00_axis_aclk,
       CE => '1',
-      D => m00_rst_sync3_reg_i_1_n_0,
+      D => axis_stream_fifo_v1_0_S00_AXI_inst_n_51,
       Q => dbg_word0_int(25),
       R => '0'
     );
@@ -2982,14 +3118,6 @@ s00_axis_tready_INST_0: unisim.vcomponents.LUT6
       I5 => p_0_in0_in,
       O => s00_axis_tready
     );
-s00_rst_sync1_reg_i_1: unisim.vcomponents.LUT1
-    generic map(
-      INIT => X"1"
-    )
-        port map (
-      I0 => s00_axis_aresetn,
-      O => s00_rst_sync1_reg_i_1_n_0
-    );
 s00_rst_sync1_reg_reg: unisim.vcomponents.FDRE
     generic map(
       INIT => '1'
@@ -2997,19 +3125,9 @@ s00_rst_sync1_reg_reg: unisim.vcomponents.FDRE
         port map (
       C => s00_axis_aclk,
       CE => '1',
-      D => s00_rst_sync1_reg_i_1_n_0,
+      D => s00_rst_sync1_reg0,
       Q => s00_rst_sync1_reg,
       R => '0'
-    );
-s00_rst_sync2_reg_i_1: unisim.vcomponents.LUT3
-    generic map(
-      INIT => X"EF"
-    )
-        port map (
-      I0 => s00_rst_sync1_reg,
-      I1 => m00_rst_sync1_reg,
-      I2 => s00_axis_aresetn,
-      O => s00_rst_sync2_reg_i_1_n_0
     );
 s00_rst_sync2_reg_reg: unisim.vcomponents.FDRE
     generic map(
@@ -3018,18 +3136,9 @@ s00_rst_sync2_reg_reg: unisim.vcomponents.FDRE
         port map (
       C => s00_axis_aclk,
       CE => '1',
-      D => s00_rst_sync2_reg_i_1_n_0,
+      D => axis_stream_fifo_v1_0_S00_AXI_inst_n_50,
       Q => dbg_word2_int(26),
       R => '0'
-    );
-s00_rst_sync3_reg_i_1: unisim.vcomponents.LUT2
-    generic map(
-      INIT => X"B"
-    )
-        port map (
-      I0 => dbg_word2_int(26),
-      I1 => s00_axis_aresetn,
-      O => s00_rst_sync3_reg_i_1_n_0
     );
 s00_rst_sync3_reg_reg: unisim.vcomponents.FDRE
     generic map(
@@ -3038,7 +3147,7 @@ s00_rst_sync3_reg_reg: unisim.vcomponents.FDRE
         port map (
       C => s00_axis_aclk,
       CE => '1',
-      D => s00_rst_sync3_reg_i_1_n_0,
+      D => axis_stream_fifo_v1_0_S00_AXI_inst_n_49,
       Q => s00_rst_sync3_reg,
       R => '0'
     );
@@ -3963,7 +4072,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity design_1_axis_stream_fifo_0_1 is
+entity decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix is
   port (
     s00_axi_awaddr : in STD_LOGIC_VECTOR ( 3 downto 0 );
     s00_axi_awprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
@@ -4002,16 +4111,16 @@ entity design_1_axis_stream_fifo_0_1 is
     s00_axis_aresetn : in STD_LOGIC
   );
   attribute NotValidForBitStream : boolean;
-  attribute NotValidForBitStream of design_1_axis_stream_fifo_0_1 : entity is true;
+  attribute NotValidForBitStream of decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix : entity is true;
   attribute CHECK_LICENSE_TYPE : string;
-  attribute CHECK_LICENSE_TYPE of design_1_axis_stream_fifo_0_1 : entity is "design_1_axis_stream_fifo_0_1,axis_stream_fifo_v1_0,{}";
+  attribute CHECK_LICENSE_TYPE of decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix : entity is "design_1_axis_stream_fifo_0_1,axis_stream_fifo_v1_0,{}";
   attribute DowngradeIPIdentifiedWarnings : string;
-  attribute DowngradeIPIdentifiedWarnings of design_1_axis_stream_fifo_0_1 : entity is "yes";
+  attribute DowngradeIPIdentifiedWarnings of decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix : entity is "yes";
   attribute X_CORE_INFO : string;
-  attribute X_CORE_INFO of design_1_axis_stream_fifo_0_1 : entity is "axis_stream_fifo_v1_0,Vivado 2018.2";
-end design_1_axis_stream_fifo_0_1;
+  attribute X_CORE_INFO of decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix : entity is "axis_stream_fifo_v1_0,Vivado 2018.2";
+end decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix;
 
-architecture STRUCTURE of design_1_axis_stream_fifo_0_1 is
+architecture STRUCTURE of decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix is
   signal \<const0>\ : STD_LOGIC;
   signal \^s00_axi_rdata\ : STD_LOGIC_VECTOR ( 27 downto 0 );
   attribute X_INTERFACE_INFO : string;
@@ -4082,7 +4191,7 @@ GND: unisim.vcomponents.GND
      port map (
       G => \<const0>\
     );
-inst: entity work.design_1_axis_stream_fifo_0_1_axis_stream_fifo_v1_0
+inst: entity work.decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_axis_stream_fifo_v1_0
      port map (
       m00_axis_aclk => m00_axis_aclk,
       m00_axis_aresetn => m00_axis_aresetn,
@@ -4095,6 +4204,7 @@ inst: entity work.design_1_axis_stream_fifo_0_1_axis_stream_fifo_v1_0
       s00_axi_aresetn => s00_axi_aresetn,
       s00_axi_arready => s00_axi_arready,
       s00_axi_arvalid => s00_axi_arvalid,
+      s00_axi_awaddr(1 downto 0) => s00_axi_awaddr(3 downto 2),
       s00_axi_awready => s00_axi_awready,
       s00_axi_awvalid => s00_axi_awvalid,
       s00_axi_bready => s00_axi_bready,
@@ -4103,7 +4213,9 @@ inst: entity work.design_1_axis_stream_fifo_0_1_axis_stream_fifo_v1_0
       s00_axi_rdata(10 downto 0) => \^s00_axi_rdata\(10 downto 0),
       s00_axi_rready => s00_axi_rready,
       s00_axi_rvalid => s00_axi_rvalid,
+      s00_axi_wdata(0) => s00_axi_wdata(0),
       s00_axi_wready => s00_axi_wready,
+      s00_axi_wstrb(0) => s00_axi_wstrb(0),
       s00_axi_wvalid => s00_axi_wvalid,
       s00_axis_aclk => s00_axis_aclk,
       s00_axis_aresetn => s00_axis_aresetn,
