@@ -1,10 +1,10 @@
 // Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-// Date        : Sun Mar  3 13:08:05 2019
-// Host        : DESKTOP-KC9HGNO running 64-bit major release  (build 9200)
+// Date        : Thu Mar  7 18:38:31 2019
+// Host        : AsusP8 running 64-bit major release  (build 9200)
 // Command     : write_verilog -force -mode funcsim
-//               C:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_1/ip/design_1_BiDirChannels_0_0/design_1_BiDirChannels_0_0_sim_netlist.v
+//               C:/Xilinx/Vivado/projects/initial_gyro_tester_experiments/tester/tester.srcs/sources_1/bd/design_1/ip/design_1_BiDirChannels_0_0/design_1_BiDirChannels_0_0_sim_netlist.v
 // Design      : design_1_BiDirChannels_0_0
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -95,11 +95,12 @@ module design_1_BiDirChannels_0_0
   (* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 S00_AXIS_RST RST" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME S00_AXIS_RST, POLARITY ACTIVE_LOW" *) input s00_axis_aresetn;
 
   wire \<const0> ;
-  wire D0;
   wire HS_Clock;
   wire HS_DataIn;
   wire HS_DataOut;
   wire MCK;
+  wire \X1/CHANNELS/clock_div_4 ;
+  wire clock0;
   wire [31:0]m00_axis_tdata;
   wire m00_axis_tlast;
   wire m00_axis_tready;
@@ -122,7 +123,6 @@ module design_1_BiDirChannels_0_0
   wire [3:0]s00_axi_wstrb;
   wire s00_axi_wvalid;
   wire [31:0]s00_axis_tdata;
-  wire s00_axis_tlast;
   wire s00_axis_tready;
   wire s00_axis_tvalid;
 
@@ -139,14 +139,15 @@ module design_1_BiDirChannels_0_0
   LUT1 #(
     .INIT(2'h1)) 
     Q_reg_i_1
-       (.I0(MCK),
-        .O(D0));
+       (.I0(\X1/CHANNELS/clock_div_4 ),
+        .O(clock0));
   design_1_BiDirChannels_0_0_BiDirChannels_v1_0 inst
-       (.CLK(D0),
+       (.CLK(clock0),
         .HS_Clock(HS_Clock),
         .HS_DataIn(HS_DataIn),
         .HS_DataOut(HS_DataOut),
         .MCK(MCK),
+        .clock_div_4(\X1/CHANNELS/clock_div_4 ),
         .m00_axis_tdata(m00_axis_tdata),
         .m00_axis_tlast(m00_axis_tlast),
         .m00_axis_tready(m00_axis_tready),
@@ -164,12 +165,11 @@ module design_1_BiDirChannels_0_0
         .s00_axi_rdata(s00_axi_rdata),
         .s00_axi_rready(s00_axi_rready),
         .s00_axi_rvalid(s00_axi_rvalid),
-        .s00_axi_wdata(s00_axi_wdata),
+        .s00_axi_wdata({s00_axi_wdata[31],s00_axi_wdata[28],s00_axi_wdata[24],s00_axi_wdata[4],s00_axi_wdata[0]}),
         .s00_axi_wready(s00_axi_wready),
-        .s00_axi_wstrb(s00_axi_wstrb),
+        .s00_axi_wstrb({s00_axi_wstrb[3],s00_axi_wstrb[0]}),
         .s00_axi_wvalid(s00_axi_wvalid),
         .s00_axis_tdata(s00_axis_tdata),
-        .s00_axis_tlast(s00_axis_tlast),
         .s00_axis_tready(s00_axis_tready),
         .s00_axis_tvalid(s00_axis_tvalid));
 endmodule
@@ -179,14 +179,15 @@ module design_1_BiDirChannels_0_0_BiDirChannels_v1_0
    (s00_axi_awready,
     s00_axi_wready,
     s00_axi_arready,
-    MCK,
     m00_axis_tvalid,
+    MCK,
+    clock_div_4,
     HS_DataOut,
     s00_axi_bvalid,
     s00_axi_rvalid,
-    m00_axis_tdata,
     m00_axis_tlast,
     HS_Clock,
+    m00_axis_tdata,
     s00_axis_tready,
     s00_axi_rdata,
     s00_axi_aclk,
@@ -194,8 +195,8 @@ module design_1_BiDirChannels_0_0_BiDirChannels_v1_0
     s00_axis_tdata,
     s00_axis_tvalid,
     m00_axis_tready,
-    HS_DataIn,
     s00_axi_aresetn,
+    HS_DataIn,
     s00_axi_awvalid,
     s00_axi_wvalid,
     s00_axi_bready,
@@ -203,20 +204,20 @@ module design_1_BiDirChannels_0_0_BiDirChannels_v1_0
     s00_axi_rready,
     s00_axi_awaddr,
     s00_axi_wdata,
-    s00_axi_araddr,
-    s00_axis_tlast,
-    s00_axi_wstrb);
+    s00_axi_wstrb,
+    s00_axi_araddr);
   output s00_axi_awready;
   output s00_axi_wready;
   output s00_axi_arready;
-  output MCK;
   output m00_axis_tvalid;
+  output MCK;
+  output clock_div_4;
   output HS_DataOut;
   output s00_axi_bvalid;
   output s00_axi_rvalid;
-  output [31:0]m00_axis_tdata;
   output m00_axis_tlast;
   output HS_Clock;
+  output [31:0]m00_axis_tdata;
   output s00_axis_tready;
   output [31:0]s00_axi_rdata;
   input s00_axi_aclk;
@@ -224,39 +225,34 @@ module design_1_BiDirChannels_0_0_BiDirChannels_v1_0
   input [31:0]s00_axis_tdata;
   input s00_axis_tvalid;
   input m00_axis_tready;
-  input HS_DataIn;
   input s00_axi_aresetn;
+  input HS_DataIn;
   input s00_axi_awvalid;
   input s00_axi_wvalid;
   input s00_axi_bready;
   input s00_axi_arvalid;
   input s00_axi_rready;
   input [1:0]s00_axi_awaddr;
-  input [31:0]s00_axi_wdata;
+  input [4:0]s00_axi_wdata;
+  input [1:0]s00_axi_wstrb;
   input [1:0]s00_axi_araddr;
-  input s00_axis_tlast;
-  input [3:0]s00_axi_wstrb;
 
-  wire BiDirChannels_v1_0_S00_AXI_inst_n_10;
-  wire BiDirChannels_v1_0_S00_AXI_inst_n_11;
-  wire BiDirChannels_v1_0_S00_AXI_inst_n_6;
+  wire BiDirChannels_v1_0_S00_AXI_inst_n_44;
+  wire BiDirChannels_v1_0_S00_AXI_inst_n_5;
   wire CLK;
   wire D;
-  wire [7:0]\DEBUGGER/CNTR0/r_reg_reg__0 ;
-  wire [7:0]\DEBUGGER/CNTR1/r_reg_reg__0 ;
-  wire [7:0]\DEBUGGER/CNTR2/r_reg_reg__0 ;
-  wire [7:0]\DEBUGGER/CNTR3/r_reg_reg__0 ;
-  wire [7:0]\DEBUGGER/CNTR4/r_reg_reg__0 ;
-  wire [7:0]\DEBUGGER/CNTR5/r_reg_reg__0 ;
   wire HS_Clock;
   wire HS_DataIn;
   wire HS_DataOut;
   wire MCK;
-  wire [31:24]data_word_0;
+  wire [3:2]axi_araddr;
+  wire clock_div_4;
+  wire [31:24]data_word_4;
   wire [31:0]m00_axis_tdata;
   wire m00_axis_tlast;
   wire m00_axis_tready;
   wire m00_axis_tvalid;
+  wire [31:0]reg_data_out;
   wire s00_axi_aclk;
   wire [1:0]s00_axi_araddr;
   wire s00_axi_aresetn;
@@ -270,26 +266,21 @@ module design_1_BiDirChannels_0_0_BiDirChannels_v1_0
   wire [31:0]s00_axi_rdata;
   wire s00_axi_rready;
   wire s00_axi_rvalid;
-  wire [31:0]s00_axi_wdata;
+  wire [4:0]s00_axi_wdata;
   wire s00_axi_wready;
-  wire [3:0]s00_axi_wstrb;
+  wire [1:0]s00_axi_wstrb;
   wire s00_axi_wvalid;
   wire [31:0]s00_axis_tdata;
-  wire s00_axis_tlast;
   wire s00_axis_tready;
   wire s00_axis_tvalid;
 
   design_1_BiDirChannels_0_0_BiDirChannels_v1_0_S00_AXI BiDirChannels_v1_0_S00_AXI_inst
-       (.Q(\DEBUGGER/CNTR0/r_reg_reg__0 ),
-        .Q_reg({D,BiDirChannels_v1_0_S00_AXI_inst_n_6}),
-        .\r_reg_reg[4] ({data_word_0[31],data_word_0[28],data_word_0[24]}),
-        .\r_reg_reg[4]_0 (BiDirChannels_v1_0_S00_AXI_inst_n_10),
-        .\r_reg_reg[7] (BiDirChannels_v1_0_S00_AXI_inst_n_11),
-        .\r_reg_reg[7]_0 (\DEBUGGER/CNTR2/r_reg_reg__0 ),
-        .\r_reg_reg[7]_1 (\DEBUGGER/CNTR4/r_reg_reg__0 ),
-        .\r_reg_reg[7]_2 (\DEBUGGER/CNTR3/r_reg_reg__0 ),
-        .\r_reg_reg[7]_3 (\DEBUGGER/CNTR1/r_reg_reg__0 ),
-        .\r_reg_reg[7]_4 (\DEBUGGER/CNTR5/r_reg_reg__0 ),
+       (.D(reg_data_out),
+        .Q_reg(D),
+        .Q_reg_0(BiDirChannels_v1_0_S00_AXI_inst_n_44),
+        .axi_araddr(axi_araddr),
+        .data_word_4({data_word_4[31],data_word_4[28],data_word_4[24]}),
+        .\r_reg_reg[4] (BiDirChannels_v1_0_S00_AXI_inst_n_5),
         .s00_axi_aclk(s00_axi_aclk),
         .s00_axi_araddr(s00_axi_araddr),
         .s00_axi_aresetn(s00_axi_aresetn),
@@ -309,30 +300,26 @@ module design_1_BiDirChannels_0_0_BiDirChannels_v1_0
         .s00_axi_wvalid(s00_axi_wvalid));
   design_1_BiDirChannels_0_0_GyroBiDirChannelController X1
        (.CLK(CLK),
+        .D(reg_data_out),
         .HS_Clock(HS_Clock),
         .HS_DataIn(HS_DataIn),
         .HS_DataOut(HS_DataOut),
         .MCK(MCK),
-        .Q(\DEBUGGER/CNTR0/r_reg_reg__0 ),
+        .Q_reg(clock_div_4),
+        .axi_araddr(axi_araddr),
+        .data_word_4({data_word_4[31],data_word_4[28],data_word_4[24]}),
         .m00_axis_tdata(m00_axis_tdata),
         .m00_axis_tlast(m00_axis_tlast),
         .m00_axis_tready(m00_axis_tready),
         .m00_axis_tvalid(m00_axis_tvalid),
-        .\r_reg_reg[7] (\DEBUGGER/CNTR1/r_reg_reg__0 ),
-        .\r_reg_reg[7]_0 (\DEBUGGER/CNTR2/r_reg_reg__0 ),
-        .\r_reg_reg[7]_1 (\DEBUGGER/CNTR4/r_reg_reg__0 ),
-        .\r_reg_reg[7]_2 (\DEBUGGER/CNTR3/r_reg_reg__0 ),
-        .\r_reg_reg[7]_3 (\DEBUGGER/CNTR5/r_reg_reg__0 ),
         .s00_axi_aclk(s00_axi_aclk),
         .s00_axi_aresetn(s00_axi_aresetn),
         .s00_axis_tdata(s00_axis_tdata),
-        .s00_axis_tlast(s00_axis_tlast),
         .s00_axis_tready(s00_axis_tready),
         .s00_axis_tvalid(s00_axis_tvalid),
-        .\slv_reg0_reg[16] (BiDirChannels_v1_0_S00_AXI_inst_n_11),
-        .\slv_reg0_reg[31] (BiDirChannels_v1_0_S00_AXI_inst_n_10),
-        .\slv_reg0_reg[31]_0 ({data_word_0[31],data_word_0[28],data_word_0[24]}),
-        .\slv_reg1_reg[4] ({D,BiDirChannels_v1_0_S00_AXI_inst_n_6}));
+        .\slv_reg0_reg[31] (BiDirChannels_v1_0_S00_AXI_inst_n_5),
+        .\slv_reg1_reg[0] (BiDirChannels_v1_0_S00_AXI_inst_n_44),
+        .\slv_reg1_reg[4] (D));
 endmodule
 
 (* ORIG_REF_NAME = "BiDirChannels_v1_0_S00_AXI" *) 
@@ -342,19 +329,14 @@ module design_1_BiDirChannels_0_0_BiDirChannels_v1_0_S00_AXI
     s00_axi_arready,
     s00_axi_bvalid,
     s00_axi_rvalid,
-    Q_reg,
     \r_reg_reg[4] ,
-    \r_reg_reg[4]_0 ,
-    \r_reg_reg[7] ,
+    data_word_4,
+    axi_araddr,
     s00_axi_rdata,
+    Q_reg,
+    Q_reg_0,
     s00_axi_aclk,
     s00_axi_aresetn,
-    Q,
-    \r_reg_reg[7]_0 ,
-    \r_reg_reg[7]_1 ,
-    \r_reg_reg[7]_2 ,
-    \r_reg_reg[7]_3 ,
-    \r_reg_reg[7]_4 ,
     s00_axi_awvalid,
     s00_axi_wvalid,
     s00_axi_bready,
@@ -362,41 +344,39 @@ module design_1_BiDirChannels_0_0_BiDirChannels_v1_0_S00_AXI
     s00_axi_rready,
     s00_axi_awaddr,
     s00_axi_wdata,
+    s00_axi_wstrb,
     s00_axi_araddr,
-    s00_axi_wstrb);
+    D);
   output s00_axi_awready;
   output s00_axi_wready;
   output s00_axi_arready;
   output s00_axi_bvalid;
   output s00_axi_rvalid;
-  output [1:0]Q_reg;
-  output [2:0]\r_reg_reg[4] ;
-  output \r_reg_reg[4]_0 ;
-  output \r_reg_reg[7] ;
+  output \r_reg_reg[4] ;
+  output [2:0]data_word_4;
+  output [1:0]axi_araddr;
   output [31:0]s00_axi_rdata;
+  output Q_reg;
+  output Q_reg_0;
   input s00_axi_aclk;
   input s00_axi_aresetn;
-  input [7:0]Q;
-  input [7:0]\r_reg_reg[7]_0 ;
-  input [7:0]\r_reg_reg[7]_1 ;
-  input [7:0]\r_reg_reg[7]_2 ;
-  input [7:0]\r_reg_reg[7]_3 ;
-  input [7:0]\r_reg_reg[7]_4 ;
   input s00_axi_awvalid;
   input s00_axi_wvalid;
   input s00_axi_bready;
   input s00_axi_arvalid;
   input s00_axi_rready;
   input [1:0]s00_axi_awaddr;
-  input [31:0]s00_axi_wdata;
+  input [4:0]s00_axi_wdata;
+  input [1:0]s00_axi_wstrb;
   input [1:0]s00_axi_araddr;
-  input [3:0]s00_axi_wstrb;
+  input [31:0]D;
 
-  wire [7:0]Q;
-  wire [1:0]Q_reg;
+  wire [31:0]D;
+  wire Q_reg;
+  wire Q_reg_0;
   wire aw_en_i_1_n_0;
   wire aw_en_reg_n_0;
-  wire [3:2]axi_araddr;
+  wire [1:0]axi_araddr;
   wire \axi_araddr[2]_i_1_n_0 ;
   wire \axi_araddr[3]_i_1_n_0 ;
   wire axi_arready0;
@@ -408,17 +388,8 @@ module design_1_BiDirChannels_0_0_BiDirChannels_v1_0_S00_AXI
   wire axi_bvalid_i_1_n_0;
   wire axi_rvalid_i_1_n_0;
   wire axi_wready0;
-  wire [16:16]data_word_0;
-  wire [28:7]p_1_in;
-  wire [2:0]\r_reg_reg[4] ;
-  wire \r_reg_reg[4]_0 ;
-  wire \r_reg_reg[7] ;
-  wire [7:0]\r_reg_reg[7]_0 ;
-  wire [7:0]\r_reg_reg[7]_1 ;
-  wire [7:0]\r_reg_reg[7]_2 ;
-  wire [7:0]\r_reg_reg[7]_3 ;
-  wire [7:0]\r_reg_reg[7]_4 ;
-  wire [31:0]reg_data_out;
+  wire [2:0]data_word_4;
+  wire \r_reg_reg[4] ;
   wire s00_axi_aclk;
   wire [1:0]s00_axi_araddr;
   wire s00_axi_aresetn;
@@ -432,82 +403,24 @@ module design_1_BiDirChannels_0_0_BiDirChannels_v1_0_S00_AXI
   wire [31:0]s00_axi_rdata;
   wire s00_axi_rready;
   wire s00_axi_rvalid;
-  wire [31:0]s00_axi_wdata;
+  wire [4:0]s00_axi_wdata;
   wire s00_axi_wready;
-  wire [3:0]s00_axi_wstrb;
+  wire [1:0]s00_axi_wstrb;
   wire s00_axi_wvalid;
-  wire \slv_reg0_reg_n_0_[0] ;
-  wire \slv_reg0_reg_n_0_[10] ;
-  wire \slv_reg0_reg_n_0_[11] ;
-  wire \slv_reg0_reg_n_0_[12] ;
-  wire \slv_reg0_reg_n_0_[13] ;
-  wire \slv_reg0_reg_n_0_[14] ;
-  wire \slv_reg0_reg_n_0_[15] ;
-  wire \slv_reg0_reg_n_0_[17] ;
-  wire \slv_reg0_reg_n_0_[18] ;
-  wire \slv_reg0_reg_n_0_[19] ;
-  wire \slv_reg0_reg_n_0_[1] ;
-  wire \slv_reg0_reg_n_0_[20] ;
-  wire \slv_reg0_reg_n_0_[21] ;
-  wire \slv_reg0_reg_n_0_[22] ;
-  wire \slv_reg0_reg_n_0_[23] ;
-  wire \slv_reg0_reg_n_0_[25] ;
-  wire \slv_reg0_reg_n_0_[26] ;
-  wire \slv_reg0_reg_n_0_[27] ;
-  wire \slv_reg0_reg_n_0_[29] ;
-  wire \slv_reg0_reg_n_0_[2] ;
-  wire \slv_reg0_reg_n_0_[30] ;
-  wire \slv_reg0_reg_n_0_[3] ;
-  wire \slv_reg0_reg_n_0_[4] ;
-  wire \slv_reg0_reg_n_0_[5] ;
-  wire \slv_reg0_reg_n_0_[6] ;
-  wire \slv_reg0_reg_n_0_[7] ;
-  wire \slv_reg0_reg_n_0_[8] ;
-  wire \slv_reg0_reg_n_0_[9] ;
-  wire \slv_reg1[15]_i_1_n_0 ;
-  wire \slv_reg1[23]_i_1_n_0 ;
-  wire \slv_reg1[31]_i_1_n_0 ;
-  wire \slv_reg1[7]_i_1_n_0 ;
-  wire \slv_reg1_reg_n_0_[10] ;
-  wire \slv_reg1_reg_n_0_[11] ;
-  wire \slv_reg1_reg_n_0_[12] ;
-  wire \slv_reg1_reg_n_0_[13] ;
-  wire \slv_reg1_reg_n_0_[14] ;
-  wire \slv_reg1_reg_n_0_[15] ;
-  wire \slv_reg1_reg_n_0_[16] ;
-  wire \slv_reg1_reg_n_0_[17] ;
-  wire \slv_reg1_reg_n_0_[18] ;
-  wire \slv_reg1_reg_n_0_[19] ;
-  wire \slv_reg1_reg_n_0_[1] ;
-  wire \slv_reg1_reg_n_0_[20] ;
-  wire \slv_reg1_reg_n_0_[21] ;
-  wire \slv_reg1_reg_n_0_[22] ;
-  wire \slv_reg1_reg_n_0_[23] ;
-  wire \slv_reg1_reg_n_0_[24] ;
-  wire \slv_reg1_reg_n_0_[25] ;
-  wire \slv_reg1_reg_n_0_[26] ;
-  wire \slv_reg1_reg_n_0_[27] ;
-  wire \slv_reg1_reg_n_0_[28] ;
-  wire \slv_reg1_reg_n_0_[29] ;
-  wire \slv_reg1_reg_n_0_[2] ;
-  wire \slv_reg1_reg_n_0_[30] ;
-  wire \slv_reg1_reg_n_0_[31] ;
-  wire \slv_reg1_reg_n_0_[3] ;
-  wire \slv_reg1_reg_n_0_[5] ;
-  wire \slv_reg1_reg_n_0_[6] ;
-  wire \slv_reg1_reg_n_0_[7] ;
-  wire \slv_reg1_reg_n_0_[8] ;
-  wire \slv_reg1_reg_n_0_[9] ;
+  wire \slv_reg0[24]_i_1_n_0 ;
+  wire \slv_reg0[28]_i_1_n_0 ;
+  wire \slv_reg0[31]_i_1_n_0 ;
+  wire \slv_reg1[0]_i_1_n_0 ;
+  wire \slv_reg1[4]_i_1_n_0 ;
   wire slv_reg_rden__0;
   wire slv_reg_wren__0;
 
-  (* SOFT_HLUTNM = "soft_lutpair2" *) 
   LUT2 #(
     .INIT(4'hB)) 
     Q_i_2
-       (.I0(\r_reg_reg[4] [2]),
+       (.I0(data_word_4[2]),
         .I1(s00_axi_aresetn),
-        .O(\r_reg_reg[4]_0 ));
+        .O(\r_reg_reg[4] ));
   LUT6 #(
     .INIT(64'hF7FFC4CCC4CCC4CC)) 
     aw_en_i_1
@@ -524,14 +437,13 @@ module design_1_BiDirChannels_0_0_BiDirChannels_v1_0_S00_AXI
         .D(aw_en_i_1_n_0),
         .Q(aw_en_reg_n_0),
         .S(axi_awready_i_1_n_0));
-  (* SOFT_HLUTNM = "soft_lutpair0" *) 
   LUT4 #(
     .INIT(16'hFB08)) 
     \axi_araddr[2]_i_1 
        (.I0(s00_axi_araddr[0]),
         .I1(s00_axi_arvalid),
         .I2(s00_axi_arready),
-        .I3(axi_araddr[2]),
+        .I3(axi_araddr[0]),
         .O(\axi_araddr[2]_i_1_n_0 ));
   LUT4 #(
     .INIT(16'hFB08)) 
@@ -539,19 +451,19 @@ module design_1_BiDirChannels_0_0_BiDirChannels_v1_0_S00_AXI
        (.I0(s00_axi_araddr[1]),
         .I1(s00_axi_arvalid),
         .I2(s00_axi_arready),
-        .I3(axi_araddr[3]),
+        .I3(axi_araddr[1]),
         .O(\axi_araddr[3]_i_1_n_0 ));
   FDRE \axi_araddr_reg[2] 
        (.C(s00_axi_aclk),
         .CE(1'b1),
         .D(\axi_araddr[2]_i_1_n_0 ),
-        .Q(axi_araddr[2]),
+        .Q(axi_araddr[0]),
         .R(axi_awready_i_1_n_0));
   FDRE \axi_araddr_reg[3] 
        (.C(s00_axi_aclk),
         .CE(1'b1),
         .D(\axi_araddr[3]_i_1_n_0 ),
-        .Q(axi_araddr[3]),
+        .Q(axi_araddr[1]),
         .R(axi_awready_i_1_n_0));
   (* SOFT_HLUTNM = "soft_lutpair0" *) 
   LUT2 #(
@@ -634,502 +546,199 @@ module design_1_BiDirChannels_0_0_BiDirChannels_v1_0_S00_AXI
         .D(axi_bvalid_i_1_n_0),
         .Q(s00_axi_bvalid),
         .R(axi_awready_i_1_n_0));
-  LUT6 #(
-    .INIT(64'hAFA0CFCFAFA0C0C0)) 
-    \axi_rdata[0]_i_1 
-       (.I0(Q[0]),
-        .I1(Q_reg[0]),
-        .I2(axi_araddr[2]),
-        .I3(\r_reg_reg[7]_0 [0]),
-        .I4(axi_araddr[3]),
-        .I5(\slv_reg0_reg_n_0_[0] ),
-        .O(reg_data_out[0]));
-  LUT5 #(
-    .INIT(32'h30BB3088)) 
-    \axi_rdata[10]_i_1 
-       (.I0(\slv_reg1_reg_n_0_[10] ),
-        .I1(axi_araddr[2]),
-        .I2(\r_reg_reg[7]_1 [2]),
-        .I3(axi_araddr[3]),
-        .I4(\slv_reg0_reg_n_0_[10] ),
-        .O(reg_data_out[10]));
-  LUT5 #(
-    .INIT(32'h30BB3088)) 
-    \axi_rdata[11]_i_1 
-       (.I0(\slv_reg1_reg_n_0_[11] ),
-        .I1(axi_araddr[2]),
-        .I2(\r_reg_reg[7]_1 [3]),
-        .I3(axi_araddr[3]),
-        .I4(\slv_reg0_reg_n_0_[11] ),
-        .O(reg_data_out[11]));
-  LUT5 #(
-    .INIT(32'h30BB3088)) 
-    \axi_rdata[12]_i_1 
-       (.I0(\slv_reg1_reg_n_0_[12] ),
-        .I1(axi_araddr[2]),
-        .I2(\r_reg_reg[7]_1 [4]),
-        .I3(axi_araddr[3]),
-        .I4(\slv_reg0_reg_n_0_[12] ),
-        .O(reg_data_out[12]));
-  LUT5 #(
-    .INIT(32'h30BB3088)) 
-    \axi_rdata[13]_i_1 
-       (.I0(\slv_reg1_reg_n_0_[13] ),
-        .I1(axi_araddr[2]),
-        .I2(\r_reg_reg[7]_1 [5]),
-        .I3(axi_araddr[3]),
-        .I4(\slv_reg0_reg_n_0_[13] ),
-        .O(reg_data_out[13]));
-  LUT5 #(
-    .INIT(32'h30BB3088)) 
-    \axi_rdata[14]_i_1 
-       (.I0(\slv_reg1_reg_n_0_[14] ),
-        .I1(axi_araddr[2]),
-        .I2(\r_reg_reg[7]_1 [6]),
-        .I3(axi_araddr[3]),
-        .I4(\slv_reg0_reg_n_0_[14] ),
-        .O(reg_data_out[14]));
-  LUT5 #(
-    .INIT(32'h30BB3088)) 
-    \axi_rdata[15]_i_1 
-       (.I0(\slv_reg1_reg_n_0_[15] ),
-        .I1(axi_araddr[2]),
-        .I2(\r_reg_reg[7]_1 [7]),
-        .I3(axi_araddr[3]),
-        .I4(\slv_reg0_reg_n_0_[15] ),
-        .O(reg_data_out[15]));
-  LUT5 #(
-    .INIT(32'h30BB3088)) 
-    \axi_rdata[16]_i_1 
-       (.I0(\slv_reg1_reg_n_0_[16] ),
-        .I1(axi_araddr[2]),
-        .I2(\r_reg_reg[7]_2 [0]),
-        .I3(axi_araddr[3]),
-        .I4(data_word_0),
-        .O(reg_data_out[16]));
-  LUT5 #(
-    .INIT(32'h30BB3088)) 
-    \axi_rdata[17]_i_1 
-       (.I0(\slv_reg1_reg_n_0_[17] ),
-        .I1(axi_araddr[2]),
-        .I2(\r_reg_reg[7]_2 [1]),
-        .I3(axi_araddr[3]),
-        .I4(\slv_reg0_reg_n_0_[17] ),
-        .O(reg_data_out[17]));
-  LUT5 #(
-    .INIT(32'h30BB3088)) 
-    \axi_rdata[18]_i_1 
-       (.I0(\slv_reg1_reg_n_0_[18] ),
-        .I1(axi_araddr[2]),
-        .I2(\r_reg_reg[7]_2 [2]),
-        .I3(axi_araddr[3]),
-        .I4(\slv_reg0_reg_n_0_[18] ),
-        .O(reg_data_out[18]));
-  LUT5 #(
-    .INIT(32'h30BB3088)) 
-    \axi_rdata[19]_i_1 
-       (.I0(\slv_reg1_reg_n_0_[19] ),
-        .I1(axi_araddr[2]),
-        .I2(\r_reg_reg[7]_2 [3]),
-        .I3(axi_araddr[3]),
-        .I4(\slv_reg0_reg_n_0_[19] ),
-        .O(reg_data_out[19]));
-  LUT6 #(
-    .INIT(64'hAFA0CFCFAFA0C0C0)) 
-    \axi_rdata[1]_i_1 
-       (.I0(Q[1]),
-        .I1(\slv_reg1_reg_n_0_[1] ),
-        .I2(axi_araddr[2]),
-        .I3(\r_reg_reg[7]_0 [1]),
-        .I4(axi_araddr[3]),
-        .I5(\slv_reg0_reg_n_0_[1] ),
-        .O(reg_data_out[1]));
-  LUT5 #(
-    .INIT(32'h30BB3088)) 
-    \axi_rdata[20]_i_1 
-       (.I0(\slv_reg1_reg_n_0_[20] ),
-        .I1(axi_araddr[2]),
-        .I2(\r_reg_reg[7]_2 [4]),
-        .I3(axi_araddr[3]),
-        .I4(\slv_reg0_reg_n_0_[20] ),
-        .O(reg_data_out[20]));
-  LUT5 #(
-    .INIT(32'h30BB3088)) 
-    \axi_rdata[21]_i_1 
-       (.I0(\slv_reg1_reg_n_0_[21] ),
-        .I1(axi_araddr[2]),
-        .I2(\r_reg_reg[7]_2 [5]),
-        .I3(axi_araddr[3]),
-        .I4(\slv_reg0_reg_n_0_[21] ),
-        .O(reg_data_out[21]));
-  LUT5 #(
-    .INIT(32'h30BB3088)) 
-    \axi_rdata[22]_i_1 
-       (.I0(\slv_reg1_reg_n_0_[22] ),
-        .I1(axi_araddr[2]),
-        .I2(\r_reg_reg[7]_2 [6]),
-        .I3(axi_araddr[3]),
-        .I4(\slv_reg0_reg_n_0_[22] ),
-        .O(reg_data_out[22]));
-  LUT5 #(
-    .INIT(32'h30BB3088)) 
-    \axi_rdata[23]_i_1 
-       (.I0(\slv_reg1_reg_n_0_[23] ),
-        .I1(axi_araddr[2]),
-        .I2(\r_reg_reg[7]_2 [7]),
-        .I3(axi_araddr[3]),
-        .I4(\slv_reg0_reg_n_0_[23] ),
-        .O(reg_data_out[23]));
-  LUT6 #(
-    .INIT(64'hAFA0CFCFAFA0C0C0)) 
-    \axi_rdata[24]_i_1 
-       (.I0(\r_reg_reg[7]_3 [0]),
-        .I1(\slv_reg1_reg_n_0_[24] ),
-        .I2(axi_araddr[2]),
-        .I3(\r_reg_reg[7]_4 [0]),
-        .I4(axi_araddr[3]),
-        .I5(\r_reg_reg[4] [0]),
-        .O(reg_data_out[24]));
-  LUT6 #(
-    .INIT(64'hAFA0CFCFAFA0C0C0)) 
-    \axi_rdata[25]_i_1 
-       (.I0(\r_reg_reg[7]_3 [1]),
-        .I1(\slv_reg1_reg_n_0_[25] ),
-        .I2(axi_araddr[2]),
-        .I3(\r_reg_reg[7]_4 [1]),
-        .I4(axi_araddr[3]),
-        .I5(\slv_reg0_reg_n_0_[25] ),
-        .O(reg_data_out[25]));
-  LUT6 #(
-    .INIT(64'hAFA0CFCFAFA0C0C0)) 
-    \axi_rdata[26]_i_1 
-       (.I0(\r_reg_reg[7]_3 [2]),
-        .I1(\slv_reg1_reg_n_0_[26] ),
-        .I2(axi_araddr[2]),
-        .I3(\r_reg_reg[7]_4 [2]),
-        .I4(axi_araddr[3]),
-        .I5(\slv_reg0_reg_n_0_[26] ),
-        .O(reg_data_out[26]));
-  LUT6 #(
-    .INIT(64'hAFA0CFCFAFA0C0C0)) 
-    \axi_rdata[27]_i_1 
-       (.I0(\r_reg_reg[7]_3 [3]),
-        .I1(\slv_reg1_reg_n_0_[27] ),
-        .I2(axi_araddr[2]),
-        .I3(\r_reg_reg[7]_4 [3]),
-        .I4(axi_araddr[3]),
-        .I5(\slv_reg0_reg_n_0_[27] ),
-        .O(reg_data_out[27]));
-  LUT6 #(
-    .INIT(64'hAFA0CFCFAFA0C0C0)) 
-    \axi_rdata[28]_i_1 
-       (.I0(\r_reg_reg[7]_3 [4]),
-        .I1(\slv_reg1_reg_n_0_[28] ),
-        .I2(axi_araddr[2]),
-        .I3(\r_reg_reg[7]_4 [4]),
-        .I4(axi_araddr[3]),
-        .I5(\r_reg_reg[4] [1]),
-        .O(reg_data_out[28]));
-  LUT6 #(
-    .INIT(64'hAFA0CFCFAFA0C0C0)) 
-    \axi_rdata[29]_i_1 
-       (.I0(\r_reg_reg[7]_3 [5]),
-        .I1(\slv_reg1_reg_n_0_[29] ),
-        .I2(axi_araddr[2]),
-        .I3(\r_reg_reg[7]_4 [5]),
-        .I4(axi_araddr[3]),
-        .I5(\slv_reg0_reg_n_0_[29] ),
-        .O(reg_data_out[29]));
-  LUT6 #(
-    .INIT(64'hAFA0CFCFAFA0C0C0)) 
-    \axi_rdata[2]_i_1 
-       (.I0(Q[2]),
-        .I1(\slv_reg1_reg_n_0_[2] ),
-        .I2(axi_araddr[2]),
-        .I3(\r_reg_reg[7]_0 [2]),
-        .I4(axi_araddr[3]),
-        .I5(\slv_reg0_reg_n_0_[2] ),
-        .O(reg_data_out[2]));
-  LUT6 #(
-    .INIT(64'hAFA0CFCFAFA0C0C0)) 
-    \axi_rdata[30]_i_1 
-       (.I0(\r_reg_reg[7]_3 [6]),
-        .I1(\slv_reg1_reg_n_0_[30] ),
-        .I2(axi_araddr[2]),
-        .I3(\r_reg_reg[7]_4 [6]),
-        .I4(axi_araddr[3]),
-        .I5(\slv_reg0_reg_n_0_[30] ),
-        .O(reg_data_out[30]));
-  LUT6 #(
-    .INIT(64'hAFA0CFCFAFA0C0C0)) 
-    \axi_rdata[31]_i_1 
-       (.I0(\r_reg_reg[7]_3 [7]),
-        .I1(\slv_reg1_reg_n_0_[31] ),
-        .I2(axi_araddr[2]),
-        .I3(\r_reg_reg[7]_4 [7]),
-        .I4(axi_araddr[3]),
-        .I5(\r_reg_reg[4] [2]),
-        .O(reg_data_out[31]));
-  LUT6 #(
-    .INIT(64'hAFA0CFCFAFA0C0C0)) 
-    \axi_rdata[3]_i_1 
-       (.I0(Q[3]),
-        .I1(\slv_reg1_reg_n_0_[3] ),
-        .I2(axi_araddr[2]),
-        .I3(\r_reg_reg[7]_0 [3]),
-        .I4(axi_araddr[3]),
-        .I5(\slv_reg0_reg_n_0_[3] ),
-        .O(reg_data_out[3]));
-  LUT6 #(
-    .INIT(64'hAFA0CFCFAFA0C0C0)) 
-    \axi_rdata[4]_i_1 
-       (.I0(Q[4]),
-        .I1(Q_reg[1]),
-        .I2(axi_araddr[2]),
-        .I3(\r_reg_reg[7]_0 [4]),
-        .I4(axi_araddr[3]),
-        .I5(\slv_reg0_reg_n_0_[4] ),
-        .O(reg_data_out[4]));
-  LUT6 #(
-    .INIT(64'hAFA0CFCFAFA0C0C0)) 
-    \axi_rdata[5]_i_1 
-       (.I0(Q[5]),
-        .I1(\slv_reg1_reg_n_0_[5] ),
-        .I2(axi_araddr[2]),
-        .I3(\r_reg_reg[7]_0 [5]),
-        .I4(axi_araddr[3]),
-        .I5(\slv_reg0_reg_n_0_[5] ),
-        .O(reg_data_out[5]));
-  LUT6 #(
-    .INIT(64'hAFA0CFCFAFA0C0C0)) 
-    \axi_rdata[6]_i_1 
-       (.I0(Q[6]),
-        .I1(\slv_reg1_reg_n_0_[6] ),
-        .I2(axi_araddr[2]),
-        .I3(\r_reg_reg[7]_0 [6]),
-        .I4(axi_araddr[3]),
-        .I5(\slv_reg0_reg_n_0_[6] ),
-        .O(reg_data_out[6]));
-  LUT6 #(
-    .INIT(64'hAFA0CFCFAFA0C0C0)) 
-    \axi_rdata[7]_i_1 
-       (.I0(Q[7]),
-        .I1(\slv_reg1_reg_n_0_[7] ),
-        .I2(axi_araddr[2]),
-        .I3(\r_reg_reg[7]_0 [7]),
-        .I4(axi_araddr[3]),
-        .I5(\slv_reg0_reg_n_0_[7] ),
-        .O(reg_data_out[7]));
-  LUT5 #(
-    .INIT(32'h30BB3088)) 
-    \axi_rdata[8]_i_1 
-       (.I0(\slv_reg1_reg_n_0_[8] ),
-        .I1(axi_araddr[2]),
-        .I2(\r_reg_reg[7]_1 [0]),
-        .I3(axi_araddr[3]),
-        .I4(\slv_reg0_reg_n_0_[8] ),
-        .O(reg_data_out[8]));
-  LUT5 #(
-    .INIT(32'h30BB3088)) 
-    \axi_rdata[9]_i_1 
-       (.I0(\slv_reg1_reg_n_0_[9] ),
-        .I1(axi_araddr[2]),
-        .I2(\r_reg_reg[7]_1 [1]),
-        .I3(axi_araddr[3]),
-        .I4(\slv_reg0_reg_n_0_[9] ),
-        .O(reg_data_out[9]));
   FDRE \axi_rdata_reg[0] 
        (.C(s00_axi_aclk),
         .CE(slv_reg_rden__0),
-        .D(reg_data_out[0]),
+        .D(D[0]),
         .Q(s00_axi_rdata[0]),
         .R(axi_awready_i_1_n_0));
   FDRE \axi_rdata_reg[10] 
        (.C(s00_axi_aclk),
         .CE(slv_reg_rden__0),
-        .D(reg_data_out[10]),
+        .D(D[10]),
         .Q(s00_axi_rdata[10]),
         .R(axi_awready_i_1_n_0));
   FDRE \axi_rdata_reg[11] 
        (.C(s00_axi_aclk),
         .CE(slv_reg_rden__0),
-        .D(reg_data_out[11]),
+        .D(D[11]),
         .Q(s00_axi_rdata[11]),
         .R(axi_awready_i_1_n_0));
   FDRE \axi_rdata_reg[12] 
        (.C(s00_axi_aclk),
         .CE(slv_reg_rden__0),
-        .D(reg_data_out[12]),
+        .D(D[12]),
         .Q(s00_axi_rdata[12]),
         .R(axi_awready_i_1_n_0));
   FDRE \axi_rdata_reg[13] 
        (.C(s00_axi_aclk),
         .CE(slv_reg_rden__0),
-        .D(reg_data_out[13]),
+        .D(D[13]),
         .Q(s00_axi_rdata[13]),
         .R(axi_awready_i_1_n_0));
   FDRE \axi_rdata_reg[14] 
        (.C(s00_axi_aclk),
         .CE(slv_reg_rden__0),
-        .D(reg_data_out[14]),
+        .D(D[14]),
         .Q(s00_axi_rdata[14]),
         .R(axi_awready_i_1_n_0));
   FDRE \axi_rdata_reg[15] 
        (.C(s00_axi_aclk),
         .CE(slv_reg_rden__0),
-        .D(reg_data_out[15]),
+        .D(D[15]),
         .Q(s00_axi_rdata[15]),
         .R(axi_awready_i_1_n_0));
   FDRE \axi_rdata_reg[16] 
        (.C(s00_axi_aclk),
         .CE(slv_reg_rden__0),
-        .D(reg_data_out[16]),
+        .D(D[16]),
         .Q(s00_axi_rdata[16]),
         .R(axi_awready_i_1_n_0));
   FDRE \axi_rdata_reg[17] 
        (.C(s00_axi_aclk),
         .CE(slv_reg_rden__0),
-        .D(reg_data_out[17]),
+        .D(D[17]),
         .Q(s00_axi_rdata[17]),
         .R(axi_awready_i_1_n_0));
   FDRE \axi_rdata_reg[18] 
        (.C(s00_axi_aclk),
         .CE(slv_reg_rden__0),
-        .D(reg_data_out[18]),
+        .D(D[18]),
         .Q(s00_axi_rdata[18]),
         .R(axi_awready_i_1_n_0));
   FDRE \axi_rdata_reg[19] 
        (.C(s00_axi_aclk),
         .CE(slv_reg_rden__0),
-        .D(reg_data_out[19]),
+        .D(D[19]),
         .Q(s00_axi_rdata[19]),
         .R(axi_awready_i_1_n_0));
   FDRE \axi_rdata_reg[1] 
        (.C(s00_axi_aclk),
         .CE(slv_reg_rden__0),
-        .D(reg_data_out[1]),
+        .D(D[1]),
         .Q(s00_axi_rdata[1]),
         .R(axi_awready_i_1_n_0));
   FDRE \axi_rdata_reg[20] 
        (.C(s00_axi_aclk),
         .CE(slv_reg_rden__0),
-        .D(reg_data_out[20]),
+        .D(D[20]),
         .Q(s00_axi_rdata[20]),
         .R(axi_awready_i_1_n_0));
   FDRE \axi_rdata_reg[21] 
        (.C(s00_axi_aclk),
         .CE(slv_reg_rden__0),
-        .D(reg_data_out[21]),
+        .D(D[21]),
         .Q(s00_axi_rdata[21]),
         .R(axi_awready_i_1_n_0));
   FDRE \axi_rdata_reg[22] 
        (.C(s00_axi_aclk),
         .CE(slv_reg_rden__0),
-        .D(reg_data_out[22]),
+        .D(D[22]),
         .Q(s00_axi_rdata[22]),
         .R(axi_awready_i_1_n_0));
   FDRE \axi_rdata_reg[23] 
        (.C(s00_axi_aclk),
         .CE(slv_reg_rden__0),
-        .D(reg_data_out[23]),
+        .D(D[23]),
         .Q(s00_axi_rdata[23]),
         .R(axi_awready_i_1_n_0));
   FDRE \axi_rdata_reg[24] 
        (.C(s00_axi_aclk),
         .CE(slv_reg_rden__0),
-        .D(reg_data_out[24]),
+        .D(D[24]),
         .Q(s00_axi_rdata[24]),
         .R(axi_awready_i_1_n_0));
   FDRE \axi_rdata_reg[25] 
        (.C(s00_axi_aclk),
         .CE(slv_reg_rden__0),
-        .D(reg_data_out[25]),
+        .D(D[25]),
         .Q(s00_axi_rdata[25]),
         .R(axi_awready_i_1_n_0));
   FDRE \axi_rdata_reg[26] 
        (.C(s00_axi_aclk),
         .CE(slv_reg_rden__0),
-        .D(reg_data_out[26]),
+        .D(D[26]),
         .Q(s00_axi_rdata[26]),
         .R(axi_awready_i_1_n_0));
   FDRE \axi_rdata_reg[27] 
        (.C(s00_axi_aclk),
         .CE(slv_reg_rden__0),
-        .D(reg_data_out[27]),
+        .D(D[27]),
         .Q(s00_axi_rdata[27]),
         .R(axi_awready_i_1_n_0));
   FDRE \axi_rdata_reg[28] 
        (.C(s00_axi_aclk),
         .CE(slv_reg_rden__0),
-        .D(reg_data_out[28]),
+        .D(D[28]),
         .Q(s00_axi_rdata[28]),
         .R(axi_awready_i_1_n_0));
   FDRE \axi_rdata_reg[29] 
        (.C(s00_axi_aclk),
         .CE(slv_reg_rden__0),
-        .D(reg_data_out[29]),
+        .D(D[29]),
         .Q(s00_axi_rdata[29]),
         .R(axi_awready_i_1_n_0));
   FDRE \axi_rdata_reg[2] 
        (.C(s00_axi_aclk),
         .CE(slv_reg_rden__0),
-        .D(reg_data_out[2]),
+        .D(D[2]),
         .Q(s00_axi_rdata[2]),
         .R(axi_awready_i_1_n_0));
   FDRE \axi_rdata_reg[30] 
        (.C(s00_axi_aclk),
         .CE(slv_reg_rden__0),
-        .D(reg_data_out[30]),
+        .D(D[30]),
         .Q(s00_axi_rdata[30]),
         .R(axi_awready_i_1_n_0));
   FDRE \axi_rdata_reg[31] 
        (.C(s00_axi_aclk),
         .CE(slv_reg_rden__0),
-        .D(reg_data_out[31]),
+        .D(D[31]),
         .Q(s00_axi_rdata[31]),
         .R(axi_awready_i_1_n_0));
   FDRE \axi_rdata_reg[3] 
        (.C(s00_axi_aclk),
         .CE(slv_reg_rden__0),
-        .D(reg_data_out[3]),
+        .D(D[3]),
         .Q(s00_axi_rdata[3]),
         .R(axi_awready_i_1_n_0));
   FDRE \axi_rdata_reg[4] 
        (.C(s00_axi_aclk),
         .CE(slv_reg_rden__0),
-        .D(reg_data_out[4]),
+        .D(D[4]),
         .Q(s00_axi_rdata[4]),
         .R(axi_awready_i_1_n_0));
   FDRE \axi_rdata_reg[5] 
        (.C(s00_axi_aclk),
         .CE(slv_reg_rden__0),
-        .D(reg_data_out[5]),
+        .D(D[5]),
         .Q(s00_axi_rdata[5]),
         .R(axi_awready_i_1_n_0));
   FDRE \axi_rdata_reg[6] 
        (.C(s00_axi_aclk),
         .CE(slv_reg_rden__0),
-        .D(reg_data_out[6]),
+        .D(D[6]),
         .Q(s00_axi_rdata[6]),
         .R(axi_awready_i_1_n_0));
   FDRE \axi_rdata_reg[7] 
        (.C(s00_axi_aclk),
         .CE(slv_reg_rden__0),
-        .D(reg_data_out[7]),
+        .D(D[7]),
         .Q(s00_axi_rdata[7]),
         .R(axi_awready_i_1_n_0));
   FDRE \axi_rdata_reg[8] 
        (.C(s00_axi_aclk),
         .CE(slv_reg_rden__0),
-        .D(reg_data_out[8]),
+        .D(D[8]),
         .Q(s00_axi_rdata[8]),
         .R(axi_awready_i_1_n_0));
   FDRE \axi_rdata_reg[9] 
        (.C(s00_axi_aclk),
         .CE(slv_reg_rden__0),
-        .D(reg_data_out[9]),
+        .D(D[9]),
         .Q(s00_axi_rdata[9]),
         .R(axi_awready_i_1_n_0));
+  (* SOFT_HLUTNM = "soft_lutpair0" *) 
   LUT4 #(
     .INIT(16'h08F8)) 
     axi_rvalid_i_1
@@ -1159,38 +768,36 @@ module design_1_BiDirChannels_0_0_BiDirChannels_v1_0_S00_AXI
         .D(axi_wready0),
         .Q(s00_axi_wready),
         .R(axi_awready_i_1_n_0));
-  (* SOFT_HLUTNM = "soft_lutpair2" *) 
-  LUT3 #(
-    .INIT(8'hEF)) 
-    \r_reg[7]_i_3__0 
-       (.I0(data_word_0),
-        .I1(\r_reg_reg[4] [2]),
-        .I2(s00_axi_aresetn),
-        .O(\r_reg_reg[7] ));
-  LUT4 #(
-    .INIT(16'h0200)) 
-    \slv_reg0[15]_i_1 
-       (.I0(slv_reg_wren__0),
-        .I1(axi_awaddr[3]),
-        .I2(axi_awaddr[2]),
-        .I3(s00_axi_wstrb[1]),
-        .O(p_1_in[15]));
-  LUT4 #(
-    .INIT(16'h0200)) 
-    \slv_reg0[23]_i_1 
-       (.I0(slv_reg_wren__0),
-        .I1(axi_awaddr[3]),
-        .I2(axi_awaddr[2]),
-        .I3(s00_axi_wstrb[2]),
-        .O(p_1_in[23]));
-  LUT4 #(
-    .INIT(16'h0200)) 
+  LUT6 #(
+    .INIT(64'hFFFBFFFF00080000)) 
+    \slv_reg0[24]_i_1 
+       (.I0(s00_axi_wdata[2]),
+        .I1(slv_reg_wren__0),
+        .I2(axi_awaddr[3]),
+        .I3(axi_awaddr[2]),
+        .I4(s00_axi_wstrb[1]),
+        .I5(data_word_4[0]),
+        .O(\slv_reg0[24]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hFFFBFFFF00080000)) 
+    \slv_reg0[28]_i_1 
+       (.I0(s00_axi_wdata[3]),
+        .I1(slv_reg_wren__0),
+        .I2(axi_awaddr[3]),
+        .I3(axi_awaddr[2]),
+        .I4(s00_axi_wstrb[1]),
+        .I5(data_word_4[1]),
+        .O(\slv_reg0[28]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hFFFBFFFF00080000)) 
     \slv_reg0[31]_i_1 
-       (.I0(slv_reg_wren__0),
-        .I1(axi_awaddr[3]),
-        .I2(axi_awaddr[2]),
-        .I3(s00_axi_wstrb[3]),
-        .O(p_1_in[28]));
+       (.I0(s00_axi_wdata[4]),
+        .I1(slv_reg_wren__0),
+        .I2(axi_awaddr[3]),
+        .I3(axi_awaddr[2]),
+        .I4(s00_axi_wstrb[1]),
+        .I5(data_word_4[2]),
+        .O(\slv_reg0[31]_i_1_n_0 ));
   LUT4 #(
     .INIT(16'h8000)) 
     \slv_reg0[31]_i_2 
@@ -1199,429 +806,55 @@ module design_1_BiDirChannels_0_0_BiDirChannels_v1_0_S00_AXI
         .I2(s00_axi_awvalid),
         .I3(s00_axi_wvalid),
         .O(slv_reg_wren__0));
-  LUT4 #(
-    .INIT(16'h0200)) 
-    \slv_reg0[7]_i_1 
-       (.I0(slv_reg_wren__0),
-        .I1(axi_awaddr[3]),
-        .I2(axi_awaddr[2]),
-        .I3(s00_axi_wstrb[0]),
-        .O(p_1_in[7]));
-  FDRE \slv_reg0_reg[0] 
-       (.C(s00_axi_aclk),
-        .CE(p_1_in[7]),
-        .D(s00_axi_wdata[0]),
-        .Q(\slv_reg0_reg_n_0_[0] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg0_reg[10] 
-       (.C(s00_axi_aclk),
-        .CE(p_1_in[15]),
-        .D(s00_axi_wdata[10]),
-        .Q(\slv_reg0_reg_n_0_[10] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg0_reg[11] 
-       (.C(s00_axi_aclk),
-        .CE(p_1_in[15]),
-        .D(s00_axi_wdata[11]),
-        .Q(\slv_reg0_reg_n_0_[11] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg0_reg[12] 
-       (.C(s00_axi_aclk),
-        .CE(p_1_in[15]),
-        .D(s00_axi_wdata[12]),
-        .Q(\slv_reg0_reg_n_0_[12] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg0_reg[13] 
-       (.C(s00_axi_aclk),
-        .CE(p_1_in[15]),
-        .D(s00_axi_wdata[13]),
-        .Q(\slv_reg0_reg_n_0_[13] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg0_reg[14] 
-       (.C(s00_axi_aclk),
-        .CE(p_1_in[15]),
-        .D(s00_axi_wdata[14]),
-        .Q(\slv_reg0_reg_n_0_[14] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg0_reg[15] 
-       (.C(s00_axi_aclk),
-        .CE(p_1_in[15]),
-        .D(s00_axi_wdata[15]),
-        .Q(\slv_reg0_reg_n_0_[15] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg0_reg[16] 
-       (.C(s00_axi_aclk),
-        .CE(p_1_in[23]),
-        .D(s00_axi_wdata[16]),
-        .Q(data_word_0),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg0_reg[17] 
-       (.C(s00_axi_aclk),
-        .CE(p_1_in[23]),
-        .D(s00_axi_wdata[17]),
-        .Q(\slv_reg0_reg_n_0_[17] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg0_reg[18] 
-       (.C(s00_axi_aclk),
-        .CE(p_1_in[23]),
-        .D(s00_axi_wdata[18]),
-        .Q(\slv_reg0_reg_n_0_[18] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg0_reg[19] 
-       (.C(s00_axi_aclk),
-        .CE(p_1_in[23]),
-        .D(s00_axi_wdata[19]),
-        .Q(\slv_reg0_reg_n_0_[19] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg0_reg[1] 
-       (.C(s00_axi_aclk),
-        .CE(p_1_in[7]),
-        .D(s00_axi_wdata[1]),
-        .Q(\slv_reg0_reg_n_0_[1] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg0_reg[20] 
-       (.C(s00_axi_aclk),
-        .CE(p_1_in[23]),
-        .D(s00_axi_wdata[20]),
-        .Q(\slv_reg0_reg_n_0_[20] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg0_reg[21] 
-       (.C(s00_axi_aclk),
-        .CE(p_1_in[23]),
-        .D(s00_axi_wdata[21]),
-        .Q(\slv_reg0_reg_n_0_[21] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg0_reg[22] 
-       (.C(s00_axi_aclk),
-        .CE(p_1_in[23]),
-        .D(s00_axi_wdata[22]),
-        .Q(\slv_reg0_reg_n_0_[22] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg0_reg[23] 
-       (.C(s00_axi_aclk),
-        .CE(p_1_in[23]),
-        .D(s00_axi_wdata[23]),
-        .Q(\slv_reg0_reg_n_0_[23] ),
-        .R(axi_awready_i_1_n_0));
   FDRE \slv_reg0_reg[24] 
        (.C(s00_axi_aclk),
-        .CE(p_1_in[28]),
-        .D(s00_axi_wdata[24]),
-        .Q(\r_reg_reg[4] [0]),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg0_reg[25] 
-       (.C(s00_axi_aclk),
-        .CE(p_1_in[28]),
-        .D(s00_axi_wdata[25]),
-        .Q(\slv_reg0_reg_n_0_[25] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg0_reg[26] 
-       (.C(s00_axi_aclk),
-        .CE(p_1_in[28]),
-        .D(s00_axi_wdata[26]),
-        .Q(\slv_reg0_reg_n_0_[26] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg0_reg[27] 
-       (.C(s00_axi_aclk),
-        .CE(p_1_in[28]),
-        .D(s00_axi_wdata[27]),
-        .Q(\slv_reg0_reg_n_0_[27] ),
+        .CE(1'b1),
+        .D(\slv_reg0[24]_i_1_n_0 ),
+        .Q(data_word_4[0]),
         .R(axi_awready_i_1_n_0));
   FDRE \slv_reg0_reg[28] 
        (.C(s00_axi_aclk),
-        .CE(p_1_in[28]),
-        .D(s00_axi_wdata[28]),
-        .Q(\r_reg_reg[4] [1]),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg0_reg[29] 
-       (.C(s00_axi_aclk),
-        .CE(p_1_in[28]),
-        .D(s00_axi_wdata[29]),
-        .Q(\slv_reg0_reg_n_0_[29] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg0_reg[2] 
-       (.C(s00_axi_aclk),
-        .CE(p_1_in[7]),
-        .D(s00_axi_wdata[2]),
-        .Q(\slv_reg0_reg_n_0_[2] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg0_reg[30] 
-       (.C(s00_axi_aclk),
-        .CE(p_1_in[28]),
-        .D(s00_axi_wdata[30]),
-        .Q(\slv_reg0_reg_n_0_[30] ),
+        .CE(1'b1),
+        .D(\slv_reg0[28]_i_1_n_0 ),
+        .Q(data_word_4[1]),
         .R(axi_awready_i_1_n_0));
   FDRE \slv_reg0_reg[31] 
        (.C(s00_axi_aclk),
-        .CE(p_1_in[28]),
-        .D(s00_axi_wdata[31]),
-        .Q(\r_reg_reg[4] [2]),
+        .CE(1'b1),
+        .D(\slv_reg0[31]_i_1_n_0 ),
+        .Q(data_word_4[2]),
         .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg0_reg[3] 
-       (.C(s00_axi_aclk),
-        .CE(p_1_in[7]),
-        .D(s00_axi_wdata[3]),
-        .Q(\slv_reg0_reg_n_0_[3] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg0_reg[4] 
-       (.C(s00_axi_aclk),
-        .CE(p_1_in[7]),
-        .D(s00_axi_wdata[4]),
-        .Q(\slv_reg0_reg_n_0_[4] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg0_reg[5] 
-       (.C(s00_axi_aclk),
-        .CE(p_1_in[7]),
-        .D(s00_axi_wdata[5]),
-        .Q(\slv_reg0_reg_n_0_[5] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg0_reg[6] 
-       (.C(s00_axi_aclk),
-        .CE(p_1_in[7]),
-        .D(s00_axi_wdata[6]),
-        .Q(\slv_reg0_reg_n_0_[6] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg0_reg[7] 
-       (.C(s00_axi_aclk),
-        .CE(p_1_in[7]),
-        .D(s00_axi_wdata[7]),
-        .Q(\slv_reg0_reg_n_0_[7] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg0_reg[8] 
-       (.C(s00_axi_aclk),
-        .CE(p_1_in[15]),
-        .D(s00_axi_wdata[8]),
-        .Q(\slv_reg0_reg_n_0_[8] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg0_reg[9] 
-       (.C(s00_axi_aclk),
-        .CE(p_1_in[15]),
-        .D(s00_axi_wdata[9]),
-        .Q(\slv_reg0_reg_n_0_[9] ),
-        .R(axi_awready_i_1_n_0));
-  LUT4 #(
-    .INIT(16'h0080)) 
-    \slv_reg1[15]_i_1 
-       (.I0(slv_reg_wren__0),
-        .I1(s00_axi_wstrb[1]),
-        .I2(axi_awaddr[2]),
-        .I3(axi_awaddr[3]),
-        .O(\slv_reg1[15]_i_1_n_0 ));
-  LUT4 #(
-    .INIT(16'h0080)) 
-    \slv_reg1[23]_i_1 
-       (.I0(slv_reg_wren__0),
-        .I1(s00_axi_wstrb[2]),
-        .I2(axi_awaddr[2]),
-        .I3(axi_awaddr[3]),
-        .O(\slv_reg1[23]_i_1_n_0 ));
-  LUT4 #(
-    .INIT(16'h0080)) 
-    \slv_reg1[31]_i_1 
-       (.I0(slv_reg_wren__0),
-        .I1(s00_axi_wstrb[3]),
-        .I2(axi_awaddr[2]),
-        .I3(axi_awaddr[3]),
-        .O(\slv_reg1[31]_i_1_n_0 ));
-  LUT4 #(
-    .INIT(16'h0080)) 
-    \slv_reg1[7]_i_1 
-       (.I0(slv_reg_wren__0),
-        .I1(s00_axi_wstrb[0]),
-        .I2(axi_awaddr[2]),
-        .I3(axi_awaddr[3]),
-        .O(\slv_reg1[7]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hFFFFBFFF00008000)) 
+    \slv_reg1[0]_i_1 
+       (.I0(s00_axi_wdata[0]),
+        .I1(slv_reg_wren__0),
+        .I2(s00_axi_wstrb[0]),
+        .I3(axi_awaddr[2]),
+        .I4(axi_awaddr[3]),
+        .I5(Q_reg_0),
+        .O(\slv_reg1[0]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hFFFFBFFF00008000)) 
+    \slv_reg1[4]_i_1 
+       (.I0(s00_axi_wdata[1]),
+        .I1(slv_reg_wren__0),
+        .I2(s00_axi_wstrb[0]),
+        .I3(axi_awaddr[2]),
+        .I4(axi_awaddr[3]),
+        .I5(Q_reg),
+        .O(\slv_reg1[4]_i_1_n_0 ));
   FDRE \slv_reg1_reg[0] 
        (.C(s00_axi_aclk),
-        .CE(\slv_reg1[7]_i_1_n_0 ),
-        .D(s00_axi_wdata[0]),
-        .Q(Q_reg[0]),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg1_reg[10] 
-       (.C(s00_axi_aclk),
-        .CE(\slv_reg1[15]_i_1_n_0 ),
-        .D(s00_axi_wdata[10]),
-        .Q(\slv_reg1_reg_n_0_[10] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg1_reg[11] 
-       (.C(s00_axi_aclk),
-        .CE(\slv_reg1[15]_i_1_n_0 ),
-        .D(s00_axi_wdata[11]),
-        .Q(\slv_reg1_reg_n_0_[11] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg1_reg[12] 
-       (.C(s00_axi_aclk),
-        .CE(\slv_reg1[15]_i_1_n_0 ),
-        .D(s00_axi_wdata[12]),
-        .Q(\slv_reg1_reg_n_0_[12] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg1_reg[13] 
-       (.C(s00_axi_aclk),
-        .CE(\slv_reg1[15]_i_1_n_0 ),
-        .D(s00_axi_wdata[13]),
-        .Q(\slv_reg1_reg_n_0_[13] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg1_reg[14] 
-       (.C(s00_axi_aclk),
-        .CE(\slv_reg1[15]_i_1_n_0 ),
-        .D(s00_axi_wdata[14]),
-        .Q(\slv_reg1_reg_n_0_[14] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg1_reg[15] 
-       (.C(s00_axi_aclk),
-        .CE(\slv_reg1[15]_i_1_n_0 ),
-        .D(s00_axi_wdata[15]),
-        .Q(\slv_reg1_reg_n_0_[15] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg1_reg[16] 
-       (.C(s00_axi_aclk),
-        .CE(\slv_reg1[23]_i_1_n_0 ),
-        .D(s00_axi_wdata[16]),
-        .Q(\slv_reg1_reg_n_0_[16] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg1_reg[17] 
-       (.C(s00_axi_aclk),
-        .CE(\slv_reg1[23]_i_1_n_0 ),
-        .D(s00_axi_wdata[17]),
-        .Q(\slv_reg1_reg_n_0_[17] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg1_reg[18] 
-       (.C(s00_axi_aclk),
-        .CE(\slv_reg1[23]_i_1_n_0 ),
-        .D(s00_axi_wdata[18]),
-        .Q(\slv_reg1_reg_n_0_[18] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg1_reg[19] 
-       (.C(s00_axi_aclk),
-        .CE(\slv_reg1[23]_i_1_n_0 ),
-        .D(s00_axi_wdata[19]),
-        .Q(\slv_reg1_reg_n_0_[19] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg1_reg[1] 
-       (.C(s00_axi_aclk),
-        .CE(\slv_reg1[7]_i_1_n_0 ),
-        .D(s00_axi_wdata[1]),
-        .Q(\slv_reg1_reg_n_0_[1] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg1_reg[20] 
-       (.C(s00_axi_aclk),
-        .CE(\slv_reg1[23]_i_1_n_0 ),
-        .D(s00_axi_wdata[20]),
-        .Q(\slv_reg1_reg_n_0_[20] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg1_reg[21] 
-       (.C(s00_axi_aclk),
-        .CE(\slv_reg1[23]_i_1_n_0 ),
-        .D(s00_axi_wdata[21]),
-        .Q(\slv_reg1_reg_n_0_[21] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg1_reg[22] 
-       (.C(s00_axi_aclk),
-        .CE(\slv_reg1[23]_i_1_n_0 ),
-        .D(s00_axi_wdata[22]),
-        .Q(\slv_reg1_reg_n_0_[22] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg1_reg[23] 
-       (.C(s00_axi_aclk),
-        .CE(\slv_reg1[23]_i_1_n_0 ),
-        .D(s00_axi_wdata[23]),
-        .Q(\slv_reg1_reg_n_0_[23] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg1_reg[24] 
-       (.C(s00_axi_aclk),
-        .CE(\slv_reg1[31]_i_1_n_0 ),
-        .D(s00_axi_wdata[24]),
-        .Q(\slv_reg1_reg_n_0_[24] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg1_reg[25] 
-       (.C(s00_axi_aclk),
-        .CE(\slv_reg1[31]_i_1_n_0 ),
-        .D(s00_axi_wdata[25]),
-        .Q(\slv_reg1_reg_n_0_[25] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg1_reg[26] 
-       (.C(s00_axi_aclk),
-        .CE(\slv_reg1[31]_i_1_n_0 ),
-        .D(s00_axi_wdata[26]),
-        .Q(\slv_reg1_reg_n_0_[26] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg1_reg[27] 
-       (.C(s00_axi_aclk),
-        .CE(\slv_reg1[31]_i_1_n_0 ),
-        .D(s00_axi_wdata[27]),
-        .Q(\slv_reg1_reg_n_0_[27] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg1_reg[28] 
-       (.C(s00_axi_aclk),
-        .CE(\slv_reg1[31]_i_1_n_0 ),
-        .D(s00_axi_wdata[28]),
-        .Q(\slv_reg1_reg_n_0_[28] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg1_reg[29] 
-       (.C(s00_axi_aclk),
-        .CE(\slv_reg1[31]_i_1_n_0 ),
-        .D(s00_axi_wdata[29]),
-        .Q(\slv_reg1_reg_n_0_[29] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg1_reg[2] 
-       (.C(s00_axi_aclk),
-        .CE(\slv_reg1[7]_i_1_n_0 ),
-        .D(s00_axi_wdata[2]),
-        .Q(\slv_reg1_reg_n_0_[2] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg1_reg[30] 
-       (.C(s00_axi_aclk),
-        .CE(\slv_reg1[31]_i_1_n_0 ),
-        .D(s00_axi_wdata[30]),
-        .Q(\slv_reg1_reg_n_0_[30] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg1_reg[31] 
-       (.C(s00_axi_aclk),
-        .CE(\slv_reg1[31]_i_1_n_0 ),
-        .D(s00_axi_wdata[31]),
-        .Q(\slv_reg1_reg_n_0_[31] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg1_reg[3] 
-       (.C(s00_axi_aclk),
-        .CE(\slv_reg1[7]_i_1_n_0 ),
-        .D(s00_axi_wdata[3]),
-        .Q(\slv_reg1_reg_n_0_[3] ),
+        .CE(1'b1),
+        .D(\slv_reg1[0]_i_1_n_0 ),
+        .Q(Q_reg_0),
         .R(axi_awready_i_1_n_0));
   FDRE \slv_reg1_reg[4] 
        (.C(s00_axi_aclk),
-        .CE(\slv_reg1[7]_i_1_n_0 ),
-        .D(s00_axi_wdata[4]),
-        .Q(Q_reg[1]),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg1_reg[5] 
-       (.C(s00_axi_aclk),
-        .CE(\slv_reg1[7]_i_1_n_0 ),
-        .D(s00_axi_wdata[5]),
-        .Q(\slv_reg1_reg_n_0_[5] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg1_reg[6] 
-       (.C(s00_axi_aclk),
-        .CE(\slv_reg1[7]_i_1_n_0 ),
-        .D(s00_axi_wdata[6]),
-        .Q(\slv_reg1_reg_n_0_[6] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg1_reg[7] 
-       (.C(s00_axi_aclk),
-        .CE(\slv_reg1[7]_i_1_n_0 ),
-        .D(s00_axi_wdata[7]),
-        .Q(\slv_reg1_reg_n_0_[7] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg1_reg[8] 
-       (.C(s00_axi_aclk),
-        .CE(\slv_reg1[15]_i_1_n_0 ),
-        .D(s00_axi_wdata[8]),
-        .Q(\slv_reg1_reg_n_0_[8] ),
-        .R(axi_awready_i_1_n_0));
-  FDRE \slv_reg1_reg[9] 
-       (.C(s00_axi_aclk),
-        .CE(\slv_reg1[15]_i_1_n_0 ),
-        .D(s00_axi_wdata[9]),
-        .Q(\slv_reg1_reg_n_0_[9] ),
+        .CE(1'b1),
+        .D(\slv_reg1[4]_i_1_n_0 ),
+        .Q(Q_reg),
         .R(axi_awready_i_1_n_0));
   LUT3 #(
     .INIT(8'h20)) 
@@ -1634,56 +867,48 @@ endmodule
 
 (* ORIG_REF_NAME = "GyroBiDirChannelController" *) 
 module design_1_BiDirChannels_0_0_GyroBiDirChannelController
-   (MCK,
-    m00_axis_tvalid,
+   (m00_axis_tvalid,
+    MCK,
+    Q_reg,
     HS_DataOut,
-    m00_axis_tdata,
     m00_axis_tlast,
     HS_Clock,
-    Q,
-    \r_reg_reg[7] ,
-    \r_reg_reg[7]_0 ,
-    \r_reg_reg[7]_1 ,
-    \r_reg_reg[7]_2 ,
-    \r_reg_reg[7]_3 ,
+    D,
+    m00_axis_tdata,
     s00_axis_tready,
-    CLK,
     s00_axi_aclk,
     \slv_reg0_reg[31] ,
     \slv_reg1_reg[4] ,
+    \slv_reg1_reg[0] ,
+    CLK,
     s00_axis_tdata,
     s00_axis_tvalid,
     m00_axis_tready,
-    \slv_reg0_reg[31]_0 ,
+    data_word_4,
+    axi_araddr,
     HS_DataIn,
-    s00_axi_aresetn,
-    \slv_reg0_reg[16] ,
-    s00_axis_tlast);
-  output MCK;
+    s00_axi_aresetn);
   output m00_axis_tvalid;
+  output MCK;
+  output Q_reg;
   output HS_DataOut;
-  output [31:0]m00_axis_tdata;
   output m00_axis_tlast;
   output HS_Clock;
-  output [7:0]Q;
-  output [7:0]\r_reg_reg[7] ;
-  output [7:0]\r_reg_reg[7]_0 ;
-  output [7:0]\r_reg_reg[7]_1 ;
-  output [7:0]\r_reg_reg[7]_2 ;
-  output [7:0]\r_reg_reg[7]_3 ;
+  output [31:0]D;
+  output [31:0]m00_axis_tdata;
   output s00_axis_tready;
-  input CLK;
   input s00_axi_aclk;
   input \slv_reg0_reg[31] ;
-  input [1:0]\slv_reg1_reg[4] ;
+  input \slv_reg1_reg[4] ;
+  input \slv_reg1_reg[0] ;
+  input CLK;
   input [31:0]s00_axis_tdata;
   input s00_axis_tvalid;
   input m00_axis_tready;
-  input [2:0]\slv_reg0_reg[31]_0 ;
+  input [2:0]data_word_4;
+  input [1:0]axi_araddr;
   input HS_DataIn;
   input s00_axi_aresetn;
-  input \slv_reg0_reg[16] ;
-  input s00_axis_tlast;
 
   wire BUFFERS_n_10;
   wire BUFFERS_n_11;
@@ -1695,6 +920,7 @@ module design_1_BiDirChannels_0_0_GyroBiDirChannelController
   wire BUFFERS_n_17;
   wire BUFFERS_n_18;
   wire BUFFERS_n_19;
+  wire BUFFERS_n_2;
   wire BUFFERS_n_20;
   wire BUFFERS_n_21;
   wire BUFFERS_n_22;
@@ -1710,86 +936,82 @@ module design_1_BiDirChannels_0_0_GyroBiDirChannelController
   wire BUFFERS_n_31;
   wire BUFFERS_n_32;
   wire BUFFERS_n_33;
-  wire BUFFERS_n_34;
   wire BUFFERS_n_4;
   wire BUFFERS_n_5;
   wire BUFFERS_n_6;
   wire BUFFERS_n_7;
   wire BUFFERS_n_8;
   wire BUFFERS_n_9;
+  wire CHANNELS_n_1;
   wire CLK;
+  wire [31:0]D;
   wire HS_Clock;
   wire HS_DataIn;
   wire HS_DataOut;
+  wire \MASK_HSCK/in_start_stop_int ;
   wire MCK;
-  wire [7:0]Q;
+  wire Q_reg;
+  wire [1:0]axi_araddr;
+  wire [2:0]data_word_4;
   wire debug_in_shift_int;
-  wire debug_out_shift_int;
   wire [31:0]m00_axis_tdata;
   wire m00_axis_tlast;
   wire m00_axis_tready;
   wire m00_axis_tvalid;
-  wire out_shift_sel;
   wire [31:0]r_reg;
-  wire [7:0]\r_reg_reg[7] ;
-  wire [7:0]\r_reg_reg[7]_0 ;
-  wire [7:0]\r_reg_reg[7]_1 ;
-  wire [7:0]\r_reg_reg[7]_2 ;
-  wire [7:0]\r_reg_reg[7]_3 ;
-  wire rx_token_next_int;
   wire s00_axi_aclk;
   wire s00_axi_aresetn;
   wire [31:0]s00_axis_tdata;
-  wire s00_axis_tlast;
   wire s00_axis_tready;
   wire s00_axis_tvalid;
-  wire \slv_reg0_reg[16] ;
   wire \slv_reg0_reg[31] ;
-  wire [2:0]\slv_reg0_reg[31]_0 ;
-  wire [1:0]\slv_reg1_reg[4] ;
-  wire tx_token_next_int;
+  wire \slv_reg1_reg[0] ;
+  wire \slv_reg1_reg[4] ;
   wire tx_token_valid_int;
 
   design_1_BiDirChannels_0_0_GyroBiDirTokenBuffer BUFFERS
-       (.CLK(m00_axis_tlast),
+       (.D(D),
         .Q(r_reg),
+        .axi_araddr(axi_araddr),
+        .\axi_rdata_reg[0] (BUFFERS_n_33),
+        .\axi_rdata_reg[10] (BUFFERS_n_23),
+        .\axi_rdata_reg[11] (BUFFERS_n_22),
+        .\axi_rdata_reg[12] (BUFFERS_n_21),
+        .\axi_rdata_reg[13] (BUFFERS_n_20),
+        .\axi_rdata_reg[14] (BUFFERS_n_19),
+        .\axi_rdata_reg[15] (BUFFERS_n_18),
+        .\axi_rdata_reg[16] (BUFFERS_n_17),
+        .\axi_rdata_reg[17] (BUFFERS_n_16),
+        .\axi_rdata_reg[18] (BUFFERS_n_15),
+        .\axi_rdata_reg[19] (BUFFERS_n_14),
+        .\axi_rdata_reg[1] (BUFFERS_n_32),
+        .\axi_rdata_reg[20] (BUFFERS_n_13),
+        .\axi_rdata_reg[21] (BUFFERS_n_12),
+        .\axi_rdata_reg[22] (BUFFERS_n_11),
+        .\axi_rdata_reg[23] (BUFFERS_n_10),
+        .\axi_rdata_reg[24] (BUFFERS_n_9),
+        .\axi_rdata_reg[25] (BUFFERS_n_8),
+        .\axi_rdata_reg[26] (BUFFERS_n_7),
+        .\axi_rdata_reg[27] (BUFFERS_n_6),
+        .\axi_rdata_reg[28] (BUFFERS_n_5),
+        .\axi_rdata_reg[29] (BUFFERS_n_4),
+        .\axi_rdata_reg[2] (BUFFERS_n_31),
+        .\axi_rdata_reg[30] (BUFFERS_n_3),
+        .\axi_rdata_reg[31] (BUFFERS_n_2),
+        .\axi_rdata_reg[3] (BUFFERS_n_30),
+        .\axi_rdata_reg[4] (BUFFERS_n_29),
+        .\axi_rdata_reg[5] (BUFFERS_n_28),
+        .\axi_rdata_reg[6] (BUFFERS_n_27),
+        .\axi_rdata_reg[7] (BUFFERS_n_26),
+        .\axi_rdata_reg[8] (BUFFERS_n_25),
+        .\axi_rdata_reg[9] (BUFFERS_n_24),
         .debug_in_shift_int(debug_in_shift_int),
-        .debug_out_shift_int(debug_out_shift_int),
+        .in_start_stop_int(\MASK_HSCK/in_start_stop_int ),
         .m00_axis_tdata(m00_axis_tdata),
+        .m00_axis_tlast(m00_axis_tlast),
+        .m00_axis_tready(m00_axis_tready),
         .m00_axis_tvalid(m00_axis_tvalid),
-        .out_shift_sel(out_shift_sel),
-        .\r_reg_reg[0]_P (BUFFERS_n_34),
-        .\r_reg_reg[10]_P (BUFFERS_n_24),
-        .\r_reg_reg[11]_P (BUFFERS_n_23),
-        .\r_reg_reg[12]_P (BUFFERS_n_22),
-        .\r_reg_reg[13]_P (BUFFERS_n_21),
-        .\r_reg_reg[14]_P (BUFFERS_n_20),
-        .\r_reg_reg[15]_P (BUFFERS_n_19),
-        .\r_reg_reg[16]_P (BUFFERS_n_18),
-        .\r_reg_reg[17]_P (BUFFERS_n_17),
-        .\r_reg_reg[18]_P (BUFFERS_n_16),
-        .\r_reg_reg[19]_P (BUFFERS_n_15),
-        .\r_reg_reg[1]_P (BUFFERS_n_33),
-        .\r_reg_reg[20]_P (BUFFERS_n_14),
-        .\r_reg_reg[21]_P (BUFFERS_n_13),
-        .\r_reg_reg[22]_P (BUFFERS_n_12),
-        .\r_reg_reg[23]_P (BUFFERS_n_11),
-        .\r_reg_reg[24]_P (BUFFERS_n_10),
-        .\r_reg_reg[25]_P (BUFFERS_n_9),
-        .\r_reg_reg[26]_P (BUFFERS_n_8),
-        .\r_reg_reg[27]_P (BUFFERS_n_7),
-        .\r_reg_reg[28]_P (BUFFERS_n_6),
-        .\r_reg_reg[29]_P (BUFFERS_n_5),
-        .\r_reg_reg[2]_P (BUFFERS_n_32),
-        .\r_reg_reg[30]_P (BUFFERS_n_4),
-        .\r_reg_reg[31]_P (BUFFERS_n_3),
-        .\r_reg_reg[3]_P (BUFFERS_n_31),
-        .\r_reg_reg[4]_P (BUFFERS_n_30),
-        .\r_reg_reg[5]_P (BUFFERS_n_29),
-        .\r_reg_reg[6]_P (BUFFERS_n_28),
-        .\r_reg_reg[7]_P (BUFFERS_n_27),
-        .\r_reg_reg[8]_P (BUFFERS_n_26),
-        .\r_reg_reg[9]_P (BUFFERS_n_25),
+        .\r_reg_reg[0] (CHANNELS_n_1),
         .s00_axi_aclk(s00_axi_aclk),
         .s00_axis_tdata(s00_axis_tdata),
         .s00_axis_tready(s00_axis_tready),
@@ -1802,202 +1024,198 @@ module design_1_BiDirChannels_0_0_GyroBiDirChannelController
         .HS_DataOut(HS_DataOut),
         .MCK(MCK),
         .Q(r_reg),
-        .\data_out_reg[0] (BUFFERS_n_34),
-        .\data_out_reg[10] (BUFFERS_n_24),
-        .\data_out_reg[11] (BUFFERS_n_23),
-        .\data_out_reg[12] (BUFFERS_n_22),
-        .\data_out_reg[13] (BUFFERS_n_21),
-        .\data_out_reg[14] (BUFFERS_n_20),
-        .\data_out_reg[15] (BUFFERS_n_19),
-        .\data_out_reg[16] (BUFFERS_n_18),
-        .\data_out_reg[17] (BUFFERS_n_17),
-        .\data_out_reg[18] (BUFFERS_n_16),
-        .\data_out_reg[19] (BUFFERS_n_15),
-        .\data_out_reg[1] (BUFFERS_n_33),
-        .\data_out_reg[20] (BUFFERS_n_14),
-        .\data_out_reg[21] (BUFFERS_n_13),
-        .\data_out_reg[22] (BUFFERS_n_12),
-        .\data_out_reg[23] (BUFFERS_n_11),
-        .\data_out_reg[24] (BUFFERS_n_10),
-        .\data_out_reg[25] (BUFFERS_n_9),
-        .\data_out_reg[26] (BUFFERS_n_8),
-        .\data_out_reg[27] (BUFFERS_n_7),
-        .\data_out_reg[28] (BUFFERS_n_6),
-        .\data_out_reg[29] (BUFFERS_n_5),
-        .\data_out_reg[2] (BUFFERS_n_32),
-        .\data_out_reg[30] (BUFFERS_n_4),
-        .\data_out_reg[31] (BUFFERS_n_3),
-        .\data_out_reg[3] (BUFFERS_n_31),
-        .\data_out_reg[4] (BUFFERS_n_30),
-        .\data_out_reg[5] (BUFFERS_n_29),
-        .\data_out_reg[6] (BUFFERS_n_28),
-        .\data_out_reg[7] (BUFFERS_n_27),
-        .\data_out_reg[8] (BUFFERS_n_26),
-        .\data_out_reg[9] (BUFFERS_n_25),
+        .Q_reg(CHANNELS_n_1),
+        .Q_reg_0(Q_reg),
+        .\data_out_reg[0] (BUFFERS_n_33),
+        .\data_out_reg[10] (BUFFERS_n_23),
+        .\data_out_reg[11] (BUFFERS_n_22),
+        .\data_out_reg[12] (BUFFERS_n_21),
+        .\data_out_reg[13] (BUFFERS_n_20),
+        .\data_out_reg[14] (BUFFERS_n_19),
+        .\data_out_reg[15] (BUFFERS_n_18),
+        .\data_out_reg[16] (BUFFERS_n_17),
+        .\data_out_reg[17] (BUFFERS_n_16),
+        .\data_out_reg[18] (BUFFERS_n_15),
+        .\data_out_reg[19] (BUFFERS_n_14),
+        .\data_out_reg[1] (BUFFERS_n_32),
+        .\data_out_reg[20] (BUFFERS_n_13),
+        .\data_out_reg[21] (BUFFERS_n_12),
+        .\data_out_reg[22] (BUFFERS_n_11),
+        .\data_out_reg[23] (BUFFERS_n_10),
+        .\data_out_reg[24] (BUFFERS_n_9),
+        .\data_out_reg[25] (BUFFERS_n_8),
+        .\data_out_reg[26] (BUFFERS_n_7),
+        .\data_out_reg[27] (BUFFERS_n_6),
+        .\data_out_reg[28] (BUFFERS_n_5),
+        .\data_out_reg[29] (BUFFERS_n_4),
+        .\data_out_reg[2] (BUFFERS_n_31),
+        .\data_out_reg[30] (BUFFERS_n_3),
+        .\data_out_reg[31] (BUFFERS_n_2),
+        .\data_out_reg[3] (BUFFERS_n_30),
+        .\data_out_reg[4] (BUFFERS_n_29),
+        .\data_out_reg[5] (BUFFERS_n_28),
+        .\data_out_reg[6] (BUFFERS_n_27),
+        .\data_out_reg[7] (BUFFERS_n_26),
+        .\data_out_reg[8] (BUFFERS_n_25),
+        .\data_out_reg[9] (BUFFERS_n_24),
+        .data_word_4(data_word_4),
         .debug_in_shift_int(debug_in_shift_int),
-        .debug_out_shift_int(debug_out_shift_int),
-        .m00_axis_tready(m00_axis_tready),
-        .out_shift_sel(out_shift_sel),
-        .\r_reg_reg[7] (rx_token_next_int),
+        .in_start_stop_int(\MASK_HSCK/in_start_stop_int ),
         .s00_axi_aclk(s00_axi_aclk),
         .s00_axi_aresetn(s00_axi_aresetn),
         .s00_axis_tvalid(s00_axis_tvalid),
         .\slv_reg0_reg[31] (\slv_reg0_reg[31] ),
-        .\slv_reg0_reg[31]_0 (\slv_reg0_reg[31]_0 ),
+        .\slv_reg1_reg[0] (\slv_reg1_reg[0] ),
         .\slv_reg1_reg[4] (\slv_reg1_reg[4] ),
-        .tx_token_next_int(tx_token_next_int),
         .tx_token_valid_int(tx_token_valid_int));
-  design_1_BiDirChannels_0_0_GyroChannelDebugger DEBUGGER
-       (.CLK(rx_token_next_int),
-        .Q(Q),
-        .debug_in_shift_int(debug_in_shift_int),
-        .debug_out_shift_int(debug_out_shift_int),
-        .\out_reg[7] (m00_axis_tlast),
-        .\r_reg_reg[7] (\r_reg_reg[7] ),
-        .\r_reg_reg[7]_0 (\r_reg_reg[7]_0 ),
-        .\r_reg_reg[7]_1 (\r_reg_reg[7]_1 ),
-        .\r_reg_reg[7]_2 (\r_reg_reg[7]_2 ),
-        .\r_reg_reg[7]_3 (\r_reg_reg[7]_3 ),
-        .s00_axis_tlast(s00_axis_tlast),
-        .\slv_reg0_reg[16] (\slv_reg0_reg[16] ),
-        .tx_token_next_int(tx_token_next_int));
 endmodule
 
 (* ORIG_REF_NAME = "GyroBiDirTokenBuffer" *) 
 module design_1_BiDirChannels_0_0_GyroBiDirTokenBuffer
    (tx_token_valid_int,
-    out_shift_sel,
     m00_axis_tvalid,
-    \r_reg_reg[31]_P ,
-    \r_reg_reg[30]_P ,
-    \r_reg_reg[29]_P ,
-    \r_reg_reg[28]_P ,
-    \r_reg_reg[27]_P ,
-    \r_reg_reg[26]_P ,
-    \r_reg_reg[25]_P ,
-    \r_reg_reg[24]_P ,
-    \r_reg_reg[23]_P ,
-    \r_reg_reg[22]_P ,
-    \r_reg_reg[21]_P ,
-    \r_reg_reg[20]_P ,
-    \r_reg_reg[19]_P ,
-    \r_reg_reg[18]_P ,
-    \r_reg_reg[17]_P ,
-    \r_reg_reg[16]_P ,
-    \r_reg_reg[15]_P ,
-    \r_reg_reg[14]_P ,
-    \r_reg_reg[13]_P ,
-    \r_reg_reg[12]_P ,
-    \r_reg_reg[11]_P ,
-    \r_reg_reg[10]_P ,
-    \r_reg_reg[9]_P ,
-    \r_reg_reg[8]_P ,
-    \r_reg_reg[7]_P ,
-    \r_reg_reg[6]_P ,
-    \r_reg_reg[5]_P ,
-    \r_reg_reg[4]_P ,
-    \r_reg_reg[3]_P ,
-    \r_reg_reg[2]_P ,
-    \r_reg_reg[1]_P ,
-    \r_reg_reg[0]_P ,
+    \axi_rdata_reg[31] ,
+    \axi_rdata_reg[30] ,
+    \axi_rdata_reg[29] ,
+    \axi_rdata_reg[28] ,
+    \axi_rdata_reg[27] ,
+    \axi_rdata_reg[26] ,
+    \axi_rdata_reg[25] ,
+    \axi_rdata_reg[24] ,
+    \axi_rdata_reg[23] ,
+    \axi_rdata_reg[22] ,
+    \axi_rdata_reg[21] ,
+    \axi_rdata_reg[20] ,
+    \axi_rdata_reg[19] ,
+    \axi_rdata_reg[18] ,
+    \axi_rdata_reg[17] ,
+    \axi_rdata_reg[16] ,
+    \axi_rdata_reg[15] ,
+    \axi_rdata_reg[14] ,
+    \axi_rdata_reg[13] ,
+    \axi_rdata_reg[12] ,
+    \axi_rdata_reg[11] ,
+    \axi_rdata_reg[10] ,
+    \axi_rdata_reg[9] ,
+    \axi_rdata_reg[8] ,
+    \axi_rdata_reg[7] ,
+    \axi_rdata_reg[6] ,
+    \axi_rdata_reg[5] ,
+    \axi_rdata_reg[4] ,
+    \axi_rdata_reg[3] ,
+    \axi_rdata_reg[2] ,
+    \axi_rdata_reg[1] ,
+    \axi_rdata_reg[0] ,
+    m00_axis_tlast,
+    D,
     m00_axis_tdata,
-    CLK,
     s00_axis_tready,
     s00_axi_aclk,
     \slv_reg0_reg[31] ,
-    debug_out_shift_int,
+    Q,
     debug_in_shift_int,
     s00_axis_tdata,
-    Q);
+    m00_axis_tready,
+    \r_reg_reg[0] ,
+    in_start_stop_int,
+    axi_araddr);
   output tx_token_valid_int;
-  output out_shift_sel;
   output m00_axis_tvalid;
-  output \r_reg_reg[31]_P ;
-  output \r_reg_reg[30]_P ;
-  output \r_reg_reg[29]_P ;
-  output \r_reg_reg[28]_P ;
-  output \r_reg_reg[27]_P ;
-  output \r_reg_reg[26]_P ;
-  output \r_reg_reg[25]_P ;
-  output \r_reg_reg[24]_P ;
-  output \r_reg_reg[23]_P ;
-  output \r_reg_reg[22]_P ;
-  output \r_reg_reg[21]_P ;
-  output \r_reg_reg[20]_P ;
-  output \r_reg_reg[19]_P ;
-  output \r_reg_reg[18]_P ;
-  output \r_reg_reg[17]_P ;
-  output \r_reg_reg[16]_P ;
-  output \r_reg_reg[15]_P ;
-  output \r_reg_reg[14]_P ;
-  output \r_reg_reg[13]_P ;
-  output \r_reg_reg[12]_P ;
-  output \r_reg_reg[11]_P ;
-  output \r_reg_reg[10]_P ;
-  output \r_reg_reg[9]_P ;
-  output \r_reg_reg[8]_P ;
-  output \r_reg_reg[7]_P ;
-  output \r_reg_reg[6]_P ;
-  output \r_reg_reg[5]_P ;
-  output \r_reg_reg[4]_P ;
-  output \r_reg_reg[3]_P ;
-  output \r_reg_reg[2]_P ;
-  output \r_reg_reg[1]_P ;
-  output \r_reg_reg[0]_P ;
+  output \axi_rdata_reg[31] ;
+  output \axi_rdata_reg[30] ;
+  output \axi_rdata_reg[29] ;
+  output \axi_rdata_reg[28] ;
+  output \axi_rdata_reg[27] ;
+  output \axi_rdata_reg[26] ;
+  output \axi_rdata_reg[25] ;
+  output \axi_rdata_reg[24] ;
+  output \axi_rdata_reg[23] ;
+  output \axi_rdata_reg[22] ;
+  output \axi_rdata_reg[21] ;
+  output \axi_rdata_reg[20] ;
+  output \axi_rdata_reg[19] ;
+  output \axi_rdata_reg[18] ;
+  output \axi_rdata_reg[17] ;
+  output \axi_rdata_reg[16] ;
+  output \axi_rdata_reg[15] ;
+  output \axi_rdata_reg[14] ;
+  output \axi_rdata_reg[13] ;
+  output \axi_rdata_reg[12] ;
+  output \axi_rdata_reg[11] ;
+  output \axi_rdata_reg[10] ;
+  output \axi_rdata_reg[9] ;
+  output \axi_rdata_reg[8] ;
+  output \axi_rdata_reg[7] ;
+  output \axi_rdata_reg[6] ;
+  output \axi_rdata_reg[5] ;
+  output \axi_rdata_reg[4] ;
+  output \axi_rdata_reg[3] ;
+  output \axi_rdata_reg[2] ;
+  output \axi_rdata_reg[1] ;
+  output \axi_rdata_reg[0] ;
+  output m00_axis_tlast;
+  output [31:0]D;
   output [31:0]m00_axis_tdata;
-  output CLK;
   output s00_axis_tready;
   input s00_axi_aclk;
   input \slv_reg0_reg[31] ;
-  input debug_out_shift_int;
+  input [31:0]Q;
   input debug_in_shift_int;
   input [31:0]s00_axis_tdata;
-  input [31:0]Q;
+  input m00_axis_tready;
+  input \r_reg_reg[0] ;
+  input in_start_stop_int;
+  input [1:0]axi_araddr;
 
-  wire CLK;
+  wire [31:0]D;
   wire [31:0]Q;
+  wire [1:0]axi_araddr;
+  wire \axi_rdata_reg[0] ;
+  wire \axi_rdata_reg[10] ;
+  wire \axi_rdata_reg[11] ;
+  wire \axi_rdata_reg[12] ;
+  wire \axi_rdata_reg[13] ;
+  wire \axi_rdata_reg[14] ;
+  wire \axi_rdata_reg[15] ;
+  wire \axi_rdata_reg[16] ;
+  wire \axi_rdata_reg[17] ;
+  wire \axi_rdata_reg[18] ;
+  wire \axi_rdata_reg[19] ;
+  wire \axi_rdata_reg[1] ;
+  wire \axi_rdata_reg[20] ;
+  wire \axi_rdata_reg[21] ;
+  wire \axi_rdata_reg[22] ;
+  wire \axi_rdata_reg[23] ;
+  wire \axi_rdata_reg[24] ;
+  wire \axi_rdata_reg[25] ;
+  wire \axi_rdata_reg[26] ;
+  wire \axi_rdata_reg[27] ;
+  wire \axi_rdata_reg[28] ;
+  wire \axi_rdata_reg[29] ;
+  wire \axi_rdata_reg[2] ;
+  wire \axi_rdata_reg[30] ;
+  wire \axi_rdata_reg[31] ;
+  wire \axi_rdata_reg[3] ;
+  wire \axi_rdata_reg[4] ;
+  wire \axi_rdata_reg[5] ;
+  wire \axi_rdata_reg[6] ;
+  wire \axi_rdata_reg[7] ;
+  wire \axi_rdata_reg[8] ;
+  wire \axi_rdata_reg[9] ;
   wire debug_in_shift_int;
   wire debug_out_shift_int;
   wire in_inj_bit;
+  wire in_start_stop_int;
+  wire inputDelayLine_n_0;
   wire inputShiftRegister_n_0;
-  wire inputShiftRegister_n_1;
   wire [31:0]m00_axis_tdata;
+  wire m00_axis_tlast;
+  wire m00_axis_tready;
   wire m00_axis_tvalid;
   wire out_shift_sel;
   wire outputDelayLine_n_0;
   wire outputFF_n_1;
-  wire \r_reg_reg[0]_P ;
-  wire \r_reg_reg[10]_P ;
-  wire \r_reg_reg[11]_P ;
-  wire \r_reg_reg[12]_P ;
-  wire \r_reg_reg[13]_P ;
-  wire \r_reg_reg[14]_P ;
-  wire \r_reg_reg[15]_P ;
-  wire \r_reg_reg[16]_P ;
-  wire \r_reg_reg[17]_P ;
-  wire \r_reg_reg[18]_P ;
-  wire \r_reg_reg[19]_P ;
-  wire \r_reg_reg[1]_P ;
-  wire \r_reg_reg[20]_P ;
-  wire \r_reg_reg[21]_P ;
-  wire \r_reg_reg[22]_P ;
-  wire \r_reg_reg[23]_P ;
-  wire \r_reg_reg[24]_P ;
-  wire \r_reg_reg[25]_P ;
-  wire \r_reg_reg[26]_P ;
-  wire \r_reg_reg[27]_P ;
-  wire \r_reg_reg[28]_P ;
-  wire \r_reg_reg[29]_P ;
-  wire \r_reg_reg[2]_P ;
-  wire \r_reg_reg[30]_P ;
-  wire \r_reg_reg[31]_P ;
-  wire \r_reg_reg[3]_P ;
-  wire \r_reg_reg[4]_P ;
-  wire \r_reg_reg[5]_P ;
-  wire \r_reg_reg[6]_P ;
-  wire \r_reg_reg[7]_P ;
-  wire \r_reg_reg[8]_P ;
-  wire \r_reg_reg[9]_P ;
+  wire \r_reg_reg[0] ;
   wire s00_axi_aclk;
   wire [31:0]s00_axis_tdata;
   wire s00_axis_tready;
@@ -2005,164 +1223,132 @@ module design_1_BiDirChannels_0_0_GyroBiDirTokenBuffer
   wire tx_token_valid_int;
 
   design_1_BiDirChannels_0_0_delay_line_8x32bits inputDelayLine
-       (.debug_in_shift_int(debug_in_shift_int),
-        .out_reg_c_5(inputShiftRegister_n_0),
-        .\r_reg_reg[0]_P (\r_reg_reg[0]_P ),
-        .\r_reg_reg[10]_P (\r_reg_reg[10]_P ),
-        .\r_reg_reg[11]_P (\r_reg_reg[11]_P ),
-        .\r_reg_reg[12]_P (\r_reg_reg[12]_P ),
-        .\r_reg_reg[13]_P (\r_reg_reg[13]_P ),
-        .\r_reg_reg[14]_P (\r_reg_reg[14]_P ),
-        .\r_reg_reg[15]_P (\r_reg_reg[15]_P ),
-        .\r_reg_reg[16]_P (\r_reg_reg[16]_P ),
-        .\r_reg_reg[17]_P (\r_reg_reg[17]_P ),
-        .\r_reg_reg[18]_P (\r_reg_reg[18]_P ),
-        .\r_reg_reg[19]_P (\r_reg_reg[19]_P ),
-        .\r_reg_reg[1]_P (\r_reg_reg[1]_P ),
-        .\r_reg_reg[20]_P (\r_reg_reg[20]_P ),
-        .\r_reg_reg[21]_P (\r_reg_reg[21]_P ),
-        .\r_reg_reg[22]_P (\r_reg_reg[22]_P ),
-        .\r_reg_reg[23]_P (\r_reg_reg[23]_P ),
-        .\r_reg_reg[24]_P (\r_reg_reg[24]_P ),
-        .\r_reg_reg[25]_P (\r_reg_reg[25]_P ),
-        .\r_reg_reg[26]_P (\r_reg_reg[26]_P ),
-        .\r_reg_reg[27]_P (\r_reg_reg[27]_P ),
-        .\r_reg_reg[28]_P (\r_reg_reg[28]_P ),
-        .\r_reg_reg[29]_P (\r_reg_reg[29]_P ),
-        .\r_reg_reg[2]_P (\r_reg_reg[2]_P ),
-        .\r_reg_reg[30]_P (\r_reg_reg[30]_P ),
-        .\r_reg_reg[31]_P (\r_reg_reg[31]_P ),
-        .\r_reg_reg[3]_P (\r_reg_reg[3]_P ),
-        .\r_reg_reg[4]_P (\r_reg_reg[4]_P ),
-        .\r_reg_reg[5]_P (\r_reg_reg[5]_P ),
-        .\r_reg_reg[6]_P (\r_reg_reg[6]_P ),
-        .\r_reg_reg[7]_P (\r_reg_reg[7]_P ),
-        .\r_reg_reg[8]_P (\r_reg_reg[8]_P ),
-        .\r_reg_reg[9]_P (\r_reg_reg[9]_P ),
+       (.\axi_rdata_reg[0] (\axi_rdata_reg[0] ),
+        .\axi_rdata_reg[10] (\axi_rdata_reg[10] ),
+        .\axi_rdata_reg[11] (\axi_rdata_reg[11] ),
+        .\axi_rdata_reg[12] (\axi_rdata_reg[12] ),
+        .\axi_rdata_reg[13] (\axi_rdata_reg[13] ),
+        .\axi_rdata_reg[14] (\axi_rdata_reg[14] ),
+        .\axi_rdata_reg[15] (\axi_rdata_reg[15] ),
+        .\axi_rdata_reg[16] (\axi_rdata_reg[16] ),
+        .\axi_rdata_reg[17] (\axi_rdata_reg[17] ),
+        .\axi_rdata_reg[18] (\axi_rdata_reg[18] ),
+        .\axi_rdata_reg[19] (\axi_rdata_reg[19] ),
+        .\axi_rdata_reg[1] (\axi_rdata_reg[1] ),
+        .\axi_rdata_reg[20] (\axi_rdata_reg[20] ),
+        .\axi_rdata_reg[21] (\axi_rdata_reg[21] ),
+        .\axi_rdata_reg[22] (\axi_rdata_reg[22] ),
+        .\axi_rdata_reg[23] (\axi_rdata_reg[23] ),
+        .\axi_rdata_reg[24] (\axi_rdata_reg[24] ),
+        .\axi_rdata_reg[25] (\axi_rdata_reg[25] ),
+        .\axi_rdata_reg[26] (\axi_rdata_reg[26] ),
+        .\axi_rdata_reg[27] (\axi_rdata_reg[27] ),
+        .\axi_rdata_reg[28] (\axi_rdata_reg[28] ),
+        .\axi_rdata_reg[29] (\axi_rdata_reg[29] ),
+        .\axi_rdata_reg[2] (\axi_rdata_reg[2] ),
+        .\axi_rdata_reg[30] (\axi_rdata_reg[30] ),
+        .\axi_rdata_reg[31] (\axi_rdata_reg[31] ),
+        .\axi_rdata_reg[3] (\axi_rdata_reg[3] ),
+        .\axi_rdata_reg[4] (\axi_rdata_reg[4] ),
+        .\axi_rdata_reg[5] (\axi_rdata_reg[5] ),
+        .\axi_rdata_reg[6] (\axi_rdata_reg[6] ),
+        .\axi_rdata_reg[7] (\axi_rdata_reg[7] ),
+        .\axi_rdata_reg[8] (\axi_rdata_reg[8] ),
+        .\axi_rdata_reg[9] (\axi_rdata_reg[9] ),
+        .\data_out_reg[0] (inputDelayLine_n_0),
+        .debug_in_shift_int(debug_in_shift_int),
         .s00_axis_tdata(s00_axis_tdata),
         .\slv_reg0_reg[31] (\slv_reg0_reg[31] ));
-  design_1_BiDirChannels_0_0_dff_8 inputFF
+  design_1_BiDirChannels_0_0_dff_5 inputFF
        (.in_inj_bit(in_inj_bit),
-        .\out_reg[7] (inputShiftRegister_n_1),
+        .\out_reg[7] (inputShiftRegister_n_0),
         .s00_axi_aclk(s00_axi_aclk),
         .\slv_reg0_reg[31] (\slv_reg0_reg[31] ),
         .tx_token_valid_int(tx_token_valid_int));
   design_1_BiDirChannels_0_0_shift_reg_8bits inputShiftRegister
-       (.Q_reg(inputShiftRegister_n_1),
+       (.Q_reg(inputShiftRegister_n_0),
+        .data_out_reg_c(inputDelayLine_n_0),
         .debug_in_shift_int(debug_in_shift_int),
         .in_inj_bit(in_inj_bit),
-        .\out_reg[7]_0 (inputShiftRegister_n_0),
         .s00_axis_tready(s00_axis_tready),
         .\slv_reg0_reg[31] (\slv_reg0_reg[31] ));
-  design_1_BiDirChannels_0_0_delay_line_8x32bits_9 outputDelayLine
-       (.Q(Q),
-        .data_out_reg_c(outputDelayLine_n_0),
+  design_1_BiDirChannels_0_0_delay_line_8x32bits_6 outputDelayLine
+       (.D(D),
+        .Q(Q),
+        .axi_araddr(axi_araddr),
+        .\data_out_reg[0] (outputDelayLine_n_0),
+        .\data_out_reg[0]_0 (\axi_rdata_reg[0] ),
+        .\data_out_reg[10] (\axi_rdata_reg[10] ),
+        .\data_out_reg[11] (\axi_rdata_reg[11] ),
+        .\data_out_reg[12] (\axi_rdata_reg[12] ),
+        .\data_out_reg[13] (\axi_rdata_reg[13] ),
+        .\data_out_reg[14] (\axi_rdata_reg[14] ),
+        .\data_out_reg[15] (\axi_rdata_reg[15] ),
+        .\data_out_reg[16] (\axi_rdata_reg[16] ),
+        .\data_out_reg[17] (\axi_rdata_reg[17] ),
+        .\data_out_reg[18] (\axi_rdata_reg[18] ),
+        .\data_out_reg[19] (\axi_rdata_reg[19] ),
+        .\data_out_reg[1] (\axi_rdata_reg[1] ),
+        .\data_out_reg[20] (\axi_rdata_reg[20] ),
+        .\data_out_reg[21] (\axi_rdata_reg[21] ),
+        .\data_out_reg[22] (\axi_rdata_reg[22] ),
+        .\data_out_reg[23] (\axi_rdata_reg[23] ),
+        .\data_out_reg[24] (\axi_rdata_reg[24] ),
+        .\data_out_reg[25] (\axi_rdata_reg[25] ),
+        .\data_out_reg[26] (\axi_rdata_reg[26] ),
+        .\data_out_reg[27] (\axi_rdata_reg[27] ),
+        .\data_out_reg[28] (\axi_rdata_reg[28] ),
+        .\data_out_reg[29] (\axi_rdata_reg[29] ),
+        .\data_out_reg[2] (\axi_rdata_reg[2] ),
+        .\data_out_reg[30] (\axi_rdata_reg[30] ),
+        .\data_out_reg[31] (\axi_rdata_reg[31] ),
+        .\data_out_reg[3] (\axi_rdata_reg[3] ),
+        .\data_out_reg[4] (\axi_rdata_reg[4] ),
+        .\data_out_reg[5] (\axi_rdata_reg[5] ),
+        .\data_out_reg[6] (\axi_rdata_reg[6] ),
+        .\data_out_reg[7] (\axi_rdata_reg[7] ),
+        .\data_out_reg[8] (\axi_rdata_reg[8] ),
+        .\data_out_reg[9] (\axi_rdata_reg[9] ),
         .debug_out_shift_int(debug_out_shift_int),
         .m00_axis_tdata(m00_axis_tdata),
         .\slv_reg0_reg[31] (\slv_reg0_reg[31] ));
-  design_1_BiDirChannels_0_0_dff_10 outputFF
-       (.m00_axis_tvalid(m00_axis_tvalid),
-        .\out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (outputFF_n_1),
+  design_1_BiDirChannels_0_0_dff_7 outputFF
+       (.\out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (outputFF_n_1),
+        .\out_reg[7] (m00_axis_tvalid),
         .out_shift_sel(out_shift_sel),
         .s00_axi_aclk(s00_axi_aclk),
         .\slv_reg0_reg[31] (\slv_reg0_reg[31] ));
-  design_1_BiDirChannels_0_0_shift_reg_8bits_11 outputShiftRegister
-       (.CLK(CLK),
-        .Q_reg(outputFF_n_1),
+  design_1_BiDirChannels_0_0_shift_reg_8bits_8 outputShiftRegister
+       (.Q_reg(outputFF_n_1),
         .data_out_reg_c(outputDelayLine_n_0),
         .debug_out_shift_int(debug_out_shift_int),
+        .in_start_stop_int(in_start_stop_int),
+        .m00_axis_tlast(m00_axis_tlast),
+        .m00_axis_tready(m00_axis_tready),
         .m00_axis_tvalid(m00_axis_tvalid),
+        .out_shift_sel(out_shift_sel),
+        .\r_reg_reg[0] (\r_reg_reg[0] ),
         .\slv_reg0_reg[31] (\slv_reg0_reg[31] ));
-endmodule
-
-(* ORIG_REF_NAME = "GyroChannelDebugger" *) 
-module design_1_BiDirChannels_0_0_GyroChannelDebugger
-   (Q,
-    \r_reg_reg[7] ,
-    \r_reg_reg[7]_0 ,
-    \r_reg_reg[7]_1 ,
-    \r_reg_reg[7]_2 ,
-    \r_reg_reg[7]_3 ,
-    CLK,
-    \slv_reg0_reg[16] ,
-    tx_token_next_int,
-    s00_axis_tlast,
-    debug_out_shift_int,
-    \out_reg[7] ,
-    debug_in_shift_int);
-  output [7:0]Q;
-  output [7:0]\r_reg_reg[7] ;
-  output [7:0]\r_reg_reg[7]_0 ;
-  output [7:0]\r_reg_reg[7]_1 ;
-  output [7:0]\r_reg_reg[7]_2 ;
-  output [7:0]\r_reg_reg[7]_3 ;
-  input CLK;
-  input \slv_reg0_reg[16] ;
-  input tx_token_next_int;
-  input s00_axis_tlast;
-  input debug_out_shift_int;
-  input \out_reg[7] ;
-  input debug_in_shift_int;
-
-  wire CLK;
-  wire [7:0]Q;
-  wire debug_in_shift_int;
-  wire debug_out_shift_int;
-  wire \out_reg[7] ;
-  wire [7:0]\r_reg_reg[7] ;
-  wire [7:0]\r_reg_reg[7]_0 ;
-  wire [7:0]\r_reg_reg[7]_1 ;
-  wire [7:0]\r_reg_reg[7]_2 ;
-  wire [7:0]\r_reg_reg[7]_3 ;
-  wire s00_axis_tlast;
-  wire \slv_reg0_reg[16] ;
-  wire tx_token_next_int;
-
-  design_1_BiDirChannels_0_0_upCounter8Bits CNTR0
-       (.CLK(CLK),
-        .Q(Q),
-        .\slv_reg0_reg[16] (\slv_reg0_reg[16] ));
-  design_1_BiDirChannels_0_0_upCounter8Bits_0 CNTR1
-       (.Q(\r_reg_reg[7] ),
-        .\slv_reg0_reg[16] (\slv_reg0_reg[16] ),
-        .tx_token_next_int(tx_token_next_int));
-  design_1_BiDirChannels_0_0_upCounter8Bits_1 CNTR2
-       (.Q(\r_reg_reg[7]_0 ),
-        .s00_axis_tlast(s00_axis_tlast),
-        .\slv_reg0_reg[16] (\slv_reg0_reg[16] ));
-  design_1_BiDirChannels_0_0_upCounter8Bits_2 CNTR3
-       (.Q(\r_reg_reg[7]_2 ),
-        .\out_reg[7] (\out_reg[7] ),
-        .\slv_reg0_reg[16] (\slv_reg0_reg[16] ));
-  design_1_BiDirChannels_0_0_upCounter8Bits_3 CNTR4
-       (.Q(\r_reg_reg[7]_1 ),
-        .debug_out_shift_int(debug_out_shift_int),
-        .\slv_reg0_reg[16] (\slv_reg0_reg[16] ));
-  design_1_BiDirChannels_0_0_upCounter8Bits_4 CNTR5
-       (.Q(\r_reg_reg[7]_3 ),
-        .debug_in_shift_int(debug_in_shift_int),
-        .\slv_reg0_reg[16] (\slv_reg0_reg[16] ));
 endmodule
 
 (* ORIG_REF_NAME = "GyroInputOutputChannel" *) 
 module design_1_BiDirChannels_0_0_GyroInputOutputChannel
-   (MCK,
-    tx_token_next_int,
+   (in_start_stop_int,
+    Q_reg,
+    MCK,
+    Q_reg_0,
     HS_DataOut,
     debug_in_shift_int,
-    debug_out_shift_int,
-    \r_reg_reg[7] ,
     HS_Clock,
     Q,
-    CLK,
-    s00_axi_aclk,
-    \slv_reg0_reg[31] ,
     \slv_reg1_reg[4] ,
+    \slv_reg0_reg[31] ,
+    \slv_reg1_reg[0] ,
+    s00_axi_aclk,
+    CLK,
     tx_token_valid_int,
     s00_axis_tvalid,
-    m00_axis_tready,
-    out_shift_sel,
-    \slv_reg0_reg[31]_0 ,
+    data_word_4,
     HS_DataIn,
     s00_axi_aresetn,
     \data_out_reg[31] ,
@@ -2197,23 +1383,22 @@ module design_1_BiDirChannels_0_0_GyroInputOutputChannel
     \data_out_reg[2] ,
     \data_out_reg[1] ,
     \data_out_reg[0] );
+  output in_start_stop_int;
+  output Q_reg;
   output MCK;
-  output tx_token_next_int;
+  output Q_reg_0;
   output HS_DataOut;
   output debug_in_shift_int;
-  output debug_out_shift_int;
-  output \r_reg_reg[7] ;
   output HS_Clock;
   output [31:0]Q;
-  input CLK;
-  input s00_axi_aclk;
+  input \slv_reg1_reg[4] ;
   input \slv_reg0_reg[31] ;
-  input [1:0]\slv_reg1_reg[4] ;
+  input \slv_reg1_reg[0] ;
+  input s00_axi_aclk;
+  input CLK;
   input tx_token_valid_int;
   input s00_axis_tvalid;
-  input m00_axis_tready;
-  input out_shift_sel;
-  input [2:0]\slv_reg0_reg[31]_0 ;
+  input [2:0]data_word_4;
   input HS_DataIn;
   input s00_axi_aresetn;
   input \data_out_reg[31] ;
@@ -2318,9 +1503,10 @@ module design_1_BiDirChannels_0_0_GyroInputOutputChannel
   wire MASK_HSCK_n_8;
   wire MASK_HSCK_n_9;
   wire MCK;
-  wire PULSE_CNTR_n_1;
-  wire PULSE_CNTR_n_7;
+  wire PULSE_CNTR_n_5;
   wire [31:0]Q;
+  wire Q_reg;
+  wire Q_reg_0;
   wire \data_out_reg[0] ;
   wire \data_out_reg[10] ;
   wire \data_out_reg[11] ;
@@ -2353,39 +1539,38 @@ module design_1_BiDirChannels_0_0_GyroInputOutputChannel
   wire \data_out_reg[7] ;
   wire \data_out_reg[8] ;
   wire \data_out_reg[9] ;
+  wire [2:0]data_word_4;
   wire debug_in_shift_int;
-  wire debug_out_shift_int;
   wire hs_data_in_int;
   wire inSR_shift;
   wire in_start_stop_int;
-  wire m00_axis_tready;
   wire outSR_shift;
   wire out_next_int;
-  wire out_shift_sel;
   wire out_start_stop_int;
-  wire \r_reg_reg[7] ;
   wire s00_axi_aclk;
   wire s00_axi_aresetn;
   wire s00_axis_tvalid;
   wire \slv_reg0_reg[31] ;
-  wire [2:0]\slv_reg0_reg[31]_0 ;
-  wire [1:0]\slv_reg1_reg[4] ;
-  wire tx_token_next_int;
+  wire \slv_reg1_reg[0] ;
+  wire \slv_reg1_reg[4] ;
   wire tx_token_valid_int;
 
   design_1_BiDirChannels_0_0_clock_divider_by_2 CLK_DIV2
-       (.CLK(CLK),
-        .MCK(MCK),
+       (.MCK(MCK),
         .s00_axi_aclk(s00_axi_aclk),
         .\slv_reg0_reg[31] (\slv_reg0_reg[31] ));
+  design_1_BiDirChannels_0_0_clock_divider_by_2_0 CLK_DIV4
+       (.CLK(CLK),
+        .MCK(MCK),
+        .Q_reg(Q_reg_0),
+        .\slv_reg0_reg[31] (\slv_reg0_reg[31] ));
   design_1_BiDirChannels_0_0_dff FF1
-       (.Q_reg_0(MCK),
+       (.Q_reg_0(Q_reg_0),
         .debug_in_shift_int(debug_in_shift_int),
         .out_next_int(out_next_int),
         .s00_axi_aclk(s00_axi_aclk),
         .s00_axis_tvalid(s00_axis_tvalid),
         .\slv_reg0_reg[31] (\slv_reg0_reg[31] ),
-        .tx_token_next_int(tx_token_next_int),
         .tx_token_valid_int(tx_token_valid_int));
   design_1_BiDirChannels_0_0_inputShiftRegister32Bits IN_SHIFT_REG
        (.CLK(inSR_shift),
@@ -2425,9 +1610,10 @@ module design_1_BiDirChannels_0_0_GyroInputOutputChannel
         .\data_out_reg[7] (\data_out_reg[7] ),
         .\data_out_reg[8] (\data_out_reg[8] ),
         .\data_out_reg[9] (\data_out_reg[9] ),
+        .data_word_4(data_word_4[2]),
         .in_start_stop_int(in_start_stop_int),
         .out_start_stop_int(out_start_stop_int),
-        .\r_reg_reg[0] (PULSE_CNTR_n_1),
+        .\r_reg_reg[0] (Q_reg),
         .\r_reg_reg[0]_P (MASK_HSCK_n_33),
         .\r_reg_reg[10]_C (MASK_HSCK_n_55),
         .\r_reg_reg[10]_P (MASK_HSCK_n_23),
@@ -2494,16 +1680,16 @@ module design_1_BiDirChannels_0_0_GyroInputOutputChannel
         .\r_reg_reg[9]_P (MASK_HSCK_n_24),
         .s00_axi_aresetn(s00_axi_aresetn),
         .\slv_reg0_reg[31] (\slv_reg0_reg[31] ),
-        .\slv_reg0_reg[31]_0 (\slv_reg0_reg[31]_0 [2]),
+        .\slv_reg1_reg[0] (\slv_reg1_reg[0] ),
         .\slv_reg1_reg[4] (\slv_reg1_reg[4] ),
         .tx_token_valid_int(tx_token_valid_int));
   design_1_BiDirChannels_0_0_outputShiftRegister32Bits OUT_SHIFT_REG
        (.D(hs_data_in_int),
         .HS_DataIn(HS_DataIn),
         .HS_DataOut(HS_DataOut),
-        .Q_reg(PULSE_CNTR_n_7),
+        .Q_reg(PULSE_CNTR_n_5),
+        .data_word_4(data_word_4[0]),
         .outSR_shift(outSR_shift),
-        .\slv_reg0_reg[24] (\slv_reg0_reg[31]_0 [0]),
         .\slv_reg0_reg[31] (MASK_HSCK_n_2),
         .\slv_reg0_reg[31]_0 (MASK_HSCK_n_34),
         .\slv_reg0_reg[31]_1 (MASK_HSCK_n_3),
@@ -2571,88 +1757,92 @@ module design_1_BiDirChannels_0_0_GyroInputOutputChannel
   design_1_BiDirChannels_0_0_counter48Cycles PULSE_CNTR
        (.CLK(inSR_shift),
         .HS_Clock(HS_Clock),
-        .Q_reg(PULSE_CNTR_n_1),
-        .Q_reg_0(MCK),
+        .Q_reg(Q_reg),
+        .Q_reg_0(Q_reg_0),
         .Q_reg_1(CLK),
-        .debug_out_shift_int(debug_out_shift_int),
+        .data_word_4(data_word_4[2:1]),
         .in_start_stop_int(in_start_stop_int),
-        .m00_axis_tready(m00_axis_tready),
         .outSR_shift(outSR_shift),
         .out_next_int(out_next_int),
-        .out_shift_sel(out_shift_sel),
         .out_start_stop_int(out_start_stop_int),
-        .\r_reg_reg[32] (PULSE_CNTR_n_7),
-        .\r_reg_reg[7] (\r_reg_reg[7] ),
-        .s00_axi_aclk(s00_axi_aclk),
+        .\r_reg_reg[32] (PULSE_CNTR_n_5),
         .s00_axi_aresetn(s00_axi_aresetn),
-        .\slv_reg0_reg[31] (\slv_reg0_reg[31]_0 [2:1]),
-        .\slv_reg0_reg[31]_0 (\slv_reg0_reg[31] ),
+        .\slv_reg0_reg[31] (\slv_reg0_reg[31] ),
         .tx_token_valid_int(tx_token_valid_int));
 endmodule
 
 (* ORIG_REF_NAME = "clock_divider_by_2" *) 
 module design_1_BiDirChannels_0_0_clock_divider_by_2
    (MCK,
-    CLK,
     s00_axi_aclk,
     \slv_reg0_reg[31] );
   output MCK;
-  input CLK;
   input s00_axi_aclk;
   input \slv_reg0_reg[31] ;
 
-  wire CLK;
   wire MCK;
   wire s00_axi_aclk;
   wire \slv_reg0_reg[31] ;
 
-  design_1_BiDirChannels_0_0_dff_7 ff0
+  design_1_BiDirChannels_0_0_dff_4 ff0
+       (.MCK(MCK),
+        .s00_axi_aclk(s00_axi_aclk),
+        .\slv_reg0_reg[31] (\slv_reg0_reg[31] ));
+endmodule
+
+(* ORIG_REF_NAME = "clock_divider_by_2" *) 
+module design_1_BiDirChannels_0_0_clock_divider_by_2_0
+   (Q_reg,
+    CLK,
+    MCK,
+    \slv_reg0_reg[31] );
+  output Q_reg;
+  input CLK;
+  input MCK;
+  input \slv_reg0_reg[31] ;
+
+  wire CLK;
+  wire MCK;
+  wire Q_reg;
+  wire \slv_reg0_reg[31] ;
+
+  design_1_BiDirChannels_0_0_dff_3 ff0
        (.CLK(CLK),
         .MCK(MCK),
-        .s00_axi_aclk(s00_axi_aclk),
+        .Q_reg_0(Q_reg),
         .\slv_reg0_reg[31] (\slv_reg0_reg[31] ));
 endmodule
 
 (* ORIG_REF_NAME = "counter48Cycles" *) 
 module design_1_BiDirChannels_0_0_counter48Cycles
-   (debug_out_shift_int,
+   (out_next_int,
     Q_reg,
-    out_next_int,
-    \r_reg_reg[7] ,
     outSR_shift,
     CLK,
     HS_Clock,
     \r_reg_reg[32] ,
-    m00_axis_tready,
-    s00_axi_aclk,
-    out_shift_sel,
-    in_start_stop_int,
     out_start_stop_int,
     Q_reg_0,
-    \slv_reg0_reg[31] ,
+    in_start_stop_int,
+    data_word_4,
     tx_token_valid_int,
     s00_axi_aresetn,
     Q_reg_1,
-    \slv_reg0_reg[31]_0 );
-  output debug_out_shift_int;
-  output Q_reg;
+    \slv_reg0_reg[31] );
   output out_next_int;
-  output \r_reg_reg[7] ;
+  output Q_reg;
   output outSR_shift;
   output CLK;
   output HS_Clock;
   output \r_reg_reg[32] ;
-  input m00_axis_tready;
-  input s00_axi_aclk;
-  input out_shift_sel;
-  input in_start_stop_int;
   input out_start_stop_int;
   input Q_reg_0;
-  input [1:0]\slv_reg0_reg[31] ;
+  input in_start_stop_int;
+  input [1:0]data_word_4;
   input tx_token_valid_int;
   input s00_axi_aresetn;
   input Q_reg_1;
-  input \slv_reg0_reg[31]_0 ;
+  input \slv_reg0_reg[31] ;
 
   wire CLK;
   wire HS_Clock;
@@ -2660,37 +1850,32 @@ module design_1_BiDirChannels_0_0_counter48Cycles
   wire Q_reg_0;
   wire Q_reg_1;
   wire [5:0]count_pulses;
-  wire debug_out_shift_int;
+  wire [1:0]data_word_4;
   wire in_start_stop_int;
-  wire m00_axis_tready;
   wire outSR_shift;
   wire out_next_int;
-  wire out_shift_sel;
   wire out_start_stop_int;
-  wire \r_reg[0]_i_1__6_n_0 ;
-  wire \r_reg[1]_i_1__5_n_0 ;
-  wire \r_reg[2]_i_1__5_n_0 ;
-  wire \r_reg[3]_i_1__5_n_0 ;
-  wire \r_reg[4]_i_1__5_n_0 ;
-  wire \r_reg[5]_i_1__5_n_0 ;
+  wire \r_reg[0]_i_1__0_n_0 ;
+  wire \r_reg[1]_i_1_n_0 ;
+  wire \r_reg[2]_i_1_n_0 ;
+  wire \r_reg[3]_i_1_n_0 ;
+  wire \r_reg[4]_i_1_n_0 ;
+  wire \r_reg[5]_i_1_n_0 ;
   wire \r_reg_reg[32] ;
-  wire \r_reg_reg[7] ;
-  wire s00_axi_aclk;
   wire s00_axi_aresetn;
-  wire [1:0]\slv_reg0_reg[31] ;
-  wire \slv_reg0_reg[31]_0 ;
+  wire \slv_reg0_reg[31] ;
   wire tx_token_valid_int;
 
   LUT5 #(
     .INIT(32'hA956AAAA)) 
     HS_Clock_INST_0
-       (.I0(\slv_reg0_reg[31] [0]),
+       (.I0(data_word_4[0]),
         .I1(count_pulses[5]),
         .I2(count_pulses[3]),
         .I3(count_pulses[4]),
         .I4(Q_reg_0),
         .O(HS_Clock));
-  (* SOFT_HLUTNM = "soft_lutpair36" *) 
+  (* SOFT_HLUTNM = "soft_lutpair34" *) 
   LUT2 #(
     .INIT(4'h8)) 
     Q_i_1
@@ -2707,37 +1892,27 @@ module design_1_BiDirChannels_0_0_counter48Cycles
         .I4(count_pulses[1]),
         .I5(count_pulses[2]),
         .O(Q_reg));
-  (* SOFT_HLUTNM = "soft_lutpair35" *) 
-  LUT5 #(
-    .INIT(32'h8F808080)) 
-    \data_out[31]_i_1 
-       (.I0(m00_axis_tready),
-        .I1(s00_axi_aclk),
-        .I2(out_shift_sel),
-        .I3(Q_reg),
-        .I4(in_start_stop_int),
-        .O(debug_out_shift_int));
-  (* SOFT_HLUTNM = "soft_lutpair38" *) 
+  (* SOFT_HLUTNM = "soft_lutpair36" *) 
   LUT1 #(
     .INIT(2'h1)) 
-    \r_reg[0]_i_1__6 
+    \r_reg[0]_i_1__0 
        (.I0(count_pulses[0]),
-        .O(\r_reg[0]_i_1__6_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair38" *) 
+        .O(\r_reg[0]_i_1__0_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair36" *) 
   LUT2 #(
     .INIT(4'h9)) 
-    \r_reg[1]_i_1__5 
+    \r_reg[1]_i_1 
        (.I0(count_pulses[0]),
         .I1(count_pulses[1]),
-        .O(\r_reg[1]_i_1__5_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair37" *) 
+        .O(\r_reg[1]_i_1_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair35" *) 
   LUT3 #(
     .INIT(8'hA9)) 
-    \r_reg[2]_i_1__5 
+    \r_reg[2]_i_1 
        (.I0(count_pulses[2]),
         .I1(count_pulses[0]),
         .I2(count_pulses[1]),
-        .O(\r_reg[2]_i_1__5_n_0 ));
+        .O(\r_reg[2]_i_1_n_0 ));
   LUT5 #(
     .INIT(32'h02A80000)) 
     \r_reg[31]_i_1 
@@ -2756,165 +1931,163 @@ module design_1_BiDirChannels_0_0_counter48Cycles
         .I3(count_pulses[4]),
         .I4(Q_reg_0),
         .O(outSR_shift));
-  (* SOFT_HLUTNM = "soft_lutpair36" *) 
+  (* SOFT_HLUTNM = "soft_lutpair34" *) 
   LUT5 #(
     .INIT(32'hFF80FFFF)) 
     \r_reg[32]_i_3 
        (.I0(tx_token_valid_int),
         .I1(Q_reg),
         .I2(out_start_stop_int),
-        .I3(\slv_reg0_reg[31] [1]),
+        .I3(data_word_4[1]),
         .I4(s00_axi_aresetn),
         .O(\r_reg_reg[32] ));
-  (* SOFT_HLUTNM = "soft_lutpair37" *) 
+  (* SOFT_HLUTNM = "soft_lutpair35" *) 
   LUT4 #(
     .INIT(16'hCCC9)) 
-    \r_reg[3]_i_1__5 
+    \r_reg[3]_i_1 
        (.I0(count_pulses[2]),
         .I1(count_pulses[3]),
         .I2(count_pulses[0]),
         .I3(count_pulses[1]),
-        .O(\r_reg[3]_i_1__5_n_0 ));
+        .O(\r_reg[3]_i_1_n_0 ));
   LUT6 #(
     .INIT(64'hCCCCCCCCCCCCCCC2)) 
-    \r_reg[4]_i_1__5 
+    \r_reg[4]_i_1 
        (.I0(count_pulses[5]),
         .I1(count_pulses[4]),
         .I2(count_pulses[2]),
         .I3(count_pulses[0]),
         .I4(count_pulses[1]),
         .I5(count_pulses[3]),
-        .O(\r_reg[4]_i_1__5_n_0 ));
+        .O(\r_reg[4]_i_1_n_0 ));
   LUT6 #(
     .INIT(64'hFFFFFFFE00000001)) 
-    \r_reg[5]_i_1__5 
+    \r_reg[5]_i_1 
        (.I0(count_pulses[2]),
         .I1(count_pulses[3]),
         .I2(count_pulses[0]),
         .I3(count_pulses[1]),
         .I4(count_pulses[4]),
         .I5(count_pulses[5]),
-        .O(\r_reg[5]_i_1__5_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair35" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    \r_reg[7]_i_2__0 
-       (.I0(Q_reg),
-        .I1(in_start_stop_int),
-        .O(\r_reg_reg[7] ));
+        .O(\r_reg[5]_i_1_n_0 ));
   FDCE \r_reg_reg[0] 
        (.C(Q_reg_1),
         .CE(1'b1),
-        .CLR(\slv_reg0_reg[31]_0 ),
-        .D(\r_reg[0]_i_1__6_n_0 ),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(\r_reg[0]_i_1__0_n_0 ),
         .Q(count_pulses[0]));
   FDCE \r_reg_reg[1] 
        (.C(Q_reg_1),
         .CE(1'b1),
-        .CLR(\slv_reg0_reg[31]_0 ),
-        .D(\r_reg[1]_i_1__5_n_0 ),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(\r_reg[1]_i_1_n_0 ),
         .Q(count_pulses[1]));
   FDCE \r_reg_reg[2] 
        (.C(Q_reg_1),
         .CE(1'b1),
-        .CLR(\slv_reg0_reg[31]_0 ),
-        .D(\r_reg[2]_i_1__5_n_0 ),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(\r_reg[2]_i_1_n_0 ),
         .Q(count_pulses[2]));
   FDCE \r_reg_reg[3] 
        (.C(Q_reg_1),
         .CE(1'b1),
-        .CLR(\slv_reg0_reg[31]_0 ),
-        .D(\r_reg[3]_i_1__5_n_0 ),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(\r_reg[3]_i_1_n_0 ),
         .Q(count_pulses[3]));
   FDCE \r_reg_reg[4] 
        (.C(Q_reg_1),
         .CE(1'b1),
-        .CLR(\slv_reg0_reg[31]_0 ),
-        .D(\r_reg[4]_i_1__5_n_0 ),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(\r_reg[4]_i_1_n_0 ),
         .Q(count_pulses[4]));
   FDCE \r_reg_reg[5] 
        (.C(Q_reg_1),
         .CE(1'b1),
-        .CLR(\slv_reg0_reg[31]_0 ),
-        .D(\r_reg[5]_i_1__5_n_0 ),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(\r_reg[5]_i_1_n_0 ),
         .Q(count_pulses[5]));
 endmodule
 
 (* ORIG_REF_NAME = "delay_line_8x32bits" *) 
 module design_1_BiDirChannels_0_0_delay_line_8x32bits
-   (\r_reg_reg[31]_P ,
-    \r_reg_reg[30]_P ,
-    \r_reg_reg[29]_P ,
-    \r_reg_reg[28]_P ,
-    \r_reg_reg[27]_P ,
-    \r_reg_reg[26]_P ,
-    \r_reg_reg[25]_P ,
-    \r_reg_reg[24]_P ,
-    \r_reg_reg[23]_P ,
-    \r_reg_reg[22]_P ,
-    \r_reg_reg[21]_P ,
-    \r_reg_reg[20]_P ,
-    \r_reg_reg[19]_P ,
-    \r_reg_reg[18]_P ,
-    \r_reg_reg[17]_P ,
-    \r_reg_reg[16]_P ,
-    \r_reg_reg[15]_P ,
-    \r_reg_reg[14]_P ,
-    \r_reg_reg[13]_P ,
-    \r_reg_reg[12]_P ,
-    \r_reg_reg[11]_P ,
-    \r_reg_reg[10]_P ,
-    \r_reg_reg[9]_P ,
-    \r_reg_reg[8]_P ,
-    \r_reg_reg[7]_P ,
-    \r_reg_reg[6]_P ,
-    \r_reg_reg[5]_P ,
-    \r_reg_reg[4]_P ,
-    \r_reg_reg[3]_P ,
-    \r_reg_reg[2]_P ,
-    \r_reg_reg[1]_P ,
-    \r_reg_reg[0]_P ,
-    s00_axis_tdata,
+   (\data_out_reg[0] ,
+    \axi_rdata_reg[31] ,
+    \axi_rdata_reg[30] ,
+    \axi_rdata_reg[29] ,
+    \axi_rdata_reg[28] ,
+    \axi_rdata_reg[27] ,
+    \axi_rdata_reg[26] ,
+    \axi_rdata_reg[25] ,
+    \axi_rdata_reg[24] ,
+    \axi_rdata_reg[23] ,
+    \axi_rdata_reg[22] ,
+    \axi_rdata_reg[21] ,
+    \axi_rdata_reg[20] ,
+    \axi_rdata_reg[19] ,
+    \axi_rdata_reg[18] ,
+    \axi_rdata_reg[17] ,
+    \axi_rdata_reg[16] ,
+    \axi_rdata_reg[15] ,
+    \axi_rdata_reg[14] ,
+    \axi_rdata_reg[13] ,
+    \axi_rdata_reg[12] ,
+    \axi_rdata_reg[11] ,
+    \axi_rdata_reg[10] ,
+    \axi_rdata_reg[9] ,
+    \axi_rdata_reg[8] ,
+    \axi_rdata_reg[7] ,
+    \axi_rdata_reg[6] ,
+    \axi_rdata_reg[5] ,
+    \axi_rdata_reg[4] ,
+    \axi_rdata_reg[3] ,
+    \axi_rdata_reg[2] ,
+    \axi_rdata_reg[1] ,
+    \axi_rdata_reg[0] ,
     debug_in_shift_int,
-    out_reg_c_5,
-    \slv_reg0_reg[31] );
-  output \r_reg_reg[31]_P ;
-  output \r_reg_reg[30]_P ;
-  output \r_reg_reg[29]_P ;
-  output \r_reg_reg[28]_P ;
-  output \r_reg_reg[27]_P ;
-  output \r_reg_reg[26]_P ;
-  output \r_reg_reg[25]_P ;
-  output \r_reg_reg[24]_P ;
-  output \r_reg_reg[23]_P ;
-  output \r_reg_reg[22]_P ;
-  output \r_reg_reg[21]_P ;
-  output \r_reg_reg[20]_P ;
-  output \r_reg_reg[19]_P ;
-  output \r_reg_reg[18]_P ;
-  output \r_reg_reg[17]_P ;
-  output \r_reg_reg[16]_P ;
-  output \r_reg_reg[15]_P ;
-  output \r_reg_reg[14]_P ;
-  output \r_reg_reg[13]_P ;
-  output \r_reg_reg[12]_P ;
-  output \r_reg_reg[11]_P ;
-  output \r_reg_reg[10]_P ;
-  output \r_reg_reg[9]_P ;
-  output \r_reg_reg[8]_P ;
-  output \r_reg_reg[7]_P ;
-  output \r_reg_reg[6]_P ;
-  output \r_reg_reg[5]_P ;
-  output \r_reg_reg[4]_P ;
-  output \r_reg_reg[3]_P ;
-  output \r_reg_reg[2]_P ;
-  output \r_reg_reg[1]_P ;
-  output \r_reg_reg[0]_P ;
-  input [31:0]s00_axis_tdata;
+    \slv_reg0_reg[31] ,
+    s00_axis_tdata);
+  output \data_out_reg[0] ;
+  output \axi_rdata_reg[31] ;
+  output \axi_rdata_reg[30] ;
+  output \axi_rdata_reg[29] ;
+  output \axi_rdata_reg[28] ;
+  output \axi_rdata_reg[27] ;
+  output \axi_rdata_reg[26] ;
+  output \axi_rdata_reg[25] ;
+  output \axi_rdata_reg[24] ;
+  output \axi_rdata_reg[23] ;
+  output \axi_rdata_reg[22] ;
+  output \axi_rdata_reg[21] ;
+  output \axi_rdata_reg[20] ;
+  output \axi_rdata_reg[19] ;
+  output \axi_rdata_reg[18] ;
+  output \axi_rdata_reg[17] ;
+  output \axi_rdata_reg[16] ;
+  output \axi_rdata_reg[15] ;
+  output \axi_rdata_reg[14] ;
+  output \axi_rdata_reg[13] ;
+  output \axi_rdata_reg[12] ;
+  output \axi_rdata_reg[11] ;
+  output \axi_rdata_reg[10] ;
+  output \axi_rdata_reg[9] ;
+  output \axi_rdata_reg[8] ;
+  output \axi_rdata_reg[7] ;
+  output \axi_rdata_reg[6] ;
+  output \axi_rdata_reg[5] ;
+  output \axi_rdata_reg[4] ;
+  output \axi_rdata_reg[3] ;
+  output \axi_rdata_reg[2] ;
+  output \axi_rdata_reg[1] ;
+  output \axi_rdata_reg[0] ;
   input debug_in_shift_int;
-  input out_reg_c_5;
   input \slv_reg0_reg[31] ;
+  input [31:0]s00_axis_tdata;
 
+  wire Reg0_n_0;
+  wire Reg1_n_0;
+  wire Reg2_n_0;
+  wire Reg3_n_0;
+  wire Reg4_n_0;
   wire Reg5_n_0;
   wire Reg5_n_1;
   wire Reg5_n_10;
@@ -2941,13 +2114,13 @@ module design_1_BiDirChannels_0_0_delay_line_8x32bits
   wire Reg5_n_3;
   wire Reg5_n_30;
   wire Reg5_n_31;
+  wire Reg5_n_32;
   wire Reg5_n_4;
   wire Reg5_n_5;
   wire Reg5_n_6;
   wire Reg5_n_7;
   wire Reg5_n_8;
   wire Reg5_n_9;
-  wire Reg6_n_0;
   wire Reg6_n_1;
   wire Reg6_n_10;
   wire Reg6_n_11;
@@ -2973,239 +2146,370 @@ module design_1_BiDirChannels_0_0_delay_line_8x32bits
   wire Reg6_n_3;
   wire Reg6_n_30;
   wire Reg6_n_31;
+  wire Reg6_n_32;
   wire Reg6_n_4;
   wire Reg6_n_5;
   wire Reg6_n_6;
   wire Reg6_n_7;
   wire Reg6_n_8;
   wire Reg6_n_9;
+  wire \axi_rdata_reg[0] ;
+  wire \axi_rdata_reg[10] ;
+  wire \axi_rdata_reg[11] ;
+  wire \axi_rdata_reg[12] ;
+  wire \axi_rdata_reg[13] ;
+  wire \axi_rdata_reg[14] ;
+  wire \axi_rdata_reg[15] ;
+  wire \axi_rdata_reg[16] ;
+  wire \axi_rdata_reg[17] ;
+  wire \axi_rdata_reg[18] ;
+  wire \axi_rdata_reg[19] ;
+  wire \axi_rdata_reg[1] ;
+  wire \axi_rdata_reg[20] ;
+  wire \axi_rdata_reg[21] ;
+  wire \axi_rdata_reg[22] ;
+  wire \axi_rdata_reg[23] ;
+  wire \axi_rdata_reg[24] ;
+  wire \axi_rdata_reg[25] ;
+  wire \axi_rdata_reg[26] ;
+  wire \axi_rdata_reg[27] ;
+  wire \axi_rdata_reg[28] ;
+  wire \axi_rdata_reg[29] ;
+  wire \axi_rdata_reg[2] ;
+  wire \axi_rdata_reg[30] ;
+  wire \axi_rdata_reg[31] ;
+  wire \axi_rdata_reg[3] ;
+  wire \axi_rdata_reg[4] ;
+  wire \axi_rdata_reg[5] ;
+  wire \axi_rdata_reg[6] ;
+  wire \axi_rdata_reg[7] ;
+  wire \axi_rdata_reg[8] ;
+  wire \axi_rdata_reg[9] ;
+  wire \data_out_reg[0] ;
   wire debug_in_shift_int;
-  wire out_reg_c_5;
-  wire \r_reg_reg[0]_P ;
-  wire \r_reg_reg[10]_P ;
-  wire \r_reg_reg[11]_P ;
-  wire \r_reg_reg[12]_P ;
-  wire \r_reg_reg[13]_P ;
-  wire \r_reg_reg[14]_P ;
-  wire \r_reg_reg[15]_P ;
-  wire \r_reg_reg[16]_P ;
-  wire \r_reg_reg[17]_P ;
-  wire \r_reg_reg[18]_P ;
-  wire \r_reg_reg[19]_P ;
-  wire \r_reg_reg[1]_P ;
-  wire \r_reg_reg[20]_P ;
-  wire \r_reg_reg[21]_P ;
-  wire \r_reg_reg[22]_P ;
-  wire \r_reg_reg[23]_P ;
-  wire \r_reg_reg[24]_P ;
-  wire \r_reg_reg[25]_P ;
-  wire \r_reg_reg[26]_P ;
-  wire \r_reg_reg[27]_P ;
-  wire \r_reg_reg[28]_P ;
-  wire \r_reg_reg[29]_P ;
-  wire \r_reg_reg[2]_P ;
-  wire \r_reg_reg[30]_P ;
-  wire \r_reg_reg[31]_P ;
-  wire \r_reg_reg[3]_P ;
-  wire \r_reg_reg[4]_P ;
-  wire \r_reg_reg[5]_P ;
-  wire \r_reg_reg[6]_P ;
-  wire \r_reg_reg[7]_P ;
-  wire \r_reg_reg[8]_P ;
-  wire \r_reg_reg[9]_P ;
   wire [31:0]s00_axis_tdata;
   wire \slv_reg0_reg[31] ;
 
-  design_1_BiDirChannels_0_0_register_32bits_19 Reg5
-       (.\data_out_reg[0]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg5_n_31),
-        .\data_out_reg[10]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg5_n_21),
-        .\data_out_reg[11]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg5_n_20),
-        .\data_out_reg[12]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg5_n_19),
-        .\data_out_reg[13]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg5_n_18),
-        .\data_out_reg[14]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg5_n_17),
-        .\data_out_reg[15]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg5_n_16),
-        .\data_out_reg[16]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg5_n_15),
-        .\data_out_reg[17]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg5_n_14),
-        .\data_out_reg[18]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg5_n_13),
-        .\data_out_reg[19]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg5_n_12),
-        .\data_out_reg[1]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg5_n_30),
-        .\data_out_reg[20]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg5_n_11),
-        .\data_out_reg[21]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg5_n_10),
-        .\data_out_reg[22]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg5_n_9),
-        .\data_out_reg[23]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg5_n_8),
-        .\data_out_reg[24]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg5_n_7),
-        .\data_out_reg[25]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg5_n_6),
-        .\data_out_reg[26]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg5_n_5),
-        .\data_out_reg[27]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg5_n_4),
-        .\data_out_reg[28]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg5_n_3),
-        .\data_out_reg[29]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg5_n_2),
-        .\data_out_reg[2]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg5_n_29),
-        .\data_out_reg[30]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg5_n_1),
-        .\data_out_reg[31]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg5_n_0),
-        .\data_out_reg[3]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg5_n_28),
-        .\data_out_reg[4]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg5_n_27),
-        .\data_out_reg[5]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg5_n_26),
-        .\data_out_reg[6]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg5_n_25),
-        .\data_out_reg[7]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg5_n_24),
-        .\data_out_reg[8]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg5_n_23),
-        .\data_out_reg[9]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg5_n_22),
+  design_1_BiDirChannels_0_0_register_32bits_16 Reg0
+       (.data_out_reg_c_0(Reg0_n_0),
         .debug_in_shift_int(debug_in_shift_int),
-        .s00_axis_tdata(s00_axis_tdata));
-  design_1_BiDirChannels_0_0_register_32bits_20 Reg6
-       (.Q_reg(Reg5_n_0),
-        .Q_reg_0(Reg5_n_1),
-        .Q_reg_1(Reg5_n_2),
-        .Q_reg_10(Reg5_n_11),
-        .Q_reg_11(Reg5_n_12),
-        .Q_reg_12(Reg5_n_13),
-        .Q_reg_13(Reg5_n_14),
-        .Q_reg_14(Reg5_n_15),
-        .Q_reg_15(Reg5_n_16),
-        .Q_reg_16(Reg5_n_17),
-        .Q_reg_17(Reg5_n_18),
-        .Q_reg_18(Reg5_n_19),
-        .Q_reg_19(Reg5_n_20),
-        .Q_reg_2(Reg5_n_3),
-        .Q_reg_20(Reg5_n_21),
-        .Q_reg_21(Reg5_n_22),
-        .Q_reg_22(Reg5_n_23),
-        .Q_reg_23(Reg5_n_24),
-        .Q_reg_24(Reg5_n_25),
-        .Q_reg_25(Reg5_n_26),
-        .Q_reg_26(Reg5_n_27),
-        .Q_reg_27(Reg5_n_28),
-        .Q_reg_28(Reg5_n_29),
-        .Q_reg_29(Reg5_n_30),
-        .Q_reg_3(Reg5_n_4),
-        .Q_reg_30(Reg5_n_31),
-        .Q_reg_4(Reg5_n_5),
-        .Q_reg_5(Reg5_n_6),
-        .Q_reg_6(Reg5_n_7),
-        .Q_reg_7(Reg5_n_8),
-        .Q_reg_8(Reg5_n_9),
-        .Q_reg_9(Reg5_n_10),
-        .\data_out_reg[0] (Reg6_n_31),
-        .\data_out_reg[10] (Reg6_n_21),
-        .\data_out_reg[11] (Reg6_n_20),
-        .\data_out_reg[12] (Reg6_n_19),
-        .\data_out_reg[13] (Reg6_n_18),
-        .\data_out_reg[14] (Reg6_n_17),
-        .\data_out_reg[15] (Reg6_n_16),
-        .\data_out_reg[16] (Reg6_n_15),
-        .\data_out_reg[17] (Reg6_n_14),
-        .\data_out_reg[18] (Reg6_n_13),
-        .\data_out_reg[19] (Reg6_n_12),
-        .\data_out_reg[1] (Reg6_n_30),
-        .\data_out_reg[20] (Reg6_n_11),
-        .\data_out_reg[21] (Reg6_n_10),
-        .\data_out_reg[22] (Reg6_n_9),
-        .\data_out_reg[23] (Reg6_n_8),
-        .\data_out_reg[24] (Reg6_n_7),
-        .\data_out_reg[25] (Reg6_n_6),
-        .\data_out_reg[26] (Reg6_n_5),
-        .\data_out_reg[27] (Reg6_n_4),
-        .\data_out_reg[28] (Reg6_n_3),
-        .\data_out_reg[29] (Reg6_n_2),
-        .\data_out_reg[2] (Reg6_n_29),
-        .\data_out_reg[30] (Reg6_n_1),
-        .\data_out_reg[31] (Reg6_n_0),
-        .\data_out_reg[3] (Reg6_n_28),
-        .\data_out_reg[4] (Reg6_n_27),
-        .\data_out_reg[5] (Reg6_n_26),
-        .\data_out_reg[6] (Reg6_n_25),
-        .\data_out_reg[7] (Reg6_n_24),
-        .\data_out_reg[8] (Reg6_n_23),
-        .\data_out_reg[9] (Reg6_n_22),
+        .\slv_reg0_reg[31] (\slv_reg0_reg[31] ));
+  design_1_BiDirChannels_0_0_register_32bits_17 Reg1
+       (.data_out_reg_c_0(Reg1_n_0),
+        .data_out_reg_c_1(Reg0_n_0),
         .debug_in_shift_int(debug_in_shift_int),
-        .out_reg_c_5(out_reg_c_5));
-  design_1_BiDirChannels_0_0_register_32bits_21 Reg7
-       (.\data_out_reg[0]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg6_n_31),
-        .\data_out_reg[10]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg6_n_21),
-        .\data_out_reg[11]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg6_n_20),
-        .\data_out_reg[12]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg6_n_19),
-        .\data_out_reg[13]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg6_n_18),
-        .\data_out_reg[14]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg6_n_17),
-        .\data_out_reg[15]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg6_n_16),
-        .\data_out_reg[16]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg6_n_15),
-        .\data_out_reg[17]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg6_n_14),
-        .\data_out_reg[18]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg6_n_13),
-        .\data_out_reg[19]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg6_n_12),
-        .\data_out_reg[1]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg6_n_30),
-        .\data_out_reg[20]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg6_n_11),
-        .\data_out_reg[21]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg6_n_10),
-        .\data_out_reg[22]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg6_n_9),
-        .\data_out_reg[23]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg6_n_8),
-        .\data_out_reg[24]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg6_n_7),
-        .\data_out_reg[25]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg6_n_6),
-        .\data_out_reg[26]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg6_n_5),
-        .\data_out_reg[27]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg6_n_4),
-        .\data_out_reg[28]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg6_n_3),
-        .\data_out_reg[29]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg6_n_2),
-        .\data_out_reg[2]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg6_n_29),
-        .\data_out_reg[30]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg6_n_1),
-        .\data_out_reg[31]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg6_n_0),
-        .\data_out_reg[3]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg6_n_28),
-        .\data_out_reg[4]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg6_n_27),
-        .\data_out_reg[5]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg6_n_26),
-        .\data_out_reg[6]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg6_n_25),
-        .\data_out_reg[7]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg6_n_24),
-        .\data_out_reg[8]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg6_n_23),
-        .\data_out_reg[9]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 (Reg6_n_22),
+        .\slv_reg0_reg[31] (\slv_reg0_reg[31] ));
+  design_1_BiDirChannels_0_0_register_32bits_18 Reg2
+       (.data_out_reg_c_0(Reg2_n_0),
+        .data_out_reg_c_1(Reg1_n_0),
         .debug_in_shift_int(debug_in_shift_int),
-        .\r_reg_reg[0]_P (\r_reg_reg[0]_P ),
-        .\r_reg_reg[10]_P (\r_reg_reg[10]_P ),
-        .\r_reg_reg[11]_P (\r_reg_reg[11]_P ),
-        .\r_reg_reg[12]_P (\r_reg_reg[12]_P ),
-        .\r_reg_reg[13]_P (\r_reg_reg[13]_P ),
-        .\r_reg_reg[14]_P (\r_reg_reg[14]_P ),
-        .\r_reg_reg[15]_P (\r_reg_reg[15]_P ),
-        .\r_reg_reg[16]_P (\r_reg_reg[16]_P ),
-        .\r_reg_reg[17]_P (\r_reg_reg[17]_P ),
-        .\r_reg_reg[18]_P (\r_reg_reg[18]_P ),
-        .\r_reg_reg[19]_P (\r_reg_reg[19]_P ),
-        .\r_reg_reg[1]_P (\r_reg_reg[1]_P ),
-        .\r_reg_reg[20]_P (\r_reg_reg[20]_P ),
-        .\r_reg_reg[21]_P (\r_reg_reg[21]_P ),
-        .\r_reg_reg[22]_P (\r_reg_reg[22]_P ),
-        .\r_reg_reg[23]_P (\r_reg_reg[23]_P ),
-        .\r_reg_reg[24]_P (\r_reg_reg[24]_P ),
-        .\r_reg_reg[25]_P (\r_reg_reg[25]_P ),
-        .\r_reg_reg[26]_P (\r_reg_reg[26]_P ),
-        .\r_reg_reg[27]_P (\r_reg_reg[27]_P ),
-        .\r_reg_reg[28]_P (\r_reg_reg[28]_P ),
-        .\r_reg_reg[29]_P (\r_reg_reg[29]_P ),
-        .\r_reg_reg[2]_P (\r_reg_reg[2]_P ),
-        .\r_reg_reg[30]_P (\r_reg_reg[30]_P ),
-        .\r_reg_reg[31]_P (\r_reg_reg[31]_P ),
-        .\r_reg_reg[3]_P (\r_reg_reg[3]_P ),
-        .\r_reg_reg[4]_P (\r_reg_reg[4]_P ),
-        .\r_reg_reg[5]_P (\r_reg_reg[5]_P ),
-        .\r_reg_reg[6]_P (\r_reg_reg[6]_P ),
-        .\r_reg_reg[7]_P (\r_reg_reg[7]_P ),
-        .\r_reg_reg[8]_P (\r_reg_reg[8]_P ),
-        .\r_reg_reg[9]_P (\r_reg_reg[9]_P ),
+        .\slv_reg0_reg[31] (\slv_reg0_reg[31] ));
+  design_1_BiDirChannels_0_0_register_32bits_19 Reg3
+       (.data_out_reg_c_0(Reg3_n_0),
+        .data_out_reg_c_1(Reg2_n_0),
+        .debug_in_shift_int(debug_in_shift_int),
+        .\slv_reg0_reg[31] (\slv_reg0_reg[31] ));
+  design_1_BiDirChannels_0_0_register_32bits_20 Reg4
+       (.data_out_reg_c_0(Reg4_n_0),
+        .data_out_reg_c_1(Reg3_n_0),
+        .debug_in_shift_int(debug_in_shift_int),
+        .\slv_reg0_reg[31] (\slv_reg0_reg[31] ));
+  design_1_BiDirChannels_0_0_register_32bits_21 Reg5
+       (.\data_out_reg[0]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg5_n_32),
+        .\data_out_reg[10]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg5_n_22),
+        .\data_out_reg[11]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg5_n_21),
+        .\data_out_reg[12]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg5_n_20),
+        .\data_out_reg[13]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg5_n_19),
+        .\data_out_reg[14]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg5_n_18),
+        .\data_out_reg[15]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg5_n_17),
+        .\data_out_reg[16]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg5_n_16),
+        .\data_out_reg[17]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg5_n_15),
+        .\data_out_reg[18]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg5_n_14),
+        .\data_out_reg[19]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg5_n_13),
+        .\data_out_reg[1]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg5_n_31),
+        .\data_out_reg[20]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg5_n_12),
+        .\data_out_reg[21]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg5_n_11),
+        .\data_out_reg[22]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg5_n_10),
+        .\data_out_reg[23]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg5_n_9),
+        .\data_out_reg[24]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg5_n_8),
+        .\data_out_reg[25]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg5_n_7),
+        .\data_out_reg[26]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg5_n_6),
+        .\data_out_reg[27]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg5_n_5),
+        .\data_out_reg[28]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg5_n_4),
+        .\data_out_reg[29]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg5_n_3),
+        .\data_out_reg[2]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg5_n_30),
+        .\data_out_reg[30]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg5_n_2),
+        .\data_out_reg[31]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg5_n_1),
+        .\data_out_reg[3]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg5_n_29),
+        .\data_out_reg[4]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg5_n_28),
+        .\data_out_reg[5]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg5_n_27),
+        .\data_out_reg[6]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg5_n_26),
+        .\data_out_reg[7]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg5_n_25),
+        .\data_out_reg[8]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg5_n_24),
+        .\data_out_reg[9]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg5_n_23),
+        .data_out_reg_c_0(Reg5_n_0),
+        .data_out_reg_c_1(Reg4_n_0),
+        .debug_in_shift_int(debug_in_shift_int),
+        .s00_axis_tdata(s00_axis_tdata),
+        .\slv_reg0_reg[31] (\slv_reg0_reg[31] ));
+  design_1_BiDirChannels_0_0_register_32bits_22 Reg6
+       (.Q_reg(Reg5_n_1),
+        .Q_reg_0(Reg5_n_2),
+        .Q_reg_1(Reg5_n_3),
+        .Q_reg_10(Reg5_n_12),
+        .Q_reg_11(Reg5_n_13),
+        .Q_reg_12(Reg5_n_14),
+        .Q_reg_13(Reg5_n_15),
+        .Q_reg_14(Reg5_n_16),
+        .Q_reg_15(Reg5_n_17),
+        .Q_reg_16(Reg5_n_18),
+        .Q_reg_17(Reg5_n_19),
+        .Q_reg_18(Reg5_n_20),
+        .Q_reg_19(Reg5_n_21),
+        .Q_reg_2(Reg5_n_4),
+        .Q_reg_20(Reg5_n_22),
+        .Q_reg_21(Reg5_n_23),
+        .Q_reg_22(Reg5_n_24),
+        .Q_reg_23(Reg5_n_25),
+        .Q_reg_24(Reg5_n_26),
+        .Q_reg_25(Reg5_n_27),
+        .Q_reg_26(Reg5_n_28),
+        .Q_reg_27(Reg5_n_29),
+        .Q_reg_28(Reg5_n_30),
+        .Q_reg_29(Reg5_n_31),
+        .Q_reg_3(Reg5_n_5),
+        .Q_reg_30(Reg5_n_32),
+        .Q_reg_4(Reg5_n_6),
+        .Q_reg_5(Reg5_n_7),
+        .Q_reg_6(Reg5_n_8),
+        .Q_reg_7(Reg5_n_9),
+        .Q_reg_8(Reg5_n_10),
+        .Q_reg_9(Reg5_n_11),
+        .\data_out_reg[0] (\data_out_reg[0] ),
+        .\data_out_reg[0]_0 (Reg6_n_32),
+        .\data_out_reg[10] (Reg6_n_22),
+        .\data_out_reg[11] (Reg6_n_21),
+        .\data_out_reg[12] (Reg6_n_20),
+        .\data_out_reg[13] (Reg6_n_19),
+        .\data_out_reg[14] (Reg6_n_18),
+        .\data_out_reg[15] (Reg6_n_17),
+        .\data_out_reg[16] (Reg6_n_16),
+        .\data_out_reg[17] (Reg6_n_15),
+        .\data_out_reg[18] (Reg6_n_14),
+        .\data_out_reg[19] (Reg6_n_13),
+        .\data_out_reg[1] (Reg6_n_31),
+        .\data_out_reg[20] (Reg6_n_12),
+        .\data_out_reg[21] (Reg6_n_11),
+        .\data_out_reg[22] (Reg6_n_10),
+        .\data_out_reg[23] (Reg6_n_9),
+        .\data_out_reg[24] (Reg6_n_8),
+        .\data_out_reg[25] (Reg6_n_7),
+        .\data_out_reg[26] (Reg6_n_6),
+        .\data_out_reg[27] (Reg6_n_5),
+        .\data_out_reg[28] (Reg6_n_4),
+        .\data_out_reg[29] (Reg6_n_3),
+        .\data_out_reg[2] (Reg6_n_30),
+        .\data_out_reg[30] (Reg6_n_2),
+        .\data_out_reg[31] (Reg6_n_1),
+        .\data_out_reg[3] (Reg6_n_29),
+        .\data_out_reg[4] (Reg6_n_28),
+        .\data_out_reg[5] (Reg6_n_27),
+        .\data_out_reg[6] (Reg6_n_26),
+        .\data_out_reg[7] (Reg6_n_25),
+        .\data_out_reg[8] (Reg6_n_24),
+        .\data_out_reg[9] (Reg6_n_23),
+        .data_out_reg_c_0(Reg5_n_0),
+        .debug_in_shift_int(debug_in_shift_int),
+        .\slv_reg0_reg[31] (\slv_reg0_reg[31] ));
+  design_1_BiDirChannels_0_0_register_32bits_23 Reg7
+       (.\axi_rdata_reg[0] (\axi_rdata_reg[0] ),
+        .\axi_rdata_reg[10] (\axi_rdata_reg[10] ),
+        .\axi_rdata_reg[11] (\axi_rdata_reg[11] ),
+        .\axi_rdata_reg[12] (\axi_rdata_reg[12] ),
+        .\axi_rdata_reg[13] (\axi_rdata_reg[13] ),
+        .\axi_rdata_reg[14] (\axi_rdata_reg[14] ),
+        .\axi_rdata_reg[15] (\axi_rdata_reg[15] ),
+        .\axi_rdata_reg[16] (\axi_rdata_reg[16] ),
+        .\axi_rdata_reg[17] (\axi_rdata_reg[17] ),
+        .\axi_rdata_reg[18] (\axi_rdata_reg[18] ),
+        .\axi_rdata_reg[19] (\axi_rdata_reg[19] ),
+        .\axi_rdata_reg[1] (\axi_rdata_reg[1] ),
+        .\axi_rdata_reg[20] (\axi_rdata_reg[20] ),
+        .\axi_rdata_reg[21] (\axi_rdata_reg[21] ),
+        .\axi_rdata_reg[22] (\axi_rdata_reg[22] ),
+        .\axi_rdata_reg[23] (\axi_rdata_reg[23] ),
+        .\axi_rdata_reg[24] (\axi_rdata_reg[24] ),
+        .\axi_rdata_reg[25] (\axi_rdata_reg[25] ),
+        .\axi_rdata_reg[26] (\axi_rdata_reg[26] ),
+        .\axi_rdata_reg[27] (\axi_rdata_reg[27] ),
+        .\axi_rdata_reg[28] (\axi_rdata_reg[28] ),
+        .\axi_rdata_reg[29] (\axi_rdata_reg[29] ),
+        .\axi_rdata_reg[2] (\axi_rdata_reg[2] ),
+        .\axi_rdata_reg[30] (\axi_rdata_reg[30] ),
+        .\axi_rdata_reg[31] (\axi_rdata_reg[31] ),
+        .\axi_rdata_reg[3] (\axi_rdata_reg[3] ),
+        .\axi_rdata_reg[4] (\axi_rdata_reg[4] ),
+        .\axi_rdata_reg[5] (\axi_rdata_reg[5] ),
+        .\axi_rdata_reg[6] (\axi_rdata_reg[6] ),
+        .\axi_rdata_reg[7] (\axi_rdata_reg[7] ),
+        .\axi_rdata_reg[8] (\axi_rdata_reg[8] ),
+        .\axi_rdata_reg[9] (\axi_rdata_reg[9] ),
+        .\data_out_reg[0]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg6_n_32),
+        .\data_out_reg[10]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg6_n_22),
+        .\data_out_reg[11]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg6_n_21),
+        .\data_out_reg[12]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg6_n_20),
+        .\data_out_reg[13]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg6_n_19),
+        .\data_out_reg[14]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg6_n_18),
+        .\data_out_reg[15]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg6_n_17),
+        .\data_out_reg[16]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg6_n_16),
+        .\data_out_reg[17]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg6_n_15),
+        .\data_out_reg[18]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg6_n_14),
+        .\data_out_reg[19]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg6_n_13),
+        .\data_out_reg[1]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg6_n_31),
+        .\data_out_reg[20]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg6_n_12),
+        .\data_out_reg[21]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg6_n_11),
+        .\data_out_reg[22]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg6_n_10),
+        .\data_out_reg[23]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg6_n_9),
+        .\data_out_reg[24]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg6_n_8),
+        .\data_out_reg[25]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg6_n_7),
+        .\data_out_reg[26]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg6_n_6),
+        .\data_out_reg[27]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg6_n_5),
+        .\data_out_reg[28]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg6_n_4),
+        .\data_out_reg[29]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg6_n_3),
+        .\data_out_reg[2]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg6_n_30),
+        .\data_out_reg[30]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg6_n_2),
+        .\data_out_reg[31]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg6_n_1),
+        .\data_out_reg[3]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg6_n_29),
+        .\data_out_reg[4]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg6_n_28),
+        .\data_out_reg[5]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg6_n_27),
+        .\data_out_reg[6]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg6_n_26),
+        .\data_out_reg[7]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg6_n_25),
+        .\data_out_reg[8]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg6_n_24),
+        .\data_out_reg[9]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c (Reg6_n_23),
+        .debug_in_shift_int(debug_in_shift_int),
         .\slv_reg0_reg[31] (\slv_reg0_reg[31] ));
 endmodule
 
 (* ORIG_REF_NAME = "delay_line_8x32bits" *) 
-module design_1_BiDirChannels_0_0_delay_line_8x32bits_9
-   (data_out_reg_c,
+module design_1_BiDirChannels_0_0_delay_line_8x32bits_6
+   (\data_out_reg[0] ,
+    D,
     m00_axis_tdata,
     debug_out_shift_int,
     \slv_reg0_reg[31] ,
-    Q);
-  output data_out_reg_c;
+    Q,
+    \data_out_reg[31] ,
+    axi_araddr,
+    \data_out_reg[30] ,
+    \data_out_reg[29] ,
+    \data_out_reg[28] ,
+    \data_out_reg[27] ,
+    \data_out_reg[26] ,
+    \data_out_reg[25] ,
+    \data_out_reg[24] ,
+    \data_out_reg[23] ,
+    \data_out_reg[22] ,
+    \data_out_reg[21] ,
+    \data_out_reg[20] ,
+    \data_out_reg[19] ,
+    \data_out_reg[18] ,
+    \data_out_reg[17] ,
+    \data_out_reg[16] ,
+    \data_out_reg[15] ,
+    \data_out_reg[14] ,
+    \data_out_reg[13] ,
+    \data_out_reg[12] ,
+    \data_out_reg[11] ,
+    \data_out_reg[10] ,
+    \data_out_reg[9] ,
+    \data_out_reg[8] ,
+    \data_out_reg[7] ,
+    \data_out_reg[6] ,
+    \data_out_reg[5] ,
+    \data_out_reg[4] ,
+    \data_out_reg[3] ,
+    \data_out_reg[2] ,
+    \data_out_reg[1] ,
+    \data_out_reg[0]_0 );
+  output \data_out_reg[0] ;
+  output [31:0]D;
   output [31:0]m00_axis_tdata;
   input debug_out_shift_int;
   input \slv_reg0_reg[31] ;
   input [31:0]Q;
+  input \data_out_reg[31] ;
+  input [1:0]axi_araddr;
+  input \data_out_reg[30] ;
+  input \data_out_reg[29] ;
+  input \data_out_reg[28] ;
+  input \data_out_reg[27] ;
+  input \data_out_reg[26] ;
+  input \data_out_reg[25] ;
+  input \data_out_reg[24] ;
+  input \data_out_reg[23] ;
+  input \data_out_reg[22] ;
+  input \data_out_reg[21] ;
+  input \data_out_reg[20] ;
+  input \data_out_reg[19] ;
+  input \data_out_reg[18] ;
+  input \data_out_reg[17] ;
+  input \data_out_reg[16] ;
+  input \data_out_reg[15] ;
+  input \data_out_reg[14] ;
+  input \data_out_reg[13] ;
+  input \data_out_reg[12] ;
+  input \data_out_reg[11] ;
+  input \data_out_reg[10] ;
+  input \data_out_reg[9] ;
+  input \data_out_reg[8] ;
+  input \data_out_reg[7] ;
+  input \data_out_reg[6] ;
+  input \data_out_reg[5] ;
+  input \data_out_reg[4] ;
+  input \data_out_reg[3] ;
+  input \data_out_reg[2] ;
+  input \data_out_reg[1] ;
+  input \data_out_reg[0]_0 ;
 
+  wire [31:0]D;
   wire [31:0]Q;
   wire Reg0_n_0;
   wire Reg1_n_0;
   wire Reg2_n_0;
   wire Reg3_n_0;
   wire Reg4_n_0;
+  wire Reg4_n_1;
+  wire Reg4_n_10;
+  wire Reg4_n_11;
+  wire Reg4_n_12;
+  wire Reg4_n_13;
+  wire Reg4_n_14;
+  wire Reg4_n_15;
+  wire Reg4_n_16;
+  wire Reg4_n_17;
+  wire Reg4_n_18;
+  wire Reg4_n_19;
+  wire Reg4_n_2;
+  wire Reg4_n_20;
+  wire Reg4_n_21;
+  wire Reg4_n_22;
+  wire Reg4_n_23;
+  wire Reg4_n_24;
+  wire Reg4_n_25;
+  wire Reg4_n_26;
+  wire Reg4_n_27;
+  wire Reg4_n_28;
+  wire Reg4_n_29;
+  wire Reg4_n_3;
+  wire Reg4_n_30;
+  wire Reg4_n_31;
+  wire Reg4_n_32;
+  wire Reg4_n_4;
+  wire Reg4_n_5;
+  wire Reg4_n_6;
+  wire Reg4_n_7;
+  wire Reg4_n_8;
+  wire Reg4_n_9;
   wire Reg5_n_1;
   wire Reg5_n_10;
   wire Reg5_n_11;
@@ -3270,7 +2574,40 @@ module design_1_BiDirChannels_0_0_delay_line_8x32bits_9
   wire Reg6_n_7;
   wire Reg6_n_8;
   wire Reg6_n_9;
-  wire data_out_reg_c;
+  wire [1:0]axi_araddr;
+  wire \data_out_reg[0] ;
+  wire \data_out_reg[0]_0 ;
+  wire \data_out_reg[10] ;
+  wire \data_out_reg[11] ;
+  wire \data_out_reg[12] ;
+  wire \data_out_reg[13] ;
+  wire \data_out_reg[14] ;
+  wire \data_out_reg[15] ;
+  wire \data_out_reg[16] ;
+  wire \data_out_reg[17] ;
+  wire \data_out_reg[18] ;
+  wire \data_out_reg[19] ;
+  wire \data_out_reg[1] ;
+  wire \data_out_reg[20] ;
+  wire \data_out_reg[21] ;
+  wire \data_out_reg[22] ;
+  wire \data_out_reg[23] ;
+  wire \data_out_reg[24] ;
+  wire \data_out_reg[25] ;
+  wire \data_out_reg[26] ;
+  wire \data_out_reg[27] ;
+  wire \data_out_reg[28] ;
+  wire \data_out_reg[29] ;
+  wire \data_out_reg[2] ;
+  wire \data_out_reg[30] ;
+  wire \data_out_reg[31] ;
+  wire \data_out_reg[3] ;
+  wire \data_out_reg[4] ;
+  wire \data_out_reg[5] ;
+  wire \data_out_reg[6] ;
+  wire \data_out_reg[7] ;
+  wire \data_out_reg[8] ;
+  wire \data_out_reg[9] ;
   wire debug_out_shift_int;
   wire [31:0]m00_axis_tdata;
   wire \slv_reg0_reg[31] ;
@@ -3279,165 +2616,201 @@ module design_1_BiDirChannels_0_0_delay_line_8x32bits_9
        (.data_out_reg_c_0(Reg0_n_0),
         .debug_out_shift_int(debug_out_shift_int),
         .\slv_reg0_reg[31] (\slv_reg0_reg[31] ));
-  design_1_BiDirChannels_0_0_register_32bits_12 Reg1
+  design_1_BiDirChannels_0_0_register_32bits_9 Reg1
        (.data_out_reg_c_0(Reg1_n_0),
         .data_out_reg_c_1(Reg0_n_0),
         .debug_out_shift_int(debug_out_shift_int),
         .\slv_reg0_reg[31] (\slv_reg0_reg[31] ));
-  design_1_BiDirChannels_0_0_register_32bits_13 Reg2
+  design_1_BiDirChannels_0_0_register_32bits_10 Reg2
        (.data_out_reg_c_0(Reg2_n_0),
         .data_out_reg_c_1(Reg1_n_0),
         .debug_out_shift_int(debug_out_shift_int),
         .\slv_reg0_reg[31] (\slv_reg0_reg[31] ));
-  design_1_BiDirChannels_0_0_register_32bits_14 Reg3
+  design_1_BiDirChannels_0_0_register_32bits_11 Reg3
        (.data_out_reg_c_0(Reg3_n_0),
         .data_out_reg_c_1(Reg2_n_0),
         .debug_out_shift_int(debug_out_shift_int),
         .\slv_reg0_reg[31] (\slv_reg0_reg[31] ));
-  design_1_BiDirChannels_0_0_register_32bits_15 Reg4
-       (.data_out_reg_c_0(Reg4_n_0),
+  design_1_BiDirChannels_0_0_register_32bits_12 Reg4
+       (.Q(Q),
+        .\data_out_reg[0]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg4_n_32),
+        .\data_out_reg[10]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg4_n_22),
+        .\data_out_reg[11]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg4_n_21),
+        .\data_out_reg[12]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg4_n_20),
+        .\data_out_reg[13]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg4_n_19),
+        .\data_out_reg[14]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg4_n_18),
+        .\data_out_reg[15]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg4_n_17),
+        .\data_out_reg[16]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg4_n_16),
+        .\data_out_reg[17]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg4_n_15),
+        .\data_out_reg[18]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg4_n_14),
+        .\data_out_reg[19]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg4_n_13),
+        .\data_out_reg[1]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg4_n_31),
+        .\data_out_reg[20]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg4_n_12),
+        .\data_out_reg[21]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg4_n_11),
+        .\data_out_reg[22]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg4_n_10),
+        .\data_out_reg[23]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg4_n_9),
+        .\data_out_reg[24]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg4_n_8),
+        .\data_out_reg[25]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg4_n_7),
+        .\data_out_reg[26]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg4_n_6),
+        .\data_out_reg[27]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg4_n_5),
+        .\data_out_reg[28]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg4_n_4),
+        .\data_out_reg[29]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg4_n_3),
+        .\data_out_reg[2]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg4_n_30),
+        .\data_out_reg[30]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg4_n_2),
+        .\data_out_reg[31]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg4_n_1),
+        .\data_out_reg[3]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg4_n_29),
+        .\data_out_reg[4]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg4_n_28),
+        .\data_out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg4_n_27),
+        .\data_out_reg[6]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg4_n_26),
+        .\data_out_reg[7]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg4_n_25),
+        .\data_out_reg[8]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg4_n_24),
+        .\data_out_reg[9]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg4_n_23),
+        .data_out_reg_c_0(Reg4_n_0),
         .data_out_reg_c_1(Reg3_n_0),
         .debug_out_shift_int(debug_out_shift_int),
         .\slv_reg0_reg[31] (\slv_reg0_reg[31] ));
-  design_1_BiDirChannels_0_0_register_32bits_16 Reg5
-       (.Q(Q),
-        .\data_out_reg[0]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg5_n_32),
-        .\data_out_reg[10]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg5_n_22),
-        .\data_out_reg[11]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg5_n_21),
-        .\data_out_reg[12]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg5_n_20),
-        .\data_out_reg[13]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg5_n_19),
-        .\data_out_reg[14]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg5_n_18),
-        .\data_out_reg[15]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg5_n_17),
-        .\data_out_reg[16]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg5_n_16),
-        .\data_out_reg[17]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg5_n_15),
-        .\data_out_reg[18]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg5_n_14),
-        .\data_out_reg[19]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg5_n_13),
-        .\data_out_reg[1]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg5_n_31),
-        .\data_out_reg[20]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg5_n_12),
-        .\data_out_reg[21]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg5_n_11),
-        .\data_out_reg[22]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg5_n_10),
-        .\data_out_reg[23]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg5_n_9),
-        .\data_out_reg[24]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg5_n_8),
-        .\data_out_reg[25]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg5_n_7),
-        .\data_out_reg[26]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg5_n_6),
-        .\data_out_reg[27]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg5_n_5),
-        .\data_out_reg[28]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg5_n_4),
-        .\data_out_reg[29]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg5_n_3),
-        .\data_out_reg[2]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg5_n_30),
-        .\data_out_reg[30]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg5_n_2),
-        .\data_out_reg[31]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg5_n_1),
-        .\data_out_reg[3]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg5_n_29),
-        .\data_out_reg[4]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg5_n_28),
-        .\data_out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg5_n_27),
-        .\data_out_reg[6]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg5_n_26),
-        .\data_out_reg[7]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg5_n_25),
-        .\data_out_reg[8]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg5_n_24),
-        .\data_out_reg[9]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg5_n_23),
-        .data_out_reg_c_0(data_out_reg_c),
-        .data_out_reg_c_1(Reg4_n_0),
+  design_1_BiDirChannels_0_0_register_32bits_13 Reg5
+       (.\data_out_reg[0] (\data_out_reg[0] ),
+        .\data_out_reg[0]_0 (Reg5_n_32),
+        .\data_out_reg[10] (Reg5_n_22),
+        .\data_out_reg[11] (Reg5_n_21),
+        .\data_out_reg[12] (Reg5_n_20),
+        .\data_out_reg[13] (Reg5_n_19),
+        .\data_out_reg[14] (Reg5_n_18),
+        .\data_out_reg[15] (Reg5_n_17),
+        .\data_out_reg[16] (Reg5_n_16),
+        .\data_out_reg[17] (Reg5_n_15),
+        .\data_out_reg[18] (Reg5_n_14),
+        .\data_out_reg[19] (Reg5_n_13),
+        .\data_out_reg[1] (Reg5_n_31),
+        .\data_out_reg[20] (Reg5_n_12),
+        .\data_out_reg[21] (Reg5_n_11),
+        .\data_out_reg[22] (Reg5_n_10),
+        .\data_out_reg[23] (Reg5_n_9),
+        .\data_out_reg[24] (Reg5_n_8),
+        .\data_out_reg[25] (Reg5_n_7),
+        .\data_out_reg[26] (Reg5_n_6),
+        .\data_out_reg[27] (Reg5_n_5),
+        .\data_out_reg[28] (Reg5_n_4),
+        .\data_out_reg[29] (Reg5_n_3),
+        .\data_out_reg[2] (Reg5_n_30),
+        .\data_out_reg[30] (Reg5_n_2),
+        .\data_out_reg[31] (Reg5_n_1),
+        .\data_out_reg[3] (Reg5_n_29),
+        .\data_out_reg[4] (Reg5_n_28),
+        .\data_out_reg[5] (Reg5_n_27),
+        .\data_out_reg[6] (Reg5_n_26),
+        .\data_out_reg[7] (Reg5_n_25),
+        .\data_out_reg[8] (Reg5_n_24),
+        .\data_out_reg[9] (Reg5_n_23),
+        .data_out_reg_c_0(Reg4_n_0),
         .debug_out_shift_int(debug_out_shift_int),
+        .\r_reg_reg[0] (Reg4_n_32),
+        .\r_reg_reg[10] (Reg4_n_22),
+        .\r_reg_reg[11] (Reg4_n_21),
+        .\r_reg_reg[12] (Reg4_n_20),
+        .\r_reg_reg[13] (Reg4_n_19),
+        .\r_reg_reg[14] (Reg4_n_18),
+        .\r_reg_reg[15] (Reg4_n_17),
+        .\r_reg_reg[16] (Reg4_n_16),
+        .\r_reg_reg[17] (Reg4_n_15),
+        .\r_reg_reg[18] (Reg4_n_14),
+        .\r_reg_reg[19] (Reg4_n_13),
+        .\r_reg_reg[1] (Reg4_n_31),
+        .\r_reg_reg[20] (Reg4_n_12),
+        .\r_reg_reg[21] (Reg4_n_11),
+        .\r_reg_reg[22] (Reg4_n_10),
+        .\r_reg_reg[23] (Reg4_n_9),
+        .\r_reg_reg[24] (Reg4_n_8),
+        .\r_reg_reg[25] (Reg4_n_7),
+        .\r_reg_reg[26] (Reg4_n_6),
+        .\r_reg_reg[27] (Reg4_n_5),
+        .\r_reg_reg[28] (Reg4_n_4),
+        .\r_reg_reg[29] (Reg4_n_3),
+        .\r_reg_reg[2] (Reg4_n_30),
+        .\r_reg_reg[30] (Reg4_n_2),
+        .\r_reg_reg[31] (Reg4_n_1),
+        .\r_reg_reg[3] (Reg4_n_29),
+        .\r_reg_reg[4] (Reg4_n_28),
+        .\r_reg_reg[5] (Reg4_n_27),
+        .\r_reg_reg[6] (Reg4_n_26),
+        .\r_reg_reg[7] (Reg4_n_25),
+        .\r_reg_reg[8] (Reg4_n_24),
+        .\r_reg_reg[9] (Reg4_n_23),
         .\slv_reg0_reg[31] (\slv_reg0_reg[31] ));
-  design_1_BiDirChannels_0_0_register_32bits_17 Reg6
-       (.\data_out_reg[0] (Reg6_n_31),
-        .\data_out_reg[10] (Reg6_n_21),
-        .\data_out_reg[11] (Reg6_n_20),
-        .\data_out_reg[12] (Reg6_n_19),
-        .\data_out_reg[13] (Reg6_n_18),
-        .\data_out_reg[14] (Reg6_n_17),
-        .\data_out_reg[15] (Reg6_n_16),
-        .\data_out_reg[16] (Reg6_n_15),
-        .\data_out_reg[17] (Reg6_n_14),
-        .\data_out_reg[18] (Reg6_n_13),
-        .\data_out_reg[19] (Reg6_n_12),
-        .\data_out_reg[1] (Reg6_n_30),
-        .\data_out_reg[20] (Reg6_n_11),
-        .\data_out_reg[21] (Reg6_n_10),
-        .\data_out_reg[22] (Reg6_n_9),
-        .\data_out_reg[23] (Reg6_n_8),
-        .\data_out_reg[24] (Reg6_n_7),
-        .\data_out_reg[25] (Reg6_n_6),
-        .\data_out_reg[26] (Reg6_n_5),
-        .\data_out_reg[27] (Reg6_n_4),
-        .\data_out_reg[28] (Reg6_n_3),
-        .\data_out_reg[29] (Reg6_n_2),
-        .\data_out_reg[2] (Reg6_n_29),
-        .\data_out_reg[30] (Reg6_n_1),
-        .\data_out_reg[31] (Reg6_n_0),
-        .\data_out_reg[3] (Reg6_n_28),
-        .\data_out_reg[4] (Reg6_n_27),
-        .\data_out_reg[5] (Reg6_n_26),
-        .\data_out_reg[6] (Reg6_n_25),
-        .\data_out_reg[7] (Reg6_n_24),
-        .\data_out_reg[8] (Reg6_n_23),
-        .\data_out_reg[9] (Reg6_n_22),
-        .data_out_reg_c_0(data_out_reg_c),
+  design_1_BiDirChannels_0_0_register_32bits_14 Reg6
+       (.D({Reg6_n_0,Reg6_n_1,Reg6_n_2,Reg6_n_3,Reg6_n_4,Reg6_n_5,Reg6_n_6,Reg6_n_7,Reg6_n_8,Reg6_n_9,Reg6_n_10,Reg6_n_11,Reg6_n_12,Reg6_n_13,Reg6_n_14,Reg6_n_15,Reg6_n_16,Reg6_n_17,Reg6_n_18,Reg6_n_19,Reg6_n_20,Reg6_n_21,Reg6_n_22,Reg6_n_23,Reg6_n_24,Reg6_n_25,Reg6_n_26,Reg6_n_27,Reg6_n_28,Reg6_n_29,Reg6_n_30,Reg6_n_31}),
+        .axi_araddr(axi_araddr),
+        .\axi_rdata_reg[31] (D),
+        .\data_out_reg[0]_0 (\data_out_reg[0]_0 ),
+        .\data_out_reg[0]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg5_n_32),
+        .\data_out_reg[10]_0 (\data_out_reg[10] ),
+        .\data_out_reg[10]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg5_n_22),
+        .\data_out_reg[11]_0 (\data_out_reg[11] ),
+        .\data_out_reg[11]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg5_n_21),
+        .\data_out_reg[12]_0 (\data_out_reg[12] ),
+        .\data_out_reg[12]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg5_n_20),
+        .\data_out_reg[13]_0 (\data_out_reg[13] ),
+        .\data_out_reg[13]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg5_n_19),
+        .\data_out_reg[14]_0 (\data_out_reg[14] ),
+        .\data_out_reg[14]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg5_n_18),
+        .\data_out_reg[15]_0 (\data_out_reg[15] ),
+        .\data_out_reg[15]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg5_n_17),
+        .\data_out_reg[16]_0 (\data_out_reg[16] ),
+        .\data_out_reg[16]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg5_n_16),
+        .\data_out_reg[17]_0 (\data_out_reg[17] ),
+        .\data_out_reg[17]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg5_n_15),
+        .\data_out_reg[18]_0 (\data_out_reg[18] ),
+        .\data_out_reg[18]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg5_n_14),
+        .\data_out_reg[19]_0 (\data_out_reg[19] ),
+        .\data_out_reg[19]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg5_n_13),
+        .\data_out_reg[1]_0 (\data_out_reg[1] ),
+        .\data_out_reg[1]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg5_n_31),
+        .\data_out_reg[20]_0 (\data_out_reg[20] ),
+        .\data_out_reg[20]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg5_n_12),
+        .\data_out_reg[21]_0 (\data_out_reg[21] ),
+        .\data_out_reg[21]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg5_n_11),
+        .\data_out_reg[22]_0 (\data_out_reg[22] ),
+        .\data_out_reg[22]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg5_n_10),
+        .\data_out_reg[23]_0 (\data_out_reg[23] ),
+        .\data_out_reg[23]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg5_n_9),
+        .\data_out_reg[24]_0 (\data_out_reg[24] ),
+        .\data_out_reg[24]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg5_n_8),
+        .\data_out_reg[25]_0 (\data_out_reg[25] ),
+        .\data_out_reg[25]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg5_n_7),
+        .\data_out_reg[26]_0 (\data_out_reg[26] ),
+        .\data_out_reg[26]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg5_n_6),
+        .\data_out_reg[27]_0 (\data_out_reg[27] ),
+        .\data_out_reg[27]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg5_n_5),
+        .\data_out_reg[28]_0 (\data_out_reg[28] ),
+        .\data_out_reg[28]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg5_n_4),
+        .\data_out_reg[29]_0 (\data_out_reg[29] ),
+        .\data_out_reg[29]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg5_n_3),
+        .\data_out_reg[2]_0 (\data_out_reg[2] ),
+        .\data_out_reg[2]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg5_n_30),
+        .\data_out_reg[30]_0 (\data_out_reg[30] ),
+        .\data_out_reg[30]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg5_n_2),
+        .\data_out_reg[31]_0 (\data_out_reg[31] ),
+        .\data_out_reg[31]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg5_n_1),
+        .\data_out_reg[3]_0 (\data_out_reg[3] ),
+        .\data_out_reg[3]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg5_n_29),
+        .\data_out_reg[4]_0 (\data_out_reg[4] ),
+        .\data_out_reg[4]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg5_n_28),
+        .\data_out_reg[5]_0 (\data_out_reg[5] ),
+        .\data_out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg5_n_27),
+        .\data_out_reg[6]_0 (\data_out_reg[6] ),
+        .\data_out_reg[6]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg5_n_26),
+        .\data_out_reg[7]_0 (\data_out_reg[7] ),
+        .\data_out_reg[7]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg5_n_25),
+        .\data_out_reg[8]_0 (\data_out_reg[8] ),
+        .\data_out_reg[8]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg5_n_24),
+        .\data_out_reg[9]_0 (\data_out_reg[9] ),
+        .\data_out_reg[9]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c (Reg5_n_23),
         .debug_out_shift_int(debug_out_shift_int),
-        .\r_reg_reg[0] (Reg5_n_32),
-        .\r_reg_reg[10] (Reg5_n_22),
-        .\r_reg_reg[11] (Reg5_n_21),
-        .\r_reg_reg[12] (Reg5_n_20),
-        .\r_reg_reg[13] (Reg5_n_19),
-        .\r_reg_reg[14] (Reg5_n_18),
-        .\r_reg_reg[15] (Reg5_n_17),
-        .\r_reg_reg[16] (Reg5_n_16),
-        .\r_reg_reg[17] (Reg5_n_15),
-        .\r_reg_reg[18] (Reg5_n_14),
-        .\r_reg_reg[19] (Reg5_n_13),
-        .\r_reg_reg[1] (Reg5_n_31),
-        .\r_reg_reg[20] (Reg5_n_12),
-        .\r_reg_reg[21] (Reg5_n_11),
-        .\r_reg_reg[22] (Reg5_n_10),
-        .\r_reg_reg[23] (Reg5_n_9),
-        .\r_reg_reg[24] (Reg5_n_8),
-        .\r_reg_reg[25] (Reg5_n_7),
-        .\r_reg_reg[26] (Reg5_n_6),
-        .\r_reg_reg[27] (Reg5_n_5),
-        .\r_reg_reg[28] (Reg5_n_4),
-        .\r_reg_reg[29] (Reg5_n_3),
-        .\r_reg_reg[2] (Reg5_n_30),
-        .\r_reg_reg[30] (Reg5_n_2),
-        .\r_reg_reg[31] (Reg5_n_1),
-        .\r_reg_reg[3] (Reg5_n_29),
-        .\r_reg_reg[4] (Reg5_n_28),
-        .\r_reg_reg[5] (Reg5_n_27),
-        .\r_reg_reg[6] (Reg5_n_26),
-        .\r_reg_reg[7] (Reg5_n_25),
-        .\r_reg_reg[8] (Reg5_n_24),
-        .\r_reg_reg[9] (Reg5_n_23),
+        .m00_axis_tdata(m00_axis_tdata),
         .\slv_reg0_reg[31] (\slv_reg0_reg[31] ));
-  design_1_BiDirChannels_0_0_register_32bits_18 Reg7
-       (.\data_out_reg[0]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg6_n_31),
-        .\data_out_reg[10]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg6_n_21),
-        .\data_out_reg[11]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg6_n_20),
-        .\data_out_reg[12]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg6_n_19),
-        .\data_out_reg[13]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg6_n_18),
-        .\data_out_reg[14]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg6_n_17),
-        .\data_out_reg[15]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg6_n_16),
-        .\data_out_reg[16]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg6_n_15),
-        .\data_out_reg[17]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg6_n_14),
-        .\data_out_reg[18]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg6_n_13),
-        .\data_out_reg[19]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg6_n_12),
-        .\data_out_reg[1]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg6_n_30),
-        .\data_out_reg[20]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg6_n_11),
-        .\data_out_reg[21]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg6_n_10),
-        .\data_out_reg[22]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg6_n_9),
-        .\data_out_reg[23]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg6_n_8),
-        .\data_out_reg[24]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg6_n_7),
-        .\data_out_reg[25]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg6_n_6),
-        .\data_out_reg[26]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg6_n_5),
-        .\data_out_reg[27]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg6_n_4),
-        .\data_out_reg[28]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg6_n_3),
-        .\data_out_reg[29]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg6_n_2),
-        .\data_out_reg[2]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg6_n_29),
-        .\data_out_reg[30]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg6_n_1),
-        .\data_out_reg[31]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg6_n_0),
-        .\data_out_reg[3]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg6_n_28),
-        .\data_out_reg[4]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg6_n_27),
-        .\data_out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg6_n_26),
-        .\data_out_reg[6]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg6_n_25),
-        .\data_out_reg[7]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg6_n_24),
-        .\data_out_reg[8]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg6_n_23),
-        .\data_out_reg[9]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c (Reg6_n_22),
+  design_1_BiDirChannels_0_0_register_32bits_15 Reg7
+       (.D({Reg6_n_0,Reg6_n_1,Reg6_n_2,Reg6_n_3,Reg6_n_4,Reg6_n_5,Reg6_n_6,Reg6_n_7,Reg6_n_8,Reg6_n_9,Reg6_n_10,Reg6_n_11,Reg6_n_12,Reg6_n_13,Reg6_n_14,Reg6_n_15,Reg6_n_16,Reg6_n_17,Reg6_n_18,Reg6_n_19,Reg6_n_20,Reg6_n_21,Reg6_n_22,Reg6_n_23,Reg6_n_24,Reg6_n_25,Reg6_n_26,Reg6_n_27,Reg6_n_28,Reg6_n_29,Reg6_n_30,Reg6_n_31}),
         .debug_out_shift_int(debug_out_shift_int),
         .m00_axis_tdata(m00_axis_tdata),
         .\slv_reg0_reg[31] (\slv_reg0_reg[31] ));
@@ -3445,15 +2818,13 @@ endmodule
 
 (* ORIG_REF_NAME = "dff" *) 
 module design_1_BiDirChannels_0_0_dff
-   (tx_token_next_int,
-    debug_in_shift_int,
+   (debug_in_shift_int,
     out_next_int,
     Q_reg_0,
     \slv_reg0_reg[31] ,
     tx_token_valid_int,
     s00_axis_tvalid,
     s00_axi_aclk);
-  output tx_token_next_int;
   output debug_in_shift_int;
   input out_next_int;
   input Q_reg_0;
@@ -3479,7 +2850,7 @@ module design_1_BiDirChannels_0_0_dff
         .Q(tx_token_next_int));
   LUT4 #(
     .INIT(16'h88B8)) 
-    \r_reg[7]_i_2 
+    data_out_c_i_1
        (.I0(tx_token_next_int),
         .I1(tx_token_valid_int),
         .I2(s00_axis_tvalid),
@@ -3488,52 +2859,20 @@ module design_1_BiDirChannels_0_0_dff
 endmodule
 
 (* ORIG_REF_NAME = "dff" *) 
-module design_1_BiDirChannels_0_0_dff_10
-   (out_shift_sel,
-    \out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
-    m00_axis_tvalid,
-    s00_axi_aclk,
-    \slv_reg0_reg[31] );
-  output out_shift_sel;
-  output \out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
-  input m00_axis_tvalid;
-  input s00_axi_aclk;
-  input \slv_reg0_reg[31] ;
-
-  wire m00_axis_tvalid;
-  wire \out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
-  wire out_shift_sel;
-  wire s00_axi_aclk;
-  wire \slv_reg0_reg[31] ;
-
-  FDCE Q_reg
-       (.C(s00_axi_aclk),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[31] ),
-        .D(m00_axis_tvalid),
-        .Q(out_shift_sel));
-  LUT1 #(
-    .INIT(2'h1)) 
-    \out_reg[4]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c_i_1 
-       (.I0(out_shift_sel),
-        .O(\out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ));
-endmodule
-
-(* ORIG_REF_NAME = "dff" *) 
-module design_1_BiDirChannels_0_0_dff_5
+module design_1_BiDirChannels_0_0_dff_1
    (in_start_stop_int,
     \slv_reg1_reg[4] ,
     \r_reg_reg[0] ,
     \slv_reg0_reg[31] );
   output in_start_stop_int;
-  input [0:0]\slv_reg1_reg[4] ;
+  input \slv_reg1_reg[4] ;
   input \r_reg_reg[0] ;
   input \slv_reg0_reg[31] ;
 
   wire in_start_stop_int;
   wire \r_reg_reg[0] ;
   wire \slv_reg0_reg[31] ;
-  wire [0:0]\slv_reg1_reg[4] ;
+  wire \slv_reg1_reg[4] ;
 
   FDCE Q_reg
        (.C(\r_reg_reg[0] ),
@@ -3544,7 +2883,7 @@ module design_1_BiDirChannels_0_0_dff_5
 endmodule
 
 (* ORIG_REF_NAME = "dff" *) 
-module design_1_BiDirChannels_0_0_dff_6
+module design_1_BiDirChannels_0_0_dff_2
    (\r_reg_reg[1]_C ,
     \r_reg_reg[31]_P ,
     \r_reg_reg[30]_P ,
@@ -3613,7 +2952,7 @@ module design_1_BiDirChannels_0_0_dff_6
     \slv_reg1_reg[0] ,
     \r_reg_reg[0] ,
     \slv_reg0_reg[31] ,
-    \slv_reg0_reg[31]_0 ,
+    data_word_4,
     s00_axi_aresetn,
     tx_token_valid_int,
     \data_out_reg[31] ,
@@ -3713,10 +3052,10 @@ module design_1_BiDirChannels_0_0_dff_6
   output \r_reg_reg[2]_C ;
   output \r_reg_reg[1]_C_0 ;
   output \r_reg_reg[1]_P_0 ;
-  input [0:0]\slv_reg1_reg[0] ;
+  input \slv_reg1_reg[0] ;
   input \r_reg_reg[0] ;
   input \slv_reg0_reg[31] ;
-  input [0:0]\slv_reg0_reg[31]_0 ;
+  input [0:0]data_word_4;
   input s00_axi_aresetn;
   input tx_token_valid_int;
   input \data_out_reg[31] ;
@@ -3784,6 +3123,7 @@ module design_1_BiDirChannels_0_0_dff_6
   wire \data_out_reg[7] ;
   wire \data_out_reg[8] ;
   wire \data_out_reg[9] ;
+  wire [0:0]data_word_4;
   wire \r_reg_reg[0] ;
   wire \r_reg_reg[0]_P ;
   wire \r_reg_reg[10]_C ;
@@ -3852,8 +3192,7 @@ module design_1_BiDirChannels_0_0_dff_6
   wire \r_reg_reg[9]_P ;
   wire s00_axi_aresetn;
   wire \slv_reg0_reg[31] ;
-  wire [0:0]\slv_reg0_reg[31]_0 ;
-  wire [0:0]\slv_reg1_reg[0] ;
+  wire \slv_reg1_reg[0] ;
   wire tx_token_valid_int;
 
   FDCE Q_reg
@@ -3865,7 +3204,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'h4000000000000000)) 
     \r_reg_reg[0]_LDC_i_1 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -3875,7 +3214,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'hBBBBBBBBFBBBBBBB)) 
     \r_reg_reg[0]_LDC_i_2 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -3885,7 +3224,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'h4000000000000000)) 
     \r_reg_reg[10]_LDC_i_1 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -3895,7 +3234,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'hBBBBBBBBFBBBBBBB)) 
     \r_reg_reg[10]_LDC_i_2 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -3905,7 +3244,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'h4000000000000000)) 
     \r_reg_reg[11]_LDC_i_1 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -3915,7 +3254,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'hBBBBBBBBFBBBBBBB)) 
     \r_reg_reg[11]_LDC_i_2 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -3925,7 +3264,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'h4000000000000000)) 
     \r_reg_reg[12]_LDC_i_1 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -3935,7 +3274,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'hBBBBBBBBFBBBBBBB)) 
     \r_reg_reg[12]_LDC_i_2 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -3945,7 +3284,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'h4000000000000000)) 
     \r_reg_reg[13]_LDC_i_1 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -3955,7 +3294,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'hBBBBBBBBFBBBBBBB)) 
     \r_reg_reg[13]_LDC_i_2 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -3965,7 +3304,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'h4000000000000000)) 
     \r_reg_reg[14]_LDC_i_1 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -3975,7 +3314,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'hBBBBBBBBFBBBBBBB)) 
     \r_reg_reg[14]_LDC_i_2 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -3985,7 +3324,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'h4000000000000000)) 
     \r_reg_reg[15]_LDC_i_1 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -3995,7 +3334,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'hBBBBBBBBFBBBBBBB)) 
     \r_reg_reg[15]_LDC_i_2 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4005,7 +3344,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'h4000000000000000)) 
     \r_reg_reg[16]_LDC_i_1 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4015,7 +3354,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'hBBBBBBBBFBBBBBBB)) 
     \r_reg_reg[16]_LDC_i_2 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4025,7 +3364,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'h4000000000000000)) 
     \r_reg_reg[17]_LDC_i_1 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4035,7 +3374,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'hBBBBBBBBFBBBBBBB)) 
     \r_reg_reg[17]_LDC_i_2 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4045,7 +3384,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'h4000000000000000)) 
     \r_reg_reg[18]_LDC_i_1 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4055,7 +3394,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'hBBBBBBBBFBBBBBBB)) 
     \r_reg_reg[18]_LDC_i_2 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4065,7 +3404,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'h4000000000000000)) 
     \r_reg_reg[19]_LDC_i_1 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4075,7 +3414,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'hBBBBBBBBFBBBBBBB)) 
     \r_reg_reg[19]_LDC_i_2 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4085,7 +3424,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'h4000000000000000)) 
     \r_reg_reg[1]_LDC_i_1 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4095,7 +3434,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'hBBBBBBBBFBBBBBBB)) 
     \r_reg_reg[1]_LDC_i_2 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4105,7 +3444,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'h4000000000000000)) 
     \r_reg_reg[20]_LDC_i_1 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4115,7 +3454,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'hBBBBBBBBFBBBBBBB)) 
     \r_reg_reg[20]_LDC_i_2 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4125,7 +3464,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'h4000000000000000)) 
     \r_reg_reg[21]_LDC_i_1 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4135,7 +3474,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'hBBBBBBBBFBBBBBBB)) 
     \r_reg_reg[21]_LDC_i_2 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4145,7 +3484,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'h4000000000000000)) 
     \r_reg_reg[22]_LDC_i_1 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4155,7 +3494,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'hBBBBBBBBFBBBBBBB)) 
     \r_reg_reg[22]_LDC_i_2 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4165,7 +3504,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'h4000000000000000)) 
     \r_reg_reg[23]_LDC_i_1 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4175,7 +3514,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'hBBBBBBBBFBBBBBBB)) 
     \r_reg_reg[23]_LDC_i_2 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4185,7 +3524,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'h4000000000000000)) 
     \r_reg_reg[24]_LDC_i_1 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4195,7 +3534,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'hBBBBBBBBFBBBBBBB)) 
     \r_reg_reg[24]_LDC_i_2 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4205,7 +3544,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'h4000000000000000)) 
     \r_reg_reg[25]_LDC_i_1 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4215,7 +3554,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'hBBBBBBBBFBBBBBBB)) 
     \r_reg_reg[25]_LDC_i_2 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4225,7 +3564,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'h4000000000000000)) 
     \r_reg_reg[26]_LDC_i_1 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4235,7 +3574,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'hBBBBBBBBFBBBBBBB)) 
     \r_reg_reg[26]_LDC_i_2 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4245,7 +3584,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'h4000000000000000)) 
     \r_reg_reg[27]_LDC_i_1 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4255,7 +3594,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'hBBBBBBBBFBBBBBBB)) 
     \r_reg_reg[27]_LDC_i_2 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4265,7 +3604,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'h4000000000000000)) 
     \r_reg_reg[28]_LDC_i_1 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4275,7 +3614,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'hBBBBBBBBFBBBBBBB)) 
     \r_reg_reg[28]_LDC_i_2 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4285,7 +3624,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'h4000000000000000)) 
     \r_reg_reg[29]_LDC_i_1 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4295,7 +3634,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'hBBBBBBBBFBBBBBBB)) 
     \r_reg_reg[29]_LDC_i_2 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4305,7 +3644,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'h4000000000000000)) 
     \r_reg_reg[2]_LDC_i_1 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4315,7 +3654,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'hBBBBBBBBFBBBBBBB)) 
     \r_reg_reg[2]_LDC_i_2 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4325,7 +3664,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'h4000000000000000)) 
     \r_reg_reg[30]_LDC_i_1 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4335,7 +3674,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'hBBBBBBBBFBBBBBBB)) 
     \r_reg_reg[30]_LDC_i_2 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4345,7 +3684,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'h4000000000000000)) 
     \r_reg_reg[31]_LDC_i_1 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4355,7 +3694,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'hBBBBBBBBFBBBBBBB)) 
     \r_reg_reg[31]_LDC_i_2 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4365,7 +3704,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'h4000000000000000)) 
     \r_reg_reg[3]_LDC_i_1 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4375,7 +3714,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'hBBBBBBBBFBBBBBBB)) 
     \r_reg_reg[3]_LDC_i_2 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4385,7 +3724,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'h4000000000000000)) 
     \r_reg_reg[4]_LDC_i_1 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4395,7 +3734,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'hBBBBBBBBFBBBBBBB)) 
     \r_reg_reg[4]_LDC_i_2 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4405,7 +3744,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'h4000000000000000)) 
     \r_reg_reg[5]_LDC_i_1 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4415,7 +3754,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'hBBBBBBBBFBBBBBBB)) 
     \r_reg_reg[5]_LDC_i_2 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4425,7 +3764,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'h4000000000000000)) 
     \r_reg_reg[6]_LDC_i_1 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4435,7 +3774,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'hBBBBBBBBFBBBBBBB)) 
     \r_reg_reg[6]_LDC_i_2 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4445,7 +3784,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'h4000000000000000)) 
     \r_reg_reg[7]_LDC_i_1 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4455,7 +3794,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'hBBBBBBBBFBBBBBBB)) 
     \r_reg_reg[7]_LDC_i_2 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4465,7 +3804,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'h4000000000000000)) 
     \r_reg_reg[8]_LDC_i_1 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4475,7 +3814,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'hBBBBBBBBFBBBBBBB)) 
     \r_reg_reg[8]_LDC_i_2 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4485,7 +3824,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'h4000000000000000)) 
     \r_reg_reg[9]_LDC_i_1 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4495,7 +3834,7 @@ module design_1_BiDirChannels_0_0_dff_6
   LUT6 #(
     .INIT(64'hBBBBBBBBFBBBBBBB)) 
     \r_reg_reg[9]_LDC_i_2 
-       (.I0(\slv_reg0_reg[31]_0 ),
+       (.I0(data_word_4),
         .I1(s00_axi_aresetn),
         .I2(\r_reg_reg[1]_C ),
         .I3(\r_reg_reg[0] ),
@@ -4505,31 +3844,58 @@ module design_1_BiDirChannels_0_0_dff_6
 endmodule
 
 (* ORIG_REF_NAME = "dff" *) 
-module design_1_BiDirChannels_0_0_dff_7
-   (MCK,
+module design_1_BiDirChannels_0_0_dff_3
+   (Q_reg_0,
     CLK,
-    s00_axi_aclk,
+    MCK,
     \slv_reg0_reg[31] );
-  output MCK;
+  output Q_reg_0;
   input CLK;
-  input s00_axi_aclk;
+  input MCK;
   input \slv_reg0_reg[31] ;
 
   wire CLK;
   wire MCK;
+  wire Q_reg_0;
+  wire \slv_reg0_reg[31] ;
+
+  FDCE Q_reg
+       (.C(MCK),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(CLK),
+        .Q(Q_reg_0));
+endmodule
+
+(* ORIG_REF_NAME = "dff" *) 
+module design_1_BiDirChannels_0_0_dff_4
+   (MCK,
+    s00_axi_aclk,
+    \slv_reg0_reg[31] );
+  output MCK;
+  input s00_axi_aclk;
+  input \slv_reg0_reg[31] ;
+
+  wire MCK;
+  wire p_0_out;
   wire s00_axi_aclk;
   wire \slv_reg0_reg[31] ;
 
+  LUT1 #(
+    .INIT(2'h1)) 
+    Q_i_1__1
+       (.I0(MCK),
+        .O(p_0_out));
   FDCE Q_reg
        (.C(s00_axi_aclk),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(CLK),
+        .D(p_0_out),
         .Q(MCK));
 endmodule
 
 (* ORIG_REF_NAME = "dff" *) 
-module design_1_BiDirChannels_0_0_dff_8
+module design_1_BiDirChannels_0_0_dff_5
    (tx_token_valid_int,
     in_inj_bit,
     \out_reg[7] ,
@@ -4555,9 +3921,41 @@ module design_1_BiDirChannels_0_0_dff_8
         .Q(tx_token_valid_int));
   LUT1 #(
     .INIT(2'h1)) 
-    \out_reg[5]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4_i_1 
+    \out_reg[5]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c_i_1 
        (.I0(tx_token_valid_int),
         .O(in_inj_bit));
+endmodule
+
+(* ORIG_REF_NAME = "dff" *) 
+module design_1_BiDirChannels_0_0_dff_7
+   (out_shift_sel,
+    \out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \out_reg[7] ,
+    s00_axi_aclk,
+    \slv_reg0_reg[31] );
+  output out_shift_sel;
+  output \out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  input \out_reg[7] ;
+  input s00_axi_aclk;
+  input \slv_reg0_reg[31] ;
+
+  wire \out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \out_reg[7] ;
+  wire out_shift_sel;
+  wire s00_axi_aclk;
+  wire \slv_reg0_reg[31] ;
+
+  FDCE Q_reg
+       (.C(s00_axi_aclk),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(\out_reg[7] ),
+        .Q(out_shift_sel));
+  LUT1 #(
+    .INIT(2'h1)) 
+    \out_reg[4]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c_i_1 
+       (.I0(out_shift_sel),
+        .O(\out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ));
 endmodule
 
 (* ORIG_REF_NAME = "inputShiftRegister32Bits" *) 
@@ -4905,7 +4303,8 @@ module design_1_BiDirChannels_0_0_maskHSCK
     \slv_reg1_reg[4] ,
     \r_reg_reg[0] ,
     \slv_reg0_reg[31] ,
-    \slv_reg0_reg[31]_0 ,
+    \slv_reg1_reg[0] ,
+    data_word_4,
     s00_axi_aresetn,
     tx_token_valid_int,
     \data_out_reg[31] ,
@@ -5006,10 +4405,11 @@ module design_1_BiDirChannels_0_0_maskHSCK
   output \r_reg_reg[2]_C ;
   output \r_reg_reg[1]_C ;
   output \r_reg_reg[1]_P_0 ;
-  input [1:0]\slv_reg1_reg[4] ;
+  input \slv_reg1_reg[4] ;
   input \r_reg_reg[0] ;
   input \slv_reg0_reg[31] ;
-  input [0:0]\slv_reg0_reg[31]_0 ;
+  input \slv_reg1_reg[0] ;
+  input [0:0]data_word_4;
   input s00_axi_aresetn;
   input tx_token_valid_int;
   input \data_out_reg[31] ;
@@ -5077,6 +4477,7 @@ module design_1_BiDirChannels_0_0_maskHSCK
   wire \data_out_reg[7] ;
   wire \data_out_reg[8] ;
   wire \data_out_reg[9] ;
+  wire [0:0]data_word_4;
   wire in_start_stop_int;
   wire out_start_stop_int;
   wire \r_reg_reg[0] ;
@@ -5146,16 +4547,16 @@ module design_1_BiDirChannels_0_0_maskHSCK
   wire \r_reg_reg[9]_P ;
   wire s00_axi_aresetn;
   wire \slv_reg0_reg[31] ;
-  wire [0:0]\slv_reg0_reg[31]_0 ;
-  wire [1:0]\slv_reg1_reg[4] ;
+  wire \slv_reg1_reg[0] ;
+  wire \slv_reg1_reg[4] ;
   wire tx_token_valid_int;
 
-  design_1_BiDirChannels_0_0_dff_5 ff0
+  design_1_BiDirChannels_0_0_dff_1 ff0
        (.in_start_stop_int(in_start_stop_int),
         .\r_reg_reg[0] (\r_reg_reg[0] ),
         .\slv_reg0_reg[31] (\slv_reg0_reg[31] ),
-        .\slv_reg1_reg[4] (\slv_reg1_reg[4] [1]));
-  design_1_BiDirChannels_0_0_dff_6 ff1
+        .\slv_reg1_reg[4] (\slv_reg1_reg[4] ));
+  design_1_BiDirChannels_0_0_dff_2 ff1
        (.\data_out_reg[0] (\data_out_reg[0] ),
         .\data_out_reg[10] (\data_out_reg[10] ),
         .\data_out_reg[11] (\data_out_reg[11] ),
@@ -5188,6 +4589,7 @@ module design_1_BiDirChannels_0_0_maskHSCK
         .\data_out_reg[7] (\data_out_reg[7] ),
         .\data_out_reg[8] (\data_out_reg[8] ),
         .\data_out_reg[9] (\data_out_reg[9] ),
+        .data_word_4(data_word_4),
         .\r_reg_reg[0] (\r_reg_reg[0] ),
         .\r_reg_reg[0]_P (\r_reg_reg[0]_P ),
         .\r_reg_reg[10]_C (\r_reg_reg[10]_C ),
@@ -5256,8 +4658,7 @@ module design_1_BiDirChannels_0_0_maskHSCK
         .\r_reg_reg[9]_P (\r_reg_reg[9]_P ),
         .s00_axi_aresetn(s00_axi_aresetn),
         .\slv_reg0_reg[31] (\slv_reg0_reg[31] ),
-        .\slv_reg0_reg[31]_0 (\slv_reg0_reg[31]_0 ),
-        .\slv_reg1_reg[0] (\slv_reg1_reg[4] [0]),
+        .\slv_reg1_reg[0] (\slv_reg1_reg[0] ),
         .tx_token_valid_int(tx_token_valid_int));
 endmodule
 
@@ -5331,7 +4732,7 @@ module design_1_BiDirChannels_0_0_outputShiftRegister32Bits
     \slv_reg0_reg[31]_60 ,
     \slv_reg0_reg[31]_61 ,
     \slv_reg0_reg[31]_62 ,
-    \slv_reg0_reg[24] ,
+    data_word_4,
     HS_DataIn);
   output HS_DataOut;
   output [0:0]D;
@@ -5401,13 +4802,14 @@ module design_1_BiDirChannels_0_0_outputShiftRegister32Bits
   input \slv_reg0_reg[31]_60 ;
   input \slv_reg0_reg[31]_61 ;
   input \slv_reg0_reg[31]_62 ;
-  input [0:0]\slv_reg0_reg[24] ;
+  input [0:0]data_word_4;
   input HS_DataIn;
 
   wire [0:0]D;
   wire HS_DataIn;
   wire HS_DataOut;
   wire Q_reg;
+  wire [0:0]data_word_4;
   wire outSR_shift;
   wire \r_reg[10]_C_i_1_n_0 ;
   wire \r_reg[11]_C_i_1_n_0 ;
@@ -5536,7 +4938,6 @@ module design_1_BiDirChannels_0_0_outputShiftRegister32Bits
   wire \r_reg_reg[9]_C_n_0 ;
   wire \r_reg_reg[9]_LDC_n_0 ;
   wire \r_reg_reg[9]_P_n_0 ;
-  wire [0:0]\slv_reg0_reg[24] ;
   wire \slv_reg0_reg[31] ;
   wire \slv_reg0_reg[31]_0 ;
   wire \slv_reg0_reg[31]_1 ;
@@ -5606,7 +5007,7 @@ module design_1_BiDirChannels_0_0_outputShiftRegister32Bits
     .INIT(8'hB8)) 
     \r_reg[0]_i_1 
        (.I0(HS_DataOut),
-        .I1(\slv_reg0_reg[24] ),
+        .I1(data_word_4),
         .I2(HS_DataIn),
         .O(D));
   LUT3 #(
@@ -6528,7 +5929,7 @@ module design_1_BiDirChannels_0_0_register_32bits
 endmodule
 
 (* ORIG_REF_NAME = "register_32bits" *) 
-module design_1_BiDirChannels_0_0_register_32bits_12
+module design_1_BiDirChannels_0_0_register_32bits_10
    (data_out_reg_c_0,
     data_out_reg_c_1,
     debug_out_shift_int,
@@ -6543,6 +5944,505 @@ module design_1_BiDirChannels_0_0_register_32bits_12
   wire debug_out_shift_int;
   wire \slv_reg0_reg[31] ;
 
+  FDCE data_out_reg_c
+       (.C(debug_out_shift_int),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(data_out_reg_c_1),
+        .Q(data_out_reg_c_0));
+endmodule
+
+(* ORIG_REF_NAME = "register_32bits" *) 
+module design_1_BiDirChannels_0_0_register_32bits_11
+   (data_out_reg_c_0,
+    data_out_reg_c_1,
+    debug_out_shift_int,
+    \slv_reg0_reg[31] );
+  output data_out_reg_c_0;
+  input data_out_reg_c_1;
+  input debug_out_shift_int;
+  input \slv_reg0_reg[31] ;
+
+  wire data_out_reg_c_0;
+  wire data_out_reg_c_1;
+  wire debug_out_shift_int;
+  wire \slv_reg0_reg[31] ;
+
+  FDCE data_out_reg_c
+       (.C(debug_out_shift_int),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(data_out_reg_c_1),
+        .Q(data_out_reg_c_0));
+endmodule
+
+(* ORIG_REF_NAME = "register_32bits" *) 
+module design_1_BiDirChannels_0_0_register_32bits_12
+   (data_out_reg_c_0,
+    \data_out_reg[31]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[30]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[29]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[28]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[27]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[26]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[25]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[24]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[23]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[22]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[21]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[20]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[19]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[18]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[17]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[16]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[15]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[14]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[13]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[12]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[11]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[10]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[9]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[8]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[7]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[6]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[4]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[3]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[2]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[1]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[0]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    data_out_reg_c_1,
+    debug_out_shift_int,
+    \slv_reg0_reg[31] ,
+    Q);
+  output data_out_reg_c_0;
+  output \data_out_reg[31]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  output \data_out_reg[30]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  output \data_out_reg[29]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  output \data_out_reg[28]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  output \data_out_reg[27]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  output \data_out_reg[26]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  output \data_out_reg[25]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  output \data_out_reg[24]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  output \data_out_reg[23]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  output \data_out_reg[22]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  output \data_out_reg[21]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  output \data_out_reg[20]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  output \data_out_reg[19]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  output \data_out_reg[18]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  output \data_out_reg[17]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  output \data_out_reg[16]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  output \data_out_reg[15]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  output \data_out_reg[14]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  output \data_out_reg[13]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  output \data_out_reg[12]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  output \data_out_reg[11]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  output \data_out_reg[10]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  output \data_out_reg[9]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  output \data_out_reg[8]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  output \data_out_reg[7]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  output \data_out_reg[6]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  output \data_out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  output \data_out_reg[4]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  output \data_out_reg[3]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  output \data_out_reg[2]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  output \data_out_reg[1]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  output \data_out_reg[0]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  input data_out_reg_c_1;
+  input debug_out_shift_int;
+  input \slv_reg0_reg[31] ;
+  input [31:0]Q;
+
+  wire [31:0]Q;
+  wire \data_out_reg[0]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[10]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[11]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[12]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[13]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[14]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[15]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[16]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[17]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[18]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[19]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[1]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[20]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[21]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[22]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[23]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[24]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[25]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[26]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[27]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[28]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[29]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[2]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[30]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[31]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[3]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[4]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[6]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[7]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[8]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[9]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire data_out_reg_c_0;
+  wire data_out_reg_c_1;
+  wire debug_out_shift_int;
+  wire \slv_reg0_reg[31] ;
+
+  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg " *) 
+  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg[0]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c " *) 
+  SRL16E \data_out_reg[0]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c 
+       (.A0(1'b0),
+        .A1(1'b0),
+        .A2(1'b1),
+        .A3(1'b0),
+        .CE(1'b1),
+        .CLK(debug_out_shift_int),
+        .D(Q[0]),
+        .Q(\data_out_reg[0]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ));
+  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg " *) 
+  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg[10]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c " *) 
+  SRL16E \data_out_reg[10]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c 
+       (.A0(1'b0),
+        .A1(1'b0),
+        .A2(1'b1),
+        .A3(1'b0),
+        .CE(1'b1),
+        .CLK(debug_out_shift_int),
+        .D(Q[10]),
+        .Q(\data_out_reg[10]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ));
+  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg " *) 
+  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg[11]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c " *) 
+  SRL16E \data_out_reg[11]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c 
+       (.A0(1'b0),
+        .A1(1'b0),
+        .A2(1'b1),
+        .A3(1'b0),
+        .CE(1'b1),
+        .CLK(debug_out_shift_int),
+        .D(Q[11]),
+        .Q(\data_out_reg[11]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ));
+  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg " *) 
+  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg[12]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c " *) 
+  SRL16E \data_out_reg[12]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c 
+       (.A0(1'b0),
+        .A1(1'b0),
+        .A2(1'b1),
+        .A3(1'b0),
+        .CE(1'b1),
+        .CLK(debug_out_shift_int),
+        .D(Q[12]),
+        .Q(\data_out_reg[12]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ));
+  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg " *) 
+  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg[13]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c " *) 
+  SRL16E \data_out_reg[13]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c 
+       (.A0(1'b0),
+        .A1(1'b0),
+        .A2(1'b1),
+        .A3(1'b0),
+        .CE(1'b1),
+        .CLK(debug_out_shift_int),
+        .D(Q[13]),
+        .Q(\data_out_reg[13]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ));
+  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg " *) 
+  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg[14]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c " *) 
+  SRL16E \data_out_reg[14]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c 
+       (.A0(1'b0),
+        .A1(1'b0),
+        .A2(1'b1),
+        .A3(1'b0),
+        .CE(1'b1),
+        .CLK(debug_out_shift_int),
+        .D(Q[14]),
+        .Q(\data_out_reg[14]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ));
+  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg " *) 
+  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg[15]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c " *) 
+  SRL16E \data_out_reg[15]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c 
+       (.A0(1'b0),
+        .A1(1'b0),
+        .A2(1'b1),
+        .A3(1'b0),
+        .CE(1'b1),
+        .CLK(debug_out_shift_int),
+        .D(Q[15]),
+        .Q(\data_out_reg[15]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ));
+  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg " *) 
+  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg[16]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c " *) 
+  SRL16E \data_out_reg[16]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c 
+       (.A0(1'b0),
+        .A1(1'b0),
+        .A2(1'b1),
+        .A3(1'b0),
+        .CE(1'b1),
+        .CLK(debug_out_shift_int),
+        .D(Q[16]),
+        .Q(\data_out_reg[16]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ));
+  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg " *) 
+  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg[17]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c " *) 
+  SRL16E \data_out_reg[17]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c 
+       (.A0(1'b0),
+        .A1(1'b0),
+        .A2(1'b1),
+        .A3(1'b0),
+        .CE(1'b1),
+        .CLK(debug_out_shift_int),
+        .D(Q[17]),
+        .Q(\data_out_reg[17]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ));
+  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg " *) 
+  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg[18]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c " *) 
+  SRL16E \data_out_reg[18]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c 
+       (.A0(1'b0),
+        .A1(1'b0),
+        .A2(1'b1),
+        .A3(1'b0),
+        .CE(1'b1),
+        .CLK(debug_out_shift_int),
+        .D(Q[18]),
+        .Q(\data_out_reg[18]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ));
+  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg " *) 
+  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg[19]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c " *) 
+  SRL16E \data_out_reg[19]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c 
+       (.A0(1'b0),
+        .A1(1'b0),
+        .A2(1'b1),
+        .A3(1'b0),
+        .CE(1'b1),
+        .CLK(debug_out_shift_int),
+        .D(Q[19]),
+        .Q(\data_out_reg[19]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ));
+  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg " *) 
+  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg[1]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c " *) 
+  SRL16E \data_out_reg[1]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c 
+       (.A0(1'b0),
+        .A1(1'b0),
+        .A2(1'b1),
+        .A3(1'b0),
+        .CE(1'b1),
+        .CLK(debug_out_shift_int),
+        .D(Q[1]),
+        .Q(\data_out_reg[1]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ));
+  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg " *) 
+  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg[20]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c " *) 
+  SRL16E \data_out_reg[20]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c 
+       (.A0(1'b0),
+        .A1(1'b0),
+        .A2(1'b1),
+        .A3(1'b0),
+        .CE(1'b1),
+        .CLK(debug_out_shift_int),
+        .D(Q[20]),
+        .Q(\data_out_reg[20]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ));
+  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg " *) 
+  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg[21]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c " *) 
+  SRL16E \data_out_reg[21]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c 
+       (.A0(1'b0),
+        .A1(1'b0),
+        .A2(1'b1),
+        .A3(1'b0),
+        .CE(1'b1),
+        .CLK(debug_out_shift_int),
+        .D(Q[21]),
+        .Q(\data_out_reg[21]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ));
+  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg " *) 
+  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg[22]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c " *) 
+  SRL16E \data_out_reg[22]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c 
+       (.A0(1'b0),
+        .A1(1'b0),
+        .A2(1'b1),
+        .A3(1'b0),
+        .CE(1'b1),
+        .CLK(debug_out_shift_int),
+        .D(Q[22]),
+        .Q(\data_out_reg[22]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ));
+  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg " *) 
+  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg[23]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c " *) 
+  SRL16E \data_out_reg[23]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c 
+       (.A0(1'b0),
+        .A1(1'b0),
+        .A2(1'b1),
+        .A3(1'b0),
+        .CE(1'b1),
+        .CLK(debug_out_shift_int),
+        .D(Q[23]),
+        .Q(\data_out_reg[23]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ));
+  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg " *) 
+  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg[24]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c " *) 
+  SRL16E \data_out_reg[24]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c 
+       (.A0(1'b0),
+        .A1(1'b0),
+        .A2(1'b1),
+        .A3(1'b0),
+        .CE(1'b1),
+        .CLK(debug_out_shift_int),
+        .D(Q[24]),
+        .Q(\data_out_reg[24]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ));
+  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg " *) 
+  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg[25]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c " *) 
+  SRL16E \data_out_reg[25]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c 
+       (.A0(1'b0),
+        .A1(1'b0),
+        .A2(1'b1),
+        .A3(1'b0),
+        .CE(1'b1),
+        .CLK(debug_out_shift_int),
+        .D(Q[25]),
+        .Q(\data_out_reg[25]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ));
+  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg " *) 
+  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg[26]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c " *) 
+  SRL16E \data_out_reg[26]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c 
+       (.A0(1'b0),
+        .A1(1'b0),
+        .A2(1'b1),
+        .A3(1'b0),
+        .CE(1'b1),
+        .CLK(debug_out_shift_int),
+        .D(Q[26]),
+        .Q(\data_out_reg[26]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ));
+  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg " *) 
+  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg[27]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c " *) 
+  SRL16E \data_out_reg[27]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c 
+       (.A0(1'b0),
+        .A1(1'b0),
+        .A2(1'b1),
+        .A3(1'b0),
+        .CE(1'b1),
+        .CLK(debug_out_shift_int),
+        .D(Q[27]),
+        .Q(\data_out_reg[27]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ));
+  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg " *) 
+  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg[28]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c " *) 
+  SRL16E \data_out_reg[28]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c 
+       (.A0(1'b0),
+        .A1(1'b0),
+        .A2(1'b1),
+        .A3(1'b0),
+        .CE(1'b1),
+        .CLK(debug_out_shift_int),
+        .D(Q[28]),
+        .Q(\data_out_reg[28]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ));
+  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg " *) 
+  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg[29]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c " *) 
+  SRL16E \data_out_reg[29]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c 
+       (.A0(1'b0),
+        .A1(1'b0),
+        .A2(1'b1),
+        .A3(1'b0),
+        .CE(1'b1),
+        .CLK(debug_out_shift_int),
+        .D(Q[29]),
+        .Q(\data_out_reg[29]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ));
+  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg " *) 
+  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg[2]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c " *) 
+  SRL16E \data_out_reg[2]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c 
+       (.A0(1'b0),
+        .A1(1'b0),
+        .A2(1'b1),
+        .A3(1'b0),
+        .CE(1'b1),
+        .CLK(debug_out_shift_int),
+        .D(Q[2]),
+        .Q(\data_out_reg[2]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ));
+  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg " *) 
+  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg[30]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c " *) 
+  SRL16E \data_out_reg[30]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c 
+       (.A0(1'b0),
+        .A1(1'b0),
+        .A2(1'b1),
+        .A3(1'b0),
+        .CE(1'b1),
+        .CLK(debug_out_shift_int),
+        .D(Q[30]),
+        .Q(\data_out_reg[30]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ));
+  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg " *) 
+  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg[31]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c " *) 
+  SRL16E \data_out_reg[31]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c 
+       (.A0(1'b0),
+        .A1(1'b0),
+        .A2(1'b1),
+        .A3(1'b0),
+        .CE(1'b1),
+        .CLK(debug_out_shift_int),
+        .D(Q[31]),
+        .Q(\data_out_reg[31]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ));
+  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg " *) 
+  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg[3]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c " *) 
+  SRL16E \data_out_reg[3]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c 
+       (.A0(1'b0),
+        .A1(1'b0),
+        .A2(1'b1),
+        .A3(1'b0),
+        .CE(1'b1),
+        .CLK(debug_out_shift_int),
+        .D(Q[3]),
+        .Q(\data_out_reg[3]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ));
+  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg " *) 
+  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg[4]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c " *) 
+  SRL16E \data_out_reg[4]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c 
+       (.A0(1'b0),
+        .A1(1'b0),
+        .A2(1'b1),
+        .A3(1'b0),
+        .CE(1'b1),
+        .CLK(debug_out_shift_int),
+        .D(Q[4]),
+        .Q(\data_out_reg[4]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ));
+  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg " *) 
+  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg[5]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c " *) 
+  SRL16E \data_out_reg[5]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c 
+       (.A0(1'b0),
+        .A1(1'b0),
+        .A2(1'b1),
+        .A3(1'b0),
+        .CE(1'b1),
+        .CLK(debug_out_shift_int),
+        .D(Q[5]),
+        .Q(\data_out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ));
+  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg " *) 
+  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg[6]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c " *) 
+  SRL16E \data_out_reg[6]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c 
+       (.A0(1'b0),
+        .A1(1'b0),
+        .A2(1'b1),
+        .A3(1'b0),
+        .CE(1'b1),
+        .CLK(debug_out_shift_int),
+        .D(Q[6]),
+        .Q(\data_out_reg[6]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ));
+  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg " *) 
+  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg[7]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c " *) 
+  SRL16E \data_out_reg[7]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c 
+       (.A0(1'b0),
+        .A1(1'b0),
+        .A2(1'b1),
+        .A3(1'b0),
+        .CE(1'b1),
+        .CLK(debug_out_shift_int),
+        .D(Q[7]),
+        .Q(\data_out_reg[7]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ));
+  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg " *) 
+  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg[8]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c " *) 
+  SRL16E \data_out_reg[8]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c 
+       (.A0(1'b0),
+        .A1(1'b0),
+        .A2(1'b1),
+        .A3(1'b0),
+        .CE(1'b1),
+        .CLK(debug_out_shift_int),
+        .D(Q[8]),
+        .Q(\data_out_reg[8]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ));
+  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg " *) 
+  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg[9]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c " *) 
+  SRL16E \data_out_reg[9]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c 
+       (.A0(1'b0),
+        .A1(1'b0),
+        .A2(1'b1),
+        .A3(1'b0),
+        .CE(1'b1),
+        .CLK(debug_out_shift_int),
+        .D(Q[9]),
+        .Q(\data_out_reg[9]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ));
   FDCE data_out_reg_c
        (.C(debug_out_shift_int),
         .CE(1'b1),
@@ -6553,554 +6453,8 @@ endmodule
 
 (* ORIG_REF_NAME = "register_32bits" *) 
 module design_1_BiDirChannels_0_0_register_32bits_13
-   (data_out_reg_c_0,
-    data_out_reg_c_1,
-    debug_out_shift_int,
-    \slv_reg0_reg[31] );
-  output data_out_reg_c_0;
-  input data_out_reg_c_1;
-  input debug_out_shift_int;
-  input \slv_reg0_reg[31] ;
-
-  wire data_out_reg_c_0;
-  wire data_out_reg_c_1;
-  wire debug_out_shift_int;
-  wire \slv_reg0_reg[31] ;
-
-  FDCE data_out_reg_c
-       (.C(debug_out_shift_int),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[31] ),
-        .D(data_out_reg_c_1),
-        .Q(data_out_reg_c_0));
-endmodule
-
-(* ORIG_REF_NAME = "register_32bits" *) 
-module design_1_BiDirChannels_0_0_register_32bits_14
-   (data_out_reg_c_0,
-    data_out_reg_c_1,
-    debug_out_shift_int,
-    \slv_reg0_reg[31] );
-  output data_out_reg_c_0;
-  input data_out_reg_c_1;
-  input debug_out_shift_int;
-  input \slv_reg0_reg[31] ;
-
-  wire data_out_reg_c_0;
-  wire data_out_reg_c_1;
-  wire debug_out_shift_int;
-  wire \slv_reg0_reg[31] ;
-
-  FDCE data_out_reg_c
-       (.C(debug_out_shift_int),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[31] ),
-        .D(data_out_reg_c_1),
-        .Q(data_out_reg_c_0));
-endmodule
-
-(* ORIG_REF_NAME = "register_32bits" *) 
-module design_1_BiDirChannels_0_0_register_32bits_15
-   (data_out_reg_c_0,
-    data_out_reg_c_1,
-    debug_out_shift_int,
-    \slv_reg0_reg[31] );
-  output data_out_reg_c_0;
-  input data_out_reg_c_1;
-  input debug_out_shift_int;
-  input \slv_reg0_reg[31] ;
-
-  wire data_out_reg_c_0;
-  wire data_out_reg_c_1;
-  wire debug_out_shift_int;
-  wire \slv_reg0_reg[31] ;
-
-  FDCE data_out_reg_c
-       (.C(debug_out_shift_int),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[31] ),
-        .D(data_out_reg_c_1),
-        .Q(data_out_reg_c_0));
-endmodule
-
-(* ORIG_REF_NAME = "register_32bits" *) 
-module design_1_BiDirChannels_0_0_register_32bits_16
-   (data_out_reg_c_0,
-    \data_out_reg[31]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[30]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[29]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[28]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[27]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[26]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[25]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[24]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[23]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[22]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[21]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[20]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[19]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[18]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[17]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[16]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[15]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[14]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[13]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[12]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[11]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[10]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[9]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[8]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[7]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[6]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[4]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[3]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[2]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[1]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[0]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    data_out_reg_c_1,
-    debug_out_shift_int,
-    \slv_reg0_reg[31] ,
-    Q);
-  output data_out_reg_c_0;
-  output \data_out_reg[31]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  output \data_out_reg[30]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  output \data_out_reg[29]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  output \data_out_reg[28]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  output \data_out_reg[27]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  output \data_out_reg[26]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  output \data_out_reg[25]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  output \data_out_reg[24]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  output \data_out_reg[23]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  output \data_out_reg[22]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  output \data_out_reg[21]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  output \data_out_reg[20]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  output \data_out_reg[19]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  output \data_out_reg[18]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  output \data_out_reg[17]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  output \data_out_reg[16]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  output \data_out_reg[15]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  output \data_out_reg[14]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  output \data_out_reg[13]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  output \data_out_reg[12]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  output \data_out_reg[11]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  output \data_out_reg[10]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  output \data_out_reg[9]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  output \data_out_reg[8]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  output \data_out_reg[7]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  output \data_out_reg[6]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  output \data_out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  output \data_out_reg[4]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  output \data_out_reg[3]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  output \data_out_reg[2]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  output \data_out_reg[1]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  output \data_out_reg[0]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  input data_out_reg_c_1;
-  input debug_out_shift_int;
-  input \slv_reg0_reg[31] ;
-  input [31:0]Q;
-
-  wire [31:0]Q;
-  wire \data_out_reg[0]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[10]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[11]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[12]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[13]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[14]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[15]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[16]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[17]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[18]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[19]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[1]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[20]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[21]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[22]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[23]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[24]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[25]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[26]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[27]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[28]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[29]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[2]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[30]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[31]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[3]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[4]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[6]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[7]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[8]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[9]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire data_out_reg_c_0;
-  wire data_out_reg_c_1;
-  wire debug_out_shift_int;
-  wire \slv_reg0_reg[31] ;
-
-  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg[0]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c " *) 
-  SRL16E \data_out_reg[0]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
-       (.A0(1'b1),
-        .A1(1'b0),
-        .A2(1'b1),
-        .A3(1'b0),
-        .CE(1'b1),
-        .CLK(debug_out_shift_int),
-        .D(Q[0]),
-        .Q(\data_out_reg[0]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ));
-  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg[10]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c " *) 
-  SRL16E \data_out_reg[10]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
-       (.A0(1'b1),
-        .A1(1'b0),
-        .A2(1'b1),
-        .A3(1'b0),
-        .CE(1'b1),
-        .CLK(debug_out_shift_int),
-        .D(Q[10]),
-        .Q(\data_out_reg[10]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ));
-  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg[11]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c " *) 
-  SRL16E \data_out_reg[11]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
-       (.A0(1'b1),
-        .A1(1'b0),
-        .A2(1'b1),
-        .A3(1'b0),
-        .CE(1'b1),
-        .CLK(debug_out_shift_int),
-        .D(Q[11]),
-        .Q(\data_out_reg[11]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ));
-  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg[12]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c " *) 
-  SRL16E \data_out_reg[12]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
-       (.A0(1'b1),
-        .A1(1'b0),
-        .A2(1'b1),
-        .A3(1'b0),
-        .CE(1'b1),
-        .CLK(debug_out_shift_int),
-        .D(Q[12]),
-        .Q(\data_out_reg[12]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ));
-  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg[13]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c " *) 
-  SRL16E \data_out_reg[13]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
-       (.A0(1'b1),
-        .A1(1'b0),
-        .A2(1'b1),
-        .A3(1'b0),
-        .CE(1'b1),
-        .CLK(debug_out_shift_int),
-        .D(Q[13]),
-        .Q(\data_out_reg[13]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ));
-  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg[14]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c " *) 
-  SRL16E \data_out_reg[14]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
-       (.A0(1'b1),
-        .A1(1'b0),
-        .A2(1'b1),
-        .A3(1'b0),
-        .CE(1'b1),
-        .CLK(debug_out_shift_int),
-        .D(Q[14]),
-        .Q(\data_out_reg[14]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ));
-  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg[15]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c " *) 
-  SRL16E \data_out_reg[15]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
-       (.A0(1'b1),
-        .A1(1'b0),
-        .A2(1'b1),
-        .A3(1'b0),
-        .CE(1'b1),
-        .CLK(debug_out_shift_int),
-        .D(Q[15]),
-        .Q(\data_out_reg[15]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ));
-  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg[16]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c " *) 
-  SRL16E \data_out_reg[16]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
-       (.A0(1'b1),
-        .A1(1'b0),
-        .A2(1'b1),
-        .A3(1'b0),
-        .CE(1'b1),
-        .CLK(debug_out_shift_int),
-        .D(Q[16]),
-        .Q(\data_out_reg[16]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ));
-  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg[17]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c " *) 
-  SRL16E \data_out_reg[17]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
-       (.A0(1'b1),
-        .A1(1'b0),
-        .A2(1'b1),
-        .A3(1'b0),
-        .CE(1'b1),
-        .CLK(debug_out_shift_int),
-        .D(Q[17]),
-        .Q(\data_out_reg[17]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ));
-  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg[18]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c " *) 
-  SRL16E \data_out_reg[18]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
-       (.A0(1'b1),
-        .A1(1'b0),
-        .A2(1'b1),
-        .A3(1'b0),
-        .CE(1'b1),
-        .CLK(debug_out_shift_int),
-        .D(Q[18]),
-        .Q(\data_out_reg[18]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ));
-  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg[19]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c " *) 
-  SRL16E \data_out_reg[19]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
-       (.A0(1'b1),
-        .A1(1'b0),
-        .A2(1'b1),
-        .A3(1'b0),
-        .CE(1'b1),
-        .CLK(debug_out_shift_int),
-        .D(Q[19]),
-        .Q(\data_out_reg[19]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ));
-  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg[1]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c " *) 
-  SRL16E \data_out_reg[1]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
-       (.A0(1'b1),
-        .A1(1'b0),
-        .A2(1'b1),
-        .A3(1'b0),
-        .CE(1'b1),
-        .CLK(debug_out_shift_int),
-        .D(Q[1]),
-        .Q(\data_out_reg[1]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ));
-  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg[20]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c " *) 
-  SRL16E \data_out_reg[20]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
-       (.A0(1'b1),
-        .A1(1'b0),
-        .A2(1'b1),
-        .A3(1'b0),
-        .CE(1'b1),
-        .CLK(debug_out_shift_int),
-        .D(Q[20]),
-        .Q(\data_out_reg[20]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ));
-  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg[21]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c " *) 
-  SRL16E \data_out_reg[21]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
-       (.A0(1'b1),
-        .A1(1'b0),
-        .A2(1'b1),
-        .A3(1'b0),
-        .CE(1'b1),
-        .CLK(debug_out_shift_int),
-        .D(Q[21]),
-        .Q(\data_out_reg[21]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ));
-  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg[22]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c " *) 
-  SRL16E \data_out_reg[22]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
-       (.A0(1'b1),
-        .A1(1'b0),
-        .A2(1'b1),
-        .A3(1'b0),
-        .CE(1'b1),
-        .CLK(debug_out_shift_int),
-        .D(Q[22]),
-        .Q(\data_out_reg[22]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ));
-  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg[23]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c " *) 
-  SRL16E \data_out_reg[23]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
-       (.A0(1'b1),
-        .A1(1'b0),
-        .A2(1'b1),
-        .A3(1'b0),
-        .CE(1'b1),
-        .CLK(debug_out_shift_int),
-        .D(Q[23]),
-        .Q(\data_out_reg[23]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ));
-  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg[24]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c " *) 
-  SRL16E \data_out_reg[24]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
-       (.A0(1'b1),
-        .A1(1'b0),
-        .A2(1'b1),
-        .A3(1'b0),
-        .CE(1'b1),
-        .CLK(debug_out_shift_int),
-        .D(Q[24]),
-        .Q(\data_out_reg[24]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ));
-  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg[25]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c " *) 
-  SRL16E \data_out_reg[25]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
-       (.A0(1'b1),
-        .A1(1'b0),
-        .A2(1'b1),
-        .A3(1'b0),
-        .CE(1'b1),
-        .CLK(debug_out_shift_int),
-        .D(Q[25]),
-        .Q(\data_out_reg[25]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ));
-  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg[26]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c " *) 
-  SRL16E \data_out_reg[26]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
-       (.A0(1'b1),
-        .A1(1'b0),
-        .A2(1'b1),
-        .A3(1'b0),
-        .CE(1'b1),
-        .CLK(debug_out_shift_int),
-        .D(Q[26]),
-        .Q(\data_out_reg[26]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ));
-  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg[27]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c " *) 
-  SRL16E \data_out_reg[27]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
-       (.A0(1'b1),
-        .A1(1'b0),
-        .A2(1'b1),
-        .A3(1'b0),
-        .CE(1'b1),
-        .CLK(debug_out_shift_int),
-        .D(Q[27]),
-        .Q(\data_out_reg[27]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ));
-  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg[28]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c " *) 
-  SRL16E \data_out_reg[28]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
-       (.A0(1'b1),
-        .A1(1'b0),
-        .A2(1'b1),
-        .A3(1'b0),
-        .CE(1'b1),
-        .CLK(debug_out_shift_int),
-        .D(Q[28]),
-        .Q(\data_out_reg[28]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ));
-  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg[29]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c " *) 
-  SRL16E \data_out_reg[29]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
-       (.A0(1'b1),
-        .A1(1'b0),
-        .A2(1'b1),
-        .A3(1'b0),
-        .CE(1'b1),
-        .CLK(debug_out_shift_int),
-        .D(Q[29]),
-        .Q(\data_out_reg[29]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ));
-  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg[2]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c " *) 
-  SRL16E \data_out_reg[2]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
-       (.A0(1'b1),
-        .A1(1'b0),
-        .A2(1'b1),
-        .A3(1'b0),
-        .CE(1'b1),
-        .CLK(debug_out_shift_int),
-        .D(Q[2]),
-        .Q(\data_out_reg[2]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ));
-  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg[30]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c " *) 
-  SRL16E \data_out_reg[30]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
-       (.A0(1'b1),
-        .A1(1'b0),
-        .A2(1'b1),
-        .A3(1'b0),
-        .CE(1'b1),
-        .CLK(debug_out_shift_int),
-        .D(Q[30]),
-        .Q(\data_out_reg[30]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ));
-  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg[31]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c " *) 
-  SRL16E \data_out_reg[31]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
-       (.A0(1'b1),
-        .A1(1'b0),
-        .A2(1'b1),
-        .A3(1'b0),
-        .CE(1'b1),
-        .CLK(debug_out_shift_int),
-        .D(Q[31]),
-        .Q(\data_out_reg[31]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ));
-  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg[3]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c " *) 
-  SRL16E \data_out_reg[3]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
-       (.A0(1'b1),
-        .A1(1'b0),
-        .A2(1'b1),
-        .A3(1'b0),
-        .CE(1'b1),
-        .CLK(debug_out_shift_int),
-        .D(Q[3]),
-        .Q(\data_out_reg[3]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ));
-  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg[4]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c " *) 
-  SRL16E \data_out_reg[4]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
-       (.A0(1'b1),
-        .A1(1'b0),
-        .A2(1'b1),
-        .A3(1'b0),
-        .CE(1'b1),
-        .CLK(debug_out_shift_int),
-        .D(Q[4]),
-        .Q(\data_out_reg[4]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ));
-  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg[5]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c " *) 
-  SRL16E \data_out_reg[5]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
-       (.A0(1'b1),
-        .A1(1'b0),
-        .A2(1'b1),
-        .A3(1'b0),
-        .CE(1'b1),
-        .CLK(debug_out_shift_int),
-        .D(Q[5]),
-        .Q(\data_out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ));
-  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg[6]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c " *) 
-  SRL16E \data_out_reg[6]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
-       (.A0(1'b1),
-        .A1(1'b0),
-        .A2(1'b1),
-        .A3(1'b0),
-        .CE(1'b1),
-        .CLK(debug_out_shift_int),
-        .D(Q[6]),
-        .Q(\data_out_reg[6]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ));
-  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg[7]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c " *) 
-  SRL16E \data_out_reg[7]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
-       (.A0(1'b1),
-        .A1(1'b0),
-        .A2(1'b1),
-        .A3(1'b0),
-        .CE(1'b1),
-        .CLK(debug_out_shift_int),
-        .D(Q[7]),
-        .Q(\data_out_reg[7]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ));
-  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg[8]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c " *) 
-  SRL16E \data_out_reg[8]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
-       (.A0(1'b1),
-        .A1(1'b0),
-        .A2(1'b1),
-        .A3(1'b0),
-        .CE(1'b1),
-        .CLK(debug_out_shift_int),
-        .D(Q[8]),
-        .Q(\data_out_reg[8]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ));
-  (* srl_bus_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg[9]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c " *) 
-  SRL16E \data_out_reg[9]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
-       (.A0(1'b1),
-        .A1(1'b0),
-        .A2(1'b1),
-        .A3(1'b0),
-        .CE(1'b1),
-        .CLK(debug_out_shift_int),
-        .D(Q[9]),
-        .Q(\data_out_reg[9]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ));
-  FDCE data_out_reg_c
-       (.C(debug_out_shift_int),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[31] ),
-        .D(data_out_reg_c_1),
-        .Q(data_out_reg_c_0));
-endmodule
-
-(* ORIG_REF_NAME = "register_32bits" *) 
-module design_1_BiDirChannels_0_0_register_32bits_17
-   (\data_out_reg[31] ,
+   (\data_out_reg[0] ,
+    \data_out_reg[31] ,
     \data_out_reg[30] ,
     \data_out_reg[29] ,
     \data_out_reg[28] ,
@@ -7131,7 +6485,7 @@ module design_1_BiDirChannels_0_0_register_32bits_17
     \data_out_reg[3] ,
     \data_out_reg[2] ,
     \data_out_reg[1] ,
-    \data_out_reg[0] ,
+    \data_out_reg[0]_0 ,
     data_out_reg_c_0,
     debug_out_shift_int,
     \slv_reg0_reg[31] ,
@@ -7167,6 +6521,7 @@ module design_1_BiDirChannels_0_0_register_32bits_17
     \r_reg_reg[2] ,
     \r_reg_reg[1] ,
     \r_reg_reg[0] );
+  output \data_out_reg[0] ;
   output \data_out_reg[31] ;
   output \data_out_reg[30] ;
   output \data_out_reg[29] ;
@@ -7198,7 +6553,7 @@ module design_1_BiDirChannels_0_0_register_32bits_17
   output \data_out_reg[3] ;
   output \data_out_reg[2] ;
   output \data_out_reg[1] ;
-  output \data_out_reg[0] ;
+  output \data_out_reg[0]_0 ;
   input data_out_reg_c_0;
   input debug_out_shift_int;
   input \slv_reg0_reg[31] ;
@@ -7236,71 +6591,71 @@ module design_1_BiDirChannels_0_0_register_32bits_17
   input \r_reg_reg[0] ;
 
   wire \data_out_reg[0] ;
-  wire \data_out_reg[0]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ;
+  wire \data_out_reg[0]_0 ;
+  wire \data_out_reg[0]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ;
   wire \data_out_reg[10] ;
-  wire \data_out_reg[10]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ;
+  wire \data_out_reg[10]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ;
   wire \data_out_reg[11] ;
-  wire \data_out_reg[11]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ;
+  wire \data_out_reg[11]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ;
   wire \data_out_reg[12] ;
-  wire \data_out_reg[12]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ;
+  wire \data_out_reg[12]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ;
   wire \data_out_reg[13] ;
-  wire \data_out_reg[13]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ;
+  wire \data_out_reg[13]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ;
   wire \data_out_reg[14] ;
-  wire \data_out_reg[14]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ;
+  wire \data_out_reg[14]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ;
   wire \data_out_reg[15] ;
-  wire \data_out_reg[15]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ;
+  wire \data_out_reg[15]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ;
   wire \data_out_reg[16] ;
-  wire \data_out_reg[16]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ;
+  wire \data_out_reg[16]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ;
   wire \data_out_reg[17] ;
-  wire \data_out_reg[17]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ;
+  wire \data_out_reg[17]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ;
   wire \data_out_reg[18] ;
-  wire \data_out_reg[18]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ;
+  wire \data_out_reg[18]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ;
   wire \data_out_reg[19] ;
-  wire \data_out_reg[19]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ;
+  wire \data_out_reg[19]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ;
   wire \data_out_reg[1] ;
-  wire \data_out_reg[1]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ;
+  wire \data_out_reg[1]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ;
   wire \data_out_reg[20] ;
-  wire \data_out_reg[20]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ;
+  wire \data_out_reg[20]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ;
   wire \data_out_reg[21] ;
-  wire \data_out_reg[21]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ;
+  wire \data_out_reg[21]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ;
   wire \data_out_reg[22] ;
-  wire \data_out_reg[22]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ;
+  wire \data_out_reg[22]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ;
   wire \data_out_reg[23] ;
-  wire \data_out_reg[23]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ;
+  wire \data_out_reg[23]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ;
   wire \data_out_reg[24] ;
-  wire \data_out_reg[24]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ;
+  wire \data_out_reg[24]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ;
   wire \data_out_reg[25] ;
-  wire \data_out_reg[25]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ;
+  wire \data_out_reg[25]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ;
   wire \data_out_reg[26] ;
-  wire \data_out_reg[26]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ;
+  wire \data_out_reg[26]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ;
   wire \data_out_reg[27] ;
-  wire \data_out_reg[27]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ;
+  wire \data_out_reg[27]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ;
   wire \data_out_reg[28] ;
-  wire \data_out_reg[28]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ;
+  wire \data_out_reg[28]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ;
   wire \data_out_reg[29] ;
-  wire \data_out_reg[29]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ;
+  wire \data_out_reg[29]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ;
   wire \data_out_reg[2] ;
-  wire \data_out_reg[2]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ;
+  wire \data_out_reg[2]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ;
   wire \data_out_reg[30] ;
-  wire \data_out_reg[30]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ;
+  wire \data_out_reg[30]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ;
   wire \data_out_reg[31] ;
-  wire \data_out_reg[31]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ;
+  wire \data_out_reg[31]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ;
   wire \data_out_reg[3] ;
-  wire \data_out_reg[3]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ;
+  wire \data_out_reg[3]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ;
   wire \data_out_reg[4] ;
-  wire \data_out_reg[4]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ;
+  wire \data_out_reg[4]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ;
   wire \data_out_reg[5] ;
-  wire \data_out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ;
+  wire \data_out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ;
   wire \data_out_reg[6] ;
-  wire \data_out_reg[6]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ;
+  wire \data_out_reg[6]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ;
   wire \data_out_reg[7] ;
-  wire \data_out_reg[7]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ;
+  wire \data_out_reg[7]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ;
   wire \data_out_reg[8] ;
-  wire \data_out_reg[8]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ;
+  wire \data_out_reg[8]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ;
   wire \data_out_reg[9] ;
-  wire \data_out_reg[9]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ;
+  wire \data_out_reg[9]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ;
   wire data_out_reg_c_0;
-  wire data_out_reg_c_n_0;
   wire debug_out_shift_int;
   wire \r_reg_reg[0] ;
   wire \r_reg_reg[10] ;
@@ -7336,535 +6691,1138 @@ module design_1_BiDirChannels_0_0_register_32bits_17
   wire \r_reg_reg[9] ;
   wire \slv_reg0_reg[31] ;
 
-  FDRE \data_out_reg[0]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c 
+  FDRE \data_out_reg[0]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .D(\r_reg_reg[0] ),
-        .Q(\data_out_reg[0]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .Q(\data_out_reg[0]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[10]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c 
+  FDRE \data_out_reg[10]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .D(\r_reg_reg[10] ),
-        .Q(\data_out_reg[10]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .Q(\data_out_reg[10]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[11]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c 
+  FDRE \data_out_reg[11]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .D(\r_reg_reg[11] ),
-        .Q(\data_out_reg[11]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .Q(\data_out_reg[11]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[12]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c 
+  FDRE \data_out_reg[12]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .D(\r_reg_reg[12] ),
-        .Q(\data_out_reg[12]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .Q(\data_out_reg[12]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[13]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c 
+  FDRE \data_out_reg[13]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .D(\r_reg_reg[13] ),
-        .Q(\data_out_reg[13]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .Q(\data_out_reg[13]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[14]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c 
+  FDRE \data_out_reg[14]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .D(\r_reg_reg[14] ),
-        .Q(\data_out_reg[14]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .Q(\data_out_reg[14]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[15]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c 
+  FDRE \data_out_reg[15]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .D(\r_reg_reg[15] ),
-        .Q(\data_out_reg[15]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .Q(\data_out_reg[15]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[16]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c 
+  FDRE \data_out_reg[16]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .D(\r_reg_reg[16] ),
-        .Q(\data_out_reg[16]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .Q(\data_out_reg[16]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[17]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c 
+  FDRE \data_out_reg[17]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .D(\r_reg_reg[17] ),
-        .Q(\data_out_reg[17]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .Q(\data_out_reg[17]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[18]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c 
+  FDRE \data_out_reg[18]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .D(\r_reg_reg[18] ),
-        .Q(\data_out_reg[18]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .Q(\data_out_reg[18]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[19]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c 
+  FDRE \data_out_reg[19]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .D(\r_reg_reg[19] ),
-        .Q(\data_out_reg[19]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .Q(\data_out_reg[19]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[1]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c 
+  FDRE \data_out_reg[1]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .D(\r_reg_reg[1] ),
-        .Q(\data_out_reg[1]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .Q(\data_out_reg[1]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[20]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c 
+  FDRE \data_out_reg[20]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .D(\r_reg_reg[20] ),
-        .Q(\data_out_reg[20]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .Q(\data_out_reg[20]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[21]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c 
+  FDRE \data_out_reg[21]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .D(\r_reg_reg[21] ),
-        .Q(\data_out_reg[21]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .Q(\data_out_reg[21]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[22]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c 
+  FDRE \data_out_reg[22]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .D(\r_reg_reg[22] ),
-        .Q(\data_out_reg[22]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .Q(\data_out_reg[22]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[23]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c 
+  FDRE \data_out_reg[23]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .D(\r_reg_reg[23] ),
-        .Q(\data_out_reg[23]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .Q(\data_out_reg[23]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[24]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c 
+  FDRE \data_out_reg[24]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .D(\r_reg_reg[24] ),
-        .Q(\data_out_reg[24]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .Q(\data_out_reg[24]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[25]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c 
+  FDRE \data_out_reg[25]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .D(\r_reg_reg[25] ),
-        .Q(\data_out_reg[25]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .Q(\data_out_reg[25]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[26]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c 
+  FDRE \data_out_reg[26]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .D(\r_reg_reg[26] ),
-        .Q(\data_out_reg[26]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .Q(\data_out_reg[26]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[27]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c 
+  FDRE \data_out_reg[27]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .D(\r_reg_reg[27] ),
-        .Q(\data_out_reg[27]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .Q(\data_out_reg[27]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[28]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c 
+  FDRE \data_out_reg[28]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .D(\r_reg_reg[28] ),
-        .Q(\data_out_reg[28]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .Q(\data_out_reg[28]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[29]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c 
+  FDRE \data_out_reg[29]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .D(\r_reg_reg[29] ),
-        .Q(\data_out_reg[29]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .Q(\data_out_reg[29]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[2]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c 
+  FDRE \data_out_reg[2]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .D(\r_reg_reg[2] ),
-        .Q(\data_out_reg[2]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .Q(\data_out_reg[2]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[30]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c 
+  FDRE \data_out_reg[30]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .D(\r_reg_reg[30] ),
-        .Q(\data_out_reg[30]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .Q(\data_out_reg[30]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[31]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c 
+  FDRE \data_out_reg[31]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .D(\r_reg_reg[31] ),
-        .Q(\data_out_reg[31]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .Q(\data_out_reg[31]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[3]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c 
+  FDRE \data_out_reg[3]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .D(\r_reg_reg[3] ),
-        .Q(\data_out_reg[3]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .Q(\data_out_reg[3]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[4]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c 
+  FDRE \data_out_reg[4]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .D(\r_reg_reg[4] ),
-        .Q(\data_out_reg[4]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .Q(\data_out_reg[4]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c 
+  FDRE \data_out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .D(\r_reg_reg[5] ),
-        .Q(\data_out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .Q(\data_out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[6]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c 
+  FDRE \data_out_reg[6]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .D(\r_reg_reg[6] ),
-        .Q(\data_out_reg[6]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .Q(\data_out_reg[6]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[7]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c 
+  FDRE \data_out_reg[7]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .D(\r_reg_reg[7] ),
-        .Q(\data_out_reg[7]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .Q(\data_out_reg[7]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[8]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c 
+  FDRE \data_out_reg[8]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .D(\r_reg_reg[8] ),
-        .Q(\data_out_reg[8]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .Q(\data_out_reg[8]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[9]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c 
+  FDRE \data_out_reg[9]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .D(\r_reg_reg[9] ),
-        .Q(\data_out_reg[9]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .Q(\data_out_reg[9]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
         .R(1'b0));
   FDCE data_out_reg_c
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
         .D(data_out_reg_c_0),
-        .Q(data_out_reg_c_n_0));
-  (* SOFT_HLUTNM = "soft_lutpair19" *) 
+        .Q(\data_out_reg[0] ));
+  (* SOFT_HLUTNM = "soft_lutpair18" *) 
   LUT2 #(
     .INIT(4'h8)) 
     data_out_reg_gate
-       (.I0(\data_out_reg[31]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
-        .I1(data_out_reg_c_n_0),
+       (.I0(\data_out_reg[31]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
         .O(\data_out_reg[31] ));
-  (* SOFT_HLUTNM = "soft_lutpair19" *) 
+  (* SOFT_HLUTNM = "soft_lutpair18" *) 
   LUT2 #(
     .INIT(4'h8)) 
     data_out_reg_gate__0
-       (.I0(\data_out_reg[30]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
-        .I1(data_out_reg_c_n_0),
+       (.I0(\data_out_reg[30]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
         .O(\data_out_reg[30] ));
-  (* SOFT_HLUTNM = "soft_lutpair20" *) 
+  (* SOFT_HLUTNM = "soft_lutpair19" *) 
   LUT2 #(
     .INIT(4'h8)) 
     data_out_reg_gate__1
-       (.I0(\data_out_reg[29]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
-        .I1(data_out_reg_c_n_0),
+       (.I0(\data_out_reg[29]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
         .O(\data_out_reg[29] ));
-  (* SOFT_HLUTNM = "soft_lutpair24" *) 
+  (* SOFT_HLUTNM = "soft_lutpair23" *) 
   LUT2 #(
     .INIT(4'h8)) 
     data_out_reg_gate__10
-       (.I0(\data_out_reg[20]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
-        .I1(data_out_reg_c_n_0),
+       (.I0(\data_out_reg[20]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
         .O(\data_out_reg[20] ));
-  (* SOFT_HLUTNM = "soft_lutpair25" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__11
-       (.I0(\data_out_reg[19]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
-        .I1(data_out_reg_c_n_0),
-        .O(\data_out_reg[19] ));
-  (* SOFT_HLUTNM = "soft_lutpair25" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__12
-       (.I0(\data_out_reg[18]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
-        .I1(data_out_reg_c_n_0),
-        .O(\data_out_reg[18] ));
-  (* SOFT_HLUTNM = "soft_lutpair26" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__13
-       (.I0(\data_out_reg[17]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
-        .I1(data_out_reg_c_n_0),
-        .O(\data_out_reg[17] ));
-  (* SOFT_HLUTNM = "soft_lutpair26" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__14
-       (.I0(\data_out_reg[16]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
-        .I1(data_out_reg_c_n_0),
-        .O(\data_out_reg[16] ));
-  (* SOFT_HLUTNM = "soft_lutpair27" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__15
-       (.I0(\data_out_reg[15]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
-        .I1(data_out_reg_c_n_0),
-        .O(\data_out_reg[15] ));
-  (* SOFT_HLUTNM = "soft_lutpair27" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__16
-       (.I0(\data_out_reg[14]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
-        .I1(data_out_reg_c_n_0),
-        .O(\data_out_reg[14] ));
-  (* SOFT_HLUTNM = "soft_lutpair28" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__17
-       (.I0(\data_out_reg[13]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
-        .I1(data_out_reg_c_n_0),
-        .O(\data_out_reg[13] ));
-  (* SOFT_HLUTNM = "soft_lutpair28" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__18
-       (.I0(\data_out_reg[12]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
-        .I1(data_out_reg_c_n_0),
-        .O(\data_out_reg[12] ));
-  (* SOFT_HLUTNM = "soft_lutpair29" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__19
-       (.I0(\data_out_reg[11]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
-        .I1(data_out_reg_c_n_0),
-        .O(\data_out_reg[11] ));
-  (* SOFT_HLUTNM = "soft_lutpair20" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__2
-       (.I0(\data_out_reg[28]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
-        .I1(data_out_reg_c_n_0),
-        .O(\data_out_reg[28] ));
-  (* SOFT_HLUTNM = "soft_lutpair29" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__20
-       (.I0(\data_out_reg[10]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
-        .I1(data_out_reg_c_n_0),
-        .O(\data_out_reg[10] ));
-  (* SOFT_HLUTNM = "soft_lutpair30" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__21
-       (.I0(\data_out_reg[9]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
-        .I1(data_out_reg_c_n_0),
-        .O(\data_out_reg[9] ));
-  (* SOFT_HLUTNM = "soft_lutpair30" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__22
-       (.I0(\data_out_reg[8]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
-        .I1(data_out_reg_c_n_0),
-        .O(\data_out_reg[8] ));
-  (* SOFT_HLUTNM = "soft_lutpair31" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__23
-       (.I0(\data_out_reg[7]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
-        .I1(data_out_reg_c_n_0),
-        .O(\data_out_reg[7] ));
-  (* SOFT_HLUTNM = "soft_lutpair31" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__24
-       (.I0(\data_out_reg[6]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
-        .I1(data_out_reg_c_n_0),
-        .O(\data_out_reg[6] ));
-  (* SOFT_HLUTNM = "soft_lutpair32" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__25
-       (.I0(\data_out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
-        .I1(data_out_reg_c_n_0),
-        .O(\data_out_reg[5] ));
-  (* SOFT_HLUTNM = "soft_lutpair32" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__26
-       (.I0(\data_out_reg[4]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
-        .I1(data_out_reg_c_n_0),
-        .O(\data_out_reg[4] ));
-  (* SOFT_HLUTNM = "soft_lutpair33" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__27
-       (.I0(\data_out_reg[3]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
-        .I1(data_out_reg_c_n_0),
-        .O(\data_out_reg[3] ));
-  (* SOFT_HLUTNM = "soft_lutpair33" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__28
-       (.I0(\data_out_reg[2]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
-        .I1(data_out_reg_c_n_0),
-        .O(\data_out_reg[2] ));
-  (* SOFT_HLUTNM = "soft_lutpair34" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__29
-       (.I0(\data_out_reg[1]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
-        .I1(data_out_reg_c_n_0),
-        .O(\data_out_reg[1] ));
-  (* SOFT_HLUTNM = "soft_lutpair21" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__3
-       (.I0(\data_out_reg[27]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
-        .I1(data_out_reg_c_n_0),
-        .O(\data_out_reg[27] ));
-  (* SOFT_HLUTNM = "soft_lutpair34" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__30
-       (.I0(\data_out_reg[0]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
-        .I1(data_out_reg_c_n_0),
-        .O(\data_out_reg[0] ));
-  (* SOFT_HLUTNM = "soft_lutpair21" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__4
-       (.I0(\data_out_reg[26]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
-        .I1(data_out_reg_c_n_0),
-        .O(\data_out_reg[26] ));
-  (* SOFT_HLUTNM = "soft_lutpair22" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__5
-       (.I0(\data_out_reg[25]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
-        .I1(data_out_reg_c_n_0),
-        .O(\data_out_reg[25] ));
-  (* SOFT_HLUTNM = "soft_lutpair22" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__6
-       (.I0(\data_out_reg[24]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
-        .I1(data_out_reg_c_n_0),
-        .O(\data_out_reg[24] ));
-  (* SOFT_HLUTNM = "soft_lutpair23" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__7
-       (.I0(\data_out_reg[23]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
-        .I1(data_out_reg_c_n_0),
-        .O(\data_out_reg[23] ));
-  (* SOFT_HLUTNM = "soft_lutpair23" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__8
-       (.I0(\data_out_reg[22]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
-        .I1(data_out_reg_c_n_0),
-        .O(\data_out_reg[22] ));
   (* SOFT_HLUTNM = "soft_lutpair24" *) 
   LUT2 #(
     .INIT(4'h8)) 
+    data_out_reg_gate__11
+       (.I0(\data_out_reg[19]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[19] ));
+  (* SOFT_HLUTNM = "soft_lutpair24" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__12
+       (.I0(\data_out_reg[18]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[18] ));
+  (* SOFT_HLUTNM = "soft_lutpair25" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__13
+       (.I0(\data_out_reg[17]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[17] ));
+  (* SOFT_HLUTNM = "soft_lutpair25" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__14
+       (.I0(\data_out_reg[16]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[16] ));
+  (* SOFT_HLUTNM = "soft_lutpair26" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__15
+       (.I0(\data_out_reg[15]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[15] ));
+  (* SOFT_HLUTNM = "soft_lutpair26" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__16
+       (.I0(\data_out_reg[14]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[14] ));
+  (* SOFT_HLUTNM = "soft_lutpair27" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__17
+       (.I0(\data_out_reg[13]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[13] ));
+  (* SOFT_HLUTNM = "soft_lutpair27" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__18
+       (.I0(\data_out_reg[12]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[12] ));
+  (* SOFT_HLUTNM = "soft_lutpair28" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__19
+       (.I0(\data_out_reg[11]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[11] ));
+  (* SOFT_HLUTNM = "soft_lutpair19" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__2
+       (.I0(\data_out_reg[28]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[28] ));
+  (* SOFT_HLUTNM = "soft_lutpair28" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__20
+       (.I0(\data_out_reg[10]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[10] ));
+  (* SOFT_HLUTNM = "soft_lutpair29" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__21
+       (.I0(\data_out_reg[9]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[9] ));
+  (* SOFT_HLUTNM = "soft_lutpair29" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__22
+       (.I0(\data_out_reg[8]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[8] ));
+  (* SOFT_HLUTNM = "soft_lutpair30" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__23
+       (.I0(\data_out_reg[7]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[7] ));
+  (* SOFT_HLUTNM = "soft_lutpair30" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__24
+       (.I0(\data_out_reg[6]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[6] ));
+  (* SOFT_HLUTNM = "soft_lutpair31" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__25
+       (.I0(\data_out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[5] ));
+  (* SOFT_HLUTNM = "soft_lutpair31" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__26
+       (.I0(\data_out_reg[4]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[4] ));
+  (* SOFT_HLUTNM = "soft_lutpair32" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__27
+       (.I0(\data_out_reg[3]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[3] ));
+  (* SOFT_HLUTNM = "soft_lutpair32" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__28
+       (.I0(\data_out_reg[2]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[2] ));
+  (* SOFT_HLUTNM = "soft_lutpair33" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__29
+       (.I0(\data_out_reg[1]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[1] ));
+  (* SOFT_HLUTNM = "soft_lutpair20" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__3
+       (.I0(\data_out_reg[27]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[27] ));
+  (* SOFT_HLUTNM = "soft_lutpair33" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__30
+       (.I0(\data_out_reg[0]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[0]_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair20" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__4
+       (.I0(\data_out_reg[26]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[26] ));
+  (* SOFT_HLUTNM = "soft_lutpair21" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__5
+       (.I0(\data_out_reg[25]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[25] ));
+  (* SOFT_HLUTNM = "soft_lutpair21" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__6
+       (.I0(\data_out_reg[24]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[24] ));
+  (* SOFT_HLUTNM = "soft_lutpair22" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__7
+       (.I0(\data_out_reg[23]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[23] ));
+  (* SOFT_HLUTNM = "soft_lutpair22" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__8
+       (.I0(\data_out_reg[22]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[22] ));
+  (* SOFT_HLUTNM = "soft_lutpair23" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
     data_out_reg_gate__9
-       (.I0(\data_out_reg[21]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c_n_0 ),
-        .I1(data_out_reg_c_n_0),
+       (.I0(\data_out_reg[21]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
         .O(\data_out_reg[21] ));
 endmodule
 
 (* ORIG_REF_NAME = "register_32bits" *) 
-module design_1_BiDirChannels_0_0_register_32bits_18
-   (m00_axis_tdata,
-    \data_out_reg[31]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
+module design_1_BiDirChannels_0_0_register_32bits_14
+   (D,
+    \axi_rdata_reg[31] ,
+    \data_out_reg[31]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
     debug_out_shift_int,
     \slv_reg0_reg[31] ,
-    \data_out_reg[30]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[29]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[28]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[27]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[26]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[25]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[24]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[23]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[22]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[21]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[20]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[19]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[18]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[17]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[16]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[15]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[14]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[13]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[12]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[11]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[10]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[9]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[8]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[7]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[6]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[4]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[3]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[2]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[1]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ,
-    \data_out_reg[0]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c );
-  output [31:0]m00_axis_tdata;
-  input \data_out_reg[31]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
+    \data_out_reg[30]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[29]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[28]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[27]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[26]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[25]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[24]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[23]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[22]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[21]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[20]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[19]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[18]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[17]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[16]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[15]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[14]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[13]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[12]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[11]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[10]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[9]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[8]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[7]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[6]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[4]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[3]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[2]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[1]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[0]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ,
+    \data_out_reg[31]_0 ,
+    axi_araddr,
+    m00_axis_tdata,
+    \data_out_reg[30]_0 ,
+    \data_out_reg[29]_0 ,
+    \data_out_reg[28]_0 ,
+    \data_out_reg[27]_0 ,
+    \data_out_reg[26]_0 ,
+    \data_out_reg[25]_0 ,
+    \data_out_reg[24]_0 ,
+    \data_out_reg[23]_0 ,
+    \data_out_reg[22]_0 ,
+    \data_out_reg[21]_0 ,
+    \data_out_reg[20]_0 ,
+    \data_out_reg[19]_0 ,
+    \data_out_reg[18]_0 ,
+    \data_out_reg[17]_0 ,
+    \data_out_reg[16]_0 ,
+    \data_out_reg[15]_0 ,
+    \data_out_reg[14]_0 ,
+    \data_out_reg[13]_0 ,
+    \data_out_reg[12]_0 ,
+    \data_out_reg[11]_0 ,
+    \data_out_reg[10]_0 ,
+    \data_out_reg[9]_0 ,
+    \data_out_reg[8]_0 ,
+    \data_out_reg[7]_0 ,
+    \data_out_reg[6]_0 ,
+    \data_out_reg[5]_0 ,
+    \data_out_reg[4]_0 ,
+    \data_out_reg[3]_0 ,
+    \data_out_reg[2]_0 ,
+    \data_out_reg[1]_0 ,
+    \data_out_reg[0]_0 );
+  output [31:0]D;
+  output [31:0]\axi_rdata_reg[31] ;
+  input \data_out_reg[31]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
   input debug_out_shift_int;
   input \slv_reg0_reg[31] ;
-  input \data_out_reg[30]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  input \data_out_reg[29]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  input \data_out_reg[28]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  input \data_out_reg[27]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  input \data_out_reg[26]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  input \data_out_reg[25]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  input \data_out_reg[24]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  input \data_out_reg[23]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  input \data_out_reg[22]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  input \data_out_reg[21]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  input \data_out_reg[20]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  input \data_out_reg[19]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  input \data_out_reg[18]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  input \data_out_reg[17]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  input \data_out_reg[16]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  input \data_out_reg[15]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  input \data_out_reg[14]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  input \data_out_reg[13]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  input \data_out_reg[12]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  input \data_out_reg[11]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  input \data_out_reg[10]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  input \data_out_reg[9]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  input \data_out_reg[8]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  input \data_out_reg[7]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  input \data_out_reg[6]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  input \data_out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  input \data_out_reg[4]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  input \data_out_reg[3]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  input \data_out_reg[2]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  input \data_out_reg[1]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  input \data_out_reg[0]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
+  input \data_out_reg[30]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  input \data_out_reg[29]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  input \data_out_reg[28]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  input \data_out_reg[27]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  input \data_out_reg[26]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  input \data_out_reg[25]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  input \data_out_reg[24]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  input \data_out_reg[23]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  input \data_out_reg[22]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  input \data_out_reg[21]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  input \data_out_reg[20]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  input \data_out_reg[19]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  input \data_out_reg[18]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  input \data_out_reg[17]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  input \data_out_reg[16]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  input \data_out_reg[15]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  input \data_out_reg[14]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  input \data_out_reg[13]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  input \data_out_reg[12]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  input \data_out_reg[11]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  input \data_out_reg[10]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  input \data_out_reg[9]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  input \data_out_reg[8]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  input \data_out_reg[7]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  input \data_out_reg[6]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  input \data_out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  input \data_out_reg[4]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  input \data_out_reg[3]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  input \data_out_reg[2]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  input \data_out_reg[1]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  input \data_out_reg[0]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  input \data_out_reg[31]_0 ;
+  input [1:0]axi_araddr;
+  input [31:0]m00_axis_tdata;
+  input \data_out_reg[30]_0 ;
+  input \data_out_reg[29]_0 ;
+  input \data_out_reg[28]_0 ;
+  input \data_out_reg[27]_0 ;
+  input \data_out_reg[26]_0 ;
+  input \data_out_reg[25]_0 ;
+  input \data_out_reg[24]_0 ;
+  input \data_out_reg[23]_0 ;
+  input \data_out_reg[22]_0 ;
+  input \data_out_reg[21]_0 ;
+  input \data_out_reg[20]_0 ;
+  input \data_out_reg[19]_0 ;
+  input \data_out_reg[18]_0 ;
+  input \data_out_reg[17]_0 ;
+  input \data_out_reg[16]_0 ;
+  input \data_out_reg[15]_0 ;
+  input \data_out_reg[14]_0 ;
+  input \data_out_reg[13]_0 ;
+  input \data_out_reg[12]_0 ;
+  input \data_out_reg[11]_0 ;
+  input \data_out_reg[10]_0 ;
+  input \data_out_reg[9]_0 ;
+  input \data_out_reg[8]_0 ;
+  input \data_out_reg[7]_0 ;
+  input \data_out_reg[6]_0 ;
+  input \data_out_reg[5]_0 ;
+  input \data_out_reg[4]_0 ;
+  input \data_out_reg[3]_0 ;
+  input \data_out_reg[2]_0 ;
+  input \data_out_reg[1]_0 ;
+  input \data_out_reg[0]_0 ;
 
-  wire \data_out_reg[0]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[10]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[11]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[12]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[13]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[14]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[15]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[16]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[17]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[18]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[19]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[1]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[20]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[21]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[22]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[23]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[24]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[25]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[26]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[27]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[28]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[29]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[2]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[30]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[31]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[3]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[4]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[6]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[7]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[8]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
-  wire \data_out_reg[9]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ;
+  wire [31:0]D;
+  wire [1:0]axi_araddr;
+  wire [31:0]\axi_rdata_reg[31] ;
+  wire \data_out_reg[0]_0 ;
+  wire \data_out_reg[0]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[10]_0 ;
+  wire \data_out_reg[10]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[11]_0 ;
+  wire \data_out_reg[11]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[12]_0 ;
+  wire \data_out_reg[12]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[13]_0 ;
+  wire \data_out_reg[13]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[14]_0 ;
+  wire \data_out_reg[14]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[15]_0 ;
+  wire \data_out_reg[15]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[16]_0 ;
+  wire \data_out_reg[16]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[17]_0 ;
+  wire \data_out_reg[17]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[18]_0 ;
+  wire \data_out_reg[18]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[19]_0 ;
+  wire \data_out_reg[19]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[1]_0 ;
+  wire \data_out_reg[1]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[20]_0 ;
+  wire \data_out_reg[20]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[21]_0 ;
+  wire \data_out_reg[21]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[22]_0 ;
+  wire \data_out_reg[22]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[23]_0 ;
+  wire \data_out_reg[23]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[24]_0 ;
+  wire \data_out_reg[24]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[25]_0 ;
+  wire \data_out_reg[25]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[26]_0 ;
+  wire \data_out_reg[26]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[27]_0 ;
+  wire \data_out_reg[27]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[28]_0 ;
+  wire \data_out_reg[28]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[29]_0 ;
+  wire \data_out_reg[29]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[2]_0 ;
+  wire \data_out_reg[2]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[30]_0 ;
+  wire \data_out_reg[30]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[31]_0 ;
+  wire \data_out_reg[31]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[3]_0 ;
+  wire \data_out_reg[3]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[4]_0 ;
+  wire \data_out_reg[4]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[5]_0 ;
+  wire \data_out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[6]_0 ;
+  wire \data_out_reg[6]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[7]_0 ;
+  wire \data_out_reg[7]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[8]_0 ;
+  wire \data_out_reg[8]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire \data_out_reg[9]_0 ;
+  wire \data_out_reg[9]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ;
+  wire debug_out_shift_int;
+  wire [31:0]m00_axis_tdata;
+  wire \slv_reg0_reg[31] ;
+
+  LUT5 #(
+    .INIT(32'hCFFAC00A)) 
+    \axi_rdata[0]_i_1 
+       (.I0(\data_out_reg[0]_0 ),
+        .I1(D[0]),
+        .I2(axi_araddr[1]),
+        .I3(axi_araddr[0]),
+        .I4(m00_axis_tdata[0]),
+        .O(\axi_rdata_reg[31] [0]));
+  LUT5 #(
+    .INIT(32'hCFFAC00A)) 
+    \axi_rdata[10]_i_1 
+       (.I0(\data_out_reg[10]_0 ),
+        .I1(D[10]),
+        .I2(axi_araddr[1]),
+        .I3(axi_araddr[0]),
+        .I4(m00_axis_tdata[10]),
+        .O(\axi_rdata_reg[31] [10]));
+  LUT5 #(
+    .INIT(32'hCFFAC00A)) 
+    \axi_rdata[11]_i_1 
+       (.I0(\data_out_reg[11]_0 ),
+        .I1(D[11]),
+        .I2(axi_araddr[1]),
+        .I3(axi_araddr[0]),
+        .I4(m00_axis_tdata[11]),
+        .O(\axi_rdata_reg[31] [11]));
+  LUT5 #(
+    .INIT(32'hCFFAC00A)) 
+    \axi_rdata[12]_i_1 
+       (.I0(\data_out_reg[12]_0 ),
+        .I1(D[12]),
+        .I2(axi_araddr[1]),
+        .I3(axi_araddr[0]),
+        .I4(m00_axis_tdata[12]),
+        .O(\axi_rdata_reg[31] [12]));
+  LUT5 #(
+    .INIT(32'hCFFAC00A)) 
+    \axi_rdata[13]_i_1 
+       (.I0(\data_out_reg[13]_0 ),
+        .I1(D[13]),
+        .I2(axi_araddr[1]),
+        .I3(axi_araddr[0]),
+        .I4(m00_axis_tdata[13]),
+        .O(\axi_rdata_reg[31] [13]));
+  LUT5 #(
+    .INIT(32'hCFFAC00A)) 
+    \axi_rdata[14]_i_1 
+       (.I0(\data_out_reg[14]_0 ),
+        .I1(D[14]),
+        .I2(axi_araddr[1]),
+        .I3(axi_araddr[0]),
+        .I4(m00_axis_tdata[14]),
+        .O(\axi_rdata_reg[31] [14]));
+  LUT5 #(
+    .INIT(32'hCFFAC00A)) 
+    \axi_rdata[15]_i_1 
+       (.I0(\data_out_reg[15]_0 ),
+        .I1(D[15]),
+        .I2(axi_araddr[1]),
+        .I3(axi_araddr[0]),
+        .I4(m00_axis_tdata[15]),
+        .O(\axi_rdata_reg[31] [15]));
+  LUT5 #(
+    .INIT(32'hCFFAC00A)) 
+    \axi_rdata[16]_i_1 
+       (.I0(\data_out_reg[16]_0 ),
+        .I1(D[16]),
+        .I2(axi_araddr[1]),
+        .I3(axi_araddr[0]),
+        .I4(m00_axis_tdata[16]),
+        .O(\axi_rdata_reg[31] [16]));
+  LUT5 #(
+    .INIT(32'hCFFAC00A)) 
+    \axi_rdata[17]_i_1 
+       (.I0(\data_out_reg[17]_0 ),
+        .I1(D[17]),
+        .I2(axi_araddr[1]),
+        .I3(axi_araddr[0]),
+        .I4(m00_axis_tdata[17]),
+        .O(\axi_rdata_reg[31] [17]));
+  LUT5 #(
+    .INIT(32'hCFFAC00A)) 
+    \axi_rdata[18]_i_1 
+       (.I0(\data_out_reg[18]_0 ),
+        .I1(D[18]),
+        .I2(axi_araddr[1]),
+        .I3(axi_araddr[0]),
+        .I4(m00_axis_tdata[18]),
+        .O(\axi_rdata_reg[31] [18]));
+  LUT5 #(
+    .INIT(32'hCFFAC00A)) 
+    \axi_rdata[19]_i_1 
+       (.I0(\data_out_reg[19]_0 ),
+        .I1(D[19]),
+        .I2(axi_araddr[1]),
+        .I3(axi_araddr[0]),
+        .I4(m00_axis_tdata[19]),
+        .O(\axi_rdata_reg[31] [19]));
+  LUT5 #(
+    .INIT(32'hCFFAC00A)) 
+    \axi_rdata[1]_i_1 
+       (.I0(\data_out_reg[1]_0 ),
+        .I1(D[1]),
+        .I2(axi_araddr[1]),
+        .I3(axi_araddr[0]),
+        .I4(m00_axis_tdata[1]),
+        .O(\axi_rdata_reg[31] [1]));
+  LUT5 #(
+    .INIT(32'hCFFAC00A)) 
+    \axi_rdata[20]_i_1 
+       (.I0(\data_out_reg[20]_0 ),
+        .I1(D[20]),
+        .I2(axi_araddr[1]),
+        .I3(axi_araddr[0]),
+        .I4(m00_axis_tdata[20]),
+        .O(\axi_rdata_reg[31] [20]));
+  LUT5 #(
+    .INIT(32'hCFFAC00A)) 
+    \axi_rdata[21]_i_1 
+       (.I0(\data_out_reg[21]_0 ),
+        .I1(D[21]),
+        .I2(axi_araddr[1]),
+        .I3(axi_araddr[0]),
+        .I4(m00_axis_tdata[21]),
+        .O(\axi_rdata_reg[31] [21]));
+  LUT5 #(
+    .INIT(32'hCFFAC00A)) 
+    \axi_rdata[22]_i_1 
+       (.I0(\data_out_reg[22]_0 ),
+        .I1(D[22]),
+        .I2(axi_araddr[1]),
+        .I3(axi_araddr[0]),
+        .I4(m00_axis_tdata[22]),
+        .O(\axi_rdata_reg[31] [22]));
+  LUT5 #(
+    .INIT(32'hCFFAC00A)) 
+    \axi_rdata[23]_i_1 
+       (.I0(\data_out_reg[23]_0 ),
+        .I1(D[23]),
+        .I2(axi_araddr[1]),
+        .I3(axi_araddr[0]),
+        .I4(m00_axis_tdata[23]),
+        .O(\axi_rdata_reg[31] [23]));
+  LUT5 #(
+    .INIT(32'hCFFAC00A)) 
+    \axi_rdata[24]_i_1 
+       (.I0(\data_out_reg[24]_0 ),
+        .I1(D[24]),
+        .I2(axi_araddr[1]),
+        .I3(axi_araddr[0]),
+        .I4(m00_axis_tdata[24]),
+        .O(\axi_rdata_reg[31] [24]));
+  LUT5 #(
+    .INIT(32'hCFFAC00A)) 
+    \axi_rdata[25]_i_1 
+       (.I0(\data_out_reg[25]_0 ),
+        .I1(D[25]),
+        .I2(axi_araddr[1]),
+        .I3(axi_araddr[0]),
+        .I4(m00_axis_tdata[25]),
+        .O(\axi_rdata_reg[31] [25]));
+  LUT5 #(
+    .INIT(32'hCFFAC00A)) 
+    \axi_rdata[26]_i_1 
+       (.I0(\data_out_reg[26]_0 ),
+        .I1(D[26]),
+        .I2(axi_araddr[1]),
+        .I3(axi_araddr[0]),
+        .I4(m00_axis_tdata[26]),
+        .O(\axi_rdata_reg[31] [26]));
+  LUT5 #(
+    .INIT(32'hCFFAC00A)) 
+    \axi_rdata[27]_i_1 
+       (.I0(\data_out_reg[27]_0 ),
+        .I1(D[27]),
+        .I2(axi_araddr[1]),
+        .I3(axi_araddr[0]),
+        .I4(m00_axis_tdata[27]),
+        .O(\axi_rdata_reg[31] [27]));
+  LUT5 #(
+    .INIT(32'hCFFAC00A)) 
+    \axi_rdata[28]_i_1 
+       (.I0(\data_out_reg[28]_0 ),
+        .I1(D[28]),
+        .I2(axi_araddr[1]),
+        .I3(axi_araddr[0]),
+        .I4(m00_axis_tdata[28]),
+        .O(\axi_rdata_reg[31] [28]));
+  LUT5 #(
+    .INIT(32'hCFFAC00A)) 
+    \axi_rdata[29]_i_1 
+       (.I0(\data_out_reg[29]_0 ),
+        .I1(D[29]),
+        .I2(axi_araddr[1]),
+        .I3(axi_araddr[0]),
+        .I4(m00_axis_tdata[29]),
+        .O(\axi_rdata_reg[31] [29]));
+  LUT5 #(
+    .INIT(32'hCFFAC00A)) 
+    \axi_rdata[2]_i_1 
+       (.I0(\data_out_reg[2]_0 ),
+        .I1(D[2]),
+        .I2(axi_araddr[1]),
+        .I3(axi_araddr[0]),
+        .I4(m00_axis_tdata[2]),
+        .O(\axi_rdata_reg[31] [2]));
+  LUT5 #(
+    .INIT(32'hCFFAC00A)) 
+    \axi_rdata[30]_i_1 
+       (.I0(\data_out_reg[30]_0 ),
+        .I1(D[30]),
+        .I2(axi_araddr[1]),
+        .I3(axi_araddr[0]),
+        .I4(m00_axis_tdata[30]),
+        .O(\axi_rdata_reg[31] [30]));
+  LUT5 #(
+    .INIT(32'hCFFAC00A)) 
+    \axi_rdata[31]_i_1 
+       (.I0(\data_out_reg[31]_0 ),
+        .I1(D[31]),
+        .I2(axi_araddr[1]),
+        .I3(axi_araddr[0]),
+        .I4(m00_axis_tdata[31]),
+        .O(\axi_rdata_reg[31] [31]));
+  LUT5 #(
+    .INIT(32'hCFFAC00A)) 
+    \axi_rdata[3]_i_1 
+       (.I0(\data_out_reg[3]_0 ),
+        .I1(D[3]),
+        .I2(axi_araddr[1]),
+        .I3(axi_araddr[0]),
+        .I4(m00_axis_tdata[3]),
+        .O(\axi_rdata_reg[31] [3]));
+  LUT5 #(
+    .INIT(32'hCFFAC00A)) 
+    \axi_rdata[4]_i_1 
+       (.I0(\data_out_reg[4]_0 ),
+        .I1(D[4]),
+        .I2(axi_araddr[1]),
+        .I3(axi_araddr[0]),
+        .I4(m00_axis_tdata[4]),
+        .O(\axi_rdata_reg[31] [4]));
+  LUT5 #(
+    .INIT(32'hCFFAC00A)) 
+    \axi_rdata[5]_i_1 
+       (.I0(\data_out_reg[5]_0 ),
+        .I1(D[5]),
+        .I2(axi_araddr[1]),
+        .I3(axi_araddr[0]),
+        .I4(m00_axis_tdata[5]),
+        .O(\axi_rdata_reg[31] [5]));
+  LUT5 #(
+    .INIT(32'hCFFAC00A)) 
+    \axi_rdata[6]_i_1 
+       (.I0(\data_out_reg[6]_0 ),
+        .I1(D[6]),
+        .I2(axi_araddr[1]),
+        .I3(axi_araddr[0]),
+        .I4(m00_axis_tdata[6]),
+        .O(\axi_rdata_reg[31] [6]));
+  LUT5 #(
+    .INIT(32'hCFFAC00A)) 
+    \axi_rdata[7]_i_1 
+       (.I0(\data_out_reg[7]_0 ),
+        .I1(D[7]),
+        .I2(axi_araddr[1]),
+        .I3(axi_araddr[0]),
+        .I4(m00_axis_tdata[7]),
+        .O(\axi_rdata_reg[31] [7]));
+  LUT5 #(
+    .INIT(32'hCFFAC00A)) 
+    \axi_rdata[8]_i_1 
+       (.I0(\data_out_reg[8]_0 ),
+        .I1(D[8]),
+        .I2(axi_araddr[1]),
+        .I3(axi_araddr[0]),
+        .I4(m00_axis_tdata[8]),
+        .O(\axi_rdata_reg[31] [8]));
+  LUT5 #(
+    .INIT(32'hCFFAC00A)) 
+    \axi_rdata[9]_i_1 
+       (.I0(\data_out_reg[9]_0 ),
+        .I1(D[9]),
+        .I2(axi_araddr[1]),
+        .I3(axi_araddr[0]),
+        .I4(m00_axis_tdata[9]),
+        .O(\axi_rdata_reg[31] [9]));
+  FDCE \data_out_reg[0] 
+       (.C(debug_out_shift_int),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(\data_out_reg[0]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ),
+        .Q(D[0]));
+  FDCE \data_out_reg[10] 
+       (.C(debug_out_shift_int),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(\data_out_reg[10]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ),
+        .Q(D[10]));
+  FDCE \data_out_reg[11] 
+       (.C(debug_out_shift_int),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(\data_out_reg[11]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ),
+        .Q(D[11]));
+  FDCE \data_out_reg[12] 
+       (.C(debug_out_shift_int),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(\data_out_reg[12]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ),
+        .Q(D[12]));
+  FDCE \data_out_reg[13] 
+       (.C(debug_out_shift_int),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(\data_out_reg[13]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ),
+        .Q(D[13]));
+  FDCE \data_out_reg[14] 
+       (.C(debug_out_shift_int),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(\data_out_reg[14]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ),
+        .Q(D[14]));
+  FDCE \data_out_reg[15] 
+       (.C(debug_out_shift_int),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(\data_out_reg[15]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ),
+        .Q(D[15]));
+  FDCE \data_out_reg[16] 
+       (.C(debug_out_shift_int),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(\data_out_reg[16]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ),
+        .Q(D[16]));
+  FDCE \data_out_reg[17] 
+       (.C(debug_out_shift_int),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(\data_out_reg[17]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ),
+        .Q(D[17]));
+  FDCE \data_out_reg[18] 
+       (.C(debug_out_shift_int),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(\data_out_reg[18]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ),
+        .Q(D[18]));
+  FDCE \data_out_reg[19] 
+       (.C(debug_out_shift_int),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(\data_out_reg[19]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ),
+        .Q(D[19]));
+  FDCE \data_out_reg[1] 
+       (.C(debug_out_shift_int),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(\data_out_reg[1]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ),
+        .Q(D[1]));
+  FDCE \data_out_reg[20] 
+       (.C(debug_out_shift_int),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(\data_out_reg[20]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ),
+        .Q(D[20]));
+  FDCE \data_out_reg[21] 
+       (.C(debug_out_shift_int),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(\data_out_reg[21]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ),
+        .Q(D[21]));
+  FDCE \data_out_reg[22] 
+       (.C(debug_out_shift_int),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(\data_out_reg[22]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ),
+        .Q(D[22]));
+  FDCE \data_out_reg[23] 
+       (.C(debug_out_shift_int),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(\data_out_reg[23]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ),
+        .Q(D[23]));
+  FDCE \data_out_reg[24] 
+       (.C(debug_out_shift_int),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(\data_out_reg[24]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ),
+        .Q(D[24]));
+  FDCE \data_out_reg[25] 
+       (.C(debug_out_shift_int),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(\data_out_reg[25]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ),
+        .Q(D[25]));
+  FDCE \data_out_reg[26] 
+       (.C(debug_out_shift_int),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(\data_out_reg[26]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ),
+        .Q(D[26]));
+  FDCE \data_out_reg[27] 
+       (.C(debug_out_shift_int),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(\data_out_reg[27]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ),
+        .Q(D[27]));
+  FDCE \data_out_reg[28] 
+       (.C(debug_out_shift_int),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(\data_out_reg[28]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ),
+        .Q(D[28]));
+  FDCE \data_out_reg[29] 
+       (.C(debug_out_shift_int),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(\data_out_reg[29]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ),
+        .Q(D[29]));
+  FDCE \data_out_reg[2] 
+       (.C(debug_out_shift_int),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(\data_out_reg[2]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ),
+        .Q(D[2]));
+  FDCE \data_out_reg[30] 
+       (.C(debug_out_shift_int),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(\data_out_reg[30]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ),
+        .Q(D[30]));
+  FDCE \data_out_reg[31] 
+       (.C(debug_out_shift_int),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(\data_out_reg[31]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ),
+        .Q(D[31]));
+  FDCE \data_out_reg[3] 
+       (.C(debug_out_shift_int),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(\data_out_reg[3]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ),
+        .Q(D[3]));
+  FDCE \data_out_reg[4] 
+       (.C(debug_out_shift_int),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(\data_out_reg[4]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ),
+        .Q(D[4]));
+  FDCE \data_out_reg[5] 
+       (.C(debug_out_shift_int),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(\data_out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ),
+        .Q(D[5]));
+  FDCE \data_out_reg[6] 
+       (.C(debug_out_shift_int),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(\data_out_reg[6]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ),
+        .Q(D[6]));
+  FDCE \data_out_reg[7] 
+       (.C(debug_out_shift_int),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(\data_out_reg[7]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ),
+        .Q(D[7]));
+  FDCE \data_out_reg[8] 
+       (.C(debug_out_shift_int),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(\data_out_reg[8]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ),
+        .Q(D[8]));
+  FDCE \data_out_reg[9] 
+       (.C(debug_out_shift_int),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(\data_out_reg[9]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c ),
+        .Q(D[9]));
+endmodule
+
+(* ORIG_REF_NAME = "register_32bits" *) 
+module design_1_BiDirChannels_0_0_register_32bits_15
+   (m00_axis_tdata,
+    D,
+    debug_out_shift_int,
+    \slv_reg0_reg[31] );
+  output [31:0]m00_axis_tdata;
+  input [31:0]D;
+  input debug_out_shift_int;
+  input \slv_reg0_reg[31] ;
+
+  wire [31:0]D;
   wire debug_out_shift_int;
   wire [31:0]m00_axis_tdata;
   wire \slv_reg0_reg[31] ;
@@ -7873,305 +7831,431 @@ module design_1_BiDirChannels_0_0_register_32bits_18
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[0]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ),
+        .D(D[0]),
         .Q(m00_axis_tdata[0]));
   FDCE \data_out_reg[10] 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[10]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ),
+        .D(D[10]),
         .Q(m00_axis_tdata[10]));
   FDCE \data_out_reg[11] 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[11]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ),
+        .D(D[11]),
         .Q(m00_axis_tdata[11]));
   FDCE \data_out_reg[12] 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[12]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ),
+        .D(D[12]),
         .Q(m00_axis_tdata[12]));
   FDCE \data_out_reg[13] 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[13]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ),
+        .D(D[13]),
         .Q(m00_axis_tdata[13]));
   FDCE \data_out_reg[14] 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[14]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ),
+        .D(D[14]),
         .Q(m00_axis_tdata[14]));
   FDCE \data_out_reg[15] 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[15]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ),
+        .D(D[15]),
         .Q(m00_axis_tdata[15]));
   FDCE \data_out_reg[16] 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[16]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ),
+        .D(D[16]),
         .Q(m00_axis_tdata[16]));
   FDCE \data_out_reg[17] 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[17]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ),
+        .D(D[17]),
         .Q(m00_axis_tdata[17]));
   FDCE \data_out_reg[18] 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[18]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ),
+        .D(D[18]),
         .Q(m00_axis_tdata[18]));
   FDCE \data_out_reg[19] 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[19]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ),
+        .D(D[19]),
         .Q(m00_axis_tdata[19]));
   FDCE \data_out_reg[1] 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[1]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ),
+        .D(D[1]),
         .Q(m00_axis_tdata[1]));
   FDCE \data_out_reg[20] 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[20]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ),
+        .D(D[20]),
         .Q(m00_axis_tdata[20]));
   FDCE \data_out_reg[21] 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[21]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ),
+        .D(D[21]),
         .Q(m00_axis_tdata[21]));
   FDCE \data_out_reg[22] 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[22]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ),
+        .D(D[22]),
         .Q(m00_axis_tdata[22]));
   FDCE \data_out_reg[23] 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[23]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ),
+        .D(D[23]),
         .Q(m00_axis_tdata[23]));
   FDCE \data_out_reg[24] 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[24]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ),
+        .D(D[24]),
         .Q(m00_axis_tdata[24]));
   FDCE \data_out_reg[25] 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[25]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ),
+        .D(D[25]),
         .Q(m00_axis_tdata[25]));
   FDCE \data_out_reg[26] 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[26]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ),
+        .D(D[26]),
         .Q(m00_axis_tdata[26]));
   FDCE \data_out_reg[27] 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[27]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ),
+        .D(D[27]),
         .Q(m00_axis_tdata[27]));
   FDCE \data_out_reg[28] 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[28]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ),
+        .D(D[28]),
         .Q(m00_axis_tdata[28]));
   FDCE \data_out_reg[29] 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[29]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ),
+        .D(D[29]),
         .Q(m00_axis_tdata[29]));
   FDCE \data_out_reg[2] 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[2]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ),
+        .D(D[2]),
         .Q(m00_axis_tdata[2]));
   FDCE \data_out_reg[30] 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[30]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ),
+        .D(D[30]),
         .Q(m00_axis_tdata[30]));
   FDCE \data_out_reg[31] 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[31]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ),
+        .D(D[31]),
         .Q(m00_axis_tdata[31]));
   FDCE \data_out_reg[3] 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[3]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ),
+        .D(D[3]),
         .Q(m00_axis_tdata[3]));
   FDCE \data_out_reg[4] 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[4]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ),
+        .D(D[4]),
         .Q(m00_axis_tdata[4]));
   FDCE \data_out_reg[5] 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ),
+        .D(D[5]),
         .Q(m00_axis_tdata[5]));
   FDCE \data_out_reg[6] 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[6]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ),
+        .D(D[6]),
         .Q(m00_axis_tdata[6]));
   FDCE \data_out_reg[7] 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[7]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ),
+        .D(D[7]),
         .Q(m00_axis_tdata[7]));
   FDCE \data_out_reg[8] 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[8]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ),
+        .D(D[8]),
         .Q(m00_axis_tdata[8]));
   FDCE \data_out_reg[9] 
        (.C(debug_out_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[9]_inst_X1_BUFFERS_outputDelayLine_Reg6_data_out_reg_c ),
+        .D(D[9]),
         .Q(m00_axis_tdata[9]));
 endmodule
 
 (* ORIG_REF_NAME = "register_32bits" *) 
-module design_1_BiDirChannels_0_0_register_32bits_19
-   (\data_out_reg[31]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[30]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[29]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[28]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[27]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[26]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[25]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[24]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[23]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[22]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[21]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[20]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[19]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[18]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[17]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[16]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[15]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[14]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[13]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[12]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[11]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[10]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[9]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[8]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[7]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[6]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[5]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[4]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[3]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[2]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[1]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[0]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    s00_axis_tdata,
-    debug_in_shift_int);
-  output \data_out_reg[31]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  output \data_out_reg[30]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  output \data_out_reg[29]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  output \data_out_reg[28]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  output \data_out_reg[27]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  output \data_out_reg[26]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  output \data_out_reg[25]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  output \data_out_reg[24]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  output \data_out_reg[23]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  output \data_out_reg[22]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  output \data_out_reg[21]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  output \data_out_reg[20]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  output \data_out_reg[19]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  output \data_out_reg[18]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  output \data_out_reg[17]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  output \data_out_reg[16]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  output \data_out_reg[15]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  output \data_out_reg[14]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  output \data_out_reg[13]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  output \data_out_reg[12]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  output \data_out_reg[11]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  output \data_out_reg[10]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  output \data_out_reg[9]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  output \data_out_reg[8]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  output \data_out_reg[7]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  output \data_out_reg[6]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  output \data_out_reg[5]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  output \data_out_reg[4]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  output \data_out_reg[3]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  output \data_out_reg[2]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  output \data_out_reg[1]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  output \data_out_reg[0]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  input [31:0]s00_axis_tdata;
+module design_1_BiDirChannels_0_0_register_32bits_16
+   (data_out_reg_c_0,
+    debug_in_shift_int,
+    \slv_reg0_reg[31] );
+  output data_out_reg_c_0;
   input debug_in_shift_int;
+  input \slv_reg0_reg[31] ;
 
-  wire \data_out_reg[0]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[10]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[11]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[12]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[13]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[14]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[15]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[16]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[17]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[18]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[19]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[1]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[20]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[21]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[22]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[23]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[24]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[25]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[26]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[27]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[28]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[29]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[2]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[30]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[31]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[3]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[4]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[5]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[6]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[7]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[8]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[9]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
+  wire data_out_reg_c_0;
+  wire debug_in_shift_int;
+  wire \slv_reg0_reg[31] ;
+
+  FDCE data_out_reg_c
+       (.C(debug_in_shift_int),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(1'b1),
+        .Q(data_out_reg_c_0));
+endmodule
+
+(* ORIG_REF_NAME = "register_32bits" *) 
+module design_1_BiDirChannels_0_0_register_32bits_17
+   (data_out_reg_c_0,
+    data_out_reg_c_1,
+    debug_in_shift_int,
+    \slv_reg0_reg[31] );
+  output data_out_reg_c_0;
+  input data_out_reg_c_1;
+  input debug_in_shift_int;
+  input \slv_reg0_reg[31] ;
+
+  wire data_out_reg_c_0;
+  wire data_out_reg_c_1;
+  wire debug_in_shift_int;
+  wire \slv_reg0_reg[31] ;
+
+  FDCE data_out_reg_c
+       (.C(debug_in_shift_int),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(data_out_reg_c_1),
+        .Q(data_out_reg_c_0));
+endmodule
+
+(* ORIG_REF_NAME = "register_32bits" *) 
+module design_1_BiDirChannels_0_0_register_32bits_18
+   (data_out_reg_c_0,
+    data_out_reg_c_1,
+    debug_in_shift_int,
+    \slv_reg0_reg[31] );
+  output data_out_reg_c_0;
+  input data_out_reg_c_1;
+  input debug_in_shift_int;
+  input \slv_reg0_reg[31] ;
+
+  wire data_out_reg_c_0;
+  wire data_out_reg_c_1;
+  wire debug_in_shift_int;
+  wire \slv_reg0_reg[31] ;
+
+  FDCE data_out_reg_c
+       (.C(debug_in_shift_int),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(data_out_reg_c_1),
+        .Q(data_out_reg_c_0));
+endmodule
+
+(* ORIG_REF_NAME = "register_32bits" *) 
+module design_1_BiDirChannels_0_0_register_32bits_19
+   (data_out_reg_c_0,
+    data_out_reg_c_1,
+    debug_in_shift_int,
+    \slv_reg0_reg[31] );
+  output data_out_reg_c_0;
+  input data_out_reg_c_1;
+  input debug_in_shift_int;
+  input \slv_reg0_reg[31] ;
+
+  wire data_out_reg_c_0;
+  wire data_out_reg_c_1;
+  wire debug_in_shift_int;
+  wire \slv_reg0_reg[31] ;
+
+  FDCE data_out_reg_c
+       (.C(debug_in_shift_int),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(data_out_reg_c_1),
+        .Q(data_out_reg_c_0));
+endmodule
+
+(* ORIG_REF_NAME = "register_32bits" *) 
+module design_1_BiDirChannels_0_0_register_32bits_20
+   (data_out_reg_c_0,
+    data_out_reg_c_1,
+    debug_in_shift_int,
+    \slv_reg0_reg[31] );
+  output data_out_reg_c_0;
+  input data_out_reg_c_1;
+  input debug_in_shift_int;
+  input \slv_reg0_reg[31] ;
+
+  wire data_out_reg_c_0;
+  wire data_out_reg_c_1;
+  wire debug_in_shift_int;
+  wire \slv_reg0_reg[31] ;
+
+  FDCE data_out_reg_c
+       (.C(debug_in_shift_int),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(data_out_reg_c_1),
+        .Q(data_out_reg_c_0));
+endmodule
+
+(* ORIG_REF_NAME = "register_32bits" *) 
+module design_1_BiDirChannels_0_0_register_32bits_21
+   (data_out_reg_c_0,
+    \data_out_reg[31]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[30]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[29]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[28]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[27]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[26]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[25]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[24]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[23]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[22]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[21]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[20]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[19]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[18]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[17]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[16]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[15]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[14]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[13]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[12]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[11]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[10]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[9]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[8]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[7]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[6]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[5]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[4]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[3]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[2]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[1]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[0]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    data_out_reg_c_1,
+    debug_in_shift_int,
+    \slv_reg0_reg[31] ,
+    s00_axis_tdata);
+  output data_out_reg_c_0;
+  output \data_out_reg[31]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  output \data_out_reg[30]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  output \data_out_reg[29]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  output \data_out_reg[28]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  output \data_out_reg[27]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  output \data_out_reg[26]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  output \data_out_reg[25]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  output \data_out_reg[24]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  output \data_out_reg[23]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  output \data_out_reg[22]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  output \data_out_reg[21]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  output \data_out_reg[20]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  output \data_out_reg[19]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  output \data_out_reg[18]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  output \data_out_reg[17]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  output \data_out_reg[16]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  output \data_out_reg[15]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  output \data_out_reg[14]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  output \data_out_reg[13]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  output \data_out_reg[12]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  output \data_out_reg[11]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  output \data_out_reg[10]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  output \data_out_reg[9]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  output \data_out_reg[8]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  output \data_out_reg[7]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  output \data_out_reg[6]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  output \data_out_reg[5]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  output \data_out_reg[4]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  output \data_out_reg[3]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  output \data_out_reg[2]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  output \data_out_reg[1]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  output \data_out_reg[0]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  input data_out_reg_c_1;
+  input debug_in_shift_int;
+  input \slv_reg0_reg[31] ;
+  input [31:0]s00_axis_tdata;
+
+  wire \data_out_reg[0]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[10]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[11]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[12]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[13]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[14]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[15]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[16]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[17]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[18]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[19]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[1]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[20]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[21]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[22]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[23]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[24]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[25]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[26]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[27]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[28]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[29]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[2]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[30]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[31]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[3]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[4]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[5]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[6]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[7]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[8]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[9]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire data_out_reg_c_0;
+  wire data_out_reg_c_1;
   wire debug_in_shift_int;
   wire [31:0]s00_axis_tdata;
+  wire \slv_reg0_reg[31] ;
 
   (* srl_bus_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[0]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 " *) 
-  SRL16E \data_out_reg[0]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 
+  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[0]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c " *) 
+  SRL16E \data_out_reg[0]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c 
        (.A0(1'b1),
         .A1(1'b0),
         .A2(1'b1),
@@ -8179,10 +8263,10 @@ module design_1_BiDirChannels_0_0_register_32bits_19
         .CE(1'b1),
         .CLK(debug_in_shift_int),
         .D(s00_axis_tdata[0]),
-        .Q(\data_out_reg[0]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ));
+        .Q(\data_out_reg[0]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ));
   (* srl_bus_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[10]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 " *) 
-  SRL16E \data_out_reg[10]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 
+  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[10]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c " *) 
+  SRL16E \data_out_reg[10]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c 
        (.A0(1'b1),
         .A1(1'b0),
         .A2(1'b1),
@@ -8190,10 +8274,10 @@ module design_1_BiDirChannels_0_0_register_32bits_19
         .CE(1'b1),
         .CLK(debug_in_shift_int),
         .D(s00_axis_tdata[10]),
-        .Q(\data_out_reg[10]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ));
+        .Q(\data_out_reg[10]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ));
   (* srl_bus_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[11]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 " *) 
-  SRL16E \data_out_reg[11]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 
+  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[11]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c " *) 
+  SRL16E \data_out_reg[11]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c 
        (.A0(1'b1),
         .A1(1'b0),
         .A2(1'b1),
@@ -8201,10 +8285,10 @@ module design_1_BiDirChannels_0_0_register_32bits_19
         .CE(1'b1),
         .CLK(debug_in_shift_int),
         .D(s00_axis_tdata[11]),
-        .Q(\data_out_reg[11]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ));
+        .Q(\data_out_reg[11]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ));
   (* srl_bus_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[12]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 " *) 
-  SRL16E \data_out_reg[12]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 
+  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[12]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c " *) 
+  SRL16E \data_out_reg[12]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c 
        (.A0(1'b1),
         .A1(1'b0),
         .A2(1'b1),
@@ -8212,10 +8296,10 @@ module design_1_BiDirChannels_0_0_register_32bits_19
         .CE(1'b1),
         .CLK(debug_in_shift_int),
         .D(s00_axis_tdata[12]),
-        .Q(\data_out_reg[12]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ));
+        .Q(\data_out_reg[12]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ));
   (* srl_bus_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[13]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 " *) 
-  SRL16E \data_out_reg[13]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 
+  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[13]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c " *) 
+  SRL16E \data_out_reg[13]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c 
        (.A0(1'b1),
         .A1(1'b0),
         .A2(1'b1),
@@ -8223,10 +8307,10 @@ module design_1_BiDirChannels_0_0_register_32bits_19
         .CE(1'b1),
         .CLK(debug_in_shift_int),
         .D(s00_axis_tdata[13]),
-        .Q(\data_out_reg[13]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ));
+        .Q(\data_out_reg[13]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ));
   (* srl_bus_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[14]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 " *) 
-  SRL16E \data_out_reg[14]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 
+  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[14]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c " *) 
+  SRL16E \data_out_reg[14]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c 
        (.A0(1'b1),
         .A1(1'b0),
         .A2(1'b1),
@@ -8234,10 +8318,10 @@ module design_1_BiDirChannels_0_0_register_32bits_19
         .CE(1'b1),
         .CLK(debug_in_shift_int),
         .D(s00_axis_tdata[14]),
-        .Q(\data_out_reg[14]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ));
+        .Q(\data_out_reg[14]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ));
   (* srl_bus_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[15]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 " *) 
-  SRL16E \data_out_reg[15]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 
+  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[15]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c " *) 
+  SRL16E \data_out_reg[15]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c 
        (.A0(1'b1),
         .A1(1'b0),
         .A2(1'b1),
@@ -8245,10 +8329,10 @@ module design_1_BiDirChannels_0_0_register_32bits_19
         .CE(1'b1),
         .CLK(debug_in_shift_int),
         .D(s00_axis_tdata[15]),
-        .Q(\data_out_reg[15]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ));
+        .Q(\data_out_reg[15]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ));
   (* srl_bus_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[16]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 " *) 
-  SRL16E \data_out_reg[16]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 
+  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[16]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c " *) 
+  SRL16E \data_out_reg[16]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c 
        (.A0(1'b1),
         .A1(1'b0),
         .A2(1'b1),
@@ -8256,10 +8340,10 @@ module design_1_BiDirChannels_0_0_register_32bits_19
         .CE(1'b1),
         .CLK(debug_in_shift_int),
         .D(s00_axis_tdata[16]),
-        .Q(\data_out_reg[16]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ));
+        .Q(\data_out_reg[16]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ));
   (* srl_bus_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[17]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 " *) 
-  SRL16E \data_out_reg[17]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 
+  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[17]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c " *) 
+  SRL16E \data_out_reg[17]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c 
        (.A0(1'b1),
         .A1(1'b0),
         .A2(1'b1),
@@ -8267,10 +8351,10 @@ module design_1_BiDirChannels_0_0_register_32bits_19
         .CE(1'b1),
         .CLK(debug_in_shift_int),
         .D(s00_axis_tdata[17]),
-        .Q(\data_out_reg[17]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ));
+        .Q(\data_out_reg[17]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ));
   (* srl_bus_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[18]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 " *) 
-  SRL16E \data_out_reg[18]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 
+  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[18]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c " *) 
+  SRL16E \data_out_reg[18]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c 
        (.A0(1'b1),
         .A1(1'b0),
         .A2(1'b1),
@@ -8278,10 +8362,10 @@ module design_1_BiDirChannels_0_0_register_32bits_19
         .CE(1'b1),
         .CLK(debug_in_shift_int),
         .D(s00_axis_tdata[18]),
-        .Q(\data_out_reg[18]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ));
+        .Q(\data_out_reg[18]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ));
   (* srl_bus_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[19]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 " *) 
-  SRL16E \data_out_reg[19]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 
+  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[19]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c " *) 
+  SRL16E \data_out_reg[19]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c 
        (.A0(1'b1),
         .A1(1'b0),
         .A2(1'b1),
@@ -8289,10 +8373,10 @@ module design_1_BiDirChannels_0_0_register_32bits_19
         .CE(1'b1),
         .CLK(debug_in_shift_int),
         .D(s00_axis_tdata[19]),
-        .Q(\data_out_reg[19]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ));
+        .Q(\data_out_reg[19]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ));
   (* srl_bus_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[1]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 " *) 
-  SRL16E \data_out_reg[1]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 
+  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[1]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c " *) 
+  SRL16E \data_out_reg[1]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c 
        (.A0(1'b1),
         .A1(1'b0),
         .A2(1'b1),
@@ -8300,10 +8384,10 @@ module design_1_BiDirChannels_0_0_register_32bits_19
         .CE(1'b1),
         .CLK(debug_in_shift_int),
         .D(s00_axis_tdata[1]),
-        .Q(\data_out_reg[1]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ));
+        .Q(\data_out_reg[1]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ));
   (* srl_bus_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[20]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 " *) 
-  SRL16E \data_out_reg[20]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 
+  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[20]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c " *) 
+  SRL16E \data_out_reg[20]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c 
        (.A0(1'b1),
         .A1(1'b0),
         .A2(1'b1),
@@ -8311,10 +8395,10 @@ module design_1_BiDirChannels_0_0_register_32bits_19
         .CE(1'b1),
         .CLK(debug_in_shift_int),
         .D(s00_axis_tdata[20]),
-        .Q(\data_out_reg[20]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ));
+        .Q(\data_out_reg[20]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ));
   (* srl_bus_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[21]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 " *) 
-  SRL16E \data_out_reg[21]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 
+  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[21]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c " *) 
+  SRL16E \data_out_reg[21]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c 
        (.A0(1'b1),
         .A1(1'b0),
         .A2(1'b1),
@@ -8322,10 +8406,10 @@ module design_1_BiDirChannels_0_0_register_32bits_19
         .CE(1'b1),
         .CLK(debug_in_shift_int),
         .D(s00_axis_tdata[21]),
-        .Q(\data_out_reg[21]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ));
+        .Q(\data_out_reg[21]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ));
   (* srl_bus_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[22]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 " *) 
-  SRL16E \data_out_reg[22]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 
+  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[22]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c " *) 
+  SRL16E \data_out_reg[22]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c 
        (.A0(1'b1),
         .A1(1'b0),
         .A2(1'b1),
@@ -8333,10 +8417,10 @@ module design_1_BiDirChannels_0_0_register_32bits_19
         .CE(1'b1),
         .CLK(debug_in_shift_int),
         .D(s00_axis_tdata[22]),
-        .Q(\data_out_reg[22]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ));
+        .Q(\data_out_reg[22]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ));
   (* srl_bus_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[23]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 " *) 
-  SRL16E \data_out_reg[23]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 
+  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[23]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c " *) 
+  SRL16E \data_out_reg[23]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c 
        (.A0(1'b1),
         .A1(1'b0),
         .A2(1'b1),
@@ -8344,10 +8428,10 @@ module design_1_BiDirChannels_0_0_register_32bits_19
         .CE(1'b1),
         .CLK(debug_in_shift_int),
         .D(s00_axis_tdata[23]),
-        .Q(\data_out_reg[23]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ));
+        .Q(\data_out_reg[23]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ));
   (* srl_bus_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[24]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 " *) 
-  SRL16E \data_out_reg[24]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 
+  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[24]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c " *) 
+  SRL16E \data_out_reg[24]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c 
        (.A0(1'b1),
         .A1(1'b0),
         .A2(1'b1),
@@ -8355,10 +8439,10 @@ module design_1_BiDirChannels_0_0_register_32bits_19
         .CE(1'b1),
         .CLK(debug_in_shift_int),
         .D(s00_axis_tdata[24]),
-        .Q(\data_out_reg[24]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ));
+        .Q(\data_out_reg[24]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ));
   (* srl_bus_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[25]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 " *) 
-  SRL16E \data_out_reg[25]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 
+  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[25]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c " *) 
+  SRL16E \data_out_reg[25]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c 
        (.A0(1'b1),
         .A1(1'b0),
         .A2(1'b1),
@@ -8366,10 +8450,10 @@ module design_1_BiDirChannels_0_0_register_32bits_19
         .CE(1'b1),
         .CLK(debug_in_shift_int),
         .D(s00_axis_tdata[25]),
-        .Q(\data_out_reg[25]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ));
+        .Q(\data_out_reg[25]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ));
   (* srl_bus_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[26]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 " *) 
-  SRL16E \data_out_reg[26]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 
+  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[26]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c " *) 
+  SRL16E \data_out_reg[26]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c 
        (.A0(1'b1),
         .A1(1'b0),
         .A2(1'b1),
@@ -8377,10 +8461,10 @@ module design_1_BiDirChannels_0_0_register_32bits_19
         .CE(1'b1),
         .CLK(debug_in_shift_int),
         .D(s00_axis_tdata[26]),
-        .Q(\data_out_reg[26]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ));
+        .Q(\data_out_reg[26]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ));
   (* srl_bus_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[27]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 " *) 
-  SRL16E \data_out_reg[27]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 
+  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[27]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c " *) 
+  SRL16E \data_out_reg[27]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c 
        (.A0(1'b1),
         .A1(1'b0),
         .A2(1'b1),
@@ -8388,10 +8472,10 @@ module design_1_BiDirChannels_0_0_register_32bits_19
         .CE(1'b1),
         .CLK(debug_in_shift_int),
         .D(s00_axis_tdata[27]),
-        .Q(\data_out_reg[27]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ));
+        .Q(\data_out_reg[27]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ));
   (* srl_bus_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[28]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 " *) 
-  SRL16E \data_out_reg[28]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 
+  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[28]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c " *) 
+  SRL16E \data_out_reg[28]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c 
        (.A0(1'b1),
         .A1(1'b0),
         .A2(1'b1),
@@ -8399,10 +8483,10 @@ module design_1_BiDirChannels_0_0_register_32bits_19
         .CE(1'b1),
         .CLK(debug_in_shift_int),
         .D(s00_axis_tdata[28]),
-        .Q(\data_out_reg[28]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ));
+        .Q(\data_out_reg[28]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ));
   (* srl_bus_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[29]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 " *) 
-  SRL16E \data_out_reg[29]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 
+  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[29]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c " *) 
+  SRL16E \data_out_reg[29]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c 
        (.A0(1'b1),
         .A1(1'b0),
         .A2(1'b1),
@@ -8410,10 +8494,10 @@ module design_1_BiDirChannels_0_0_register_32bits_19
         .CE(1'b1),
         .CLK(debug_in_shift_int),
         .D(s00_axis_tdata[29]),
-        .Q(\data_out_reg[29]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ));
+        .Q(\data_out_reg[29]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ));
   (* srl_bus_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[2]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 " *) 
-  SRL16E \data_out_reg[2]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 
+  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[2]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c " *) 
+  SRL16E \data_out_reg[2]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c 
        (.A0(1'b1),
         .A1(1'b0),
         .A2(1'b1),
@@ -8421,10 +8505,10 @@ module design_1_BiDirChannels_0_0_register_32bits_19
         .CE(1'b1),
         .CLK(debug_in_shift_int),
         .D(s00_axis_tdata[2]),
-        .Q(\data_out_reg[2]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ));
+        .Q(\data_out_reg[2]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ));
   (* srl_bus_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[30]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 " *) 
-  SRL16E \data_out_reg[30]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 
+  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[30]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c " *) 
+  SRL16E \data_out_reg[30]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c 
        (.A0(1'b1),
         .A1(1'b0),
         .A2(1'b1),
@@ -8432,10 +8516,10 @@ module design_1_BiDirChannels_0_0_register_32bits_19
         .CE(1'b1),
         .CLK(debug_in_shift_int),
         .D(s00_axis_tdata[30]),
-        .Q(\data_out_reg[30]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ));
+        .Q(\data_out_reg[30]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ));
   (* srl_bus_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[31]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 " *) 
-  SRL16E \data_out_reg[31]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 
+  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[31]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c " *) 
+  SRL16E \data_out_reg[31]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c 
        (.A0(1'b1),
         .A1(1'b0),
         .A2(1'b1),
@@ -8443,10 +8527,10 @@ module design_1_BiDirChannels_0_0_register_32bits_19
         .CE(1'b1),
         .CLK(debug_in_shift_int),
         .D(s00_axis_tdata[31]),
-        .Q(\data_out_reg[31]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ));
+        .Q(\data_out_reg[31]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ));
   (* srl_bus_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[3]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 " *) 
-  SRL16E \data_out_reg[3]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 
+  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[3]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c " *) 
+  SRL16E \data_out_reg[3]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c 
        (.A0(1'b1),
         .A1(1'b0),
         .A2(1'b1),
@@ -8454,10 +8538,10 @@ module design_1_BiDirChannels_0_0_register_32bits_19
         .CE(1'b1),
         .CLK(debug_in_shift_int),
         .D(s00_axis_tdata[3]),
-        .Q(\data_out_reg[3]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ));
+        .Q(\data_out_reg[3]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ));
   (* srl_bus_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[4]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 " *) 
-  SRL16E \data_out_reg[4]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 
+  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[4]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c " *) 
+  SRL16E \data_out_reg[4]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c 
        (.A0(1'b1),
         .A1(1'b0),
         .A2(1'b1),
@@ -8465,10 +8549,10 @@ module design_1_BiDirChannels_0_0_register_32bits_19
         .CE(1'b1),
         .CLK(debug_in_shift_int),
         .D(s00_axis_tdata[4]),
-        .Q(\data_out_reg[4]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ));
+        .Q(\data_out_reg[4]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ));
   (* srl_bus_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[5]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 " *) 
-  SRL16E \data_out_reg[5]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 
+  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[5]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c " *) 
+  SRL16E \data_out_reg[5]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c 
        (.A0(1'b1),
         .A1(1'b0),
         .A2(1'b1),
@@ -8476,10 +8560,10 @@ module design_1_BiDirChannels_0_0_register_32bits_19
         .CE(1'b1),
         .CLK(debug_in_shift_int),
         .D(s00_axis_tdata[5]),
-        .Q(\data_out_reg[5]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ));
+        .Q(\data_out_reg[5]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ));
   (* srl_bus_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[6]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 " *) 
-  SRL16E \data_out_reg[6]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 
+  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[6]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c " *) 
+  SRL16E \data_out_reg[6]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c 
        (.A0(1'b1),
         .A1(1'b0),
         .A2(1'b1),
@@ -8487,10 +8571,10 @@ module design_1_BiDirChannels_0_0_register_32bits_19
         .CE(1'b1),
         .CLK(debug_in_shift_int),
         .D(s00_axis_tdata[6]),
-        .Q(\data_out_reg[6]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ));
+        .Q(\data_out_reg[6]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ));
   (* srl_bus_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[7]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 " *) 
-  SRL16E \data_out_reg[7]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 
+  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[7]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c " *) 
+  SRL16E \data_out_reg[7]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c 
        (.A0(1'b1),
         .A1(1'b0),
         .A2(1'b1),
@@ -8498,10 +8582,10 @@ module design_1_BiDirChannels_0_0_register_32bits_19
         .CE(1'b1),
         .CLK(debug_in_shift_int),
         .D(s00_axis_tdata[7]),
-        .Q(\data_out_reg[7]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ));
+        .Q(\data_out_reg[7]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ));
   (* srl_bus_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[8]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 " *) 
-  SRL16E \data_out_reg[8]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 
+  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[8]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c " *) 
+  SRL16E \data_out_reg[8]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c 
        (.A0(1'b1),
         .A1(1'b0),
         .A2(1'b1),
@@ -8509,10 +8593,10 @@ module design_1_BiDirChannels_0_0_register_32bits_19
         .CE(1'b1),
         .CLK(debug_in_shift_int),
         .D(s00_axis_tdata[8]),
-        .Q(\data_out_reg[8]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ));
+        .Q(\data_out_reg[8]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ));
   (* srl_bus_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[9]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 " *) 
-  SRL16E \data_out_reg[9]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 
+  (* srl_name = "\inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[9]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c " *) 
+  SRL16E \data_out_reg[9]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c 
        (.A0(1'b1),
         .A1(1'b0),
         .A2(1'b1),
@@ -8520,12 +8604,19 @@ module design_1_BiDirChannels_0_0_register_32bits_19
         .CE(1'b1),
         .CLK(debug_in_shift_int),
         .D(s00_axis_tdata[9]),
-        .Q(\data_out_reg[9]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ));
+        .Q(\data_out_reg[9]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ));
+  FDCE data_out_reg_c
+       (.C(debug_in_shift_int),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(data_out_reg_c_1),
+        .Q(data_out_reg_c_0));
 endmodule
 
 (* ORIG_REF_NAME = "register_32bits" *) 
-module design_1_BiDirChannels_0_0_register_32bits_20
-   (\data_out_reg[31] ,
+module design_1_BiDirChannels_0_0_register_32bits_22
+   (\data_out_reg[0] ,
+    \data_out_reg[31] ,
     \data_out_reg[30] ,
     \data_out_reg[29] ,
     \data_out_reg[28] ,
@@ -8556,10 +8647,11 @@ module design_1_BiDirChannels_0_0_register_32bits_20
     \data_out_reg[3] ,
     \data_out_reg[2] ,
     \data_out_reg[1] ,
-    \data_out_reg[0] ,
-    Q_reg,
+    \data_out_reg[0]_0 ,
+    data_out_reg_c_0,
     debug_in_shift_int,
-    out_reg_c_5,
+    \slv_reg0_reg[31] ,
+    Q_reg,
     Q_reg_0,
     Q_reg_1,
     Q_reg_2,
@@ -8591,6 +8683,7 @@ module design_1_BiDirChannels_0_0_register_32bits_20
     Q_reg_28,
     Q_reg_29,
     Q_reg_30);
+  output \data_out_reg[0] ;
   output \data_out_reg[31] ;
   output \data_out_reg[30] ;
   output \data_out_reg[29] ;
@@ -8622,10 +8715,11 @@ module design_1_BiDirChannels_0_0_register_32bits_20
   output \data_out_reg[3] ;
   output \data_out_reg[2] ;
   output \data_out_reg[1] ;
-  output \data_out_reg[0] ;
-  input Q_reg;
+  output \data_out_reg[0]_0 ;
+  input data_out_reg_c_0;
   input debug_in_shift_int;
-  input out_reg_c_5;
+  input \slv_reg0_reg[31] ;
+  input Q_reg;
   input Q_reg_0;
   input Q_reg_1;
   input Q_reg_2;
@@ -8691,920 +8785,946 @@ module design_1_BiDirChannels_0_0_register_32bits_20
   wire Q_reg_8;
   wire Q_reg_9;
   wire \data_out_reg[0] ;
-  wire \data_out_reg[0]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ;
+  wire \data_out_reg[0]_0 ;
+  wire \data_out_reg[0]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ;
   wire \data_out_reg[10] ;
-  wire \data_out_reg[10]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ;
+  wire \data_out_reg[10]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ;
   wire \data_out_reg[11] ;
-  wire \data_out_reg[11]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ;
+  wire \data_out_reg[11]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ;
   wire \data_out_reg[12] ;
-  wire \data_out_reg[12]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ;
+  wire \data_out_reg[12]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ;
   wire \data_out_reg[13] ;
-  wire \data_out_reg[13]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ;
+  wire \data_out_reg[13]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ;
   wire \data_out_reg[14] ;
-  wire \data_out_reg[14]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ;
+  wire \data_out_reg[14]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ;
   wire \data_out_reg[15] ;
-  wire \data_out_reg[15]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ;
+  wire \data_out_reg[15]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ;
   wire \data_out_reg[16] ;
-  wire \data_out_reg[16]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ;
+  wire \data_out_reg[16]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ;
   wire \data_out_reg[17] ;
-  wire \data_out_reg[17]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ;
+  wire \data_out_reg[17]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ;
   wire \data_out_reg[18] ;
-  wire \data_out_reg[18]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ;
+  wire \data_out_reg[18]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ;
   wire \data_out_reg[19] ;
-  wire \data_out_reg[19]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ;
+  wire \data_out_reg[19]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ;
   wire \data_out_reg[1] ;
-  wire \data_out_reg[1]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ;
+  wire \data_out_reg[1]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ;
   wire \data_out_reg[20] ;
-  wire \data_out_reg[20]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ;
+  wire \data_out_reg[20]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ;
   wire \data_out_reg[21] ;
-  wire \data_out_reg[21]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ;
+  wire \data_out_reg[21]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ;
   wire \data_out_reg[22] ;
-  wire \data_out_reg[22]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ;
+  wire \data_out_reg[22]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ;
   wire \data_out_reg[23] ;
-  wire \data_out_reg[23]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ;
+  wire \data_out_reg[23]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ;
   wire \data_out_reg[24] ;
-  wire \data_out_reg[24]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ;
+  wire \data_out_reg[24]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ;
   wire \data_out_reg[25] ;
-  wire \data_out_reg[25]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ;
+  wire \data_out_reg[25]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ;
   wire \data_out_reg[26] ;
-  wire \data_out_reg[26]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ;
+  wire \data_out_reg[26]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ;
   wire \data_out_reg[27] ;
-  wire \data_out_reg[27]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ;
+  wire \data_out_reg[27]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ;
   wire \data_out_reg[28] ;
-  wire \data_out_reg[28]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ;
+  wire \data_out_reg[28]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ;
   wire \data_out_reg[29] ;
-  wire \data_out_reg[29]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ;
+  wire \data_out_reg[29]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ;
   wire \data_out_reg[2] ;
-  wire \data_out_reg[2]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ;
+  wire \data_out_reg[2]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ;
   wire \data_out_reg[30] ;
-  wire \data_out_reg[30]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ;
+  wire \data_out_reg[30]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ;
   wire \data_out_reg[31] ;
-  wire \data_out_reg[31]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ;
+  wire \data_out_reg[31]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ;
   wire \data_out_reg[3] ;
-  wire \data_out_reg[3]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ;
+  wire \data_out_reg[3]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ;
   wire \data_out_reg[4] ;
-  wire \data_out_reg[4]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ;
+  wire \data_out_reg[4]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ;
   wire \data_out_reg[5] ;
-  wire \data_out_reg[5]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ;
+  wire \data_out_reg[5]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ;
   wire \data_out_reg[6] ;
-  wire \data_out_reg[6]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ;
+  wire \data_out_reg[6]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ;
   wire \data_out_reg[7] ;
-  wire \data_out_reg[7]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ;
+  wire \data_out_reg[7]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ;
   wire \data_out_reg[8] ;
-  wire \data_out_reg[8]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ;
+  wire \data_out_reg[8]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ;
   wire \data_out_reg[9] ;
-  wire \data_out_reg[9]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ;
+  wire \data_out_reg[9]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ;
+  wire data_out_reg_c_0;
   wire debug_in_shift_int;
-  wire out_reg_c_5;
+  wire \slv_reg0_reg[31] ;
 
-  FDRE \data_out_reg[0]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 
+  FDRE \data_out_reg[0]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .D(Q_reg_30),
-        .Q(\data_out_reg[0]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
+        .Q(\data_out_reg[0]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[10]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 
+  FDRE \data_out_reg[10]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .D(Q_reg_20),
-        .Q(\data_out_reg[10]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
+        .Q(\data_out_reg[10]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[11]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 
+  FDRE \data_out_reg[11]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .D(Q_reg_19),
-        .Q(\data_out_reg[11]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
+        .Q(\data_out_reg[11]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[12]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 
+  FDRE \data_out_reg[12]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .D(Q_reg_18),
-        .Q(\data_out_reg[12]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
+        .Q(\data_out_reg[12]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[13]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 
+  FDRE \data_out_reg[13]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .D(Q_reg_17),
-        .Q(\data_out_reg[13]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
+        .Q(\data_out_reg[13]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[14]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 
+  FDRE \data_out_reg[14]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .D(Q_reg_16),
-        .Q(\data_out_reg[14]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
+        .Q(\data_out_reg[14]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[15]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 
+  FDRE \data_out_reg[15]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .D(Q_reg_15),
-        .Q(\data_out_reg[15]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
+        .Q(\data_out_reg[15]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[16]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 
+  FDRE \data_out_reg[16]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .D(Q_reg_14),
-        .Q(\data_out_reg[16]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
+        .Q(\data_out_reg[16]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[17]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 
+  FDRE \data_out_reg[17]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .D(Q_reg_13),
-        .Q(\data_out_reg[17]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
+        .Q(\data_out_reg[17]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[18]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 
+  FDRE \data_out_reg[18]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .D(Q_reg_12),
-        .Q(\data_out_reg[18]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
+        .Q(\data_out_reg[18]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[19]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 
+  FDRE \data_out_reg[19]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .D(Q_reg_11),
-        .Q(\data_out_reg[19]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
+        .Q(\data_out_reg[19]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[1]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 
+  FDRE \data_out_reg[1]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .D(Q_reg_29),
-        .Q(\data_out_reg[1]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
+        .Q(\data_out_reg[1]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[20]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 
+  FDRE \data_out_reg[20]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .D(Q_reg_10),
-        .Q(\data_out_reg[20]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
+        .Q(\data_out_reg[20]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[21]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 
+  FDRE \data_out_reg[21]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .D(Q_reg_9),
-        .Q(\data_out_reg[21]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
+        .Q(\data_out_reg[21]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[22]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 
+  FDRE \data_out_reg[22]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .D(Q_reg_8),
-        .Q(\data_out_reg[22]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
+        .Q(\data_out_reg[22]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[23]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 
+  FDRE \data_out_reg[23]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .D(Q_reg_7),
-        .Q(\data_out_reg[23]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
+        .Q(\data_out_reg[23]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[24]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 
+  FDRE \data_out_reg[24]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .D(Q_reg_6),
-        .Q(\data_out_reg[24]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
+        .Q(\data_out_reg[24]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[25]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 
+  FDRE \data_out_reg[25]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .D(Q_reg_5),
-        .Q(\data_out_reg[25]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
+        .Q(\data_out_reg[25]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[26]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 
+  FDRE \data_out_reg[26]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .D(Q_reg_4),
-        .Q(\data_out_reg[26]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
+        .Q(\data_out_reg[26]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[27]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 
+  FDRE \data_out_reg[27]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .D(Q_reg_3),
-        .Q(\data_out_reg[27]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
+        .Q(\data_out_reg[27]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[28]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 
+  FDRE \data_out_reg[28]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .D(Q_reg_2),
-        .Q(\data_out_reg[28]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
+        .Q(\data_out_reg[28]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[29]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 
+  FDRE \data_out_reg[29]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .D(Q_reg_1),
-        .Q(\data_out_reg[29]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
+        .Q(\data_out_reg[29]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[2]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 
+  FDRE \data_out_reg[2]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .D(Q_reg_28),
-        .Q(\data_out_reg[2]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
+        .Q(\data_out_reg[2]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[30]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 
+  FDRE \data_out_reg[30]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .D(Q_reg_0),
-        .Q(\data_out_reg[30]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
+        .Q(\data_out_reg[30]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[31]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 
+  FDRE \data_out_reg[31]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .D(Q_reg),
-        .Q(\data_out_reg[31]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
+        .Q(\data_out_reg[31]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[3]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 
+  FDRE \data_out_reg[3]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .D(Q_reg_27),
-        .Q(\data_out_reg[3]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
+        .Q(\data_out_reg[3]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[4]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 
+  FDRE \data_out_reg[4]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .D(Q_reg_26),
-        .Q(\data_out_reg[4]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
+        .Q(\data_out_reg[4]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[5]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 
+  FDRE \data_out_reg[5]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .D(Q_reg_25),
-        .Q(\data_out_reg[5]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
+        .Q(\data_out_reg[5]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[6]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 
+  FDRE \data_out_reg[6]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .D(Q_reg_24),
-        .Q(\data_out_reg[6]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
+        .Q(\data_out_reg[6]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[7]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 
+  FDRE \data_out_reg[7]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .D(Q_reg_23),
-        .Q(\data_out_reg[7]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
+        .Q(\data_out_reg[7]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[8]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 
+  FDRE \data_out_reg[8]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .D(Q_reg_22),
-        .Q(\data_out_reg[8]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
+        .Q(\data_out_reg[8]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
         .R(1'b0));
-  FDRE \data_out_reg[9]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 
+  FDRE \data_out_reg[9]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .D(Q_reg_21),
-        .Q(\data_out_reg[9]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
+        .Q(\data_out_reg[9]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
         .R(1'b0));
-  (* SOFT_HLUTNM = "soft_lutpair3" *) 
+  FDCE data_out_reg_c
+       (.C(debug_in_shift_int),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(data_out_reg_c_0),
+        .Q(\data_out_reg[0] ));
+  (* SOFT_HLUTNM = "soft_lutpair2" *) 
   LUT2 #(
     .INIT(4'h8)) 
     data_out_reg_gate
-       (.I0(\data_out_reg[31]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
-        .I1(out_reg_c_5),
+       (.I0(\data_out_reg[31]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
         .O(\data_out_reg[31] ));
-  (* SOFT_HLUTNM = "soft_lutpair3" *) 
+  (* SOFT_HLUTNM = "soft_lutpair2" *) 
   LUT2 #(
     .INIT(4'h8)) 
     data_out_reg_gate__0
-       (.I0(\data_out_reg[30]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
-        .I1(out_reg_c_5),
+       (.I0(\data_out_reg[30]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
         .O(\data_out_reg[30] ));
-  (* SOFT_HLUTNM = "soft_lutpair4" *) 
+  (* SOFT_HLUTNM = "soft_lutpair3" *) 
   LUT2 #(
     .INIT(4'h8)) 
     data_out_reg_gate__1
-       (.I0(\data_out_reg[29]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
-        .I1(out_reg_c_5),
+       (.I0(\data_out_reg[29]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
         .O(\data_out_reg[29] ));
-  (* SOFT_HLUTNM = "soft_lutpair8" *) 
+  (* SOFT_HLUTNM = "soft_lutpair7" *) 
   LUT2 #(
     .INIT(4'h8)) 
     data_out_reg_gate__10
-       (.I0(\data_out_reg[20]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
-        .I1(out_reg_c_5),
+       (.I0(\data_out_reg[20]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
         .O(\data_out_reg[20] ));
-  (* SOFT_HLUTNM = "soft_lutpair9" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__11
-       (.I0(\data_out_reg[19]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
-        .I1(out_reg_c_5),
-        .O(\data_out_reg[19] ));
-  (* SOFT_HLUTNM = "soft_lutpair9" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__12
-       (.I0(\data_out_reg[18]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
-        .I1(out_reg_c_5),
-        .O(\data_out_reg[18] ));
-  (* SOFT_HLUTNM = "soft_lutpair10" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__13
-       (.I0(\data_out_reg[17]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
-        .I1(out_reg_c_5),
-        .O(\data_out_reg[17] ));
-  (* SOFT_HLUTNM = "soft_lutpair10" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__14
-       (.I0(\data_out_reg[16]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
-        .I1(out_reg_c_5),
-        .O(\data_out_reg[16] ));
-  (* SOFT_HLUTNM = "soft_lutpair11" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__15
-       (.I0(\data_out_reg[15]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
-        .I1(out_reg_c_5),
-        .O(\data_out_reg[15] ));
-  (* SOFT_HLUTNM = "soft_lutpair11" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__16
-       (.I0(\data_out_reg[14]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
-        .I1(out_reg_c_5),
-        .O(\data_out_reg[14] ));
-  (* SOFT_HLUTNM = "soft_lutpair12" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__17
-       (.I0(\data_out_reg[13]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
-        .I1(out_reg_c_5),
-        .O(\data_out_reg[13] ));
-  (* SOFT_HLUTNM = "soft_lutpair12" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__18
-       (.I0(\data_out_reg[12]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
-        .I1(out_reg_c_5),
-        .O(\data_out_reg[12] ));
-  (* SOFT_HLUTNM = "soft_lutpair13" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__19
-       (.I0(\data_out_reg[11]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
-        .I1(out_reg_c_5),
-        .O(\data_out_reg[11] ));
-  (* SOFT_HLUTNM = "soft_lutpair4" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__2
-       (.I0(\data_out_reg[28]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
-        .I1(out_reg_c_5),
-        .O(\data_out_reg[28] ));
-  (* SOFT_HLUTNM = "soft_lutpair13" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__20
-       (.I0(\data_out_reg[10]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
-        .I1(out_reg_c_5),
-        .O(\data_out_reg[10] ));
-  (* SOFT_HLUTNM = "soft_lutpair14" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__21
-       (.I0(\data_out_reg[9]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
-        .I1(out_reg_c_5),
-        .O(\data_out_reg[9] ));
-  (* SOFT_HLUTNM = "soft_lutpair14" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__22
-       (.I0(\data_out_reg[8]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
-        .I1(out_reg_c_5),
-        .O(\data_out_reg[8] ));
-  (* SOFT_HLUTNM = "soft_lutpair15" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__23
-       (.I0(\data_out_reg[7]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
-        .I1(out_reg_c_5),
-        .O(\data_out_reg[7] ));
-  (* SOFT_HLUTNM = "soft_lutpair15" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__24
-       (.I0(\data_out_reg[6]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
-        .I1(out_reg_c_5),
-        .O(\data_out_reg[6] ));
-  (* SOFT_HLUTNM = "soft_lutpair16" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__25
-       (.I0(\data_out_reg[5]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
-        .I1(out_reg_c_5),
-        .O(\data_out_reg[5] ));
-  (* SOFT_HLUTNM = "soft_lutpair16" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__26
-       (.I0(\data_out_reg[4]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
-        .I1(out_reg_c_5),
-        .O(\data_out_reg[4] ));
-  (* SOFT_HLUTNM = "soft_lutpair17" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__27
-       (.I0(\data_out_reg[3]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
-        .I1(out_reg_c_5),
-        .O(\data_out_reg[3] ));
-  (* SOFT_HLUTNM = "soft_lutpair17" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__28
-       (.I0(\data_out_reg[2]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
-        .I1(out_reg_c_5),
-        .O(\data_out_reg[2] ));
-  (* SOFT_HLUTNM = "soft_lutpair18" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__29
-       (.I0(\data_out_reg[1]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
-        .I1(out_reg_c_5),
-        .O(\data_out_reg[1] ));
-  (* SOFT_HLUTNM = "soft_lutpair5" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__3
-       (.I0(\data_out_reg[27]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
-        .I1(out_reg_c_5),
-        .O(\data_out_reg[27] ));
-  (* SOFT_HLUTNM = "soft_lutpair18" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__30
-       (.I0(\data_out_reg[0]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
-        .I1(out_reg_c_5),
-        .O(\data_out_reg[0] ));
-  (* SOFT_HLUTNM = "soft_lutpair5" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__4
-       (.I0(\data_out_reg[26]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
-        .I1(out_reg_c_5),
-        .O(\data_out_reg[26] ));
-  (* SOFT_HLUTNM = "soft_lutpair6" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__5
-       (.I0(\data_out_reg[25]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
-        .I1(out_reg_c_5),
-        .O(\data_out_reg[25] ));
-  (* SOFT_HLUTNM = "soft_lutpair6" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__6
-       (.I0(\data_out_reg[24]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
-        .I1(out_reg_c_5),
-        .O(\data_out_reg[24] ));
-  (* SOFT_HLUTNM = "soft_lutpair7" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__7
-       (.I0(\data_out_reg[23]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
-        .I1(out_reg_c_5),
-        .O(\data_out_reg[23] ));
-  (* SOFT_HLUTNM = "soft_lutpair7" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    data_out_reg_gate__8
-       (.I0(\data_out_reg[22]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
-        .I1(out_reg_c_5),
-        .O(\data_out_reg[22] ));
   (* SOFT_HLUTNM = "soft_lutpair8" *) 
   LUT2 #(
     .INIT(4'h8)) 
+    data_out_reg_gate__11
+       (.I0(\data_out_reg[19]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[19] ));
+  (* SOFT_HLUTNM = "soft_lutpair8" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__12
+       (.I0(\data_out_reg[18]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[18] ));
+  (* SOFT_HLUTNM = "soft_lutpair9" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__13
+       (.I0(\data_out_reg[17]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[17] ));
+  (* SOFT_HLUTNM = "soft_lutpair9" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__14
+       (.I0(\data_out_reg[16]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[16] ));
+  (* SOFT_HLUTNM = "soft_lutpair10" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__15
+       (.I0(\data_out_reg[15]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[15] ));
+  (* SOFT_HLUTNM = "soft_lutpair10" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__16
+       (.I0(\data_out_reg[14]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[14] ));
+  (* SOFT_HLUTNM = "soft_lutpair11" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__17
+       (.I0(\data_out_reg[13]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[13] ));
+  (* SOFT_HLUTNM = "soft_lutpair11" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__18
+       (.I0(\data_out_reg[12]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[12] ));
+  (* SOFT_HLUTNM = "soft_lutpair12" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__19
+       (.I0(\data_out_reg[11]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[11] ));
+  (* SOFT_HLUTNM = "soft_lutpair3" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__2
+       (.I0(\data_out_reg[28]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[28] ));
+  (* SOFT_HLUTNM = "soft_lutpair12" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__20
+       (.I0(\data_out_reg[10]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[10] ));
+  (* SOFT_HLUTNM = "soft_lutpair13" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__21
+       (.I0(\data_out_reg[9]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[9] ));
+  (* SOFT_HLUTNM = "soft_lutpair13" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__22
+       (.I0(\data_out_reg[8]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[8] ));
+  (* SOFT_HLUTNM = "soft_lutpair14" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__23
+       (.I0(\data_out_reg[7]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[7] ));
+  (* SOFT_HLUTNM = "soft_lutpair14" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__24
+       (.I0(\data_out_reg[6]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[6] ));
+  (* SOFT_HLUTNM = "soft_lutpair15" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__25
+       (.I0(\data_out_reg[5]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[5] ));
+  (* SOFT_HLUTNM = "soft_lutpair15" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__26
+       (.I0(\data_out_reg[4]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[4] ));
+  (* SOFT_HLUTNM = "soft_lutpair16" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__27
+       (.I0(\data_out_reg[3]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[3] ));
+  (* SOFT_HLUTNM = "soft_lutpair16" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__28
+       (.I0(\data_out_reg[2]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[2] ));
+  (* SOFT_HLUTNM = "soft_lutpair17" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__29
+       (.I0(\data_out_reg[1]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[1] ));
+  (* SOFT_HLUTNM = "soft_lutpair4" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__3
+       (.I0(\data_out_reg[27]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[27] ));
+  (* SOFT_HLUTNM = "soft_lutpair17" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__30
+       (.I0(\data_out_reg[0]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[0]_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair4" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__4
+       (.I0(\data_out_reg[26]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[26] ));
+  (* SOFT_HLUTNM = "soft_lutpair5" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__5
+       (.I0(\data_out_reg[25]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[25] ));
+  (* SOFT_HLUTNM = "soft_lutpair5" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__6
+       (.I0(\data_out_reg[24]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[24] ));
+  (* SOFT_HLUTNM = "soft_lutpair6" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__7
+       (.I0(\data_out_reg[23]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[23] ));
+  (* SOFT_HLUTNM = "soft_lutpair6" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    data_out_reg_gate__8
+       (.I0(\data_out_reg[22]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
+        .O(\data_out_reg[22] ));
+  (* SOFT_HLUTNM = "soft_lutpair7" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
     data_out_reg_gate__9
-       (.I0(\data_out_reg[21]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
-        .I1(out_reg_c_5),
+       (.I0(\data_out_reg[21]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .I1(\data_out_reg[0] ),
         .O(\data_out_reg[21] ));
 endmodule
 
 (* ORIG_REF_NAME = "register_32bits" *) 
-module design_1_BiDirChannels_0_0_register_32bits_21
-   (\r_reg_reg[31]_P ,
-    \r_reg_reg[30]_P ,
-    \r_reg_reg[29]_P ,
-    \r_reg_reg[28]_P ,
-    \r_reg_reg[27]_P ,
-    \r_reg_reg[26]_P ,
-    \r_reg_reg[25]_P ,
-    \r_reg_reg[24]_P ,
-    \r_reg_reg[23]_P ,
-    \r_reg_reg[22]_P ,
-    \r_reg_reg[21]_P ,
-    \r_reg_reg[20]_P ,
-    \r_reg_reg[19]_P ,
-    \r_reg_reg[18]_P ,
-    \r_reg_reg[17]_P ,
-    \r_reg_reg[16]_P ,
-    \r_reg_reg[15]_P ,
-    \r_reg_reg[14]_P ,
-    \r_reg_reg[13]_P ,
-    \r_reg_reg[12]_P ,
-    \r_reg_reg[11]_P ,
-    \r_reg_reg[10]_P ,
-    \r_reg_reg[9]_P ,
-    \r_reg_reg[8]_P ,
-    \r_reg_reg[7]_P ,
-    \r_reg_reg[6]_P ,
-    \r_reg_reg[5]_P ,
-    \r_reg_reg[4]_P ,
-    \r_reg_reg[3]_P ,
-    \r_reg_reg[2]_P ,
-    \r_reg_reg[1]_P ,
-    \r_reg_reg[0]_P ,
-    \data_out_reg[31]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
+module design_1_BiDirChannels_0_0_register_32bits_23
+   (\axi_rdata_reg[31] ,
+    \axi_rdata_reg[30] ,
+    \axi_rdata_reg[29] ,
+    \axi_rdata_reg[28] ,
+    \axi_rdata_reg[27] ,
+    \axi_rdata_reg[26] ,
+    \axi_rdata_reg[25] ,
+    \axi_rdata_reg[24] ,
+    \axi_rdata_reg[23] ,
+    \axi_rdata_reg[22] ,
+    \axi_rdata_reg[21] ,
+    \axi_rdata_reg[20] ,
+    \axi_rdata_reg[19] ,
+    \axi_rdata_reg[18] ,
+    \axi_rdata_reg[17] ,
+    \axi_rdata_reg[16] ,
+    \axi_rdata_reg[15] ,
+    \axi_rdata_reg[14] ,
+    \axi_rdata_reg[13] ,
+    \axi_rdata_reg[12] ,
+    \axi_rdata_reg[11] ,
+    \axi_rdata_reg[10] ,
+    \axi_rdata_reg[9] ,
+    \axi_rdata_reg[8] ,
+    \axi_rdata_reg[7] ,
+    \axi_rdata_reg[6] ,
+    \axi_rdata_reg[5] ,
+    \axi_rdata_reg[4] ,
+    \axi_rdata_reg[3] ,
+    \axi_rdata_reg[2] ,
+    \axi_rdata_reg[1] ,
+    \axi_rdata_reg[0] ,
+    \data_out_reg[31]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
     debug_in_shift_int,
     \slv_reg0_reg[31] ,
-    \data_out_reg[30]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[29]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[28]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[27]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[26]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[25]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[24]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[23]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[22]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[21]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[20]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[19]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[18]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[17]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[16]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[15]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[14]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[13]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[12]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[11]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[10]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[9]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[8]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[7]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[6]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[5]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[4]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[3]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[2]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[1]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ,
-    \data_out_reg[0]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 );
-  output \r_reg_reg[31]_P ;
-  output \r_reg_reg[30]_P ;
-  output \r_reg_reg[29]_P ;
-  output \r_reg_reg[28]_P ;
-  output \r_reg_reg[27]_P ;
-  output \r_reg_reg[26]_P ;
-  output \r_reg_reg[25]_P ;
-  output \r_reg_reg[24]_P ;
-  output \r_reg_reg[23]_P ;
-  output \r_reg_reg[22]_P ;
-  output \r_reg_reg[21]_P ;
-  output \r_reg_reg[20]_P ;
-  output \r_reg_reg[19]_P ;
-  output \r_reg_reg[18]_P ;
-  output \r_reg_reg[17]_P ;
-  output \r_reg_reg[16]_P ;
-  output \r_reg_reg[15]_P ;
-  output \r_reg_reg[14]_P ;
-  output \r_reg_reg[13]_P ;
-  output \r_reg_reg[12]_P ;
-  output \r_reg_reg[11]_P ;
-  output \r_reg_reg[10]_P ;
-  output \r_reg_reg[9]_P ;
-  output \r_reg_reg[8]_P ;
-  output \r_reg_reg[7]_P ;
-  output \r_reg_reg[6]_P ;
-  output \r_reg_reg[5]_P ;
-  output \r_reg_reg[4]_P ;
-  output \r_reg_reg[3]_P ;
-  output \r_reg_reg[2]_P ;
-  output \r_reg_reg[1]_P ;
-  output \r_reg_reg[0]_P ;
-  input \data_out_reg[31]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
+    \data_out_reg[30]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[29]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[28]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[27]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[26]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[25]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[24]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[23]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[22]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[21]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[20]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[19]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[18]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[17]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[16]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[15]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[14]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[13]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[12]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[11]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[10]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[9]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[8]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[7]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[6]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[5]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[4]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[3]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[2]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[1]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ,
+    \data_out_reg[0]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c );
+  output \axi_rdata_reg[31] ;
+  output \axi_rdata_reg[30] ;
+  output \axi_rdata_reg[29] ;
+  output \axi_rdata_reg[28] ;
+  output \axi_rdata_reg[27] ;
+  output \axi_rdata_reg[26] ;
+  output \axi_rdata_reg[25] ;
+  output \axi_rdata_reg[24] ;
+  output \axi_rdata_reg[23] ;
+  output \axi_rdata_reg[22] ;
+  output \axi_rdata_reg[21] ;
+  output \axi_rdata_reg[20] ;
+  output \axi_rdata_reg[19] ;
+  output \axi_rdata_reg[18] ;
+  output \axi_rdata_reg[17] ;
+  output \axi_rdata_reg[16] ;
+  output \axi_rdata_reg[15] ;
+  output \axi_rdata_reg[14] ;
+  output \axi_rdata_reg[13] ;
+  output \axi_rdata_reg[12] ;
+  output \axi_rdata_reg[11] ;
+  output \axi_rdata_reg[10] ;
+  output \axi_rdata_reg[9] ;
+  output \axi_rdata_reg[8] ;
+  output \axi_rdata_reg[7] ;
+  output \axi_rdata_reg[6] ;
+  output \axi_rdata_reg[5] ;
+  output \axi_rdata_reg[4] ;
+  output \axi_rdata_reg[3] ;
+  output \axi_rdata_reg[2] ;
+  output \axi_rdata_reg[1] ;
+  output \axi_rdata_reg[0] ;
+  input \data_out_reg[31]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
   input debug_in_shift_int;
   input \slv_reg0_reg[31] ;
-  input \data_out_reg[30]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  input \data_out_reg[29]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  input \data_out_reg[28]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  input \data_out_reg[27]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  input \data_out_reg[26]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  input \data_out_reg[25]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  input \data_out_reg[24]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  input \data_out_reg[23]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  input \data_out_reg[22]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  input \data_out_reg[21]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  input \data_out_reg[20]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  input \data_out_reg[19]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  input \data_out_reg[18]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  input \data_out_reg[17]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  input \data_out_reg[16]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  input \data_out_reg[15]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  input \data_out_reg[14]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  input \data_out_reg[13]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  input \data_out_reg[12]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  input \data_out_reg[11]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  input \data_out_reg[10]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  input \data_out_reg[9]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  input \data_out_reg[8]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  input \data_out_reg[7]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  input \data_out_reg[6]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  input \data_out_reg[5]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  input \data_out_reg[4]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  input \data_out_reg[3]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  input \data_out_reg[2]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  input \data_out_reg[1]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  input \data_out_reg[0]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
+  input \data_out_reg[30]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  input \data_out_reg[29]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  input \data_out_reg[28]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  input \data_out_reg[27]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  input \data_out_reg[26]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  input \data_out_reg[25]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  input \data_out_reg[24]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  input \data_out_reg[23]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  input \data_out_reg[22]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  input \data_out_reg[21]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  input \data_out_reg[20]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  input \data_out_reg[19]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  input \data_out_reg[18]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  input \data_out_reg[17]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  input \data_out_reg[16]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  input \data_out_reg[15]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  input \data_out_reg[14]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  input \data_out_reg[13]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  input \data_out_reg[12]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  input \data_out_reg[11]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  input \data_out_reg[10]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  input \data_out_reg[9]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  input \data_out_reg[8]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  input \data_out_reg[7]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  input \data_out_reg[6]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  input \data_out_reg[5]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  input \data_out_reg[4]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  input \data_out_reg[3]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  input \data_out_reg[2]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  input \data_out_reg[1]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  input \data_out_reg[0]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
 
-  wire \data_out_reg[0]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[10]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[11]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[12]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[13]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[14]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[15]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[16]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[17]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[18]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[19]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[1]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[20]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[21]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[22]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[23]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[24]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[25]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[26]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[27]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[28]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[29]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[2]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[30]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[31]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[3]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[4]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[5]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[6]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[7]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[8]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
-  wire \data_out_reg[9]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ;
+  wire \axi_rdata_reg[0] ;
+  wire \axi_rdata_reg[10] ;
+  wire \axi_rdata_reg[11] ;
+  wire \axi_rdata_reg[12] ;
+  wire \axi_rdata_reg[13] ;
+  wire \axi_rdata_reg[14] ;
+  wire \axi_rdata_reg[15] ;
+  wire \axi_rdata_reg[16] ;
+  wire \axi_rdata_reg[17] ;
+  wire \axi_rdata_reg[18] ;
+  wire \axi_rdata_reg[19] ;
+  wire \axi_rdata_reg[1] ;
+  wire \axi_rdata_reg[20] ;
+  wire \axi_rdata_reg[21] ;
+  wire \axi_rdata_reg[22] ;
+  wire \axi_rdata_reg[23] ;
+  wire \axi_rdata_reg[24] ;
+  wire \axi_rdata_reg[25] ;
+  wire \axi_rdata_reg[26] ;
+  wire \axi_rdata_reg[27] ;
+  wire \axi_rdata_reg[28] ;
+  wire \axi_rdata_reg[29] ;
+  wire \axi_rdata_reg[2] ;
+  wire \axi_rdata_reg[30] ;
+  wire \axi_rdata_reg[31] ;
+  wire \axi_rdata_reg[3] ;
+  wire \axi_rdata_reg[4] ;
+  wire \axi_rdata_reg[5] ;
+  wire \axi_rdata_reg[6] ;
+  wire \axi_rdata_reg[7] ;
+  wire \axi_rdata_reg[8] ;
+  wire \axi_rdata_reg[9] ;
+  wire \data_out_reg[0]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[10]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[11]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[12]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[13]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[14]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[15]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[16]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[17]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[18]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[19]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[1]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[20]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[21]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[22]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[23]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[24]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[25]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[26]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[27]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[28]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[29]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[2]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[30]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[31]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[3]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[4]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[5]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[6]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[7]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[8]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
+  wire \data_out_reg[9]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ;
   wire debug_in_shift_int;
-  wire \r_reg_reg[0]_P ;
-  wire \r_reg_reg[10]_P ;
-  wire \r_reg_reg[11]_P ;
-  wire \r_reg_reg[12]_P ;
-  wire \r_reg_reg[13]_P ;
-  wire \r_reg_reg[14]_P ;
-  wire \r_reg_reg[15]_P ;
-  wire \r_reg_reg[16]_P ;
-  wire \r_reg_reg[17]_P ;
-  wire \r_reg_reg[18]_P ;
-  wire \r_reg_reg[19]_P ;
-  wire \r_reg_reg[1]_P ;
-  wire \r_reg_reg[20]_P ;
-  wire \r_reg_reg[21]_P ;
-  wire \r_reg_reg[22]_P ;
-  wire \r_reg_reg[23]_P ;
-  wire \r_reg_reg[24]_P ;
-  wire \r_reg_reg[25]_P ;
-  wire \r_reg_reg[26]_P ;
-  wire \r_reg_reg[27]_P ;
-  wire \r_reg_reg[28]_P ;
-  wire \r_reg_reg[29]_P ;
-  wire \r_reg_reg[2]_P ;
-  wire \r_reg_reg[30]_P ;
-  wire \r_reg_reg[31]_P ;
-  wire \r_reg_reg[3]_P ;
-  wire \r_reg_reg[4]_P ;
-  wire \r_reg_reg[5]_P ;
-  wire \r_reg_reg[6]_P ;
-  wire \r_reg_reg[7]_P ;
-  wire \r_reg_reg[8]_P ;
-  wire \r_reg_reg[9]_P ;
   wire \slv_reg0_reg[31] ;
 
   FDCE \data_out_reg[0] 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[0]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ),
-        .Q(\r_reg_reg[0]_P ));
+        .D(\data_out_reg[0]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ),
+        .Q(\axi_rdata_reg[0] ));
   FDCE \data_out_reg[10] 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[10]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ),
-        .Q(\r_reg_reg[10]_P ));
+        .D(\data_out_reg[10]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ),
+        .Q(\axi_rdata_reg[10] ));
   FDCE \data_out_reg[11] 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[11]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ),
-        .Q(\r_reg_reg[11]_P ));
+        .D(\data_out_reg[11]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ),
+        .Q(\axi_rdata_reg[11] ));
   FDCE \data_out_reg[12] 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[12]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ),
-        .Q(\r_reg_reg[12]_P ));
+        .D(\data_out_reg[12]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ),
+        .Q(\axi_rdata_reg[12] ));
   FDCE \data_out_reg[13] 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[13]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ),
-        .Q(\r_reg_reg[13]_P ));
+        .D(\data_out_reg[13]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ),
+        .Q(\axi_rdata_reg[13] ));
   FDCE \data_out_reg[14] 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[14]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ),
-        .Q(\r_reg_reg[14]_P ));
+        .D(\data_out_reg[14]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ),
+        .Q(\axi_rdata_reg[14] ));
   FDCE \data_out_reg[15] 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[15]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ),
-        .Q(\r_reg_reg[15]_P ));
+        .D(\data_out_reg[15]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ),
+        .Q(\axi_rdata_reg[15] ));
   FDCE \data_out_reg[16] 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[16]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ),
-        .Q(\r_reg_reg[16]_P ));
+        .D(\data_out_reg[16]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ),
+        .Q(\axi_rdata_reg[16] ));
   FDCE \data_out_reg[17] 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[17]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ),
-        .Q(\r_reg_reg[17]_P ));
+        .D(\data_out_reg[17]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ),
+        .Q(\axi_rdata_reg[17] ));
   FDCE \data_out_reg[18] 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[18]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ),
-        .Q(\r_reg_reg[18]_P ));
+        .D(\data_out_reg[18]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ),
+        .Q(\axi_rdata_reg[18] ));
   FDCE \data_out_reg[19] 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[19]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ),
-        .Q(\r_reg_reg[19]_P ));
+        .D(\data_out_reg[19]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ),
+        .Q(\axi_rdata_reg[19] ));
   FDCE \data_out_reg[1] 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[1]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ),
-        .Q(\r_reg_reg[1]_P ));
+        .D(\data_out_reg[1]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ),
+        .Q(\axi_rdata_reg[1] ));
   FDCE \data_out_reg[20] 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[20]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ),
-        .Q(\r_reg_reg[20]_P ));
+        .D(\data_out_reg[20]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ),
+        .Q(\axi_rdata_reg[20] ));
   FDCE \data_out_reg[21] 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[21]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ),
-        .Q(\r_reg_reg[21]_P ));
+        .D(\data_out_reg[21]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ),
+        .Q(\axi_rdata_reg[21] ));
   FDCE \data_out_reg[22] 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[22]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ),
-        .Q(\r_reg_reg[22]_P ));
+        .D(\data_out_reg[22]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ),
+        .Q(\axi_rdata_reg[22] ));
   FDCE \data_out_reg[23] 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[23]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ),
-        .Q(\r_reg_reg[23]_P ));
+        .D(\data_out_reg[23]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ),
+        .Q(\axi_rdata_reg[23] ));
   FDCE \data_out_reg[24] 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[24]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ),
-        .Q(\r_reg_reg[24]_P ));
+        .D(\data_out_reg[24]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ),
+        .Q(\axi_rdata_reg[24] ));
   FDCE \data_out_reg[25] 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[25]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ),
-        .Q(\r_reg_reg[25]_P ));
+        .D(\data_out_reg[25]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ),
+        .Q(\axi_rdata_reg[25] ));
   FDCE \data_out_reg[26] 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[26]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ),
-        .Q(\r_reg_reg[26]_P ));
+        .D(\data_out_reg[26]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ),
+        .Q(\axi_rdata_reg[26] ));
   FDCE \data_out_reg[27] 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[27]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ),
-        .Q(\r_reg_reg[27]_P ));
+        .D(\data_out_reg[27]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ),
+        .Q(\axi_rdata_reg[27] ));
   FDCE \data_out_reg[28] 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[28]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ),
-        .Q(\r_reg_reg[28]_P ));
+        .D(\data_out_reg[28]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ),
+        .Q(\axi_rdata_reg[28] ));
   FDCE \data_out_reg[29] 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[29]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ),
-        .Q(\r_reg_reg[29]_P ));
+        .D(\data_out_reg[29]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ),
+        .Q(\axi_rdata_reg[29] ));
   FDCE \data_out_reg[2] 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[2]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ),
-        .Q(\r_reg_reg[2]_P ));
+        .D(\data_out_reg[2]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ),
+        .Q(\axi_rdata_reg[2] ));
   FDCE \data_out_reg[30] 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[30]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ),
-        .Q(\r_reg_reg[30]_P ));
+        .D(\data_out_reg[30]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ),
+        .Q(\axi_rdata_reg[30] ));
   FDCE \data_out_reg[31] 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[31]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ),
-        .Q(\r_reg_reg[31]_P ));
+        .D(\data_out_reg[31]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ),
+        .Q(\axi_rdata_reg[31] ));
   FDCE \data_out_reg[3] 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[3]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ),
-        .Q(\r_reg_reg[3]_P ));
+        .D(\data_out_reg[3]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ),
+        .Q(\axi_rdata_reg[3] ));
   FDCE \data_out_reg[4] 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[4]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ),
-        .Q(\r_reg_reg[4]_P ));
+        .D(\data_out_reg[4]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ),
+        .Q(\axi_rdata_reg[4] ));
   FDCE \data_out_reg[5] 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[5]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ),
-        .Q(\r_reg_reg[5]_P ));
+        .D(\data_out_reg[5]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ),
+        .Q(\axi_rdata_reg[5] ));
   FDCE \data_out_reg[6] 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[6]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ),
-        .Q(\r_reg_reg[6]_P ));
+        .D(\data_out_reg[6]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ),
+        .Q(\axi_rdata_reg[6] ));
   FDCE \data_out_reg[7] 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[7]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ),
-        .Q(\r_reg_reg[7]_P ));
+        .D(\data_out_reg[7]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ),
+        .Q(\axi_rdata_reg[7] ));
   FDCE \data_out_reg[8] 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[8]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ),
-        .Q(\r_reg_reg[8]_P ));
+        .D(\data_out_reg[8]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ),
+        .Q(\axi_rdata_reg[8] ));
   FDCE \data_out_reg[9] 
        (.C(debug_in_shift_int),
         .CE(1'b1),
         .CLR(\slv_reg0_reg[31] ),
-        .D(\data_out_reg[9]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 ),
-        .Q(\r_reg_reg[9]_P ));
+        .D(\data_out_reg[9]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c ),
+        .Q(\axi_rdata_reg[9] ));
+endmodule
+
+(* ORIG_REF_NAME = "register_32bits" *) 
+module design_1_BiDirChannels_0_0_register_32bits_9
+   (data_out_reg_c_0,
+    data_out_reg_c_1,
+    debug_out_shift_int,
+    \slv_reg0_reg[31] );
+  output data_out_reg_c_0;
+  input data_out_reg_c_1;
+  input debug_out_shift_int;
+  input \slv_reg0_reg[31] ;
+
+  wire data_out_reg_c_0;
+  wire data_out_reg_c_1;
+  wire debug_out_shift_int;
+  wire \slv_reg0_reg[31] ;
+
+  FDCE data_out_reg_c
+       (.C(debug_out_shift_int),
+        .CE(1'b1),
+        .CLR(\slv_reg0_reg[31] ),
+        .D(data_out_reg_c_1),
+        .Q(data_out_reg_c_0));
 endmodule
 
 (* ORIG_REF_NAME = "shift_reg_8bits" *) 
 module design_1_BiDirChannels_0_0_shift_reg_8bits
-   (\out_reg[7]_0 ,
-    Q_reg,
+   (Q_reg,
     s00_axis_tready,
+    in_inj_bit,
     debug_in_shift_int,
-    \slv_reg0_reg[31] ,
-    in_inj_bit);
-  output \out_reg[7]_0 ;
+    data_out_reg_c,
+    \slv_reg0_reg[31] );
   output Q_reg;
   output s00_axis_tready;
-  input debug_in_shift_int;
-  input \slv_reg0_reg[31] ;
   input in_inj_bit;
+  input debug_in_shift_int;
+  input data_out_reg_c;
+  input \slv_reg0_reg[31] ;
 
   wire Q_reg;
+  wire data_out_reg_c;
   wire debug_in_shift_int;
   wire in_inj_bit;
-  wire \out_reg[5]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4_n_0 ;
-  wire \out_reg[6]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ;
-  wire \out_reg[7]_0 ;
-  wire out_reg_c_0_n_0;
-  wire out_reg_c_1_n_0;
-  wire out_reg_c_2_n_0;
-  wire out_reg_c_3_n_0;
-  wire out_reg_c_4_n_0;
-  wire out_reg_c_n_0;
+  wire \out_reg[5]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c_n_0 ;
+  wire \out_reg[6]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ;
   wire out_reg_gate_n_0;
   wire s00_axis_tready;
   wire \slv_reg0_reg[31] ;
 
   (* srl_bus_name = "\inst/X1/BUFFERS/inputShiftRegister/out_reg " *) 
-  (* srl_name = "\inst/X1/BUFFERS/inputShiftRegister/out_reg[5]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 " *) 
-  SRL16E \out_reg[5]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 
+  (* srl_name = "\inst/X1/BUFFERS/inputShiftRegister/out_reg[5]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c " *) 
+  SRL16E \out_reg[5]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c 
        (.A0(1'b1),
         .A1(1'b0),
         .A2(1'b1),
@@ -9612,12 +9732,12 @@ module design_1_BiDirChannels_0_0_shift_reg_8bits
         .CE(1'b1),
         .CLK(debug_in_shift_int),
         .D(in_inj_bit),
-        .Q(\out_reg[5]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4_n_0 ));
-  FDRE \out_reg[6]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5 
+        .Q(\out_reg[5]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c_n_0 ));
+  FDRE \out_reg[6]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c 
        (.C(debug_in_shift_int),
         .CE(1'b1),
-        .D(\out_reg[5]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4_n_0 ),
-        .Q(\out_reg[6]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
+        .D(\out_reg[5]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c_n_0 ),
+        .Q(\out_reg[6]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
         .R(1'b0));
   FDCE \out_reg[7] 
        (.C(debug_in_shift_int),
@@ -9625,53 +9745,11 @@ module design_1_BiDirChannels_0_0_shift_reg_8bits
         .CLR(\slv_reg0_reg[31] ),
         .D(out_reg_gate_n_0),
         .Q(Q_reg));
-  FDCE out_reg_c
-       (.C(debug_in_shift_int),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[31] ),
-        .D(1'b1),
-        .Q(out_reg_c_n_0));
-  FDCE out_reg_c_0
-       (.C(debug_in_shift_int),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[31] ),
-        .D(out_reg_c_n_0),
-        .Q(out_reg_c_0_n_0));
-  FDCE out_reg_c_1
-       (.C(debug_in_shift_int),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[31] ),
-        .D(out_reg_c_0_n_0),
-        .Q(out_reg_c_1_n_0));
-  FDCE out_reg_c_2
-       (.C(debug_in_shift_int),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[31] ),
-        .D(out_reg_c_1_n_0),
-        .Q(out_reg_c_2_n_0));
-  FDCE out_reg_c_3
-       (.C(debug_in_shift_int),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[31] ),
-        .D(out_reg_c_2_n_0),
-        .Q(out_reg_c_3_n_0));
-  FDCE out_reg_c_4
-       (.C(debug_in_shift_int),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[31] ),
-        .D(out_reg_c_3_n_0),
-        .Q(out_reg_c_4_n_0));
-  FDCE out_reg_c_5
-       (.C(debug_in_shift_int),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[31] ),
-        .D(out_reg_c_4_n_0),
-        .Q(\out_reg[7]_0 ));
   LUT2 #(
     .INIT(4'h8)) 
     out_reg_gate
-       (.I0(\out_reg[6]_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_5_n_0 ),
-        .I1(\out_reg[7]_0 ),
+       (.I0(\out_reg[6]_inst_X1_BUFFERS_inputDelayLine_Reg6_data_out_reg_c_n_0 ),
+        .I1(data_out_reg_c),
         .O(out_reg_gate_n_0));
   LUT1 #(
     .INIT(2'h1)) 
@@ -9681,37 +9759,58 @@ module design_1_BiDirChannels_0_0_shift_reg_8bits
 endmodule
 
 (* ORIG_REF_NAME = "shift_reg_8bits" *) 
-module design_1_BiDirChannels_0_0_shift_reg_8bits_11
+module design_1_BiDirChannels_0_0_shift_reg_8bits_8
    (m00_axis_tvalid,
-    CLK,
     debug_out_shift_int,
+    m00_axis_tlast,
     \slv_reg0_reg[31] ,
     Q_reg,
-    data_out_reg_c);
+    data_out_reg_c,
+    m00_axis_tready,
+    out_shift_sel,
+    \r_reg_reg[0] ,
+    in_start_stop_int);
   output m00_axis_tvalid;
-  output CLK;
-  input debug_out_shift_int;
+  output debug_out_shift_int;
+  output m00_axis_tlast;
   input \slv_reg0_reg[31] ;
   input Q_reg;
   input data_out_reg_c;
+  input m00_axis_tready;
+  input out_shift_sel;
+  input \r_reg_reg[0] ;
+  input in_start_stop_int;
 
-  wire CLK;
   wire Q_reg;
   wire data_out_reg_c;
   wire debug_out_shift_int;
+  wire in_start_stop_int;
+  wire m00_axis_tlast;
+  wire m00_axis_tready;
   wire m00_axis_tvalid;
   wire [6:6]out_full;
   wire \out_reg[4]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c_n_0 ;
   wire \out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ;
   wire out_reg_gate_n_0;
+  wire out_shift_sel;
+  wire \r_reg_reg[0] ;
   wire \slv_reg0_reg[31] ;
 
+  LUT5 #(
+    .INIT(32'h2F202020)) 
+    \data_out[31]_i_1 
+       (.I0(m00_axis_tready),
+        .I1(m00_axis_tvalid),
+        .I2(out_shift_sel),
+        .I3(\r_reg_reg[0] ),
+        .I4(in_start_stop_int),
+        .O(debug_out_shift_int));
   LUT2 #(
     .INIT(4'h2)) 
     m00_axis_tlast_INST_0
        (.I0(m00_axis_tvalid),
         .I1(out_full),
-        .O(CLK));
+        .O(m00_axis_tlast));
   (* srl_bus_name = "\inst/X1/BUFFERS/outputShiftRegister/out_reg " *) 
   (* srl_name = "\inst/X1/BUFFERS/outputShiftRegister/out_reg[4]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c " *) 
   SRL16E \out_reg[4]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c 
@@ -9747,840 +9846,6 @@ module design_1_BiDirChannels_0_0_shift_reg_8bits_11
        (.I0(\out_reg[5]_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c_n_0 ),
         .I1(data_out_reg_c),
         .O(out_reg_gate_n_0));
-endmodule
-
-(* ORIG_REF_NAME = "upCounter8Bits" *) 
-module design_1_BiDirChannels_0_0_upCounter8Bits
-   (Q,
-    CLK,
-    \slv_reg0_reg[16] );
-  output [7:0]Q;
-  input CLK;
-  input \slv_reg0_reg[16] ;
-
-  wire CLK;
-  wire [7:0]Q;
-  wire [7:0]r_next;
-  wire \r_reg[7]_i_4_n_0 ;
-  wire \slv_reg0_reg[16] ;
-
-  LUT1 #(
-    .INIT(2'h1)) 
-    \r_reg[0]_i_1__0 
-       (.I0(Q[0]),
-        .O(r_next[0]));
-  (* SOFT_HLUTNM = "soft_lutpair41" *) 
-  LUT2 #(
-    .INIT(4'h6)) 
-    \r_reg[1]_i_1 
-       (.I0(Q[0]),
-        .I1(Q[1]),
-        .O(r_next[1]));
-  (* SOFT_HLUTNM = "soft_lutpair41" *) 
-  LUT3 #(
-    .INIT(8'h78)) 
-    \r_reg[2]_i_1 
-       (.I0(Q[0]),
-        .I1(Q[1]),
-        .I2(Q[2]),
-        .O(r_next[2]));
-  (* SOFT_HLUTNM = "soft_lutpair39" *) 
-  LUT4 #(
-    .INIT(16'h7F80)) 
-    \r_reg[3]_i_1 
-       (.I0(Q[1]),
-        .I1(Q[0]),
-        .I2(Q[2]),
-        .I3(Q[3]),
-        .O(r_next[3]));
-  (* SOFT_HLUTNM = "soft_lutpair39" *) 
-  LUT5 #(
-    .INIT(32'h7FFF8000)) 
-    \r_reg[4]_i_1 
-       (.I0(Q[2]),
-        .I1(Q[0]),
-        .I2(Q[1]),
-        .I3(Q[3]),
-        .I4(Q[4]),
-        .O(r_next[4]));
-  LUT6 #(
-    .INIT(64'h7FFFFFFF80000000)) 
-    \r_reg[5]_i_1 
-       (.I0(Q[3]),
-        .I1(Q[1]),
-        .I2(Q[0]),
-        .I3(Q[2]),
-        .I4(Q[4]),
-        .I5(Q[5]),
-        .O(r_next[5]));
-  (* SOFT_HLUTNM = "soft_lutpair40" *) 
-  LUT2 #(
-    .INIT(4'h6)) 
-    \r_reg[6]_i_1 
-       (.I0(\r_reg[7]_i_4_n_0 ),
-        .I1(Q[6]),
-        .O(r_next[6]));
-  (* SOFT_HLUTNM = "soft_lutpair40" *) 
-  LUT3 #(
-    .INIT(8'h78)) 
-    \r_reg[7]_i_1 
-       (.I0(\r_reg[7]_i_4_n_0 ),
-        .I1(Q[6]),
-        .I2(Q[7]),
-        .O(r_next[7]));
-  LUT6 #(
-    .INIT(64'h8000000000000000)) 
-    \r_reg[7]_i_4 
-       (.I0(Q[5]),
-        .I1(Q[3]),
-        .I2(Q[1]),
-        .I3(Q[0]),
-        .I4(Q[2]),
-        .I5(Q[4]),
-        .O(\r_reg[7]_i_4_n_0 ));
-  FDCE \r_reg_reg[0] 
-       (.C(CLK),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next[0]),
-        .Q(Q[0]));
-  FDCE \r_reg_reg[1] 
-       (.C(CLK),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next[1]),
-        .Q(Q[1]));
-  FDCE \r_reg_reg[2] 
-       (.C(CLK),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next[2]),
-        .Q(Q[2]));
-  FDCE \r_reg_reg[3] 
-       (.C(CLK),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next[3]),
-        .Q(Q[3]));
-  FDCE \r_reg_reg[4] 
-       (.C(CLK),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next[4]),
-        .Q(Q[4]));
-  FDCE \r_reg_reg[5] 
-       (.C(CLK),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next[5]),
-        .Q(Q[5]));
-  FDCE \r_reg_reg[6] 
-       (.C(CLK),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next[6]),
-        .Q(Q[6]));
-  FDCE \r_reg_reg[7] 
-       (.C(CLK),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next[7]),
-        .Q(Q[7]));
-endmodule
-
-(* ORIG_REF_NAME = "upCounter8Bits" *) 
-module design_1_BiDirChannels_0_0_upCounter8Bits_0
-   (Q,
-    tx_token_next_int,
-    \slv_reg0_reg[16] );
-  output [7:0]Q;
-  input tx_token_next_int;
-  input \slv_reg0_reg[16] ;
-
-  wire [7:0]Q;
-  wire [7:0]r_next__0;
-  wire \r_reg[7]_i_2__1_n_0 ;
-  wire \slv_reg0_reg[16] ;
-  wire tx_token_next_int;
-
-  LUT1 #(
-    .INIT(2'h1)) 
-    \r_reg[0]_i_1__1 
-       (.I0(Q[0]),
-        .O(r_next__0[0]));
-  (* SOFT_HLUTNM = "soft_lutpair44" *) 
-  LUT2 #(
-    .INIT(4'h6)) 
-    \r_reg[1]_i_1__0 
-       (.I0(Q[0]),
-        .I1(Q[1]),
-        .O(r_next__0[1]));
-  (* SOFT_HLUTNM = "soft_lutpair44" *) 
-  LUT3 #(
-    .INIT(8'h78)) 
-    \r_reg[2]_i_1__0 
-       (.I0(Q[0]),
-        .I1(Q[1]),
-        .I2(Q[2]),
-        .O(r_next__0[2]));
-  (* SOFT_HLUTNM = "soft_lutpair42" *) 
-  LUT4 #(
-    .INIT(16'h7F80)) 
-    \r_reg[3]_i_1__0 
-       (.I0(Q[1]),
-        .I1(Q[0]),
-        .I2(Q[2]),
-        .I3(Q[3]),
-        .O(r_next__0[3]));
-  (* SOFT_HLUTNM = "soft_lutpair42" *) 
-  LUT5 #(
-    .INIT(32'h7FFF8000)) 
-    \r_reg[4]_i_1__0 
-       (.I0(Q[2]),
-        .I1(Q[0]),
-        .I2(Q[1]),
-        .I3(Q[3]),
-        .I4(Q[4]),
-        .O(r_next__0[4]));
-  LUT6 #(
-    .INIT(64'h7FFFFFFF80000000)) 
-    \r_reg[5]_i_1__0 
-       (.I0(Q[3]),
-        .I1(Q[1]),
-        .I2(Q[0]),
-        .I3(Q[2]),
-        .I4(Q[4]),
-        .I5(Q[5]),
-        .O(r_next__0[5]));
-  (* SOFT_HLUTNM = "soft_lutpair43" *) 
-  LUT2 #(
-    .INIT(4'h6)) 
-    \r_reg[6]_i_1__0 
-       (.I0(\r_reg[7]_i_2__1_n_0 ),
-        .I1(Q[6]),
-        .O(r_next__0[6]));
-  (* SOFT_HLUTNM = "soft_lutpair43" *) 
-  LUT3 #(
-    .INIT(8'h78)) 
-    \r_reg[7]_i_1__0 
-       (.I0(\r_reg[7]_i_2__1_n_0 ),
-        .I1(Q[6]),
-        .I2(Q[7]),
-        .O(r_next__0[7]));
-  LUT6 #(
-    .INIT(64'h8000000000000000)) 
-    \r_reg[7]_i_2__1 
-       (.I0(Q[5]),
-        .I1(Q[3]),
-        .I2(Q[1]),
-        .I3(Q[0]),
-        .I4(Q[2]),
-        .I5(Q[4]),
-        .O(\r_reg[7]_i_2__1_n_0 ));
-  FDCE \r_reg_reg[0] 
-       (.C(tx_token_next_int),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next__0[0]),
-        .Q(Q[0]));
-  FDCE \r_reg_reg[1] 
-       (.C(tx_token_next_int),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next__0[1]),
-        .Q(Q[1]));
-  FDCE \r_reg_reg[2] 
-       (.C(tx_token_next_int),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next__0[2]),
-        .Q(Q[2]));
-  FDCE \r_reg_reg[3] 
-       (.C(tx_token_next_int),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next__0[3]),
-        .Q(Q[3]));
-  FDCE \r_reg_reg[4] 
-       (.C(tx_token_next_int),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next__0[4]),
-        .Q(Q[4]));
-  FDCE \r_reg_reg[5] 
-       (.C(tx_token_next_int),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next__0[5]),
-        .Q(Q[5]));
-  FDCE \r_reg_reg[6] 
-       (.C(tx_token_next_int),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next__0[6]),
-        .Q(Q[6]));
-  FDCE \r_reg_reg[7] 
-       (.C(tx_token_next_int),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next__0[7]),
-        .Q(Q[7]));
-endmodule
-
-(* ORIG_REF_NAME = "upCounter8Bits" *) 
-module design_1_BiDirChannels_0_0_upCounter8Bits_1
-   (Q,
-    s00_axis_tlast,
-    \slv_reg0_reg[16] );
-  output [7:0]Q;
-  input s00_axis_tlast;
-  input \slv_reg0_reg[16] ;
-
-  wire [7:0]Q;
-  wire [7:0]r_next__1;
-  wire \r_reg[7]_i_2__2_n_0 ;
-  wire s00_axis_tlast;
-  wire \slv_reg0_reg[16] ;
-
-  LUT1 #(
-    .INIT(2'h1)) 
-    \r_reg[0]_i_1__2 
-       (.I0(Q[0]),
-        .O(r_next__1[0]));
-  (* SOFT_HLUTNM = "soft_lutpair47" *) 
-  LUT2 #(
-    .INIT(4'h6)) 
-    \r_reg[1]_i_1__1 
-       (.I0(Q[0]),
-        .I1(Q[1]),
-        .O(r_next__1[1]));
-  (* SOFT_HLUTNM = "soft_lutpair47" *) 
-  LUT3 #(
-    .INIT(8'h78)) 
-    \r_reg[2]_i_1__1 
-       (.I0(Q[0]),
-        .I1(Q[1]),
-        .I2(Q[2]),
-        .O(r_next__1[2]));
-  (* SOFT_HLUTNM = "soft_lutpair45" *) 
-  LUT4 #(
-    .INIT(16'h7F80)) 
-    \r_reg[3]_i_1__1 
-       (.I0(Q[1]),
-        .I1(Q[0]),
-        .I2(Q[2]),
-        .I3(Q[3]),
-        .O(r_next__1[3]));
-  (* SOFT_HLUTNM = "soft_lutpair45" *) 
-  LUT5 #(
-    .INIT(32'h7FFF8000)) 
-    \r_reg[4]_i_1__1 
-       (.I0(Q[2]),
-        .I1(Q[0]),
-        .I2(Q[1]),
-        .I3(Q[3]),
-        .I4(Q[4]),
-        .O(r_next__1[4]));
-  LUT6 #(
-    .INIT(64'h7FFFFFFF80000000)) 
-    \r_reg[5]_i_1__1 
-       (.I0(Q[3]),
-        .I1(Q[1]),
-        .I2(Q[0]),
-        .I3(Q[2]),
-        .I4(Q[4]),
-        .I5(Q[5]),
-        .O(r_next__1[5]));
-  (* SOFT_HLUTNM = "soft_lutpair46" *) 
-  LUT2 #(
-    .INIT(4'h6)) 
-    \r_reg[6]_i_1__1 
-       (.I0(\r_reg[7]_i_2__2_n_0 ),
-        .I1(Q[6]),
-        .O(r_next__1[6]));
-  (* SOFT_HLUTNM = "soft_lutpair46" *) 
-  LUT3 #(
-    .INIT(8'h78)) 
-    \r_reg[7]_i_1__1 
-       (.I0(\r_reg[7]_i_2__2_n_0 ),
-        .I1(Q[6]),
-        .I2(Q[7]),
-        .O(r_next__1[7]));
-  LUT6 #(
-    .INIT(64'h8000000000000000)) 
-    \r_reg[7]_i_2__2 
-       (.I0(Q[5]),
-        .I1(Q[3]),
-        .I2(Q[1]),
-        .I3(Q[0]),
-        .I4(Q[2]),
-        .I5(Q[4]),
-        .O(\r_reg[7]_i_2__2_n_0 ));
-  FDCE \r_reg_reg[0] 
-       (.C(s00_axis_tlast),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next__1[0]),
-        .Q(Q[0]));
-  FDCE \r_reg_reg[1] 
-       (.C(s00_axis_tlast),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next__1[1]),
-        .Q(Q[1]));
-  FDCE \r_reg_reg[2] 
-       (.C(s00_axis_tlast),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next__1[2]),
-        .Q(Q[2]));
-  FDCE \r_reg_reg[3] 
-       (.C(s00_axis_tlast),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next__1[3]),
-        .Q(Q[3]));
-  FDCE \r_reg_reg[4] 
-       (.C(s00_axis_tlast),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next__1[4]),
-        .Q(Q[4]));
-  FDCE \r_reg_reg[5] 
-       (.C(s00_axis_tlast),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next__1[5]),
-        .Q(Q[5]));
-  FDCE \r_reg_reg[6] 
-       (.C(s00_axis_tlast),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next__1[6]),
-        .Q(Q[6]));
-  FDCE \r_reg_reg[7] 
-       (.C(s00_axis_tlast),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next__1[7]),
-        .Q(Q[7]));
-endmodule
-
-(* ORIG_REF_NAME = "upCounter8Bits" *) 
-module design_1_BiDirChannels_0_0_upCounter8Bits_2
-   (Q,
-    \out_reg[7] ,
-    \slv_reg0_reg[16] );
-  output [7:0]Q;
-  input \out_reg[7] ;
-  input \slv_reg0_reg[16] ;
-
-  wire [7:0]Q;
-  wire \out_reg[7] ;
-  wire [7:0]r_next__3;
-  wire \r_reg[7]_i_2__4_n_0 ;
-  wire \slv_reg0_reg[16] ;
-
-  LUT1 #(
-    .INIT(2'h1)) 
-    \r_reg[0]_i_1__4 
-       (.I0(Q[0]),
-        .O(r_next__3[0]));
-  (* SOFT_HLUTNM = "soft_lutpair50" *) 
-  LUT2 #(
-    .INIT(4'h6)) 
-    \r_reg[1]_i_1__3 
-       (.I0(Q[0]),
-        .I1(Q[1]),
-        .O(r_next__3[1]));
-  (* SOFT_HLUTNM = "soft_lutpair50" *) 
-  LUT3 #(
-    .INIT(8'h78)) 
-    \r_reg[2]_i_1__3 
-       (.I0(Q[0]),
-        .I1(Q[1]),
-        .I2(Q[2]),
-        .O(r_next__3[2]));
-  (* SOFT_HLUTNM = "soft_lutpair48" *) 
-  LUT4 #(
-    .INIT(16'h7F80)) 
-    \r_reg[3]_i_1__3 
-       (.I0(Q[1]),
-        .I1(Q[0]),
-        .I2(Q[2]),
-        .I3(Q[3]),
-        .O(r_next__3[3]));
-  (* SOFT_HLUTNM = "soft_lutpair48" *) 
-  LUT5 #(
-    .INIT(32'h7FFF8000)) 
-    \r_reg[4]_i_1__3 
-       (.I0(Q[2]),
-        .I1(Q[0]),
-        .I2(Q[1]),
-        .I3(Q[3]),
-        .I4(Q[4]),
-        .O(r_next__3[4]));
-  LUT6 #(
-    .INIT(64'h7FFFFFFF80000000)) 
-    \r_reg[5]_i_1__3 
-       (.I0(Q[3]),
-        .I1(Q[1]),
-        .I2(Q[0]),
-        .I3(Q[2]),
-        .I4(Q[4]),
-        .I5(Q[5]),
-        .O(r_next__3[5]));
-  (* SOFT_HLUTNM = "soft_lutpair49" *) 
-  LUT2 #(
-    .INIT(4'h6)) 
-    \r_reg[6]_i_1__3 
-       (.I0(\r_reg[7]_i_2__4_n_0 ),
-        .I1(Q[6]),
-        .O(r_next__3[6]));
-  (* SOFT_HLUTNM = "soft_lutpair49" *) 
-  LUT3 #(
-    .INIT(8'h78)) 
-    \r_reg[7]_i_1__3 
-       (.I0(\r_reg[7]_i_2__4_n_0 ),
-        .I1(Q[6]),
-        .I2(Q[7]),
-        .O(r_next__3[7]));
-  LUT6 #(
-    .INIT(64'h8000000000000000)) 
-    \r_reg[7]_i_2__4 
-       (.I0(Q[5]),
-        .I1(Q[3]),
-        .I2(Q[1]),
-        .I3(Q[0]),
-        .I4(Q[2]),
-        .I5(Q[4]),
-        .O(\r_reg[7]_i_2__4_n_0 ));
-  FDCE \r_reg_reg[0] 
-       (.C(\out_reg[7] ),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next__3[0]),
-        .Q(Q[0]));
-  FDCE \r_reg_reg[1] 
-       (.C(\out_reg[7] ),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next__3[1]),
-        .Q(Q[1]));
-  FDCE \r_reg_reg[2] 
-       (.C(\out_reg[7] ),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next__3[2]),
-        .Q(Q[2]));
-  FDCE \r_reg_reg[3] 
-       (.C(\out_reg[7] ),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next__3[3]),
-        .Q(Q[3]));
-  FDCE \r_reg_reg[4] 
-       (.C(\out_reg[7] ),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next__3[4]),
-        .Q(Q[4]));
-  FDCE \r_reg_reg[5] 
-       (.C(\out_reg[7] ),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next__3[5]),
-        .Q(Q[5]));
-  FDCE \r_reg_reg[6] 
-       (.C(\out_reg[7] ),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next__3[6]),
-        .Q(Q[6]));
-  FDCE \r_reg_reg[7] 
-       (.C(\out_reg[7] ),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next__3[7]),
-        .Q(Q[7]));
-endmodule
-
-(* ORIG_REF_NAME = "upCounter8Bits" *) 
-module design_1_BiDirChannels_0_0_upCounter8Bits_3
-   (Q,
-    debug_out_shift_int,
-    \slv_reg0_reg[16] );
-  output [7:0]Q;
-  input debug_out_shift_int;
-  input \slv_reg0_reg[16] ;
-
-  wire [7:0]Q;
-  wire debug_out_shift_int;
-  wire [7:0]r_next__2;
-  wire \r_reg[7]_i_2__3_n_0 ;
-  wire \slv_reg0_reg[16] ;
-
-  LUT1 #(
-    .INIT(2'h1)) 
-    \r_reg[0]_i_1__3 
-       (.I0(Q[0]),
-        .O(r_next__2[0]));
-  (* SOFT_HLUTNM = "soft_lutpair53" *) 
-  LUT2 #(
-    .INIT(4'h6)) 
-    \r_reg[1]_i_1__2 
-       (.I0(Q[0]),
-        .I1(Q[1]),
-        .O(r_next__2[1]));
-  (* SOFT_HLUTNM = "soft_lutpair53" *) 
-  LUT3 #(
-    .INIT(8'h78)) 
-    \r_reg[2]_i_1__2 
-       (.I0(Q[0]),
-        .I1(Q[1]),
-        .I2(Q[2]),
-        .O(r_next__2[2]));
-  (* SOFT_HLUTNM = "soft_lutpair51" *) 
-  LUT4 #(
-    .INIT(16'h7F80)) 
-    \r_reg[3]_i_1__2 
-       (.I0(Q[1]),
-        .I1(Q[0]),
-        .I2(Q[2]),
-        .I3(Q[3]),
-        .O(r_next__2[3]));
-  (* SOFT_HLUTNM = "soft_lutpair51" *) 
-  LUT5 #(
-    .INIT(32'h7FFF8000)) 
-    \r_reg[4]_i_1__2 
-       (.I0(Q[2]),
-        .I1(Q[0]),
-        .I2(Q[1]),
-        .I3(Q[3]),
-        .I4(Q[4]),
-        .O(r_next__2[4]));
-  LUT6 #(
-    .INIT(64'h7FFFFFFF80000000)) 
-    \r_reg[5]_i_1__2 
-       (.I0(Q[3]),
-        .I1(Q[1]),
-        .I2(Q[0]),
-        .I3(Q[2]),
-        .I4(Q[4]),
-        .I5(Q[5]),
-        .O(r_next__2[5]));
-  (* SOFT_HLUTNM = "soft_lutpair52" *) 
-  LUT2 #(
-    .INIT(4'h6)) 
-    \r_reg[6]_i_1__2 
-       (.I0(\r_reg[7]_i_2__3_n_0 ),
-        .I1(Q[6]),
-        .O(r_next__2[6]));
-  (* SOFT_HLUTNM = "soft_lutpair52" *) 
-  LUT3 #(
-    .INIT(8'h78)) 
-    \r_reg[7]_i_1__2 
-       (.I0(\r_reg[7]_i_2__3_n_0 ),
-        .I1(Q[6]),
-        .I2(Q[7]),
-        .O(r_next__2[7]));
-  LUT6 #(
-    .INIT(64'h8000000000000000)) 
-    \r_reg[7]_i_2__3 
-       (.I0(Q[5]),
-        .I1(Q[3]),
-        .I2(Q[1]),
-        .I3(Q[0]),
-        .I4(Q[2]),
-        .I5(Q[4]),
-        .O(\r_reg[7]_i_2__3_n_0 ));
-  FDCE \r_reg_reg[0] 
-       (.C(debug_out_shift_int),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next__2[0]),
-        .Q(Q[0]));
-  FDCE \r_reg_reg[1] 
-       (.C(debug_out_shift_int),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next__2[1]),
-        .Q(Q[1]));
-  FDCE \r_reg_reg[2] 
-       (.C(debug_out_shift_int),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next__2[2]),
-        .Q(Q[2]));
-  FDCE \r_reg_reg[3] 
-       (.C(debug_out_shift_int),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next__2[3]),
-        .Q(Q[3]));
-  FDCE \r_reg_reg[4] 
-       (.C(debug_out_shift_int),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next__2[4]),
-        .Q(Q[4]));
-  FDCE \r_reg_reg[5] 
-       (.C(debug_out_shift_int),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next__2[5]),
-        .Q(Q[5]));
-  FDCE \r_reg_reg[6] 
-       (.C(debug_out_shift_int),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next__2[6]),
-        .Q(Q[6]));
-  FDCE \r_reg_reg[7] 
-       (.C(debug_out_shift_int),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next__2[7]),
-        .Q(Q[7]));
-endmodule
-
-(* ORIG_REF_NAME = "upCounter8Bits" *) 
-module design_1_BiDirChannels_0_0_upCounter8Bits_4
-   (Q,
-    debug_in_shift_int,
-    \slv_reg0_reg[16] );
-  output [7:0]Q;
-  input debug_in_shift_int;
-  input \slv_reg0_reg[16] ;
-
-  wire [7:0]Q;
-  wire debug_in_shift_int;
-  wire [7:0]r_next__4;
-  wire \r_reg[7]_i_3_n_0 ;
-  wire \slv_reg0_reg[16] ;
-
-  LUT1 #(
-    .INIT(2'h1)) 
-    \r_reg[0]_i_1__5 
-       (.I0(Q[0]),
-        .O(r_next__4[0]));
-  (* SOFT_HLUTNM = "soft_lutpair56" *) 
-  LUT2 #(
-    .INIT(4'h6)) 
-    \r_reg[1]_i_1__4 
-       (.I0(Q[0]),
-        .I1(Q[1]),
-        .O(r_next__4[1]));
-  (* SOFT_HLUTNM = "soft_lutpair56" *) 
-  LUT3 #(
-    .INIT(8'h78)) 
-    \r_reg[2]_i_1__4 
-       (.I0(Q[0]),
-        .I1(Q[1]),
-        .I2(Q[2]),
-        .O(r_next__4[2]));
-  (* SOFT_HLUTNM = "soft_lutpair54" *) 
-  LUT4 #(
-    .INIT(16'h7F80)) 
-    \r_reg[3]_i_1__4 
-       (.I0(Q[1]),
-        .I1(Q[0]),
-        .I2(Q[2]),
-        .I3(Q[3]),
-        .O(r_next__4[3]));
-  (* SOFT_HLUTNM = "soft_lutpair54" *) 
-  LUT5 #(
-    .INIT(32'h7FFF8000)) 
-    \r_reg[4]_i_1__4 
-       (.I0(Q[2]),
-        .I1(Q[0]),
-        .I2(Q[1]),
-        .I3(Q[3]),
-        .I4(Q[4]),
-        .O(r_next__4[4]));
-  LUT6 #(
-    .INIT(64'h7FFFFFFF80000000)) 
-    \r_reg[5]_i_1__4 
-       (.I0(Q[3]),
-        .I1(Q[1]),
-        .I2(Q[0]),
-        .I3(Q[2]),
-        .I4(Q[4]),
-        .I5(Q[5]),
-        .O(r_next__4[5]));
-  (* SOFT_HLUTNM = "soft_lutpair55" *) 
-  LUT2 #(
-    .INIT(4'h6)) 
-    \r_reg[6]_i_1__4 
-       (.I0(\r_reg[7]_i_3_n_0 ),
-        .I1(Q[6]),
-        .O(r_next__4[6]));
-  (* SOFT_HLUTNM = "soft_lutpair55" *) 
-  LUT3 #(
-    .INIT(8'h78)) 
-    \r_reg[7]_i_1__4 
-       (.I0(\r_reg[7]_i_3_n_0 ),
-        .I1(Q[6]),
-        .I2(Q[7]),
-        .O(r_next__4[7]));
-  LUT6 #(
-    .INIT(64'h8000000000000000)) 
-    \r_reg[7]_i_3 
-       (.I0(Q[5]),
-        .I1(Q[3]),
-        .I2(Q[1]),
-        .I3(Q[0]),
-        .I4(Q[2]),
-        .I5(Q[4]),
-        .O(\r_reg[7]_i_3_n_0 ));
-  FDCE \r_reg_reg[0] 
-       (.C(debug_in_shift_int),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next__4[0]),
-        .Q(Q[0]));
-  FDCE \r_reg_reg[1] 
-       (.C(debug_in_shift_int),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next__4[1]),
-        .Q(Q[1]));
-  FDCE \r_reg_reg[2] 
-       (.C(debug_in_shift_int),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next__4[2]),
-        .Q(Q[2]));
-  FDCE \r_reg_reg[3] 
-       (.C(debug_in_shift_int),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next__4[3]),
-        .Q(Q[3]));
-  FDCE \r_reg_reg[4] 
-       (.C(debug_in_shift_int),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next__4[4]),
-        .Q(Q[4]));
-  FDCE \r_reg_reg[5] 
-       (.C(debug_in_shift_int),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next__4[5]),
-        .Q(Q[5]));
-  FDCE \r_reg_reg[6] 
-       (.C(debug_in_shift_int),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next__4[6]),
-        .Q(Q[6]));
-  FDCE \r_reg_reg[7] 
-       (.C(debug_in_shift_int),
-        .CE(1'b1),
-        .CLR(\slv_reg0_reg[16] ),
-        .D(r_next__4[7]),
-        .Q(Q[7]));
 endmodule
 `ifndef GLBL
 `define GLBL

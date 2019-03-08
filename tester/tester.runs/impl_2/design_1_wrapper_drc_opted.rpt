@@ -1,8 +1,8 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-| Date         : Wed Mar  6 16:50:20 2019
-| Host         : DESKTOP-KC9HGNO running 64-bit major release  (build 9200)
+| Date         : Thu Mar  7 18:40:43 2019
+| Host         : AsusP8 running 64-bit major release  (build 9200)
 | Command      : report_drc -file design_1_wrapper_drc_opted.rpt -pb design_1_wrapper_drc_opted.pb -rpx design_1_wrapper_drc_opted.rpx
 | Design       : design_1_wrapper
 | Device       : xc7z020clg484-1
@@ -24,11 +24,11 @@ Table of Contents
       Design limits: <entire design considered>
            Ruledeck: default
              Max violations: <unlimited>
-             Violations found: 14
+             Violations found: 12
 +-------------+----------+-------------------------------------------------------------+------------+
 | Rule        | Severity | Description                                                 | Violations |
 +-------------+----------+-------------------------------------------------------------+------------+
-| PLHOLDVIO-2 | Warning  | Non-Optimal connections which could lead to hold violations | 7          |
+| PLHOLDVIO-2 | Warning  | Non-Optimal connections which could lead to hold violations | 5          |
 | REQP-1839   | Warning  | RAMB36 async control check                                  | 5          |
 | REQP-181    | Advisory | writefirst                                                  | 2          |
 +-------------+----------+-------------------------------------------------------------+------------+
@@ -37,30 +37,31 @@ Table of Contents
 -----------------
 PLHOLDVIO-2#1 Warning
 Non-Optimal connections which could lead to hold violations  
-A LUT design_1_i/BiDirChannels_0/inst/X1/BUFFERS/outputShiftRegister/m00_axis_tlast_INST_0 is driving clock pin of 8 cells. This could lead to large hold time violations. First few involved cells are:
-    design_1_i/BiDirChannels_0/inst/X1/DEBUGGER/CNTR3/r_reg_reg[0] {FDCE}
-    design_1_i/BiDirChannels_0/inst/X1/DEBUGGER/CNTR3/r_reg_reg[1] {FDCE}
-    design_1_i/BiDirChannels_0/inst/X1/DEBUGGER/CNTR3/r_reg_reg[2] {FDCE}
-    design_1_i/BiDirChannels_0/inst/X1/DEBUGGER/CNTR3/r_reg_reg[3] {FDCE}
-    design_1_i/BiDirChannels_0/inst/X1/DEBUGGER/CNTR3/r_reg_reg[4] {FDCE}
-    design_1_i/BiDirChannels_0/inst/X1/DEBUGGER/CNTR3/r_reg_reg[5] {FDCE}
-    design_1_i/BiDirChannels_0/inst/X1/DEBUGGER/CNTR3/r_reg_reg[6] {FDCE}
-    design_1_i/BiDirChannels_0/inst/X1/DEBUGGER/CNTR3/r_reg_reg[7] {FDCE}
+A LUT design_1_i/BiDirChannels_0/inst/X1/BUFFERS/outputShiftRegister/data_out[31]_i_1 is driving clock pin of 138 cells. This could lead to large hold time violations. First few involved cells are:
+    design_1_i/BiDirChannels_0/inst/X1/BUFFERS/outputDelayLine/Reg0/data_out_reg_c {FDCE}
+    design_1_i/BiDirChannels_0/inst/X1/BUFFERS/outputDelayLine/Reg1/data_out_reg_c {FDCE}
+    design_1_i/BiDirChannels_0/inst/X1/BUFFERS/outputDelayLine/Reg2/data_out_reg_c {FDCE}
+    design_1_i/BiDirChannels_0/inst/X1/BUFFERS/outputDelayLine/Reg3/data_out_reg_c {FDCE}
+    design_1_i/BiDirChannels_0/inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg[0]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c {SRL16E}
+    design_1_i/BiDirChannels_0/inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg[10]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c {SRL16E}
+    design_1_i/BiDirChannels_0/inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg[11]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c {SRL16E}
+    design_1_i/BiDirChannels_0/inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg[12]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c {SRL16E}
+    design_1_i/BiDirChannels_0/inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg[13]_srl5_inst_X1_BUFFERS_outputDelayLine_Reg4_data_out_reg_c {SRL16E}
 
 Related violations: <none>
 
 PLHOLDVIO-2#2 Warning
 Non-Optimal connections which could lead to hold violations  
-A LUT design_1_i/BiDirChannels_0/inst/X1/CHANNELS/FF1/r_reg[7]_i_2 is driving clock pin of 114 cells. This could lead to large hold time violations. First few involved cells are:
-    design_1_i/BiDirChannels_0/inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[0]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 {SRL16E}
-    design_1_i/BiDirChannels_0/inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[10]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 {SRL16E}
-    design_1_i/BiDirChannels_0/inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[11]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 {SRL16E}
-    design_1_i/BiDirChannels_0/inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[12]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 {SRL16E}
-    design_1_i/BiDirChannels_0/inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[13]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 {SRL16E}
-    design_1_i/BiDirChannels_0/inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[14]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 {SRL16E}
-    design_1_i/BiDirChannels_0/inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[15]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 {SRL16E}
-    design_1_i/BiDirChannels_0/inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[16]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 {SRL16E}
-    design_1_i/BiDirChannels_0/inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[17]_srl6_inst_X1_BUFFERS_inputShiftRegister_out_reg_c_4 {SRL16E}
+A LUT design_1_i/BiDirChannels_0/inst/X1/CHANNELS/FF1/data_out_c_i_1 is driving clock pin of 106 cells. This could lead to large hold time violations. First few involved cells are:
+    design_1_i/BiDirChannels_0/inst/X1/BUFFERS/inputDelayLine/Reg0/data_out_reg_c {FDCE}
+    design_1_i/BiDirChannels_0/inst/X1/BUFFERS/inputDelayLine/Reg1/data_out_reg_c {FDCE}
+    design_1_i/BiDirChannels_0/inst/X1/BUFFERS/inputDelayLine/Reg2/data_out_reg_c {FDCE}
+    design_1_i/BiDirChannels_0/inst/X1/BUFFERS/inputDelayLine/Reg3/data_out_reg_c {FDCE}
+    design_1_i/BiDirChannels_0/inst/X1/BUFFERS/inputDelayLine/Reg4/data_out_reg_c {FDCE}
+    design_1_i/BiDirChannels_0/inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[0]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c {SRL16E}
+    design_1_i/BiDirChannels_0/inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[10]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c {SRL16E}
+    design_1_i/BiDirChannels_0/inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[11]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c {SRL16E}
+    design_1_i/BiDirChannels_0/inst/X1/BUFFERS/inputDelayLine/Reg5/data_out_reg[12]_srl6_inst_X1_BUFFERS_inputDelayLine_Reg5_data_out_reg_c {SRL16E}
 
 Related violations: <none>
 
@@ -73,21 +74,6 @@ A LUT design_1_i/BiDirChannels_0/inst/X1/CHANNELS/PULSE_CNTR/Q_i_1__0 is driving
 Related violations: <none>
 
 PLHOLDVIO-2#4 Warning
-Non-Optimal connections which could lead to hold violations  
-A LUT design_1_i/BiDirChannels_0/inst/X1/CHANNELS/PULSE_CNTR/data_out[31]_i_1 is driving clock pin of 115 cells. This could lead to large hold time violations. First few involved cells are:
-    design_1_i/BiDirChannels_0/inst/X1/BUFFERS/outputDelayLine/Reg0/data_out_reg_c {FDCE}
-    design_1_i/BiDirChannels_0/inst/X1/BUFFERS/outputDelayLine/Reg1/data_out_reg_c {FDCE}
-    design_1_i/BiDirChannels_0/inst/X1/BUFFERS/outputDelayLine/Reg2/data_out_reg_c {FDCE}
-    design_1_i/BiDirChannels_0/inst/X1/BUFFERS/outputDelayLine/Reg3/data_out_reg_c {FDCE}
-    design_1_i/BiDirChannels_0/inst/X1/BUFFERS/outputDelayLine/Reg4/data_out_reg_c {FDCE}
-    design_1_i/BiDirChannels_0/inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg[0]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c {SRL16E}
-    design_1_i/BiDirChannels_0/inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg[10]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c {SRL16E}
-    design_1_i/BiDirChannels_0/inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg[11]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c {SRL16E}
-    design_1_i/BiDirChannels_0/inst/X1/BUFFERS/outputDelayLine/Reg5/data_out_reg[12]_srl6_inst_X1_BUFFERS_outputDelayLine_Reg5_data_out_reg_c {SRL16E}
-
-Related violations: <none>
-
-PLHOLDVIO-2#5 Warning
 Non-Optimal connections which could lead to hold violations  
 A LUT design_1_i/BiDirChannels_0/inst/X1/CHANNELS/PULSE_CNTR/r_reg[31]_i_1 is driving clock pin of 32 cells. This could lead to large hold time violations. First few involved cells are:
     design_1_i/BiDirChannels_0/inst/X1/CHANNELS/IN_SHIFT_REG/r_reg_reg[0] {FDCE}
@@ -102,7 +88,7 @@ A LUT design_1_i/BiDirChannels_0/inst/X1/CHANNELS/PULSE_CNTR/r_reg[31]_i_1 is dr
 
 Related violations: <none>
 
-PLHOLDVIO-2#6 Warning
+PLHOLDVIO-2#5 Warning
 Non-Optimal connections which could lead to hold violations  
 A LUT design_1_i/BiDirChannels_0/inst/X1/CHANNELS/PULSE_CNTR/r_reg[32]_i_2 is driving clock pin of 65 cells. This could lead to large hold time violations. First few involved cells are:
     design_1_i/BiDirChannels_0/inst/X1/CHANNELS/OUT_SHIFT_REG/r_reg_reg[0]_P {FDPE}
@@ -114,20 +100,6 @@ A LUT design_1_i/BiDirChannels_0/inst/X1/CHANNELS/PULSE_CNTR/r_reg[32]_i_2 is dr
     design_1_i/BiDirChannels_0/inst/X1/CHANNELS/OUT_SHIFT_REG/r_reg_reg[12]_P {FDPE}
     design_1_i/BiDirChannels_0/inst/X1/CHANNELS/OUT_SHIFT_REG/r_reg_reg[13]_C {FDCE}
     design_1_i/BiDirChannels_0/inst/X1/CHANNELS/OUT_SHIFT_REG/r_reg_reg[13]_P {FDPE}
-
-Related violations: <none>
-
-PLHOLDVIO-2#7 Warning
-Non-Optimal connections which could lead to hold violations  
-A LUT design_1_i/BiDirChannels_0/inst/X1/CHANNELS/PULSE_CNTR/r_reg[7]_i_2__0 is driving clock pin of 8 cells. This could lead to large hold time violations. First few involved cells are:
-    design_1_i/BiDirChannels_0/inst/X1/DEBUGGER/CNTR0/r_reg_reg[0] {FDCE}
-    design_1_i/BiDirChannels_0/inst/X1/DEBUGGER/CNTR0/r_reg_reg[1] {FDCE}
-    design_1_i/BiDirChannels_0/inst/X1/DEBUGGER/CNTR0/r_reg_reg[2] {FDCE}
-    design_1_i/BiDirChannels_0/inst/X1/DEBUGGER/CNTR0/r_reg_reg[3] {FDCE}
-    design_1_i/BiDirChannels_0/inst/X1/DEBUGGER/CNTR0/r_reg_reg[4] {FDCE}
-    design_1_i/BiDirChannels_0/inst/X1/DEBUGGER/CNTR0/r_reg_reg[5] {FDCE}
-    design_1_i/BiDirChannels_0/inst/X1/DEBUGGER/CNTR0/r_reg_reg[6] {FDCE}
-    design_1_i/BiDirChannels_0/inst/X1/DEBUGGER/CNTR0/r_reg_reg[7] {FDCE}
 
 Related violations: <none>
 
@@ -153,7 +125,7 @@ Related violations: <none>
 
 REQP-1839#5 Warning
 RAMB36 async control check  
-The RAMB36E1 design_1_i/TxFIFO/inst/mem_reg has an input control pin design_1_i/TxFIFO/inst/mem_reg/ENBWREN (net: design_1_i/TxFIFO/inst/axis_stream_fifo_v1_0_S00_AXI_inst_n_27) which is driven by a register (design_1_i/BiDirChannels_0/inst/X1/BUFFERS/inputShiftRegister/out_reg[7]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB36E1 design_1_i/TxFIFO/inst/mem_reg has an input control pin design_1_i/TxFIFO/inst/mem_reg/ENBWREN (net: design_1_i/TxFIFO/inst/read1_out) which is driven by a register (design_1_i/BiDirChannels_0/inst/X1/BUFFERS/inputShiftRegister/out_reg[7]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-181#1 Advisory

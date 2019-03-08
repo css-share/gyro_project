@@ -1,8 +1,8 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-| Date             : Wed Mar  6 16:55:17 2019
-| Host             : DESKTOP-KC9HGNO running 64-bit major release  (build 9200)
+| Date             : Thu Mar  7 18:42:28 2019
+| Host             : AsusP8 running 64-bit major release  (build 9200)
 | Command          : report_power -file design_1_wrapper_power_routed.rpt -pb design_1_wrapper_power_summary_routed.pb -rpx design_1_wrapper_power_routed.rpx
 | Design           : design_1_wrapper
 | Device           : xc7z020clg484-1
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 1.754        |
+| Total On-Chip Power (W)  | 1.748        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 1.606        |
+| Dynamic (W)              | 1.599        |
 | Device Static (W)        | 0.149        |
 | Effective TJA (C/W)      | 11.5         |
 | Max Ambient (C)          | 64.8         |
@@ -53,20 +53,20 @@ Table of Contents
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
 | Clocks                   |     0.030 |        3 |       --- |             --- |
-| Slice Logic              |     0.012 |    18607 |       --- |             --- |
-|   LUT as Logic           |     0.010 |     5500 |     53200 |           10.34 |
+| Slice Logic              |     0.012 |    18762 |       --- |             --- |
+|   LUT as Logic           |     0.009 |     5497 |     53200 |           10.33 |
 |   LUT as Distributed RAM |     0.001 |      632 |     17400 |            3.63 |
-|   Register               |    <0.001 |     9302 |    106400 |            8.74 |
+|   Register               |    <0.001 |     9485 |    106400 |            8.91 |
 |   CARRY4                 |    <0.001 |       93 |     13300 |            0.70 |
-|   LUT as Shift Register  |    <0.001 |      257 |     17400 |            1.48 |
-|   F7/F8 Muxes            |    <0.001 |       11 |     53200 |            0.02 |
+|   LUT as Shift Register  |    <0.001 |      241 |     17400 |            1.39 |
+|   F7/F8 Muxes            |    <0.001 |        1 |     53200 |           <0.01 |
 |   Others                 |     0.000 |      827 |       --- |             --- |
-| Signals                  |     0.013 |    12649 |       --- |             --- |
-| Block RAM                |     0.012 |        7 |       140 |            5.00 |
-| I/O                      |     0.005 |       14 |       200 |            7.00 |
+| Signals                  |     0.014 |    12761 |       --- |             --- |
+| Block RAM                |     0.006 |        7 |       140 |            5.00 |
+| I/O                      |     0.004 |       14 |       200 |            7.00 |
 | PS7                      |     1.533 |        1 |       --- |             --- |
 | Static Power             |     0.149 |          |           |                 |
-| Total                    |     1.754 |          |           |                 |
+| Total                    |     1.748 |          |           |                 |
 +--------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -76,16 +76,16 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.082 |       0.066 |      0.016 |
+| Vccint    |       1.000 |     0.077 |       0.062 |      0.015 |
 | Vccaux    |       1.800 |     0.016 |       0.000 |      0.015 |
 | Vcco33    |       3.300 |     0.001 |       0.000 |      0.001 |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |
-| Vcco18    |       1.800 |     0.003 |       0.002 |      0.001 |
+| Vcco18    |       1.800 |     0.002 |       0.001 |      0.001 |
 | Vcco15    |       1.500 |     0.000 |       0.000 |      0.000 |
 | Vcco135   |       1.350 |     0.000 |       0.000 |      0.000 |
 | Vcco12    |       1.200 |     0.000 |       0.000 |      0.000 |
 | Vccaux_io |       1.800 |     0.000 |       0.000 |      0.000 |
-| Vccbram   |       1.000 |     0.002 |       0.001 |      0.001 |
+| Vccbram   |       1.000 |     0.002 |       0.000 |      0.001 |
 | MGTAVcc   |       1.000 |     0.000 |       0.000 |      0.000 |
 | MGTAVtt   |       1.200 |     0.000 |       0.000 |      0.000 |
 | MGTVccaux |       1.800 |     0.000 |       0.000 |      0.000 |
@@ -152,24 +152,29 @@ Table of Contents
 +---------------------------------------------------------------------------------------------------+-----------+
 | Name                                                                                              | Power (W) |
 +---------------------------------------------------------------------------------------------------+-----------+
-| design_1_wrapper                                                                                  |     1.606 |
-|   design_1_i                                                                                      |     1.600 |
-|     BiDirChannels_0                                                                               |     0.004 |
-|       inst                                                                                        |     0.004 |
+| design_1_wrapper                                                                                  |     1.599 |
+|   design_1_i                                                                                      |     1.596 |
+|     BiDirChannels_0                                                                               |     0.001 |
+|       inst                                                                                        |     0.001 |
 |         BiDirChannels_v1_0_S00_AXI_inst                                                           |    <0.001 |
-|         X1                                                                                        |     0.003 |
-|           BUFFERS                                                                                 |     0.002 |
+|         X1                                                                                        |     0.001 |
+|           BUFFERS                                                                                 |    <0.001 |
 |             inputDelayLine                                                                        |    <0.001 |
+|               Reg0                                                                                |    <0.001 |
+|               Reg1                                                                                |    <0.001 |
+|               Reg2                                                                                |    <0.001 |
+|               Reg3                                                                                |    <0.001 |
+|               Reg4                                                                                |    <0.001 |
 |               Reg5                                                                                |    <0.001 |
 |               Reg6                                                                                |    <0.001 |
 |               Reg7                                                                                |    <0.001 |
 |             inputFF                                                                               |    <0.001 |
 |             inputShiftRegister                                                                    |    <0.001 |
 |             outputDelayLine                                                                       |    <0.001 |
-|               Reg0                                                                                |    <0.001 |
-|               Reg1                                                                                |    <0.001 |
-|               Reg2                                                                                |    <0.001 |
-|               Reg3                                                                                |    <0.001 |
+|               Reg0                                                                                |     0.000 |
+|               Reg1                                                                                |     0.000 |
+|               Reg2                                                                                |     0.000 |
+|               Reg3                                                                                |     0.000 |
 |               Reg4                                                                                |    <0.001 |
 |               Reg5                                                                                |    <0.001 |
 |               Reg6                                                                                |    <0.001 |
@@ -179,6 +184,8 @@ Table of Contents
 |           CHANNELS                                                                                |    <0.001 |
 |             CLK_DIV2                                                                              |    <0.001 |
 |               ff0                                                                                 |    <0.001 |
+|             CLK_DIV4                                                                              |    <0.001 |
+|               ff0                                                                                 |    <0.001 |
 |             FF1                                                                                   |    <0.001 |
 |             IN_SHIFT_REG                                                                          |    <0.001 |
 |             MASK_HSCK                                                                             |    <0.001 |
@@ -186,15 +193,8 @@ Table of Contents
 |               ff1                                                                                 |    <0.001 |
 |             OUT_SHIFT_REG                                                                         |    <0.001 |
 |             PULSE_CNTR                                                                            |    <0.001 |
-|           DEBUGGER                                                                                |    <0.001 |
-|             CNTR0                                                                                 |    <0.001 |
-|             CNTR1                                                                                 |    <0.001 |
-|             CNTR2                                                                                 |    <0.001 |
-|             CNTR3                                                                                 |    <0.001 |
-|             CNTR4                                                                                 |    <0.001 |
-|             CNTR5                                                                                 |    <0.001 |
-|     RxFIFO                                                                                        |     0.010 |
-|       inst                                                                                        |     0.010 |
+|     RxFIFO                                                                                        |     0.005 |
+|       inst                                                                                        |     0.005 |
 |         axis_stream_fifo_v1_0_S00_AXI_inst                                                        |    <0.001 |
 |     SPI_ip_0                                                                                      |     0.001 |
 |       inst                                                                                        |     0.001 |
@@ -212,8 +212,8 @@ Table of Contents
 |             DWCNTR                                                                                |    <0.001 |
 |             FSM                                                                                   |    <0.001 |
 |             SR25Bits                                                                              |    <0.001 |
-|     TxFIFO                                                                                        |     0.002 |
-|       inst                                                                                        |     0.002 |
+|     TxFIFO                                                                                        |     0.003 |
+|       inst                                                                                        |     0.003 |
 |         axis_stream_fifo_v1_0_S00_AXI_inst                                                        |    <0.001 |
 |     axi4_pl_interrupt_ge_0                                                                        |    <0.001 |
 |       inst                                                                                        |    <0.001 |
@@ -260,7 +260,7 @@ Table of Contents
 |             I_FTCH_PNTR_MNGR                                                                      |    <0.001 |
 |             I_FTCH_SG                                                                             |    <0.001 |
 |           I_SG_FETCH_QUEUE                                                                        |     0.001 |
-|             GEN_QUEUE.FTCH_QUEUE_I                                                                |    <0.001 |
+|             GEN_QUEUE.FTCH_QUEUE_I                                                                |     0.001 |
 |         INCLUDE_MM2S_SOF_EOF_GENERATOR.I_MM2S_DMA_MNGR                                            |    <0.001 |
 |           GEN_MM2S_DMA_CONTROL.GEN_SCATTER_GATHER_MODE.I_MM2S_SG_IF                               |    <0.001 |
 |             GEN_UPDT_FOR_QUEUE.GEN_NO_MICRO_DMA.XFERRED_BYTE_FIFO                                 |    <0.001 |
@@ -292,7 +292,7 @@ Table of Contents
 |           GEN_MM2S_REGISTERS.I_MM2S_DMA_REGISTER                                                  |    <0.001 |
 |           GEN_S2MM_REGISTERS.GEN_INTROUT_ASYNC.PROC_REG_INTR2LITE                                 |    <0.001 |
 |           GEN_S2MM_REGISTERS.I_S2MM_DMA_REGISTER                                                  |    <0.001 |
-|         I_PRMRY_DATAMOVER                                                                         |     0.006 |
+|         I_PRMRY_DATAMOVER                                                                         |     0.007 |
 |           GEN_MM2S_FULL.I_MM2S_FULL_WRAPPER                                                       |     0.002 |
 |             ENABLE_AXIS_SKID.I_MM2S_SKID_BUF                                                      |    <0.001 |
 |             GEN_INCLUDE_MM2S_SF.I_RD_SF                                                           |    <0.001 |
@@ -414,8 +414,8 @@ Table of Contents
 |             GEN_ASYNC_RESET.REG_RESET_OUT                                                         |    <0.001 |
 |           REG_HRD_RST                                                                             |    <0.001 |
 |           REG_HRD_RST_OUT                                                                         |    <0.001 |
-|     axi_smc                                                                                       |     0.030 |
-|       inst                                                                                        |     0.030 |
+|     axi_smc                                                                                       |     0.031 |
+|       inst                                                                                        |     0.031 |
 |         clk_map                                                                                   |    <0.001 |
 |           psr_aclk                                                                                |    <0.001 |
 |             U0                                                                                    |    <0.001 |
@@ -445,7 +445,7 @@ Table of Contents
 |                 gen_w_cmd_fifo.w_cmd_fifo                                                         |    <0.001 |
 |                   gen_srls[1].srl_nx1                                                             |    <0.001 |
 |                   gen_srls[2].srl_nx1                                                             |    <0.001 |
-|               r_reg                                                                               |    <0.001 |
+|               r_reg                                                                               |     0.001 |
 |               splitter_inst                                                                       |     0.002 |
 |                 gen_axi3.axi3_conv_inst                                                           |     0.002 |
 |                   USE_READ.USE_SPLIT_R.read_addr_inst                                             |    <0.001 |
@@ -665,9 +665,9 @@ Table of Contents
 |                   gen_srls[6].srl_nx1                                                             |    <0.001 |
 |                   gen_srls[9].srl_nx1                                                             |    <0.001 |
 |         s00_nodes                                                                                 |     0.006 |
-|           s00_ar_node                                                                             |    <0.001 |
-|             inst                                                                                  |    <0.001 |
-|               inst_mi_handler                                                                     |    <0.001 |
+|           s00_ar_node                                                                             |     0.001 |
+|             inst                                                                                  |     0.001 |
+|               inst_mi_handler                                                                     |     0.001 |
 |                 gen_normal_area.gen_fifo_req.inst_fifo_req                                        |    <0.001 |
 |                   gen_xpm_memory_fifo.inst_fifo                                                   |    <0.001 |
 |                     gen_mem_rep[0].inst_rd_addrb                                                  |    <0.001 |
@@ -888,8 +888,8 @@ Table of Contents
 |               inst_si_handler                                                                     |    <0.001 |
 |                 inst_arb_stall_late                                                               |    <0.001 |
 |         s02_entry_pipeline                                                                        |     0.002 |
-|           s02_mmu                                                                                 |     0.001 |
-|             inst                                                                                  |     0.001 |
+|           s02_mmu                                                                                 |     0.002 |
+|             inst                                                                                  |     0.002 |
 |               aw_reg_stall                                                                        |    <0.001 |
 |               aw_sreg                                                                             |    <0.001 |
 |               b_sreg                                                                              |    <0.001 |
@@ -957,9 +957,9 @@ Table of Contents
 |                   inst_pipeline_valid                                                             |    <0.001 |
 |               inst_si_handler                                                                     |    <0.001 |
 |                 inst_arb_stall_late                                                               |    <0.001 |
-|           s02_w_node                                                                              |    <0.001 |
-|             inst                                                                                  |    <0.001 |
-|               inst_mi_handler                                                                     |    <0.001 |
+|           s02_w_node                                                                              |     0.001 |
+|             inst                                                                                  |     0.001 |
+|               inst_mi_handler                                                                     |     0.001 |
 |                 gen_normal_area.gen_fi_regulator.inst_fi_regulator                                |    <0.001 |
 |                 gen_normal_area.gen_fifo_req.inst_fifo_req                                        |    <0.001 |
 |                   gen_xpm_memory_fifo.inst_fifo                                                   |    <0.001 |
@@ -1013,8 +1013,8 @@ Table of Contents
 |             inst                                                                                  |    <0.001 |
 |               gen_mi[0].inst_mux_payld                                                            |    <0.001 |
 |               gen_mi[0].inst_opipe_payld                                                          |    <0.001 |
-|     processing_system7_0                                                                          |     1.534 |
-|       inst                                                                                        |     1.534 |
+|     processing_system7_0                                                                          |     1.535 |
+|       inst                                                                                        |     1.535 |
 |     ps7_0_axi_periph                                                                              |     0.005 |
 |       s00_couplers                                                                                |     0.004 |
 |         auto_pc                                                                                   |     0.004 |

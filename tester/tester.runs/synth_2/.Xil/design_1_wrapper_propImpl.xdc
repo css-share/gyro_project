@@ -1,4 +1,4 @@
-set_property SRC_FILE_INFO {cfile:C:/Xilinx_Projects/gyro_project/tester/tester.srcs/constrs_1/new/LED_0.xdc rfile:../../../tester.srcs/constrs_1/new/LED_0.xdc id:1} [current_design]
+set_property SRC_FILE_INFO {cfile:C:/Xilinx/Vivado/projects/initial_gyro_tester_experiments/tester/tester.srcs/constrs_1/new/LED_0.xdc rfile:../../../tester.srcs/constrs_1/new/LED_0.xdc id:1} [current_design]
 set_property src_info {type:XDC file:1 line:2 export:INPUT save:INPUT read:READ} [current_design]
 set_property PACKAGE_PIN T22 [get_ports LED0]
 set_property src_info {type:XDC file:1 line:5 export:INPUT save:INPUT read:READ} [current_design]
