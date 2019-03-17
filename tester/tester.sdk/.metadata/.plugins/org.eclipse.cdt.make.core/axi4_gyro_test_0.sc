@@ -889,6 +889,8 @@
 <includePath path="#undef __ARM_FEATURE_CLZ" removed="true"/>
 <includePath path="c:\xilinx\sdk\2018.2\gnu\aarch32\nt\gcc-arm-none-eabi\bin\../arm-none-eabi/libc/usr/include"/>
 <includePath path="#undef __ARM_ARCH_EXT_IDIV__" removed="true"/>
+<includePath path="#undef __ARM_FEATURE_IDIV" removed="true"/>
+<includePath path="#undef __ARM_ASM_SYNTAX_UNIFIED__" removed="true"/>
 <includePath path="#undef __thumb__" removed="true"/>
 <includePath path="#undef __ARM_FEATURE_NUMERIC_MAXMIN" removed="true"/>
 <includePath path="#undef __ARM_FEATURE_LDREX" removed="true"/>
