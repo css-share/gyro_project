@@ -169,8 +169,8 @@ int setGyroChannelControl(unsigned int v){
 // -------------------------------------------------------------------
 int readGyroChannelDebugData(){
   // ---
-  xil_printf("Gyro Channel Buffer Info: 0x%08x\n\r", *(baseaddr_channel+2));
-  xil_printf("Gyro Channel ClkGen Info: 0x%08x\n\r", *(baseaddr_channel+3));
+  xil_printf("Gyro Channel Debug Word 0: 0x%08x\n\r", *(baseaddr_channel+2));
+  xil_printf("Gyro Channel Debug Word 1: 0x%08x\n\r", *(baseaddr_channel+3));
   return 0;
 }
 // -------------------------------------------------------------------
@@ -195,6 +195,7 @@ int readGyroTxFIFODebugData(){
 // -------------------------------------------------------------------
 int resetGyroTxFIFO(){
 	*(baseaddr_tx_fifo+0) = 0x00000001;
+	nops(10000);
 	*(baseaddr_tx_fifo+0) = 0x00000000;
 	  return 0;
 }
@@ -202,6 +203,7 @@ int resetGyroTxFIFO(){
 // -------------------------------------------------------------------
 int resetGyroRxFIFO(){
 	*(baseaddr_rx_fifo+0) = 0x00000001;
+	nops(100000);
 	*(baseaddr_rx_fifo+0) = 0x00000000;
 	  return 0;
 }
@@ -850,13 +852,14 @@ static int CheckDmaResult(XAxiDma * AxiDmaInstPtr, int debug_mode)
 		    ProcessedBdCount, Status);
 		return XST_FAILURE;
 	}
+	xil_printf(" --- A\r\n");
 
 	/* Wait until the data has been received by the Rx channel */
 	while ((ProcessedBdCount = XAxiDma_BdRingFromHw(RxRingPtr,
 						       XAXIDMA_ALL_BDS,
 						       &BdPtr)) == 0) {
 	}
-
+	xil_printf(" --- B\r\n");
 	/* Check received data */
 	if (CheckData(1) != XST_SUCCESS) {
 		return XST_FAILURE;
@@ -957,21 +960,31 @@ int test_DMA_loopback( int num_packets, int debug_mode){
 	  if (Status != XST_SUCCESS) {
 		  xil_printf(" Failed sending packet number: %d\r\n",i+1);
 		return XST_FAILURE;
+	  } else {
+		xil_printf(" Sent packet successful.\r\n");
 	  }
+	  xil_printf(" State before activation.\r\n");
+	  readGyroTxFIFODebugData();
+	  readGyroRxFIFODebugData();
+	  readGyroChannelDebugData();
 
-
-	 // if(i == 0){
+	 //if(i == 0){
+	  //nops(100000);
     setGyroChannelControl(0x00000011);
-	  //}
-
+	 // }
+    nops(100000);
+	 xil_printf(" State after activation.\r\n");
+	  readGyroTxFIFODebugData();
+	  readGyroRxFIFODebugData();
+	  readGyroChannelDebugData();
 	  /* Check DMA transfer result */
-/*
+
 	  Status = CheckDmaResult(&AxiDma, debug_mode);
 	  if (Status != XST_SUCCESS) {
 		xil_printf(" Failed reading packet number: %d\r\n",1);
 		return XST_FAILURE;
 	  }
-*/
+
 	}
 
 
@@ -1000,7 +1013,7 @@ int main() {
     //int readVal, writeVal;
 
     xil_printf("\n\r=====================\n\r");
-    xil_printf("== START version 25 ==\n\r");
+    xil_printf("== START version 26 ==\n\r");
     // set interrupt_0/1 of AXI PL interrupt generator to 0
 
     *(baseaddr_p+0) = 0x00000000;
@@ -1021,7 +1034,6 @@ int main() {
     xil_printf("slv_reg2: 0x%08x\n\r", *(baseaddr_p+2));
     xil_printf("slv_reg3: 0x%08x\n\r", *(baseaddr_p+3));
 
-
     // clear SPI registers
     initSPI();
     readSPIStatus();
@@ -1031,7 +1043,7 @@ int main() {
     *(baseaddr_p+1) = 0x00000000;
     *(baseaddr_p+2) = 0x00000000;
 
-   // xil_printf("Checkpoint 3\n\r");
+    // xil_printf("Checkpoint 3\n\r");
     // read interrupt_0/1 of AXI PL interrupt generator
 
 /*
@@ -1106,7 +1118,6 @@ int main() {
     //readGyroTxFIFODebugData();
     //readGyroRxFIFODebugData();
     resetGyroTxFIFO();
-
     resetGyroRxFIFO();
 
     initGyroChannel();

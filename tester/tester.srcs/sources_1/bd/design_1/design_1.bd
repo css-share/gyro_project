@@ -1073,14 +1073,14 @@
         <spirit:activeInterface spirit:busRef="S00_AXIS" spirit:componentRef="BiDirChannels_0"/>
       </spirit:interconnection>
       <spirit:interconnection>
-        <spirit:name>BiDirChannels_0_M00_AXIS</spirit:name>
-        <spirit:activeInterface spirit:busRef="M00_AXIS" spirit:componentRef="BiDirChannels_0"/>
-        <spirit:activeInterface spirit:busRef="S00_AXIS" spirit:componentRef="RxFIFO"/>
-      </spirit:interconnection>
-      <spirit:interconnection>
         <spirit:name>ps7_0_axi_periph_M02_AXI</spirit:name>
         <spirit:activeInterface spirit:busRef="M02_AXI" spirit:componentRef="ps7_0_axi_periph"/>
         <spirit:activeInterface spirit:busRef="S00_AXI" spirit:componentRef="BiDirChannels_0"/>
+      </spirit:interconnection>
+      <spirit:interconnection>
+        <spirit:name>BiDirChannels_0_M00_AXIS</spirit:name>
+        <spirit:activeInterface spirit:busRef="M00_AXIS" spirit:componentRef="BiDirChannels_0"/>
+        <spirit:activeInterface spirit:busRef="S00_AXIS" spirit:componentRef="RxFIFO"/>
       </spirit:interconnection>
     </spirit:interconnections>
     <spirit:adHocConnections>

@@ -1,11 +1,3 @@
-00:56:49 **** Incremental Build of configuration Debug for project axi4_gyro_test_0 ****
-make pre-build main-build 
-a9-linaro-pre-build-step
-' '
-make: Nothing to be done for `main-build'.
-00:56:53 **** Auto Build of configuration Debug for project axi4_gyro_test_0 ****
-make pre-build main-build 
-a9-linaro-pre-build-step
 ' '
 'Building file: ../src/helloworld.c'
 'Invoking: ARM v7 gcc compiler'
@@ -21,17 +13,14 @@ In file included from ../src/helloworld.c:4:0:
  #warning CHECK FOR THE VALID DDR ADDRESS IN XPARAMETERS.H, \
   ^~~~~~~
 ../src/helloworld.c: In function 'CheckData':
-../src/helloworld.c:783:5: warning: variable 'Value' set but not used [-Wunused-but-set-variable]
+../src/helloworld.c:785:5: warning: variable 'Value' set but not used [-Wunused-but-set-variable]
   u8 Value;
      ^~~~~
 ../src/helloworld.c: At top level:
 ../src/helloworld.c:105:12: warning: 'ReceivePacket' declared 'static' but never defined [-Wunused-function]
  static int ReceivePacket(XAxiDma * AxiDmaInstPtr);
             ^~~~~~~~~~~~~
-../src/helloworld.c:828:12: warning: 'CheckDmaResult' defined but not used [-Wunused-function]
- static int CheckDmaResult(XAxiDma * AxiDmaInstPtr, int debug_mode)
-            ^~~~~~~~~~~~~~
-../src/helloworld.c:230:6: warning: 'setSPIControl' defined but not used [-Wunused-function]
+../src/helloworld.c:232:6: warning: 'setSPIControl' defined but not used [-Wunused-function]
  void setSPIControl(Xuint32 v){
       ^~~~~~~~~~~~~
 'Finished building: ../src/helloworld.c'
@@ -44,15 +33,35 @@ arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=non
 'Invoking: ARM v7 Print Size'
 arm-none-eabi-size axi4_gyro_test_0.elf  |tee "axi4_gyro_test_0.elf.size"
    text	   data	    bss	    dec	    hex	filename
-  47164	   3856	  24536	  75556	  12724	axi4_gyro_test_0.elf
+  47436	   3856	  24536	  75828	  12834	axi4_gyro_test_0.elf
 'Finished building: axi4_gyro_test_0.elf.size'
 ' '
-00:57:02 **** Incremental Build of configuration Debug for project axi4_gyro_test_0 ****
+21:21:48 **** Incremental Build of configuration Debug for project axi4_gyro_test_0 ****
 make pre-build main-build 
 a9-linaro-pre-build-step
 ' '
 make: Nothing to be done for `main-build'.
-01:29:05 **** Incremental Build of configuration Debug for project axi4_gyro_test_0 ****
+21:21:51 **** Incremental Build of configuration Debug for project axi4_gyro_test_0 ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Nothing to be done for `main-build'.
+09:34:05 **** Incremental Build of configuration Debug for project axi4_gyro_test_0 ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Nothing to be done for `main-build'.
+09:34:40 **** Incremental Build of configuration Debug for project axi4_gyro_test_0 ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Nothing to be done for `main-build'.
+09:35:39 **** Incremental Build of configuration Debug for project axi4_gyro_test_0 ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Nothing to be done for `main-build'.
+01:43:35 **** Incremental Build of configuration Debug for project axi4_gyro_test_0 ****
 make pre-build main-build 
 a9-linaro-pre-build-step
 ' '
