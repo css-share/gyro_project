@@ -36,32 +36,37 @@ arm-none-eabi-size axi4_gyro_test_0.elf  |tee "axi4_gyro_test_0.elf.size"
   47436	   3856	  24536	  75828	  12834	axi4_gyro_test_0.elf
 'Finished building: axi4_gyro_test_0.elf.size'
 ' '
-21:21:48 **** Incremental Build of configuration Debug for project axi4_gyro_test_0 ****
+15:04:22 **** Incremental Build of configuration Debug for project axi4_gyro_test_0 ****
 make pre-build main-build 
 a9-linaro-pre-build-step
 ' '
 make: Nothing to be done for `main-build'.
-21:21:51 **** Incremental Build of configuration Debug for project axi4_gyro_test_0 ****
+15:04:28 **** Incremental Build of configuration Debug for project axi4_gyro_test_0 ****
 make pre-build main-build 
 a9-linaro-pre-build-step
 ' '
 make: Nothing to be done for `main-build'.
-09:34:05 **** Incremental Build of configuration Debug for project axi4_gyro_test_0 ****
+16:06:42 **** Incremental Build of configuration Debug for project axi4_gyro_test_0 ****
 make pre-build main-build 
 a9-linaro-pre-build-step
 ' '
 make: Nothing to be done for `main-build'.
-09:34:40 **** Incremental Build of configuration Debug for project axi4_gyro_test_0 ****
+16:56:14 **** Incremental Build of configuration Debug for project axi4_gyro_test_0 ****
 make pre-build main-build 
 a9-linaro-pre-build-step
 ' '
 make: Nothing to be done for `main-build'.
-09:35:39 **** Incremental Build of configuration Debug for project axi4_gyro_test_0 ****
+18:52:33 **** Incremental Build of configuration Debug for project axi4_gyro_test_0 ****
 make pre-build main-build 
 a9-linaro-pre-build-step
 ' '
 make: Nothing to be done for `main-build'.
-01:43:35 **** Incremental Build of configuration Debug for project axi4_gyro_test_0 ****
+19:29:59 **** Incremental Build of configuration Debug for project axi4_gyro_test_0 ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Nothing to be done for `main-build'.
+21:38:20 **** Incremental Build of configuration Debug for project axi4_gyro_test_0 ****
 make pre-build main-build 
 a9-linaro-pre-build-step
 ' '

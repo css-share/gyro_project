@@ -231,8 +231,8 @@ vlog -work xil_defaultlib -64 -incr "+incdir+../../../../tester.srcs/sources_1/b
 "../../../bd/design_2/ipshared/e792/hdl/axis_stream_fifo_v1_0.v" \
 "../../../bd/design_2/ip/design_2_RxFIFO_0/sim/design_2_RxFIFO_0.v" \
 "../../../bd/design_2/ip/design_2_TxFIFO_0/sim/design_2_TxFIFO_0.v" \
-"../../../bd/design_2/ipshared/ce22/hdl/BiDirChannels_v1_0_S00_AXI.v" \
-"../../../bd/design_2/ipshared/ce22/hdl/BiDirChannels_v1_0.v" \
+"../../../bd/design_2/ipshared/83f1/hdl/BiDirChannels_v1_0_S00_AXI.v" \
+"../../../bd/design_2/ipshared/83f1/hdl/BiDirChannels_v1_0.v" \
 "../../../bd/design_2/ip/design_2_BiDirChannels_0_0/sim/design_2_BiDirChannels_0_0.v" \
 
 vlog -work generic_baseblocks_v2_1_0 -64 -incr "+incdir+../../../../tester.srcs/sources_1/bd/design_2/ipshared/ec67/hdl" "+incdir+../../../../tester.srcs/sources_1/bd/design_2/ipshared/5bb9/hdl/verilog" "+incdir+../../../../tester.srcs/sources_1/bd/design_2/ipshared/70fd/hdl" "+incdir+../../../../tester.srcs/sources_1/bd/design_2/ipshared/f90c/hdl/verilog" "+incdir+C:/Xilinx/Vivado/2018.2/data/xilinx_vip/include" "+incdir+../../../../tester.srcs/sources_1/bd/design_2/ipshared/ec67/hdl" "+incdir+../../../../tester.srcs/sources_1/bd/design_2/ipshared/5bb9/hdl/verilog" "+incdir+../../../../tester.srcs/sources_1/bd/design_2/ipshared/70fd/hdl" "+incdir+../../../../tester.srcs/sources_1/bd/design_2/ipshared/f90c/hdl/verilog" "+incdir+C:/Xilinx/Vivado/2018.2/data/xilinx_vip/include" \

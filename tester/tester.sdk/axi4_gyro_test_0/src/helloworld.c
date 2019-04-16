@@ -696,12 +696,12 @@ static int SendPacket(XAxiDma * AxiDmaInstPtr, int id){
 	/* Create pattern in the packet to transmit */
 	TxPacket = (u8 *) Packet;
 	//Value = TEST_START_VALUE;
-	Value = 0x01;
+	Value = 0xFF;
 
 	if(id == 0){
 	  for(Index = 0; Index < MAX_PKT_LEN; Index ++) {
 		TxPacket[Index] = Value;
-		  Value = (Value + 1) & 0xFF;
+		  //Value = (Value + 1) & 0xFF;
 	  }
 	} else {
 		  for(Index = 0; Index < MAX_PKT_LEN; Index ++) {
@@ -841,8 +841,7 @@ static int CheckDmaResult(XAxiDma * AxiDmaInstPtr, int debug_mode)
 
 	/* Wait until the one BD TX transaction is done */
 	while ((ProcessedBdCount = XAxiDma_BdRingFromHw(TxRingPtr,
-						       XAXIDMA_ALL_BDS,
-						       &BdPtr)) == 0) {
+						       XAXIDMA_ALL_BDS, &BdPtr)) == 0) {
 	}
 
 	/* Free all processed TX BDs for future transmission */
