@@ -1,0 +1,658 @@
+
+*** Running vivado
+    with args -log design_2_BiDirChannels_0_0.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source design_2_BiDirChannels_0_0.tcl
+
+
+****** Vivado v2018.2 (64-bit)
+  **** SW Build 2258646 on Thu Jun 14 20:03:12 MDT 2018
+  **** IP Build 2256618 on Thu Jun 14 22:10:49 MDT 2018
+    ** Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+
+source design_2_BiDirChannels_0_0.tcl -notrace
+Command: synth_design -top design_2_BiDirChannels_0_0 -part xc7z020clg484-1 -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: Launching helper process for spawning children vivado processes
+INFO: Helper process launched with PID 8100 
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:10 . Memory (MB): peak = 406.309 ; gain = 96.770
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'design_2_BiDirChannels_0_0' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ip/design_2_BiDirChannels_0_0/synth/design_2_BiDirChannels_0_0.v:57]
+INFO: [Synth 8-6157] synthesizing module 'BiDirChannels_v1_0' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:509]
+	Parameter C_S00_AXI_DATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_S00_AXI_ADDR_WIDTH bound to: 4 - type: integer 
+	Parameter C_S00_AXIS_TDATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_M00_AXIS_TDATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_M00_AXIS_START_COUNT bound to: 32 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'BiDirChannels_v1_0_S00_AXI' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0_S00_AXI.v:4]
+	Parameter C_S_AXI_DATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_S_AXI_ADDR_WIDTH bound to: 4 - type: integer 
+	Parameter ADDR_LSB bound to: 2 - type: integer 
+	Parameter OPT_MEM_ADDR_BITS bound to: 1 - type: integer 
+INFO: [Synth 8-226] default block is never used [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0_S00_AXI.v:235]
+INFO: [Synth 8-226] default block is never used [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0_S00_AXI.v:376]
+WARNING: [Synth 8-6014] Unused sequential element slv_reg2_reg was removed.  [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0_S00_AXI.v:229]
+WARNING: [Synth 8-6014] Unused sequential element slv_reg3_reg was removed.  [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0_S00_AXI.v:230]
+INFO: [Synth 8-6155] done synthesizing module 'BiDirChannels_v1_0_S00_AXI' (1#1) [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0_S00_AXI.v:4]
+INFO: [Synth 8-6157] synthesizing module 'GyroInputOutputSerializer' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:343]
+INFO: [Synth 8-6157] synthesizing module 'clock_divider_by_2' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:23]
+INFO: [Synth 8-6157] synthesizing module 'dff' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'dff' (2#1) [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'clock_divider_by_2' (3#1) [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:23]
+INFO: [Synth 8-6157] synthesizing module 'register_2bits' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:103]
+INFO: [Synth 8-6155] done synthesizing module 'register_2bits' (4#1) [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:103]
+INFO: [Synth 8-6157] synthesizing module 'counter48Cycles' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:38]
+INFO: [Synth 8-6155] done synthesizing module 'counter48Cycles' (5#1) [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:38]
+INFO: [Synth 8-6157] synthesizing module 'upCounter3Bits' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:260]
+INFO: [Synth 8-6155] done synthesizing module 'upCounter3Bits' (6#1) [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:260]
+INFO: [Synth 8-6157] synthesizing module 'maskHSCK' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:70]
+INFO: [Synth 8-6155] done synthesizing module 'maskHSCK' (7#1) [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:70]
+INFO: [Synth 8-6157] synthesizing module 'inputShiftRegister32Bits' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:187]
+INFO: [Synth 8-6155] done synthesizing module 'inputShiftRegister32Bits' (8#1) [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:187]
+INFO: [Synth 8-6157] synthesizing module 'outputShiftRegister32Bits' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:155]
+INFO: [Synth 8-6155] done synthesizing module 'outputShiftRegister32Bits' (9#1) [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:155]
+INFO: [Synth 8-6157] synthesizing module 'mux_2x1_1bit' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:211]
+INFO: [Synth 8-6155] done synthesizing module 'mux_2x1_1bit' (10#1) [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:211]
+INFO: [Synth 8-6157] synthesizing module 'syncReady' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:243]
+INFO: [Synth 8-6155] done synthesizing module 'syncReady' (11#1) [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:243]
+INFO: [Synth 8-6157] synthesizing module 'GyroChannelDebugger' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:312]
+INFO: [Synth 8-6157] synthesizing module 'upCounter8Bits' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:286]
+INFO: [Synth 8-6155] done synthesizing module 'upCounter8Bits' (12#1) [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:286]
+INFO: [Synth 8-6155] done synthesizing module 'GyroChannelDebugger' (13#1) [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:312]
+INFO: [Synth 8-6155] done synthesizing module 'GyroInputOutputSerializer' (14#1) [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:343]
+WARNING: [Synth 8-6104] Input port 'm00_axis_tready' has an internal driver [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:658]
+WARNING: [Synth 8-6104] Input port 's00_axis_tdata' has an internal driver [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:661]
+WARNING: [Synth 8-6104] Input port 's00_axis_tvalid' has an internal driver [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:663]
+WARNING: [Synth 8-6104] Input port 's00_axis_tlast' has an internal driver [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:664]
+WARNING: [Synth 8-3848] Net s00_axis_tready in module/entity BiDirChannels_v1_0 does not have driver. [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:562]
+WARNING: [Synth 8-3848] Net m00_axis_tvalid in module/entity BiDirChannels_v1_0 does not have driver. [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:571]
+WARNING: [Synth 8-3848] Net m00_axis_tdata in module/entity BiDirChannels_v1_0 does not have driver. [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:572]
+WARNING: [Synth 8-3848] Net m00_axis_tlast in module/entity BiDirChannels_v1_0 does not have driver. [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:574]
+INFO: [Synth 8-6155] done synthesizing module 'BiDirChannels_v1_0' (15#1) [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:509]
+INFO: [Synth 8-6155] done synthesizing module 'design_2_BiDirChannels_0_0' (16#1) [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ip/design_2_BiDirChannels_0_0/synth/design_2_BiDirChannels_0_0.v:57]
+WARNING: [Synth 8-3331] design GyroInputOutputSerializer has unconnected port in_channel[2]
+WARNING: [Synth 8-3331] design GyroInputOutputSerializer has unconnected port in_channel[1]
+WARNING: [Synth 8-3331] design GyroInputOutputSerializer has unconnected port in_channel[0]
+WARNING: [Synth 8-3331] design GyroInputOutputSerializer has unconnected port out_channel[2]
+WARNING: [Synth 8-3331] design GyroInputOutputSerializer has unconnected port out_channel[1]
+WARNING: [Synth 8-3331] design GyroInputOutputSerializer has unconnected port out_channel[0]
+WARNING: [Synth 8-3331] design GyroInputOutputSerializer has unconnected port tx_fifo_data[31]
+WARNING: [Synth 8-3331] design GyroInputOutputSerializer has unconnected port tx_fifo_data[30]
+WARNING: [Synth 8-3331] design GyroInputOutputSerializer has unconnected port tx_fifo_data[29]
+WARNING: [Synth 8-3331] design GyroInputOutputSerializer has unconnected port tx_fifo_data[28]
+WARNING: [Synth 8-3331] design GyroInputOutputSerializer has unconnected port tx_fifo_data[27]
+WARNING: [Synth 8-3331] design GyroInputOutputSerializer has unconnected port tx_fifo_data[26]
+WARNING: [Synth 8-3331] design GyroInputOutputSerializer has unconnected port tx_fifo_data[25]
+WARNING: [Synth 8-3331] design GyroInputOutputSerializer has unconnected port tx_fifo_data[24]
+WARNING: [Synth 8-3331] design GyroInputOutputSerializer has unconnected port tx_fifo_data[23]
+WARNING: [Synth 8-3331] design GyroInputOutputSerializer has unconnected port tx_fifo_data[22]
+WARNING: [Synth 8-3331] design GyroInputOutputSerializer has unconnected port tx_fifo_data[21]
+WARNING: [Synth 8-3331] design GyroInputOutputSerializer has unconnected port tx_fifo_data[20]
+WARNING: [Synth 8-3331] design GyroInputOutputSerializer has unconnected port tx_fifo_data[19]
+WARNING: [Synth 8-3331] design GyroInputOutputSerializer has unconnected port tx_fifo_data[18]
+WARNING: [Synth 8-3331] design GyroInputOutputSerializer has unconnected port tx_fifo_data[17]
+WARNING: [Synth 8-3331] design GyroInputOutputSerializer has unconnected port tx_fifo_data[16]
+WARNING: [Synth 8-3331] design GyroInputOutputSerializer has unconnected port tx_fifo_data[15]
+WARNING: [Synth 8-3331] design GyroInputOutputSerializer has unconnected port tx_fifo_data[14]
+WARNING: [Synth 8-3331] design GyroInputOutputSerializer has unconnected port tx_fifo_data[13]
+WARNING: [Synth 8-3331] design GyroInputOutputSerializer has unconnected port tx_fifo_data[12]
+WARNING: [Synth 8-3331] design GyroInputOutputSerializer has unconnected port tx_fifo_data[11]
+WARNING: [Synth 8-3331] design GyroInputOutputSerializer has unconnected port tx_fifo_data[10]
+WARNING: [Synth 8-3331] design GyroInputOutputSerializer has unconnected port tx_fifo_data[9]
+WARNING: [Synth 8-3331] design GyroInputOutputSerializer has unconnected port tx_fifo_data[8]
+WARNING: [Synth 8-3331] design GyroInputOutputSerializer has unconnected port tx_fifo_data[7]
+WARNING: [Synth 8-3331] design GyroInputOutputSerializer has unconnected port tx_fifo_data[6]
+WARNING: [Synth 8-3331] design GyroInputOutputSerializer has unconnected port tx_fifo_data[5]
+WARNING: [Synth 8-3331] design GyroInputOutputSerializer has unconnected port tx_fifo_data[4]
+WARNING: [Synth 8-3331] design GyroInputOutputSerializer has unconnected port tx_fifo_data[3]
+WARNING: [Synth 8-3331] design GyroInputOutputSerializer has unconnected port tx_fifo_data[2]
+WARNING: [Synth 8-3331] design GyroInputOutputSerializer has unconnected port tx_fifo_data[1]
+WARNING: [Synth 8-3331] design GyroInputOutputSerializer has unconnected port tx_fifo_data[0]
+WARNING: [Synth 8-3331] design GyroInputOutputSerializer has unconnected port tx_fifo_valid
+WARNING: [Synth 8-3331] design GyroInputOutputSerializer has unconnected port tx_fifo_last
+WARNING: [Synth 8-3331] design GyroInputOutputSerializer has unconnected port rx_fifo_ready
+WARNING: [Synth 8-3331] design BiDirChannels_v1_0_S00_AXI has unconnected port S_AXI_AWPROT[2]
+WARNING: [Synth 8-3331] design BiDirChannels_v1_0_S00_AXI has unconnected port S_AXI_AWPROT[1]
+WARNING: [Synth 8-3331] design BiDirChannels_v1_0_S00_AXI has unconnected port S_AXI_AWPROT[0]
+WARNING: [Synth 8-3331] design BiDirChannels_v1_0_S00_AXI has unconnected port S_AXI_ARPROT[2]
+WARNING: [Synth 8-3331] design BiDirChannels_v1_0_S00_AXI has unconnected port S_AXI_ARPROT[1]
+WARNING: [Synth 8-3331] design BiDirChannels_v1_0_S00_AXI has unconnected port S_AXI_ARPROT[0]
+WARNING: [Synth 8-3331] design BiDirChannels_v1_0 has unconnected port s00_axis_aclk
+WARNING: [Synth 8-3331] design BiDirChannels_v1_0 has unconnected port s00_axis_aresetn
+WARNING: [Synth 8-3331] design BiDirChannels_v1_0 has unconnected port s00_axis_tstrb[3]
+WARNING: [Synth 8-3331] design BiDirChannels_v1_0 has unconnected port s00_axis_tstrb[2]
+WARNING: [Synth 8-3331] design BiDirChannels_v1_0 has unconnected port s00_axis_tstrb[1]
+WARNING: [Synth 8-3331] design BiDirChannels_v1_0 has unconnected port s00_axis_tstrb[0]
+WARNING: [Synth 8-3331] design BiDirChannels_v1_0 has unconnected port m00_axis_aclk
+WARNING: [Synth 8-3331] design BiDirChannels_v1_0 has unconnected port m00_axis_aresetn
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:08 ; elapsed = 00:00:13 . Memory (MB): peak = 461.500 ; gain = 151.961
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:08 ; elapsed = 00:00:15 . Memory (MB): peak = 461.500 ; gain = 151.961
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:08 ; elapsed = 00:00:15 . Memory (MB): peak = 461.500 ; gain = 151.961
+---------------------------------------------------------------------------------
+INFO: [Device 21-403] Loading part xc7z020clg484-1
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Completed Processing XDC Constraints
+
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+WARNING: [Constraints 18-5210] No constraint will be written out.
+Constraint Validation Runtime : Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.355 . Memory (MB): peak = 813.180 ; gain = 2.844
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:30 ; elapsed = 00:00:52 . Memory (MB): peak = 813.180 ; gain = 503.641
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7z020clg484-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:30 ; elapsed = 00:00:52 . Memory (MB): peak = 813.180 ; gain = 503.641
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:30 ; elapsed = 00:00:52 . Memory (MB): peak = 813.180 ; gain = 503.641
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:30 ; elapsed = 00:00:54 . Memory (MB): peak = 813.180 ; gain = 503.641
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      8 Bit       Adders := 4     
+	   2 Input      6 Bit       Adders := 1     
+	   2 Input      3 Bit       Adders := 1     
++---XORs : 
+	   2 Input      1 Bit         XORs := 4     
++---Registers : 
+	               33 Bit    Registers := 1     
+	               32 Bit    Registers := 4     
+	                8 Bit    Registers := 4     
+	                6 Bit    Registers := 1     
+	                4 Bit    Registers := 2     
+	                3 Bit    Registers := 1     
+	                2 Bit    Registers := 3     
+	                1 Bit    Registers := 14    
++---Muxes : 
+	   2 Input     33 Bit        Muxes := 4     
+	   2 Input     32 Bit        Muxes := 2     
+	   4 Input     32 Bit        Muxes := 3     
+	   2 Input      6 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 6     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Hierarchical Component Statistics 
+---------------------------------------------------------------------------------
+Hierarchical RTL Component report 
+Module BiDirChannels_v1_0_S00_AXI 
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 3     
+	                4 Bit    Registers := 2     
+	                2 Bit    Registers := 2     
+	                1 Bit    Registers := 6     
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 2     
+	   4 Input     32 Bit        Muxes := 3     
+	   2 Input      1 Bit        Muxes := 5     
+Module dff 
+Detailed RTL Component Info : 
++---Registers : 
+	                1 Bit    Registers := 1     
+Module register_2bits 
+Detailed RTL Component Info : 
++---Registers : 
+	                2 Bit    Registers := 1     
+Module counter48Cycles 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      6 Bit       Adders := 1     
++---Registers : 
+	                6 Bit    Registers := 1     
++---Muxes : 
+	   2 Input      6 Bit        Muxes := 1     
+Module upCounter3Bits 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      3 Bit       Adders := 1     
++---Registers : 
+	                3 Bit    Registers := 1     
+Module maskHSCK 
+Detailed RTL Component Info : 
++---XORs : 
+	   2 Input      1 Bit         XORs := 1     
+Module inputShiftRegister32Bits 
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 1     
+Module outputShiftRegister32Bits 
+Detailed RTL Component Info : 
++---Registers : 
+	               33 Bit    Registers := 1     
++---Muxes : 
+	   2 Input     33 Bit        Muxes := 4     
+Module mux_2x1_1bit 
+Detailed RTL Component Info : 
++---Muxes : 
+	   2 Input      1 Bit        Muxes := 1     
+Module syncReady 
+Detailed RTL Component Info : 
++---XORs : 
+	   2 Input      1 Bit         XORs := 1     
+Module upCounter8Bits 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      8 Bit       Adders := 1     
++---Registers : 
+	                8 Bit    Registers := 1     
+Module GyroInputOutputSerializer 
+Detailed RTL Component Info : 
++---XORs : 
+	   2 Input      1 Bit         XORs := 1     
+---------------------------------------------------------------------------------
+Finished RTL Hierarchical Component Statistics
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 220 (col length:60)
+BRAMs: 280 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+Warning: Parallel synthesis criteria is not met 
+WARNING: [Synth 8-6014] Unused sequential element inst/X1/STATE_REG/data_out_reg was removed.  [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:113]
+INFO: [Synth 8-3917] design design_2_BiDirChannels_0_0 has port m00_axis_tstrb[3] driven by constant 1
+INFO: [Synth 8-3917] design design_2_BiDirChannels_0_0 has port m00_axis_tstrb[2] driven by constant 1
+INFO: [Synth 8-3917] design design_2_BiDirChannels_0_0 has port m00_axis_tstrb[1] driven by constant 1
+INFO: [Synth 8-3917] design design_2_BiDirChannels_0_0 has port m00_axis_tstrb[0] driven by constant 1
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port m00_axis_tdata[31]
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port m00_axis_tdata[30]
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port m00_axis_tdata[29]
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port m00_axis_tdata[28]
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port m00_axis_tdata[27]
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port m00_axis_tdata[26]
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port m00_axis_tdata[25]
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port m00_axis_tdata[24]
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port m00_axis_tdata[23]
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port m00_axis_tdata[22]
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port m00_axis_tdata[21]
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port m00_axis_tdata[20]
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port m00_axis_tdata[19]
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port m00_axis_tdata[18]
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port m00_axis_tdata[17]
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port m00_axis_tdata[16]
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port m00_axis_tdata[15]
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port m00_axis_tdata[14]
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port m00_axis_tdata[13]
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port m00_axis_tdata[12]
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port m00_axis_tdata[11]
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port m00_axis_tdata[10]
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port m00_axis_tdata[9]
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port m00_axis_tdata[8]
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port m00_axis_tdata[7]
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port m00_axis_tdata[6]
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port m00_axis_tdata[5]
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port m00_axis_tdata[4]
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port m00_axis_tdata[3]
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port m00_axis_tdata[2]
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port m00_axis_tdata[1]
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port m00_axis_tdata[0]
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port m00_axis_tlast
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port m00_axis_tvalid
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port s00_axis_tready
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port s00_axi_awprot[2]
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port s00_axi_awprot[1]
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port s00_axi_awprot[0]
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port s00_axi_arprot[2]
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port s00_axi_arprot[1]
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port s00_axi_arprot[0]
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port m00_axis_aclk
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port m00_axis_aresetn
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port s00_axis_tstrb[3]
+WARNING: [Synth 8-3331] design design_2_BiDirChannels_0_0 has unconnected port s00_axis_tstrb[2]
+INFO: [Common 17-14] Message 'Synth 8-3331' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Synth 8-3886] merging instance 'inst/BiDirChannels_v1_0_S00_AXI_inst/axi_rresp_reg[0]' (FDRE) to 'inst/BiDirChannels_v1_0_S00_AXI_inst/axi_rresp_reg[1]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\inst/BiDirChannels_v1_0_S00_AXI_inst/axi_rresp_reg[1] )
+INFO: [Synth 8-3886] merging instance 'inst/BiDirChannels_v1_0_S00_AXI_inst/axi_bresp_reg[0]' (FDRE) to 'inst/BiDirChannels_v1_0_S00_AXI_inst/axi_bresp_reg[1]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\inst/BiDirChannels_v1_0_S00_AXI_inst/axi_bresp_reg[1] )
+INFO: [Synth 8-3332] Sequential element (inst/X1/IN_SHIFT_REG/r_reg_reg[31]) is unused and will be removed from module design_2_BiDirChannels_0_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[31] with 1st driver pin 'inst/X1/IN_SHIFT_REG/r_reg_reg[31]/Q' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:200]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[31] with 2nd driver pin 's00_axis_tdata[31]' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ip/design_2_BiDirChannels_0_0/synth/design_2_BiDirChannels_0_0.v:57]
+INFO: [Synth 8-3332] Sequential element (inst/X1/IN_SHIFT_REG/r_reg_reg[30]) is unused and will be removed from module design_2_BiDirChannels_0_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[30] with 1st driver pin 'inst/X1/IN_SHIFT_REG/r_reg_reg[30]/Q' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:200]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[30] with 2nd driver pin 's00_axis_tdata[30]' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ip/design_2_BiDirChannels_0_0/synth/design_2_BiDirChannels_0_0.v:57]
+INFO: [Synth 8-3332] Sequential element (inst/X1/IN_SHIFT_REG/r_reg_reg[29]) is unused and will be removed from module design_2_BiDirChannels_0_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[29] with 1st driver pin 'inst/X1/IN_SHIFT_REG/r_reg_reg[29]/Q' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:200]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[29] with 2nd driver pin 's00_axis_tdata[29]' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ip/design_2_BiDirChannels_0_0/synth/design_2_BiDirChannels_0_0.v:57]
+INFO: [Synth 8-3332] Sequential element (inst/X1/IN_SHIFT_REG/r_reg_reg[28]) is unused and will be removed from module design_2_BiDirChannels_0_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[28] with 1st driver pin 'inst/X1/IN_SHIFT_REG/r_reg_reg[28]/Q' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:200]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[28] with 2nd driver pin 's00_axis_tdata[28]' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ip/design_2_BiDirChannels_0_0/synth/design_2_BiDirChannels_0_0.v:57]
+INFO: [Synth 8-3332] Sequential element (inst/X1/IN_SHIFT_REG/r_reg_reg[27]) is unused and will be removed from module design_2_BiDirChannels_0_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[27] with 1st driver pin 'inst/X1/IN_SHIFT_REG/r_reg_reg[27]/Q' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:200]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[27] with 2nd driver pin 's00_axis_tdata[27]' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ip/design_2_BiDirChannels_0_0/synth/design_2_BiDirChannels_0_0.v:57]
+INFO: [Synth 8-3332] Sequential element (inst/X1/IN_SHIFT_REG/r_reg_reg[26]) is unused and will be removed from module design_2_BiDirChannels_0_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[26] with 1st driver pin 'inst/X1/IN_SHIFT_REG/r_reg_reg[26]/Q' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:200]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[26] with 2nd driver pin 's00_axis_tdata[26]' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ip/design_2_BiDirChannels_0_0/synth/design_2_BiDirChannels_0_0.v:57]
+INFO: [Synth 8-3332] Sequential element (inst/X1/IN_SHIFT_REG/r_reg_reg[25]) is unused and will be removed from module design_2_BiDirChannels_0_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[25] with 1st driver pin 'inst/X1/IN_SHIFT_REG/r_reg_reg[25]/Q' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:200]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[25] with 2nd driver pin 's00_axis_tdata[25]' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ip/design_2_BiDirChannels_0_0/synth/design_2_BiDirChannels_0_0.v:57]
+INFO: [Synth 8-3332] Sequential element (inst/X1/IN_SHIFT_REG/r_reg_reg[24]) is unused and will be removed from module design_2_BiDirChannels_0_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[24] with 1st driver pin 'inst/X1/IN_SHIFT_REG/r_reg_reg[24]/Q' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:200]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[24] with 2nd driver pin 's00_axis_tdata[24]' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ip/design_2_BiDirChannels_0_0/synth/design_2_BiDirChannels_0_0.v:57]
+INFO: [Synth 8-3332] Sequential element (inst/X1/IN_SHIFT_REG/r_reg_reg[23]) is unused and will be removed from module design_2_BiDirChannels_0_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[23] with 1st driver pin 'inst/X1/IN_SHIFT_REG/r_reg_reg[23]/Q' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:200]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[23] with 2nd driver pin 's00_axis_tdata[23]' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ip/design_2_BiDirChannels_0_0/synth/design_2_BiDirChannels_0_0.v:57]
+INFO: [Synth 8-3332] Sequential element (inst/X1/IN_SHIFT_REG/r_reg_reg[22]) is unused and will be removed from module design_2_BiDirChannels_0_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[22] with 1st driver pin 'inst/X1/IN_SHIFT_REG/r_reg_reg[22]/Q' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:200]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[22] with 2nd driver pin 's00_axis_tdata[22]' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ip/design_2_BiDirChannels_0_0/synth/design_2_BiDirChannels_0_0.v:57]
+INFO: [Synth 8-3332] Sequential element (inst/X1/IN_SHIFT_REG/r_reg_reg[21]) is unused and will be removed from module design_2_BiDirChannels_0_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[21] with 1st driver pin 'inst/X1/IN_SHIFT_REG/r_reg_reg[21]/Q' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:200]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[21] with 2nd driver pin 's00_axis_tdata[21]' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ip/design_2_BiDirChannels_0_0/synth/design_2_BiDirChannels_0_0.v:57]
+INFO: [Synth 8-3332] Sequential element (inst/X1/IN_SHIFT_REG/r_reg_reg[20]) is unused and will be removed from module design_2_BiDirChannels_0_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[20] with 1st driver pin 'inst/X1/IN_SHIFT_REG/r_reg_reg[20]/Q' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:200]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[20] with 2nd driver pin 's00_axis_tdata[20]' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ip/design_2_BiDirChannels_0_0/synth/design_2_BiDirChannels_0_0.v:57]
+INFO: [Synth 8-3332] Sequential element (inst/X1/IN_SHIFT_REG/r_reg_reg[19]) is unused and will be removed from module design_2_BiDirChannels_0_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[19] with 1st driver pin 'inst/X1/IN_SHIFT_REG/r_reg_reg[19]/Q' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:200]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[19] with 2nd driver pin 's00_axis_tdata[19]' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ip/design_2_BiDirChannels_0_0/synth/design_2_BiDirChannels_0_0.v:57]
+INFO: [Synth 8-3332] Sequential element (inst/X1/IN_SHIFT_REG/r_reg_reg[18]) is unused and will be removed from module design_2_BiDirChannels_0_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[18] with 1st driver pin 'inst/X1/IN_SHIFT_REG/r_reg_reg[18]/Q' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:200]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[18] with 2nd driver pin 's00_axis_tdata[18]' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ip/design_2_BiDirChannels_0_0/synth/design_2_BiDirChannels_0_0.v:57]
+INFO: [Synth 8-3332] Sequential element (inst/X1/IN_SHIFT_REG/r_reg_reg[17]) is unused and will be removed from module design_2_BiDirChannels_0_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[17] with 1st driver pin 'inst/X1/IN_SHIFT_REG/r_reg_reg[17]/Q' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:200]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[17] with 2nd driver pin 's00_axis_tdata[17]' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ip/design_2_BiDirChannels_0_0/synth/design_2_BiDirChannels_0_0.v:57]
+INFO: [Synth 8-3332] Sequential element (inst/X1/IN_SHIFT_REG/r_reg_reg[16]) is unused and will be removed from module design_2_BiDirChannels_0_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[16] with 1st driver pin 'inst/X1/IN_SHIFT_REG/r_reg_reg[16]/Q' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:200]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[16] with 2nd driver pin 's00_axis_tdata[16]' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ip/design_2_BiDirChannels_0_0/synth/design_2_BiDirChannels_0_0.v:57]
+INFO: [Synth 8-3332] Sequential element (inst/X1/IN_SHIFT_REG/r_reg_reg[15]) is unused and will be removed from module design_2_BiDirChannels_0_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[15] with 1st driver pin 'inst/X1/IN_SHIFT_REG/r_reg_reg[15]/Q' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:200]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[15] with 2nd driver pin 's00_axis_tdata[15]' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ip/design_2_BiDirChannels_0_0/synth/design_2_BiDirChannels_0_0.v:57]
+INFO: [Synth 8-3332] Sequential element (inst/X1/IN_SHIFT_REG/r_reg_reg[14]) is unused and will be removed from module design_2_BiDirChannels_0_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[14] with 1st driver pin 'inst/X1/IN_SHIFT_REG/r_reg_reg[14]/Q' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:200]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[14] with 2nd driver pin 's00_axis_tdata[14]' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ip/design_2_BiDirChannels_0_0/synth/design_2_BiDirChannels_0_0.v:57]
+INFO: [Synth 8-3332] Sequential element (inst/X1/IN_SHIFT_REG/r_reg_reg[13]) is unused and will be removed from module design_2_BiDirChannels_0_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[13] with 1st driver pin 'inst/X1/IN_SHIFT_REG/r_reg_reg[13]/Q' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:200]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[13] with 2nd driver pin 's00_axis_tdata[13]' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ip/design_2_BiDirChannels_0_0/synth/design_2_BiDirChannels_0_0.v:57]
+INFO: [Synth 8-3332] Sequential element (inst/X1/IN_SHIFT_REG/r_reg_reg[12]) is unused and will be removed from module design_2_BiDirChannels_0_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[12] with 1st driver pin 'inst/X1/IN_SHIFT_REG/r_reg_reg[12]/Q' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:200]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[12] with 2nd driver pin 's00_axis_tdata[12]' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ip/design_2_BiDirChannels_0_0/synth/design_2_BiDirChannels_0_0.v:57]
+INFO: [Synth 8-3332] Sequential element (inst/X1/IN_SHIFT_REG/r_reg_reg[11]) is unused and will be removed from module design_2_BiDirChannels_0_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[11] with 1st driver pin 'inst/X1/IN_SHIFT_REG/r_reg_reg[11]/Q' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:200]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[11] with 2nd driver pin 's00_axis_tdata[11]' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ip/design_2_BiDirChannels_0_0/synth/design_2_BiDirChannels_0_0.v:57]
+INFO: [Synth 8-3332] Sequential element (inst/X1/IN_SHIFT_REG/r_reg_reg[10]) is unused and will be removed from module design_2_BiDirChannels_0_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[10] with 1st driver pin 'inst/X1/IN_SHIFT_REG/r_reg_reg[10]/Q' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:200]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[10] with 2nd driver pin 's00_axis_tdata[10]' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ip/design_2_BiDirChannels_0_0/synth/design_2_BiDirChannels_0_0.v:57]
+INFO: [Synth 8-3332] Sequential element (inst/X1/IN_SHIFT_REG/r_reg_reg[9]) is unused and will be removed from module design_2_BiDirChannels_0_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[9] with 1st driver pin 'inst/X1/IN_SHIFT_REG/r_reg_reg[9]/Q' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:200]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[9] with 2nd driver pin 's00_axis_tdata[9]' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ip/design_2_BiDirChannels_0_0/synth/design_2_BiDirChannels_0_0.v:57]
+INFO: [Synth 8-3332] Sequential element (inst/X1/IN_SHIFT_REG/r_reg_reg[8]) is unused and will be removed from module design_2_BiDirChannels_0_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[8] with 1st driver pin 'inst/X1/IN_SHIFT_REG/r_reg_reg[8]/Q' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:200]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[8] with 2nd driver pin 's00_axis_tdata[8]' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ip/design_2_BiDirChannels_0_0/synth/design_2_BiDirChannels_0_0.v:57]
+INFO: [Synth 8-3332] Sequential element (inst/X1/IN_SHIFT_REG/r_reg_reg[7]) is unused and will be removed from module design_2_BiDirChannels_0_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[7] with 1st driver pin 'inst/X1/IN_SHIFT_REG/r_reg_reg[7]/Q' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:200]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[7] with 2nd driver pin 's00_axis_tdata[7]' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ip/design_2_BiDirChannels_0_0/synth/design_2_BiDirChannels_0_0.v:57]
+INFO: [Synth 8-3332] Sequential element (inst/X1/IN_SHIFT_REG/r_reg_reg[6]) is unused and will be removed from module design_2_BiDirChannels_0_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[6] with 1st driver pin 'inst/X1/IN_SHIFT_REG/r_reg_reg[6]/Q' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:200]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[6] with 2nd driver pin 's00_axis_tdata[6]' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ip/design_2_BiDirChannels_0_0/synth/design_2_BiDirChannels_0_0.v:57]
+INFO: [Synth 8-3332] Sequential element (inst/X1/IN_SHIFT_REG/r_reg_reg[5]) is unused and will be removed from module design_2_BiDirChannels_0_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[5] with 1st driver pin 'inst/X1/IN_SHIFT_REG/r_reg_reg[5]/Q' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:200]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[5] with 2nd driver pin 's00_axis_tdata[5]' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ip/design_2_BiDirChannels_0_0/synth/design_2_BiDirChannels_0_0.v:57]
+INFO: [Synth 8-3332] Sequential element (inst/X1/IN_SHIFT_REG/r_reg_reg[4]) is unused and will be removed from module design_2_BiDirChannels_0_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[4] with 1st driver pin 'inst/X1/IN_SHIFT_REG/r_reg_reg[4]/Q' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:200]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[4] with 2nd driver pin 's00_axis_tdata[4]' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ip/design_2_BiDirChannels_0_0/synth/design_2_BiDirChannels_0_0.v:57]
+INFO: [Synth 8-3332] Sequential element (inst/X1/IN_SHIFT_REG/r_reg_reg[3]) is unused and will be removed from module design_2_BiDirChannels_0_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[3] with 1st driver pin 'inst/X1/IN_SHIFT_REG/r_reg_reg[3]/Q' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:200]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[3] with 2nd driver pin 's00_axis_tdata[3]' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ip/design_2_BiDirChannels_0_0/synth/design_2_BiDirChannels_0_0.v:57]
+INFO: [Synth 8-3332] Sequential element (inst/X1/IN_SHIFT_REG/r_reg_reg[2]) is unused and will be removed from module design_2_BiDirChannels_0_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[2] with 1st driver pin 'inst/X1/IN_SHIFT_REG/r_reg_reg[2]/Q' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:200]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[2] with 2nd driver pin 's00_axis_tdata[2]' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ip/design_2_BiDirChannels_0_0/synth/design_2_BiDirChannels_0_0.v:57]
+INFO: [Synth 8-3332] Sequential element (inst/X1/IN_SHIFT_REG/r_reg_reg[1]) is unused and will be removed from module design_2_BiDirChannels_0_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[1] with 1st driver pin 'inst/X1/IN_SHIFT_REG/r_reg_reg[1]/Q' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:200]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[1] with 2nd driver pin 's00_axis_tdata[1]' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ip/design_2_BiDirChannels_0_0/synth/design_2_BiDirChannels_0_0.v:57]
+INFO: [Synth 8-3332] Sequential element (inst/X1/IN_SHIFT_REG/r_reg_reg[0]) is unused and will be removed from module design_2_BiDirChannels_0_0.
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[0] with 1st driver pin 'inst/X1/IN_SHIFT_REG/r_reg_reg[0]/Q' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:200]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tdata[0] with 2nd driver pin 's00_axis_tdata[0]' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ip/design_2_BiDirChannels_0_0/synth/design_2_BiDirChannels_0_0.v:57]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tlast with 1st driver pin 'inst/X1/rx_fifo_last_inferred/rx_fifo_last' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:502]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tlast with 2nd driver pin 's00_axis_tlast' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ip/design_2_BiDirChannels_0_0/synth/design_2_BiDirChannels_0_0.v:57]
+INFO: [Synth 8-3332] Sequential element (inst/BiDirChannels_v1_0_S00_AXI_inst/axi_awaddr_reg[1]) is unused and will be removed from module design_2_BiDirChannels_0_0.
+INFO: [Synth 8-3332] Sequential element (inst/BiDirChannels_v1_0_S00_AXI_inst/axi_awaddr_reg[0]) is unused and will be removed from module design_2_BiDirChannels_0_0.
+INFO: [Synth 8-3332] Sequential element (inst/BiDirChannels_v1_0_S00_AXI_inst/axi_bresp_reg[1]) is unused and will be removed from module design_2_BiDirChannels_0_0.
+INFO: [Synth 8-3332] Sequential element (inst/BiDirChannels_v1_0_S00_AXI_inst/axi_araddr_reg[1]) is unused and will be removed from module design_2_BiDirChannels_0_0.
+INFO: [Synth 8-3332] Sequential element (inst/BiDirChannels_v1_0_S00_AXI_inst/axi_araddr_reg[0]) is unused and will be removed from module design_2_BiDirChannels_0_0.
+INFO: [Synth 8-3332] Sequential element (inst/BiDirChannels_v1_0_S00_AXI_inst/axi_rresp_reg[1]) is unused and will be removed from module design_2_BiDirChannels_0_0.
+INFO: [Synth 8-3332] Sequential element (inst/X1/LAST_CNTR/r_reg_reg[2]) is unused and will be removed from module design_2_BiDirChannels_0_0.
+INFO: [Synth 8-3332] Sequential element (inst/X1/LAST_CNTR/r_reg_reg[1]) is unused and will be removed from module design_2_BiDirChannels_0_0.
+INFO: [Synth 8-3332] Sequential element (inst/X1/LAST_CNTR/r_reg_reg[0]) is unused and will be removed from module design_2_BiDirChannels_0_0.
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\inst/X1/OUT_SHIFT_REG/r_reg_reg[0]_C )
+INFO: [Synth 8-3332] Sequential element (inst/X1/OUT_SHIFT_REG/r_reg_reg[0]_C) is unused and will be removed from module design_2_BiDirChannels_0_0.
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:33 ; elapsed = 00:00:56 . Memory (MB): peak = 813.180 ; gain = 503.641
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:53 ; elapsed = 00:01:19 . Memory (MB): peak = 813.180 ; gain = 503.641
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:53 ; elapsed = 00:01:19 . Memory (MB): peak = 813.180 ; gain = 503.641
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:53 ; elapsed = 00:01:20 . Memory (MB): peak = 823.176 ; gain = 513.637
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:56 ; elapsed = 00:01:23 . Memory (MB): peak = 823.176 ; gain = 513.637
+---------------------------------------------------------------------------------
+CRITICAL WARNING: [Synth 8-3352] multi-driven net m00_axis_tready with 1st driver pin 'i_115/O' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:256]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net m00_axis_tready with 2nd driver pin 'm00_axis_tready' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ip/design_2_BiDirChannels_0_0/synth/design_2_BiDirChannels_0_0.v:57]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tvalid with 1st driver pin 'i_116/O' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ipshared/4b79/hdl/BiDirChannels_v1_0.v:256]
+CRITICAL WARNING: [Synth 8-3352] multi-driven net s00_axis_tvalid with 2nd driver pin 's00_axis_tvalid' [c:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ip/design_2_BiDirChannels_0_0/synth/design_2_BiDirChannels_0_0.v:57]
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        2|Failed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:56 ; elapsed = 00:01:23 . Memory (MB): peak = 823.176 ; gain = 513.637
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:56 ; elapsed = 00:01:23 . Memory (MB): peak = 823.176 ; gain = 513.637
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:56 ; elapsed = 00:01:23 . Memory (MB): peak = 823.176 ; gain = 513.637
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:56 ; elapsed = 00:01:23 . Memory (MB): peak = 823.176 ; gain = 513.637
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:56 ; elapsed = 00:01:23 . Memory (MB): peak = 823.176 ; gain = 513.637
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+Static Shift Register Report:
++---------------------------+-------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|Module Name                | RTL Name                            | Length | Width | Reset Signal | Pull out first Reg | Pull out last Reg | SRL16E | SRLC32E | 
++---------------------------+-------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|design_2_BiDirChannels_0_0 | inst/X1/OUT_SHIFT_REG/r_reg_reg[23] | 5      | 1     | YES          | NO                 | YES               | 1      | 0       | 
+|design_2_BiDirChannels_0_0 | inst/X1/OUT_SHIFT_REG/r_reg_reg[6]  | 6      | 1     | YES          | NO                 | YES               | 1      | 0       | 
++---------------------------+-------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |LUT1   |     9|
+|2     |LUT2   |    16|
+|3     |LUT3   |    19|
+|4     |LUT4   |    23|
+|5     |LUT5   |    38|
+|6     |LUT6   |    15|
+|7     |SRL16E |     2|
+|8     |FDCE   |    74|
+|9     |FDPE   |    10|
+|10    |FDRE   |   107|
+|11    |FDSE   |     1|
+|12    |LDC    |     1|
++------+-------+------+
+
+Report Instance Areas: 
++------+------------------------------------+---------------------------+------+
+|      |Instance                            |Module                     |Cells |
++------+------------------------------------+---------------------------+------+
+|1     |top                                 |                           |   315|
+|2     |  inst                              |BiDirChannels_v1_0         |   313|
+|3     |    BiDirChannels_v1_0_S00_AXI_inst |BiDirChannels_v1_0_S00_AXI |   160|
+|4     |    X1                              |GyroInputOutputSerializer  |   153|
+|5     |      CLK_DIV2                      |clock_divider_by_2         |     2|
+|6     |        ff0                         |dff_11                     |     2|
+|7     |      CLK_DIV4                      |clock_divider_by_2_0       |     1|
+|8     |        ff0                         |dff_10                     |     1|
+|9     |      DBG                           |GyroChannelDebugger        |    68|
+|10    |        CNTR0                       |upCounter8Bits             |    17|
+|11    |        CNTR1                       |upCounter8Bits_7           |    17|
+|12    |        CNTR2                       |upCounter8Bits_8           |    17|
+|13    |        CNTR3                       |upCounter8Bits_9           |    17|
+|14    |      MASK_HSCK                     |maskHSCK                   |     4|
+|15    |        ff0                         |dff_5                      |     1|
+|16    |        ff1                         |dff_6                      |     3|
+|17    |      OUT_SHIFT_REG                 |outputShiftRegister32Bits  |    55|
+|18    |      PULSE_CNTR                    |counter48Cycles            |    17|
+|19    |      X0                            |syncReady                  |     3|
+|20    |        X0                          |dff_3                      |     1|
+|21    |        X1                          |dff_4                      |     2|
+|22    |      X1                            |syncReady_1                |     3|
+|23    |        X0                          |dff                        |     1|
+|24    |        X1                          |dff_2                      |     2|
++------+------------------------------------+---------------------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:56 ; elapsed = 00:01:23 . Memory (MB): peak = 823.176 ; gain = 513.637
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 70 critical warnings and 50 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:32 ; elapsed = 00:00:54 . Memory (MB): peak = 823.176 ; gain = 161.957
+Synthesis Optimization Complete : Time (s): cpu = 00:00:56 ; elapsed = 00:01:23 . Memory (MB): peak = 823.176 ; gain = 513.637
+INFO: [Project 1-571] Translating synthesized netlist
+INFO: [Netlist 29-17] Analyzing 1 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 1 instances were transformed.
+  LDC => LDCE: 1 instances
+
+INFO: [Common 17-83] Releasing license: Synthesis
+97 Infos, 112 Warnings, 70 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:01:00 ; elapsed = 00:01:29 . Memory (MB): peak = 834.793 ; gain = 535.613
+WARNING: [Constraints 18-5210] No constraint will be written out.
+INFO: [Common 17-1381] The checkpoint 'C:/Xilinx_Projects/gyro_project/tester/tester.runs/design_2_BiDirChannels_0_0_synth_1/design_2_BiDirChannels_0_0.dcp' has been generated.

@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<Runs Version="1" Minor="0">
+	<Run Id="design_2_BiDirChannels_0_0_synth_1" LaunchDir="C:/Xilinx_Projects/gyro_project/tester/tester.runs/design_2_BiDirChannels_0_0_synth_1" FlowId="Vivado_Synthesis" FromStepId="vivado" ToStepId="vivado"/>
+	<Run Id="synth_2" LaunchDir="C:/Xilinx_Projects/gyro_project/tester/tester.runs/synth_2" FlowId="Vivado_Synthesis" FromStepId="vivado" ToStepId="vivado">
+		<Parent Id="design_2_BiDirChannels_0_0_synth_1"/>
+	</Run>
+</Runs>
+

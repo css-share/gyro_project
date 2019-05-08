@@ -178,8 +178,8 @@
   "../../../bd/design_2/ipshared/e792/hdl/axis_stream_fifo_v1_0.v" \
   "../../../bd/design_2/ip/design_2_RxFIFO_0/sim/design_2_RxFIFO_0.v" \
   "../../../bd/design_2/ip/design_2_TxFIFO_0/sim/design_2_TxFIFO_0.v" \
-  "../../../bd/design_2/ipshared/83f1/hdl/BiDirChannels_v1_0_S00_AXI.v" \
-  "../../../bd/design_2/ipshared/83f1/hdl/BiDirChannels_v1_0.v" \
+  "../../../bd/design_2/ipshared/9523/hdl/BiDirChannels_v1_0_S00_AXI.v" \
+  "../../../bd/design_2/ipshared/9523/hdl/BiDirChannels_v1_0.v" \
   "../../../bd/design_2/ip/design_2_BiDirChannels_0_0/sim/design_2_BiDirChannels_0_0.v" \
 -endlib
 -makelib xcelium_lib/generic_baseblocks_v2_1_0 \
