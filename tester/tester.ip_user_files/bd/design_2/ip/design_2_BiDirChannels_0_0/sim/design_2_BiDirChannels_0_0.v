@@ -48,7 +48,7 @@
 
 
 // IP VLNV: xilinx.com:user:BiDirChannels:1.0
-// IP Revision: 68
+// IP Revision: 72
 
 `timescale 1ns/1ps
 
@@ -57,7 +57,8 @@ module design_2_BiDirChannels_0_0 (
   HS_DataIn,
   HS_DataOut,
   HS_Clock,
-  MCK,
+  MCK_P,
+  MCK_N,
   s00_axi_awaddr,
   s00_axi_awprot,
   s00_axi_awvalid,
@@ -98,7 +99,8 @@ module design_2_BiDirChannels_0_0 (
 input wire HS_DataIn;
 output wire HS_DataOut;
 output wire HS_Clock;
-output wire MCK;
+output wire MCK_P;
+output wire MCK_N;
 (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI AWADDR" *)
 input wire [3 : 0] s00_axi_awaddr;
 (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI AWPROT" *)
@@ -190,7 +192,8 @@ input wire s00_axis_aresetn;
     .HS_DataIn(HS_DataIn),
     .HS_DataOut(HS_DataOut),
     .HS_Clock(HS_Clock),
-    .MCK(MCK),
+    .MCK_P(MCK_P),
+    .MCK_N(MCK_N),
     .s00_axi_awaddr(s00_axi_awaddr),
     .s00_axi_awprot(s00_axi_awprot),
     .s00_axi_awvalid(s00_axi_awvalid),

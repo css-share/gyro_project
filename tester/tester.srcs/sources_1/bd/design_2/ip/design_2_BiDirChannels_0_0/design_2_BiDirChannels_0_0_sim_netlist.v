@@ -1,7 +1,7 @@
 // Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-// Date        : Mon May  6 17:53:13 2019
+// Date        : Thu May  9 16:02:13 2019
 // Host        : DESKTOP-KC9HGNO running 64-bit major release  (build 9200)
 // Command     : write_verilog -force -mode funcsim
 //               C:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ip/design_2_BiDirChannels_0_0/design_2_BiDirChannels_0_0_sim_netlist.v
@@ -18,7 +18,8 @@ module design_2_BiDirChannels_0_0
    (HS_DataIn,
     HS_DataOut,
     HS_Clock,
-    MCK,
+    MCK_P,
+    MCK_N,
     s00_axi_awaddr,
     s00_axi_awprot,
     s00_axi_awvalid,
@@ -57,7 +58,8 @@ module design_2_BiDirChannels_0_0
   input HS_DataIn;
   output HS_DataOut;
   output HS_Clock;
-  output MCK;
+  output MCK_P;
+  output MCK_N;
   (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI AWADDR" *) input [3:0]s00_axi_awaddr;
   (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI AWPROT" *) input [2:0]s00_axi_awprot;
   (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI AWVALID" *) input s00_axi_awvalid;
@@ -99,7 +101,8 @@ module design_2_BiDirChannels_0_0
   wire HS_Clock;
   wire HS_DataIn;
   wire HS_DataOut;
-  wire MCK;
+  (* SLEW = "SLOW" *) wire MCK_N;
+  (* SLEW = "SLOW" *) wire MCK_P;
   wire Q_reg_i_1_n_0;
   wire \X1/clock_div_4 ;
   wire clk0;
@@ -154,7 +157,8 @@ module design_2_BiDirChannels_0_0
         .HS_Clock(HS_Clock),
         .HS_DataIn(HS_DataIn),
         .HS_DataOut(HS_DataOut),
-        .MCK(MCK),
+        .MCK_N(MCK_N),
+        .MCK_P(MCK_P),
         .clk0(clk0),
         .clock_div_4(\X1/clock_div_4 ),
         .m00_axis_tdata(m00_axis_tdata),
@@ -184,10 +188,11 @@ endmodule
 
 (* ORIG_REF_NAME = "BiDirChannels_v1_0" *) 
 module design_2_BiDirChannels_0_0_BiDirChannels_v1_0
-   (s00_axi_awready,
+   (MCK_P,
+    MCK_N,
+    s00_axi_awready,
     s00_axi_wready,
     s00_axi_arready,
-    MCK,
     clock_div_4,
     m00_axis_tlast,
     HS_DataOut,
@@ -214,10 +219,11 @@ module design_2_BiDirChannels_0_0_BiDirChannels_v1_0
     s00_axi_araddr,
     s00_axis_tdata,
     s00_axi_wstrb);
+  output MCK_P;
+  output MCK_N;
   output s00_axi_awready;
   output s00_axi_wready;
   output s00_axi_arready;
-  output MCK;
   output clock_div_4;
   output m00_axis_tlast;
   output HS_DataOut;
@@ -258,6 +264,8 @@ module design_2_BiDirChannels_0_0_BiDirChannels_v1_0
   wire HS_DataIn;
   wire HS_DataOut;
   wire MCK;
+  wire MCK_N;
+  wire MCK_P;
   wire clk0;
   wire clock_div_4;
   wire [28:24]data_word_0;
@@ -311,6 +319,15 @@ module design_2_BiDirChannels_0_0_BiDirChannels_v1_0
         .s00_axi_wready(s00_axi_wready),
         .s00_axi_wstrb(s00_axi_wstrb),
         .s00_axi_wvalid(s00_axi_wvalid));
+  (* BOX_TYPE = "PRIMITIVE" *) 
+  (* CAPACITANCE = "DONT_CARE" *) 
+  (* XILINX_LEGACY_PRIM = "OBUFDS" *) 
+  OBUFDS #(
+    .IOSTANDARD("DEFAULT")) 
+    OBUFDS_inst
+       (.I(MCK),
+        .O(MCK_P),
+        .OB(MCK_N));
   design_2_BiDirChannels_0_0_GyroInputOutputSerializer X1
        (.CLK(CLK),
         .HS_Clock(HS_Clock),
@@ -497,13 +514,6 @@ module design_2_BiDirChannels_0_0_BiDirChannels_v1_0_S00_AXI
   wire slv_reg_rden__0;
   wire slv_reg_wren__0;
 
-  (* SOFT_HLUTNM = "soft_lutpair2" *) 
-  LUT2 #(
-    .INIT(4'hB)) 
-    Q_i_2
-       (.I0(data_word_0),
-        .I1(s00_axi_aresetn),
-        .O(Q_reg_0));
   LUT6 #(
     .INIT(64'hF7FFC4CCC4CCC4CC)) 
     aw_en_i_1
@@ -1139,6 +1149,13 @@ module design_2_BiDirChannels_0_0_BiDirChannels_v1_0_S00_AXI
         .D(axi_wready0),
         .Q(s00_axi_wready),
         .R(axi_awready_i_1_n_0));
+  (* SOFT_HLUTNM = "soft_lutpair2" *) 
+  LUT2 #(
+    .INIT(4'hB)) 
+    \r_reg[31]_i_2 
+       (.I0(data_word_0),
+        .I1(s00_axi_aresetn),
+        .O(Q_reg_0));
   (* SOFT_HLUTNM = "soft_lutpair2" *) 
   LUT2 #(
     .INIT(4'h2)) 

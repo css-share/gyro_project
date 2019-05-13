@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-| Date         : Mon May  6 18:13:10 2019
+| Date         : Sun May 12 18:28:40 2019
 | Host         : DESKTOP-KC9HGNO running 64-bit major release  (build 9200)
 | Command      : report_methodology -file design_2_wrapper_methodology_drc_routed.rpt -pb design_2_wrapper_methodology_drc_routed.pb -rpx design_2_wrapper_methodology_drc_routed.rpx
 | Design       : design_2_wrapper
@@ -23,13 +23,13 @@ Table of Contents
           Floorplan: design_1
       Design limits: <entire design considered>
              Max violations: <unlimited>
-             Violations found: 389
+             Violations found: 390
 +-----------+----------+-------------------------------+------------+
 | Rule      | Severity | Description                   | Violations |
 +-----------+----------+-------------------------------+------------+
 | LUTAR-1   | Warning  | LUT drives async reset alert  | 116        |
 | TIMING-17 | Warning  | Non-clocked sequential cell   | 210        |
-| TIMING-18 | Warning  | Missing input or output delay | 6          |
+| TIMING-18 | Warning  | Missing input or output delay | 7          |
 | TIMING-20 | Warning  | Non-clocked latch             | 57         |
 +-----------+----------+-------------------------------+------------+
 
@@ -37,7 +37,7 @@ Table of Contents
 -----------------
 LUTAR-1#1 Warning
 LUT drives async reset alert  
-LUT cell design_2_i/BiDirChannels_0/inst/BiDirChannels_v1_0_S00_AXI_inst/Q_i_2, with 2 or more inputs, drives asynchronous preset/clear pin(s) design_2_i/BiDirChannels_0/inst/X1/CLK_DIV2/ff0/Q_reg/CLR, design_2_i/BiDirChannels_0/inst/X1/CLK_DIV4/ff0/Q_reg/CLR, design_2_i/BiDirChannels_0/inst/X1/DBG/CNTR0/r_reg_reg[0]/CLR, design_2_i/BiDirChannels_0/inst/X1/DBG/CNTR0/r_reg_reg[1]/CLR, design_2_i/BiDirChannels_0/inst/X1/DBG/CNTR0/r_reg_reg[2]/CLR, design_2_i/BiDirChannels_0/inst/X1/DBG/CNTR0/r_reg_reg[3]/CLR, design_2_i/BiDirChannels_0/inst/X1/DBG/CNTR0/r_reg_reg[4]/CLR, design_2_i/BiDirChannels_0/inst/X1/DBG/CNTR0/r_reg_reg[5]/CLR, design_2_i/BiDirChannels_0/inst/X1/DBG/CNTR0/r_reg_reg[6]/CLR, design_2_i/BiDirChannels_0/inst/X1/DBG/CNTR0/r_reg_reg[7]/CLR, design_2_i/BiDirChannels_0/inst/X1/DBG/CNTR1/r_reg_reg[0]/CLR, design_2_i/BiDirChannels_0/inst/X1/DBG/CNTR1/r_reg_reg[1]/CLR, design_2_i/BiDirChannels_0/inst/X1/DBG/CNTR1/r_reg_reg[2]/CLR, design_2_i/BiDirChannels_0/inst/X1/DBG/CNTR1/r_reg_reg[3]/CLR, design_2_i/BiDirChannels_0/inst/X1/DBG/CNTR1/r_reg_reg[4]/CLR (the first 15 of 114 listed). The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
+LUT cell design_2_i/BiDirChannels_0/inst/BiDirChannels_v1_0_S00_AXI_inst/r_reg[31]_i_2, with 2 or more inputs, drives asynchronous preset/clear pin(s) design_2_i/BiDirChannels_0/inst/X1/CLK_DIV2/ff0/Q_reg/CLR, design_2_i/BiDirChannels_0/inst/X1/CLK_DIV4/ff0/Q_reg/CLR, design_2_i/BiDirChannels_0/inst/X1/DBG/CNTR0/r_reg_reg[0]/CLR, design_2_i/BiDirChannels_0/inst/X1/DBG/CNTR0/r_reg_reg[1]/CLR, design_2_i/BiDirChannels_0/inst/X1/DBG/CNTR0/r_reg_reg[2]/CLR, design_2_i/BiDirChannels_0/inst/X1/DBG/CNTR0/r_reg_reg[3]/CLR, design_2_i/BiDirChannels_0/inst/X1/DBG/CNTR0/r_reg_reg[4]/CLR, design_2_i/BiDirChannels_0/inst/X1/DBG/CNTR0/r_reg_reg[5]/CLR, design_2_i/BiDirChannels_0/inst/X1/DBG/CNTR0/r_reg_reg[6]/CLR, design_2_i/BiDirChannels_0/inst/X1/DBG/CNTR0/r_reg_reg[7]/CLR, design_2_i/BiDirChannels_0/inst/X1/DBG/CNTR1/r_reg_reg[0]/CLR, design_2_i/BiDirChannels_0/inst/X1/DBG/CNTR1/r_reg_reg[1]/CLR, design_2_i/BiDirChannels_0/inst/X1/DBG/CNTR1/r_reg_reg[2]/CLR, design_2_i/BiDirChannels_0/inst/X1/DBG/CNTR1/r_reg_reg[3]/CLR, design_2_i/BiDirChannels_0/inst/X1/DBG/CNTR1/r_reg_reg[4]/CLR (the first 15 of 114 listed). The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
 Related violations: <none>
 
 LUTAR-1#2 Warning
@@ -1687,10 +1687,15 @@ Related violations: <none>
 
 TIMING-18#5 Warning
 Missing input or output delay  
-An output delay is missing on MCK relative to clock(s) clk_fpga_0
+An output delay is missing on MCK_N relative to clock(s) clk_fpga_0
 Related violations: <none>
 
 TIMING-18#6 Warning
+Missing input or output delay  
+An output delay is missing on MCK_P relative to clock(s) clk_fpga_0
+Related violations: <none>
+
+TIMING-18#7 Warning
 Missing input or output delay  
 An output delay is missing on SPI_SCK relative to clock(s) clk_fpga_0
 Related violations: <none>

@@ -1,7 +1,7 @@
 -- Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
--- Date        : Mon May  6 17:53:13 2019
+-- Date        : Thu May  9 16:02:13 2019
 -- Host        : DESKTOP-KC9HGNO running 64-bit major release  (build 9200)
 -- Command     : write_vhdl -force -mode funcsim
 --               C:/Xilinx_Projects/gyro_project/tester/tester.srcs/sources_1/bd/design_2/ip/design_2_BiDirChannels_0_0/design_2_BiDirChannels_0_0_sim_netlist.vhdl
@@ -137,11 +137,11 @@ architecture STRUCTURE of design_2_BiDirChannels_0_0_BiDirChannels_v1_0_S00_AXI 
   signal \slv_reg_rden__0\ : STD_LOGIC;
   signal \slv_reg_wren__0\ : STD_LOGIC;
   attribute SOFT_HLUTNM : string;
-  attribute SOFT_HLUTNM of Q_i_2 : label is "soft_lutpair2";
   attribute SOFT_HLUTNM of axi_arready_i_1 : label is "soft_lutpair0";
   attribute SOFT_HLUTNM of axi_awready_i_2 : label is "soft_lutpair1";
   attribute SOFT_HLUTNM of axi_rvalid_i_1 : label is "soft_lutpair0";
   attribute SOFT_HLUTNM of axi_wready_i_1 : label is "soft_lutpair1";
+  attribute SOFT_HLUTNM of \r_reg[31]_i_2\ : label is "soft_lutpair2";
   attribute SOFT_HLUTNM of \r_reg[32]_i_4\ : label is "soft_lutpair2";
 begin
   Q(1 downto 0) <= \^q\(1 downto 0);
@@ -151,15 +151,6 @@ begin
   s00_axi_bvalid <= \^s00_axi_bvalid\;
   s00_axi_rvalid <= \^s00_axi_rvalid\;
   s00_axi_wready <= \^s00_axi_wready\;
-Q_i_2: unisim.vcomponents.LUT2
-    generic map(
-      INIT => X"B"
-    )
-        port map (
-      I0 => data_word_0(31),
-      I1 => s00_axi_aresetn,
-      O => Q_reg_0
-    );
 aw_en_i_1: unisim.vcomponents.LUT6
     generic map(
       INIT => X"F7FFC4CCC4CCC4CC"
@@ -1003,6 +994,15 @@ axi_wready_reg: unisim.vcomponents.FDRE
       D => axi_wready0,
       Q => \^s00_axi_wready\,
       R => axi_awready_i_1_n_0
+    );
+\r_reg[31]_i_2\: unisim.vcomponents.LUT2
+    generic map(
+      INIT => X"B"
+    )
+        port map (
+      I0 => data_word_0(31),
+      I1 => s00_axi_aresetn,
+      O => Q_reg_0
     );
 \r_reg[32]_i_4\: unisim.vcomponents.LUT2
     generic map(
@@ -6659,10 +6659,11 @@ library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
 entity design_2_BiDirChannels_0_0_BiDirChannels_v1_0 is
   port (
+    MCK_P : out STD_LOGIC;
+    MCK_N : out STD_LOGIC;
     s00_axi_awready : out STD_LOGIC;
     s00_axi_wready : out STD_LOGIC;
     s00_axi_arready : out STD_LOGIC;
-    MCK : out STD_LOGIC;
     clock_div_4 : out STD_LOGIC;
     m00_axis_tlast : out STD_LOGIC;
     HS_DataOut : out STD_LOGIC;
@@ -6703,7 +6704,14 @@ architecture STRUCTURE of design_2_BiDirChannels_0_0_BiDirChannels_v1_0 is
   signal \DBG/CNTR1/r_reg_reg__0\ : STD_LOGIC_VECTOR ( 7 downto 0 );
   signal \DBG/CNTR2/r_reg_reg__0\ : STD_LOGIC_VECTOR ( 7 downto 0 );
   signal \DBG/CNTR3/r_reg_reg__0\ : STD_LOGIC_VECTOR ( 7 downto 0 );
+  signal MCK : STD_LOGIC;
   signal data_word_0 : STD_LOGIC_VECTOR ( 28 downto 24 );
+  attribute BOX_TYPE : string;
+  attribute BOX_TYPE of OBUFDS_inst : label is "PRIMITIVE";
+  attribute CAPACITANCE : string;
+  attribute CAPACITANCE of OBUFDS_inst : label is "DONT_CARE";
+  attribute XILINX_LEGACY_PRIM : string;
+  attribute XILINX_LEGACY_PRIM of OBUFDS_inst : label is "OBUFDS";
 begin
 BiDirChannels_v1_0_S00_AXI_inst: entity work.design_2_BiDirChannels_0_0_BiDirChannels_v1_0_S00_AXI
      port map (
@@ -6734,6 +6742,15 @@ BiDirChannels_v1_0_S00_AXI_inst: entity work.design_2_BiDirChannels_0_0_BiDirCha
       s00_axi_wready => s00_axi_wready,
       s00_axi_wstrb(3 downto 0) => s00_axi_wstrb(3 downto 0),
       s00_axi_wvalid => s00_axi_wvalid
+    );
+OBUFDS_inst: unisim.vcomponents.OBUFDS
+    generic map(
+      IOSTANDARD => "DEFAULT"
+    )
+        port map (
+      I => MCK,
+      O => MCK_P,
+      OB => MCK_N
     );
 X1: entity work.design_2_BiDirChannels_0_0_GyroInputOutputSerializer
      port map (
@@ -6772,7 +6789,8 @@ entity design_2_BiDirChannels_0_0 is
     HS_DataIn : in STD_LOGIC;
     HS_DataOut : out STD_LOGIC;
     HS_Clock : out STD_LOGIC;
-    MCK : out STD_LOGIC;
+    MCK_P : out STD_LOGIC;
+    MCK_N : out STD_LOGIC;
     s00_axi_awaddr : in STD_LOGIC_VECTOR ( 3 downto 0 );
     s00_axi_awprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
     s00_axi_awvalid : in STD_LOGIC;
@@ -6910,7 +6928,8 @@ inst: entity work.design_2_BiDirChannels_0_0_BiDirChannels_v1_0
       HS_Clock => HS_Clock,
       HS_DataIn => HS_DataIn,
       HS_DataOut => HS_DataOut,
-      MCK => MCK,
+      MCK_N => MCK_N,
+      MCK_P => MCK_P,
       clk0 => clk0,
       clock_div_4 => \X1/clock_div_4\,
       m00_axis_tdata(31 downto 0) => m00_axis_tdata(31 downto 0),

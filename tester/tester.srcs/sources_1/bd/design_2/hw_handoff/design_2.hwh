@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Mon May  6 17:50:30 2019" VIVADOVERSION="2018.2">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Thu May  9 15:59:47 2019" VIVADOVERSION="2018.2">
 
   <SYSTEMINFO ARCH="zynq" BOARD="em.avnet.com:zed:part0:1.4" DEVICE="7z020" NAME="design_2" PACKAGE="clg484" SPEEDGRADE="-1"/>
 
@@ -90,9 +90,14 @@
         <CONNECTION INSTANCE="BiDirChannels_0" PORT="HS_DataOut"/>
       </CONNECTIONS>
     </PORT>
-    <PORT DIR="O" NAME="MCK" SIGIS="data" SIGNAME="BiDirChannels_0_MCK">
+    <PORT DIR="O" NAME="MCK_P" SIGIS="data" SIGNAME="BiDirChannels_0_MCK_P">
       <CONNECTIONS>
-        <CONNECTION INSTANCE="BiDirChannels_0" PORT="MCK"/>
+        <CONNECTION INSTANCE="BiDirChannels_0" PORT="MCK_P"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="MCK_N" SIGIS="data" SIGNAME="BiDirChannels_0_MCK_N">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="BiDirChannels_0" PORT="MCK_N"/>
       </CONNECTIONS>
     </PORT>
   </EXTERNALPORTS>
@@ -177,9 +182,14 @@
             <CONNECTION INSTANCE="External_Ports" PORT="HSICK"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" NAME="MCK" SIGIS="undef" SIGNAME="BiDirChannels_0_MCK">
+        <PORT DIR="O" NAME="MCK_P" SIGIS="undef" SIGNAME="BiDirChannels_0_MCK_P">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="External_Ports" PORT="MCK"/>
+            <CONNECTION INSTANCE="External_Ports" PORT="MCK_P"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="MCK_N" SIGIS="undef" SIGNAME="BiDirChannels_0_MCK_N">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="MCK_N"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="I" LEFT="3" NAME="s00_axi_awaddr" RIGHT="0" SIGIS="undef" SIGNAME="BiDirChannels_0_s00_axi_awaddr">

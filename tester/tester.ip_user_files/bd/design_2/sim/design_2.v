@@ -1,7 +1,7 @@
 //Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-//Date        : Mon May  6 17:49:55 2019
+//Date        : Thu May  9 15:59:15 2019
 //Host        : DESKTOP-KC9HGNO running 64-bit major release  (build 9200)
 //Command     : generate_target design_2.bd
 //Design      : design_2
@@ -39,7 +39,8 @@ module design_2
     LED1,
     LED2,
     LED7,
-    MCK,
+    MCK_N,
+    MCK_P,
     SPI_CS,
     SPI_MISO,
     SPI_MOSI,
@@ -74,7 +75,8 @@ module design_2
   (* X_INTERFACE_INFO = "xilinx.com:signal:data:1.0 DATA.LED1 DATA" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME DATA.LED1, LAYERED_METADATA undef" *) output LED1;
   (* X_INTERFACE_INFO = "xilinx.com:signal:data:1.0 DATA.LED2 DATA" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME DATA.LED2, LAYERED_METADATA undef" *) output LED2;
   (* X_INTERFACE_INFO = "xilinx.com:signal:data:1.0 DATA.LED7 DATA" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME DATA.LED7, LAYERED_METADATA undef" *) output LED7;
-  (* X_INTERFACE_INFO = "xilinx.com:signal:data:1.0 DATA.MCK DATA" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME DATA.MCK, LAYERED_METADATA undef" *) output MCK;
+  (* X_INTERFACE_INFO = "xilinx.com:signal:data:1.0 DATA.MCK_N DATA" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME DATA.MCK_N, LAYERED_METADATA undef" *) output MCK_N;
+  (* X_INTERFACE_INFO = "xilinx.com:signal:data:1.0 DATA.MCK_P DATA" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME DATA.MCK_P, LAYERED_METADATA undef" *) output MCK_P;
   (* X_INTERFACE_INFO = "xilinx.com:signal:data:1.0 DATA.SPI_CS DATA" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME DATA.SPI_CS, LAYERED_METADATA undef" *) output SPI_CS;
   (* X_INTERFACE_INFO = "xilinx.com:signal:data:1.0 DATA.SPI_MISO DATA" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME DATA.SPI_MISO, LAYERED_METADATA undef" *) input SPI_MISO;
   (* X_INTERFACE_INFO = "xilinx.com:signal:data:1.0 DATA.SPI_MOSI DATA" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME DATA.SPI_MOSI, LAYERED_METADATA undef" *) output SPI_MOSI;
@@ -89,7 +91,8 @@ module design_2
   wire BiDirChannels_0_M00_AXIS_TREADY;
   wire [3:0]BiDirChannels_0_M00_AXIS_TSTRB;
   wire BiDirChannels_0_M00_AXIS_TVALID;
-  wire BiDirChannels_0_MCK;
+  wire BiDirChannels_0_MCK_N;
+  wire BiDirChannels_0_MCK_P;
   wire HSIA0_1;
   wire SPI_MISO_1;
   wire SPI_ip_0_FSM_DONE;
@@ -393,7 +396,8 @@ module design_2
   assign LED1 = SPI_ip_0_FSM_START;
   assign LED2 = SPI_ip_0_FSM_DONE;
   assign LED7 = axi4_pl_interrupt_ge_0_LED_7;
-  assign MCK = BiDirChannels_0_MCK;
+  assign MCK_N = BiDirChannels_0_MCK_N;
+  assign MCK_P = BiDirChannels_0_MCK_P;
   assign SPI_CS = SPI_ip_0_SPI_CS;
   assign SPI_MISO_1 = SPI_MISO;
   assign SPI_MOSI = SPI_ip_0_SPI_MOSI;
@@ -403,7 +407,8 @@ module design_2
        (.HS_Clock(BiDirChannels_0_HS_Clock),
         .HS_DataIn(HSIA0_1),
         .HS_DataOut(BiDirChannels_0_HS_DataOut),
-        .MCK(BiDirChannels_0_MCK),
+        .MCK_N(BiDirChannels_0_MCK_N),
+        .MCK_P(BiDirChannels_0_MCK_P),
         .m00_axis_aclk(processing_system7_0_FCLK_CLK0),
         .m00_axis_aresetn(rst_ps7_0_100M_peripheral_aresetn),
         .m00_axis_tdata(BiDirChannels_0_M00_AXIS_TDATA),

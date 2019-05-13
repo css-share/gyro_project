@@ -1,7 +1,7 @@
 //Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-//Date        : Mon May  6 17:49:55 2019
+//Date        : Thu May  9 15:59:15 2019
 //Host        : DESKTOP-KC9HGNO running 64-bit major release  (build 9200)
 //Command     : generate_target design_2_wrapper.bd
 //Design      : design_2_wrapper
@@ -38,7 +38,8 @@ module design_2_wrapper
     LED1,
     LED2,
     LED7,
-    MCK,
+    MCK_N,
+    MCK_P,
     SPI_CS,
     SPI_MISO,
     SPI_MOSI,
@@ -73,7 +74,8 @@ module design_2_wrapper
   output LED1;
   output LED2;
   output LED7;
-  output MCK;
+  output MCK_N;
+  output MCK_P;
   output SPI_CS;
   input SPI_MISO;
   output SPI_MOSI;
@@ -109,7 +111,8 @@ module design_2_wrapper
   wire LED1;
   wire LED2;
   wire LED7;
-  wire MCK;
+  wire MCK_N;
+  wire MCK_P;
   wire SPI_CS;
   wire SPI_MISO;
   wire SPI_MOSI;
@@ -146,7 +149,8 @@ module design_2_wrapper
         .LED1(LED1),
         .LED2(LED2),
         .LED7(LED7),
-        .MCK(MCK),
+        .MCK_N(MCK_N),
+        .MCK_P(MCK_P),
         .SPI_CS(SPI_CS),
         .SPI_MISO(SPI_MISO),
         .SPI_MOSI(SPI_MOSI),

@@ -539,7 +539,8 @@ endmodule
         input  wire HS_DataIn,
         output wire HS_DataOut,
         output wire HS_Clock,
-        output wire MCK,
+        output wire MCK_P,
+        output wire MCK_N,
 		// User ports ends
 
 		// Ports of Axi Slave Bus Interface S00_AXI
@@ -593,6 +594,8 @@ endmodule
 	wire [31:0] data_word_1;
     wire [31:0] debug_word_0;
     wire [31:0] debug_word_1;
+    
+    wire MCK;
 	
     // Instantiation of Axi Bus Interface S00_AXI
 	BiDirChannels_v1_0_S00_AXI # ( 
@@ -680,6 +683,14 @@ endmodule
       .MCK(MCK),
       .data_word_0(debug_word_0),
       .data_word_1(debug_word_1)
+    );
+    
+    OBUFDS #(
+      .IOSTANDARD("DEFAULT")
+    ) OBUFDS_inst (
+      .O(MCK_P),
+      .OB(MCK_N),
+      .I(MCK)
     );
 
     assign m00_axis_tstrb = 4'b1111;
