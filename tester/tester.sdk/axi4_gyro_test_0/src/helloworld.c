@@ -1,14 +1,19 @@
 #include <stdio.h>
 #include "platform.h"
+#include "xparameters.h"
 #include "xil_printf.h"
 #include "xbasic_types.h"
 #include "xscugic.h"
+#include "xuartps.h"
+#include "xuartps_hw.h"
 #include "xil_exception.h"
+
+//#define FAKE_IC		//used to send data back when no IC present
+#define FAKE_DATA	//used to create an array of data for COM test
 
 /* ===== Code to deal with the DMA IP ===== */
 
 #include "xaxidma.h"
-#include "xparameters.h"
 #include "xdebug.h"
 
 #ifdef __aarch64__
@@ -23,8 +28,36 @@
 extern void xil_printf(const char *format, ...);
 #endif
 
-/******************** Constant Definitions **********************************/
 
+/******************** Constant Definitions **********************************/
+#define INTC				XScuGic
+#define UARTPS_DEVICE_ID	XPAR_XUARTPS_0_DEVICE_ID
+#define INTC_DEVICE_ID		XPAR_SCUGIC_SINGLE_DEVICE_ID
+#define UART_INT_IRQ_ID		XPAR_XUARTPS_1_INTR
+#define UART_BASEADDR		XPAR_XUARTPS_0_BASEADDR
+#define RX_BUFFER_SIZE		30
+#define TX_BUFFER_SIZE		1000
+
+// possible states for main while loop used to drive actions
+#define SERVICE_UART		0x04
+
+#define CMD_READ_DATA				0x61	// read data from tester - should be followed by
+											// 4 bytes(unsigned int) for num words to be
+											// sent (msbyte first)
+#define CMD_LOAD_SAWTOOTH_UP_DATA	0x62	// load test data1(sawtooth up) into TxData array
+#define CMD_LOAD_SAWTOOTH_DOWN_DATA	0x63	// load test data1(sawtooth down) into TxData array
+#define CMD_READ_ADDRESS			0x41	// read 16-bit contents of gyro ic register
+#define CMD_WRITE_ADDRESS			0x42	// write 16-bit value to gyro ic register
+
+
+
+#ifdef FAKE_DATA
+static void load_sawtooth_up_data(void);
+static void load_sawtooth_down_data(void);
+static void load_sawtooth_data(void);
+#define SAWTOOTH_MAX_VALUE 100
+#define SAWTOOTH_STEP_VALUE 1
+#endif
 /*
  * Device hardware build related constants.
  */
@@ -81,6 +114,14 @@ Xuint32* baseaddr_tx_fifo     = (Xuint32*) 0x43C40000;
 
 int flag;
 int setup_interrupt_system();
+int Status;
+unsigned int state = 0;
+static XScuGic interrupt_controller;	//instance of the interrupt controller
+XUartPs UartPs;							// Instance of the UART Device
+
+static u8 UartRxData[RX_BUFFER_SIZE];	// Buffer for Receiving Data
+static u8 UartTxData[TX_BUFFER_SIZE];	// Buffer for Transmitting Data
+
 
 void isr0 (void *intc_inst_ptr);
 void isr1 (void *intc_inst_ptr);
@@ -98,6 +139,8 @@ static void Uart550_Setup(void);
 static int  initSPI();
 static void readSPIStatus();
 static void setSPIControl(Xuint32 v);
+void modify_register(unsigned int *data, unsigned int address,
+					unsigned int newVal);
 
 static int RxSetup(XAxiDma * AxiDmaInstPtr);
 static int TxSetup(XAxiDma * AxiDmaInstPtr);
@@ -118,6 +161,15 @@ static int  readGyroChannelDebugData();
 static int  setGyroChannelConfiguration(unsigned int v);
 static int  setGyroChannelControl(unsigned int v);
 
+static int 	SetupUartPs(INTC *IntcInstPtr, XUartPs *UartInstPtr,
+					u16 DeviceId, u16 UartIntrId);
+static void UartPsISR(void *CallBackRef, u32 Event, unsigned int EventData);
+static int 	SetupUartInterruptSystem(INTC *IntcInstancePtr,
+					XUartPs *UartInstancePtr,
+					u16 UartIntrId);
+static void read_uart_bytes(void);
+static unsigned int get_num_data_points(u8 *RxData);
+static void send_Tx_data_over_UART(unsigned int num_points_to_send);
 
 /************************** Variable Definitions *****************************/
 /*
@@ -169,8 +221,8 @@ int setGyroChannelControl(unsigned int v){
 // -------------------------------------------------------------------
 int readGyroChannelDebugData(){
   // ---
-  xil_printf("Gyro Channel Debug Word 0: 0x%08x\n\r", *(baseaddr_channel+2));
-  xil_printf("Gyro Channel Debug Word 1: 0x%08x\n\r", *(baseaddr_channel+3));
+  xil_printf("Gyro Channel Buffer Info: 0x%08x\n\r", *(baseaddr_channel+2));
+  xil_printf("Gyro Channel ClkGen Info: 0x%08x\n\r", *(baseaddr_channel+3));
   return 0;
 }
 // -------------------------------------------------------------------
@@ -195,7 +247,6 @@ int readGyroTxFIFODebugData(){
 // -------------------------------------------------------------------
 int resetGyroTxFIFO(){
 	*(baseaddr_tx_fifo+0) = 0x00000001;
-	nops(10000);
 	*(baseaddr_tx_fifo+0) = 0x00000000;
 	  return 0;
 }
@@ -203,7 +254,6 @@ int resetGyroTxFIFO(){
 // -------------------------------------------------------------------
 int resetGyroRxFIFO(){
 	*(baseaddr_rx_fifo+0) = 0x00000001;
-	nops(100000);
 	*(baseaddr_rx_fifo+0) = 0x00000000;
 	  return 0;
 }
@@ -222,10 +272,10 @@ int initSPI(){
 
 // -------------------------------------------------------------------
 void readSPIStatus(){
-    xil_printf("SPI reg0: 0x%08x\n\r", *(baseaddr_spi+0));
-    xil_printf("SPI reg1: 0x%08x\n\r", *(baseaddr_spi+1));
-    xil_printf("SPI reg2: 0x%08x\n\r", *(baseaddr_spi+2));
-    xil_printf("SPI reg3: 0x%08x\n\r", *(baseaddr_spi+3));
+    xil_printf("baseaddr_spi+0: 0x%08x\n", *(baseaddr_spi+0));
+    xil_printf("baseaddr_spi+1: 0x%08x\n", *(baseaddr_spi+1));
+    xil_printf("baseaddr_spi+2: 0x%08x\n", *(baseaddr_spi+2));
+    xil_printf("baseaddr_spi+3: 0x%08x\n\n", *(baseaddr_spi+3));
 }
 
 // -------------------------------------------------------------------
@@ -257,11 +307,11 @@ int writeSPI_blocking(unsigned int address, unsigned int data){
 	y = ((0x0000FFFF) & data);
 	v = 0x80000000 | (x | y);
     m = (Xuint32)v;
-    xil_printf("== m  0x%08x \n\r",m);
+    xil_printf("== m  0x%08x \n",m);
 	*(baseaddr_spi+0) = m;
 	while(1){
 	  d = *(baseaddr_spi+1);
-	  xil_printf("== read d  0x%08x \n\r",d);
+	  xil_printf("== read d  0x%08x \n",d);
 
 	  v = (unsigned int)d;
 	  if(v & 0x80000000){
@@ -341,7 +391,7 @@ int readSPI(unsigned int *data, unsigned int address){
 
   res = 1;
   *data = 0x00000000;           // clears result
-  x = ((address & 0x0000007F) << 16) | 0x00008043;	// DEBUG: the 8F51 is a test pattern
+  x = ((address & 0x0000007F) << 16) | 0x00808043;	// DEBUG: the 8F51 is a test pattern
   v = (0x80000000 | x);         // set the start bit
   m = (Xuint32)v;
   *(baseaddr_spi+0) = m;
@@ -352,6 +402,9 @@ int readSPI(unsigned int *data, unsigned int address){
     if(r & 0x80000000){
       *data = (0x0000FFFF & r); // only lower 16 bits matter
       res = 0;
+#ifdef FAKE_IC
+      *data = (0x0000ABCD);
+#endif
       break;
     }
   }
@@ -360,6 +413,20 @@ int readSPI(unsigned int *data, unsigned int address){
   *(baseaddr_spi+0) = m;        // clear start
   return res;
 }
+
+
+// -------------------------------------------------------------------
+void modify_register(unsigned int *data, unsigned int address, unsigned int newVal)
+{
+	readSPI(data,address);
+	xil_printf("\n   reading reg %d: 0x%04x\n",address,*data);
+	writeSPI_non_blocking_orig(address,newVal);
+	xil_printf("   wrote a 0x%04x to reg%d\n",newVal,address);
+	readSPI(data,address);
+	xil_printf("   reading reg %d: 0x%04x\n",address,*data);
+}
+
+// -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
 // NOTE: old code for the FEB_04 project where we had a sample generator
@@ -700,14 +767,14 @@ static int SendPacket(XAxiDma * AxiDmaInstPtr, int id){
 
 	if(id == 0){
 	  for(Index = 0; Index < MAX_PKT_LEN; Index ++) {
-	  TxPacket[Index] = Value;
-	  Value = (Value + 1) & 0xFF;
+		TxPacket[Index] = Value;
+		  Value = (Value + 1) & 0xFF;
 	  }
 	} else {
-		for(Index = 0; Index < MAX_PKT_LEN; Index ++) {
-		TxPacket[Index] = 0x80;
-	  Value = (Value + 1) & 0xFF;
-	    }
+		  for(Index = 0; Index < MAX_PKT_LEN; Index ++) {
+			TxPacket[Index] = Value+0x80;
+		    Value = (Value + 1) & 0xFF;
+		  }
 	}
 
 	/* Flush the SrcBuffer before the DMA transfer, in case the Data Cache
@@ -798,6 +865,16 @@ static int CheckData(int debug_mode)
 	for(Index = 0; Index < MAX_PKT_LEN; Index++) {
 		xil_printf("Data received %d: %x\r\n",
 		    Index, (unsigned int)RxPacket[Index]);
+		/*
+		if (RxPacket[Index] != Value) {
+			xil_printf("Data error %d: %x/%x\r\n",
+			    Index, (unsigned int)RxPacket[Index],
+			    (unsigned int)Value);
+
+			return XST_FAILURE;
+		}
+		Value = (Value + 1) & 0xFF;
+		*/
 	}
 
 	return XST_SUCCESS;
@@ -830,10 +907,10 @@ static int CheckDmaResult(XAxiDma * AxiDmaInstPtr, int debug_mode, int skip_tx)
 	RxRingPtr = XAxiDma_GetRxRing(AxiDmaInstPtr);
 
 	if(skip_tx == 0){
-	  /* Wait until the one BD TX transaction is done */
-	  while ((ProcessedBdCount = XAxiDma_BdRingFromHw(TxRingPtr,
-						       XAXIDMA_ALL_BDS, &BdPtr)) == 0) {
-	  }
+	/* Wait until the one BD TX transaction is done */
+	while ((ProcessedBdCount = XAxiDma_BdRingFromHw(TxRingPtr,
+						       XAXIDMA_ALL_BDS,
+						       &BdPtr)) == 0) {  }
 
 	  /* Free all processed TX BDs for future transmission */
 	  Status = XAxiDma_BdRingFree(TxRingPtr, ProcessedBdCount, BdPtr);
@@ -843,21 +920,16 @@ static int CheckDmaResult(XAxiDma * AxiDmaInstPtr, int debug_mode, int skip_tx)
 		return XST_FAILURE;
 	  }
 	}
-
-	xil_printf(" --- A\r\n");
-
 	/* Wait until the data has been received by the Rx channel */
 	while ((ProcessedBdCount = XAxiDma_BdRingFromHw(RxRingPtr,
-						       XAXIDMA_ALL_BDS,
-						       &BdPtr)) == 0) {
+						       XAXIDMA_ALL_BDS, &BdPtr)) == 0) {
 	}
-	xil_printf(" --- B\r\n");
+
 	/* Check received data */
 	if (CheckData(1) != XST_SUCCESS) {
 		return XST_FAILURE;
 	}
 
-	xil_printf(" --- C\r\n");
 	/* Free all processed RX BDs for future transmission */
 	Status = XAxiDma_BdRingFree(RxRingPtr, ProcessedBdCount, BdPtr);
 	if (Status != XST_SUCCESS) {
@@ -945,56 +1017,33 @@ int test_DMA_loopback( int num_packets, int debug_mode){
 		 xil_printf("RxSetup completed. \r\n");
 	}
 
-
-	  xil_printf(" State before loop on packets.\r\n");
-	//  readGyroTxFIFODebugData();
-	//  readGyroRxFIFODebugData();
-	  readGyroChannelStatus();
-	  readGyroChannelDebugData();
-
-
 	for(i = 0; i < num_packets; i++){
 	  /* Send a packet */
 
 	  Status = SendPacket(&AxiDma, i);
 
-
 	  if (Status != XST_SUCCESS) {
 		  xil_printf(" Failed sending packet number: %d\r\n",i+1);
 		return XST_FAILURE;
-	  } else {
-		xil_printf(" Sent packet successful.\r\n");
 	  }
 
-	//  xil_printf(" State before activation.\r\n");
-	//  readGyroTxFIFODebugData();
-	//  readGyroRxFIFODebugData();
-	//  readGyroChannelStatus();
-	//  readGyroChannelDebugData();
 
 	  if(i == 0){
-       setGyroChannelControl(0x00000011);
+    setGyroChannelControl(0x00000011);
 	  }
 
-	// xil_printf(" State after activation.\r\n");
-	//  readGyroTxFIFODebugData();
-	//  readGyroRxFIFODebugData();
-	//  readGyroChannelDebugData();
 	  /* Check DMA transfer result */
 
-	  Status = CheckDmaResult(&AxiDma, debug_mode, 1);
+
+			Status = CheckDmaResult(&AxiDma, debug_mode, 1);
 	  if (Status != XST_SUCCESS) {
 		xil_printf(" Failed reading packet number: %d\r\n",1);
 		return XST_FAILURE;
 	  }
 
-		// xil_printf(" State after activation.\r\n");
-		//  readGyroTxFIFODebugData();
-		//  readGyroRxFIFODebugData();
-		// readGyroChannelStatus();
-		//  readGyroChannelDebugData();
-		  /* Check DMA transfer result */
+
 	}
+
 
 	xil_printf(" >>> Successfully ran AXI DMA SG Polling Example\r\n");
 	xil_printf("--- Exiting DMA Loopback main() --- \r\n");
@@ -1013,15 +1062,354 @@ void nops(unsigned int num) {
         asm("nop");
     }
 }
+// -------------------------------------------------------------------
+
+
+
+
+//------------------------------------------------------------
+int SetupUartPs(INTC *IntcInstPtr, XUartPs *UartInstPtr,
+			u16 DeviceId, u16 UartIntrId)
+{
+	int Status;
+	XUartPs_Config *Config;
+	u32 IntrMask;
+
+
+	/*
+	 * Initialize the UART driver so that it's ready to use
+	 * Look up the configuration in the config table, then initialize it.
+	 */
+	Config = XUartPs_LookupConfig(DeviceId);
+	if (NULL == Config) {
+		return XST_FAILURE;
+	}
+
+	Status = XUartPs_CfgInitialize(UartInstPtr, Config, Config->BaseAddress);
+	if (Status != XST_SUCCESS) {
+		return XST_FAILURE;
+	}
+
+	/* Check hardware build */
+	Status = XUartPs_SelfTest(UartInstPtr);
+	if (Status != XST_SUCCESS) {
+		return XST_FAILURE;
+	}
+
+	/*
+	 * Connect the UART to the interrupt subsystem such that interrupts
+	 * can occur. This function is application specific.
+	 */
+	Status = SetupUartInterruptSystem(IntcInstPtr, UartInstPtr, UartIntrId);
+	if (Status != XST_SUCCESS) {
+		return XST_FAILURE;
+	}
+
+	/*
+	 * Setup the handlers for the UART that will be called from the
+	 * interrupt context when data has been sent and received, specify
+	 * a pointer to the UART driver instance as the callback reference
+	 * so the handlers are able to access the instance data
+	 */
+	XUartPs_SetHandler(UartInstPtr, (XUartPs_Handler)UartPsISR, UartInstPtr);
+
+	/*
+	 * Enable the interrupt of the UART so interrupts will occur, setup
+	 * a local loopback so data that is sent will be received.
+	 */
+	IntrMask =
+		XUARTPS_IXR_TOUT | XUARTPS_IXR_PARITY | XUARTPS_IXR_FRAMING |
+		XUARTPS_IXR_OVER | XUARTPS_IXR_TXEMPTY | XUARTPS_IXR_RXFULL |
+		XUARTPS_IXR_RXOVR;
+
+	if (UartInstPtr->Platform == XPLAT_ZYNQ_ULTRA_MP) {
+		IntrMask |= XUARTPS_IXR_RBRK;
+	}
+
+	XUartPs_SetInterruptMask(UartInstPtr, IntrMask);
+
+	XUartPs_SetOperMode(UartInstPtr, XUARTPS_OPER_MODE_NORMAL);
+
+	/*
+	 * Set the receiver timeout. If it is not set, and the last few bytes
+	 * of data do not trigger the over-water or full interrupt, the bytes
+	 * will not be received. By default it is disabled.
+	 *
+	 * The setting of 8 will timeout after 8 x 4 = 32 character times.
+	 * Increase the time out value if baud rate is high, decrease it if
+	 * baud rate is low.
+	 */
+	XUartPs_SetRecvTimeout(UartInstPtr, 8);
+
+	return XST_SUCCESS;
+}
+//------------------------------------------------------------
+
+
+//------------------------------------------------------------
+void UartPsISR(void *CallBackRef, u32 Event, unsigned int EventData)
+{
+//	xil_printf("IRQ handler!\n");
+
+	/* All of the data has been sent */
+	if (Event == XUARTPS_EVENT_SENT_DATA) {
+//		xil_printf("1\n");
+	}
+
+	/* All of the data has been received */
+	if (Event == XUARTPS_EVENT_RECV_DATA) {
+//		xil_printf("2\n");
+		state |= SERVICE_UART;
+	}
+
+	/*
+	 * Data was received, but not the expected number of bytes, a
+	 * timeout just indicates the data stopped for 8 character times
+	 */
+	if (Event == XUARTPS_EVENT_RECV_TOUT) {
+//		xil_printf("3\n");
+	}
+
+	/*
+	 * Data was received with an error, keep the data but determine
+	 * what kind of errors occurred
+	 */
+	if (Event == XUARTPS_EVENT_RECV_ERROR) {
+//		xil_printf("4\n");
+	}
+
+	/*
+	 * Data was received with an parity or frame or break error, keep the data
+	 * but determine what kind of errors occurred. Specific to Zynq Ultrascale+
+	 * MP.
+	 */
+	if (Event == XUARTPS_EVENT_PARE_FRAME_BRKE) {
+//		xil_printf("5\n");
+	}
+
+	/*
+	 * Data was received with an overrun error, keep the data but determine
+	 * what kind of errors occurred. Specific to Zynq Ultrascale+ MP.
+	 */
+	if (Event == XUARTPS_EVENT_RECV_ORERR) {
+//		xil_printf("6\n");
+	}
+}
+//------------------------------------------------------------
+
+
+//------------------------------------------------------------
+static int SetupUartInterruptSystem(INTC *IntcInstancePtr,
+				XUartPs *UartInstancePtr,
+				u16 UartIntrId)
+{
+	int Status;
+
+	XScuGic_Config *IntcConfig; /* Config for interrupt controller */
+
+	/* Initialize the interrupt controller driver */
+	IntcConfig = XScuGic_LookupConfig(INTC_DEVICE_ID);
+	if (NULL == IntcConfig) {
+		return XST_FAILURE;
+	}
+
+	Status = XScuGic_CfgInitialize(IntcInstancePtr, IntcConfig,
+					IntcConfig->CpuBaseAddress);
+	if (Status != XST_SUCCESS) {
+		return XST_FAILURE;
+	}
+
+	/*
+	 * Connect the interrupt controller interrupt handler to the
+	 * hardware interrupt handling logic in the processor.
+	 */
+	Xil_ExceptionRegisterHandler(XIL_EXCEPTION_ID_INT,
+				(Xil_ExceptionHandler) XScuGic_InterruptHandler,
+				IntcInstancePtr);
+
+	/*
+	 * Connect a device driver handler that will be called when an
+	 * interrupt for the device occurs, the device driver handler
+	 * performs the specific interrupt processing for the device
+	 */
+	Status = XScuGic_Connect(IntcInstancePtr, UartIntrId,
+				  (Xil_ExceptionHandler) XUartPs_InterruptHandler,
+				  (void *) UartInstancePtr);
+	if (Status != XST_SUCCESS) {
+		return XST_FAILURE;
+	}
+
+	/* Enable the interrupt for the device */
+	XScuGic_Enable(IntcInstancePtr, UartIntrId);
+
+
+	/* Enable interrupts */
+	 Xil_ExceptionEnable();
+
+
+	return XST_SUCCESS;
+}
+//------------------------------------------------------------
+
+
+//------------------------------------------------------------
+void read_uart_bytes(void)
+{
+	u8 numBytesReceived = 0;
+	unsigned int commandByte,regAddr,regData;
+
+	// loop through Uart Rx buffer and store received data
+	while (XUartPs_IsReceiveData(UART_BASEADDR))
+	{
+		UartRxData[numBytesReceived++] = XUartPs_ReadReg(UART_BASEADDR,
+					    					XUARTPS_FIFO_OFFSET);
+	}
+
+	//take first received byte as the command
+	commandByte = (unsigned int)UartRxData[0];
+
+	// check received byte for valid command
+	switch (commandByte){
+
+		case (CMD_READ_DATA):
+			send_Tx_data_over_UART(get_num_data_points(UartRxData));
+			break;
+
+		case (CMD_LOAD_SAWTOOTH_UP_DATA):
+			load_sawtooth_up_data();
+			break;
+
+		case (CMD_LOAD_SAWTOOTH_DOWN_DATA):
+			load_sawtooth_down_data();
+			break;
+
+		case (CMD_READ_ADDRESS):
+			//verify address byte was received after command byte
+			if (numBytesReceived<2)
+			{
+				return;
+			}
+			regAddr = (unsigned int)UartRxData[1];
+			readSPI(&regData,regAddr);
+			char *c = &regData;
+			xil_printf("%c%c",*(c+1),*c); //send high byte first
+			//xil_printf("%04x",regData);
+			break;
+
+		case (CMD_WRITE_ADDRESS):
+			//verify address byte, data bytes(2) received after command byte
+			if (numBytesReceived<4)
+			{
+				return;
+			}
+			regAddr = (unsigned int)UartRxData[1];
+			regData = (UartRxData[2]<<8) | UartRxData[3];
+			writeSPI_non_blocking_orig(regAddr,regData);
+			break;
+	}
+
+}
+//------------------------------------------------------------
+
+
+//------------------------------------------------------------
+unsigned int get_num_data_points(u8 *RxData)
+{
+	unsigned int num_points = 0;
+
+	// most significant byte in number sent first
+	num_points += RxData[1];
+	num_points = num_points << 8;
+
+	// least significant byte in number sent next
+	num_points += RxData[2];
+
+	return num_points;
+
+}
+//------------------------------------------------------------
+
+
+
+//------------------------------------------------------------
+void load_sawtooth_up_data(void)
+{
+	int i,j;
+
+	UartTxData[0] = 0; // initial array value
+
+	// load the data array with sawtooth data
+	for(i=1; i<TX_BUFFER_SIZE; i++)
+	{
+		j = UartTxData[i-1] + SAWTOOTH_STEP_VALUE;
+		if (j>SAWTOOTH_MAX_VALUE)
+		{
+			UartTxData[i] = 0;
+		}
+		else{
+			UartTxData[i] = j;
+		}
+	}
+}
+//------------------------------------------------------------
+
+
+//------------------------------------------------------------
+void load_sawtooth_down_data(void)
+{
+	int i,j;
+
+	UartTxData[0] = SAWTOOTH_MAX_VALUE; // initial array value
+
+	// load the data array with sawtooth data
+	for(i=1; i<TX_BUFFER_SIZE; i++){
+		j = UartTxData[i-1] - SAWTOOTH_STEP_VALUE;
+		if (j < 0){
+			UartTxData[i] = SAWTOOTH_MAX_VALUE;
+		} else {
+			UartTxData[i] = j;
+		}
+	}
+}
+//------------------------------------------------------------
+
+
+//------------------------------------------------------------
+void send_Tx_data_over_UART(unsigned int num_points_to_send)
+{
+	int i;
+	// send the data array to the transmit buffer as space is available
+	for (i = 0; i < num_points_to_send; i++) {
+		/* Wait until there is space in TX FIFO */
+		 while (XUartPs_IsTransmitFull(XPAR_XUARTPS_0_BASEADDR));
+
+		/* Write the byte into the TX FIFO */
+		XUartPs_WriteReg(XPAR_XUARTPS_0_BASEADDR, XUARTPS_FIFO_OFFSET,
+				UartTxData[i]);
+	}
+}
+//------------------------------------------------------------
+
+
 
 // -------------------------------------------------------------------
 int main() {
 	//int err;
     init_platform();
-    //int readVal, writeVal;
+
+    Status = SetupUartPs(&interrupt_controller, &UartPs,
+    				UARTPS_DEVICE_ID, UART_INT_IRQ_ID);
+	if (Status != XST_SUCCESS) {
+		xil_printf("Failed to set up UartPs\r\n");
+		return XST_FAILURE;
+	}
+
+	xil_printf("waiting for received UART data...\n");
+
+    unsigned int readVal, writeVal;
 
     xil_printf("\n\r=====================\n\r");
-    xil_printf("== START version 27 ==\n\r");
+    xil_printf("== START version 26 ==\n\r");
     // set interrupt_0/1 of AXI PL interrupt generator to 0
 
     *(baseaddr_p+0) = 0x00000000;
@@ -1042,8 +1430,10 @@ int main() {
     xil_printf("slv_reg2: 0x%08x\n\r", *(baseaddr_p+2));
     xil_printf("slv_reg3: 0x%08x\n\r", *(baseaddr_p+3));
 
+
     // clear SPI registers
     initSPI();
+    setSPIClockDivision(7);
     readSPIStatus();
 
     // set interrupt_0/1 of AXI PL interrupt generator to 0
@@ -1051,7 +1441,7 @@ int main() {
     *(baseaddr_p+1) = 0x00000000;
     *(baseaddr_p+2) = 0x00000000;
 
-    // xil_printf("Checkpoint 3\n\r");
+   // xil_printf("Checkpoint 3\n\r");
     // read interrupt_0/1 of AXI PL interrupt generator
 
 /*
@@ -1127,10 +1517,16 @@ int main() {
     //readGyroRxFIFODebugData();
     resetGyroTxFIFO();
     resetGyroRxFIFO();
-
     initGyroChannel();
+
+    //configure ADC0, ADC1 here via spi
+
+
+
+
     // --- loopback mode, POL = 0, in and out channels = 00
-    setGyroChannelConfiguration(0x01000000);
+    //setGyroChannelConfiguration(0x01000000);
+    setGyroChannelConfiguration(0x00000000);
     setGyroChannelControl(0x00000000);
 
     xil_printf(" - after initialization ==\n\r");
@@ -1140,27 +1536,62 @@ int main() {
     readGyroTxFIFODebugData();
     readGyroRxFIFODebugData();
 
-  //  xil_printf(" - after input burst ==\n\r");
-   // readGyroChannelDebugData();
-   // readGyroTxFIFODebugData();
-   // readGyroRxFIFODebugData();
-
     xil_printf("== Starting FIFO / DMA test ++\n\r");
-
-    test_DMA_loopback(2,1);
+    //setGyroChannelControl(0x00000011); // moved inside loopback
+    test_DMA_loopback(1,1);
     // --- stopping both channels
-     setGyroChannelControl(0x00000000);
+	setGyroChannelControl(0x00000000);
 
-     readGyroChannelStatus();
-     readGyroChannelDebugData();
-     readGyroTxFIFODebugData();
-     readGyroRxFIFODebugData();
+	//readGyroChannelStatus();
+	//readGyroChannelDebugData();
+	//readGyroTxFIFODebugData();
+	//readGyroRxFIFODebugData();
 
     xil_printf("== After Rx ++\n\r");
 
-
     xil_printf("== STOP ==\n\r");
     xil_printf("=====================\n\n\r");
+
+
+
+    //#################################################################
+    //#################################################################
+    // code below here is merged from zedboard project used to develop
+    // UART interrupts for received data
+    //#################################################################
+    //#################################################################
+    int looping = 1;
+
+	Status = SetupUartPs(&interrupt_controller, &UartPs,
+					UARTPS_DEVICE_ID, UART_INT_IRQ_ID);
+	if (Status != XST_SUCCESS) {
+		xil_printf("Failed to set up UartPs\r\n");
+		return XST_FAILURE;
+	}
+
+	xil_printf("  waiting for received UART data...\n");
+
+	while(looping){// loop here and let interrupts drive further actions
+
+
+		//-------------------------------------------------------------------
+		// uart received data so read command
+		if (state & SERVICE_UART){
+
+			read_uart_bytes();
+			state &= ~SERVICE_UART;
+		}
+		//-------------------------------------------------------------------
+
+
+	}
+
+
+	// end of code for UART interrupts
+	//#################################################################
+	//#################################################################
+
+
 
     cleanup_platform();
     return 0;

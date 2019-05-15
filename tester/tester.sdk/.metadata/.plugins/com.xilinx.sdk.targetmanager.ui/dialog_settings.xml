@@ -26,7 +26,7 @@
 	<item value="false" key="design_2_wrapper_hw_platform_0-partial_bit"/>
 	<item value="" key="design_2_wrapper_hw_platform_0-bmmFile"/>
 	<item value="Local" key="design_1_wrapper_hw_platform_6-target"/>
-	<item value="design_2_wrapper.bit" key="design_2_wrapper_hw_platform_0-bitFile"/>
+	<item value="C:\Docs\initial_gyro_tester_experiments\tester\tester.runs\impl_4\design_2_wrapper.bit" key="design_2_wrapper_hw_platform_0-bitFile"/>
 	<item value="design_1_wrapper.bit" key="design_1_wrapper_hw_platform_6-bitFile"/>
 	<item value="" key="design_1_wrapper_hw_platform_6-bmmFile"/>
 	<item value="design_1_wrapper.bit" key="design_1_wrapper_hw_platform_5-bitFile"/>

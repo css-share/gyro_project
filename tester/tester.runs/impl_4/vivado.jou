@@ -2,11 +2,11 @@
 # Vivado v2018.2 (64-bit)
 # SW Build 2258646 on Thu Jun 14 20:03:12 MDT 2018
 # IP Build 2256618 on Thu Jun 14 22:10:49 MDT 2018
-# Start of session at: Sun May 12 18:37:52 2019
-# Process ID: 10044
-# Current directory: C:/Xilinx_Projects/gyro_project/tester/tester.runs/impl_4
+# Start of session at: Wed May 15 02:06:52 2019
+# Process ID: 8428
+# Current directory: C:/Docs/initial_gyro_tester_experiments/tester/tester.runs/impl_4
 # Command line: vivado.exe -log design_2_wrapper.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source design_2_wrapper.tcl -notrace
-# Log file: C:/Xilinx_Projects/gyro_project/tester/tester.runs/impl_4/design_2_wrapper.vdi
-# Journal file: C:/Xilinx_Projects/gyro_project/tester/tester.runs/impl_4\vivado.jou
+# Log file: C:/Docs/initial_gyro_tester_experiments/tester/tester.runs/impl_4/design_2_wrapper.vdi
+# Journal file: C:/Docs/initial_gyro_tester_experiments/tester/tester.runs/impl_4\vivado.jou
 #-----------------------------------------------------------
 source design_2_wrapper.tcl -notrace

@@ -1,4 +1,4 @@
-11:14:14 **** Auto Build of project axi4_gyro_test_0_bsp ****
+19:34:59 **** Auto Build of project axi4_gyro_test_0_bsp ****
 make -k all 
 "Running Make include in ps7_cortexa9_0/libsrc/axi_gyro_hsi_v1_0/src"
 make -C ps7_cortexa9_0/libsrc/axi_gyro_hsi_v1_0/src -s include  "SHELL=CMD" "COMPILER=arm-none-eabi-gcc" "ARCHIVER=arm-none-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -nostartfiles -g -Wall -Wextra"
@@ -132,5 +132,5 @@ make -C ps7_cortexa9_0/libsrc/xadcps_v2_2/src -s libs  "SHELL=CMD" "COMPILER=arm
 "Compiling xadcps"
 'Finished building libraries'
 
-11:15:53 Build Finished (took 1m:39s.187ms)
+19:36:50 Build Finished (took 1m:51s.172ms)
 
