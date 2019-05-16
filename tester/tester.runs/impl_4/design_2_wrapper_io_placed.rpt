@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------
 | Tool Version              : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-| Date                      : Wed May 15 02:03:44 2019
+| Date                      : Wed May 15 22:21:45 2019
 | Host                      : LAPTOP-FM91H59Q running 64-bit major release  (build 9200)
 | Command                   : report_io -file design_2_wrapper_io_placed.rpt
 | Design                    : design_2_wrapper
@@ -485,8 +485,8 @@ Table of Contents
 | W8         | SPI_MOSI          | High Range | IO_L2N_T0_13            | OUTPUT      | LVCMOS33          |      13 |         12 | SLOW |                     |            FP_VTT_50 |         | FIXED      |           |          |      | NONE             |              |                   |              |
 | W9         |                   |            | GND                     | GND         |                   |         |            |      |                     |                      |     0.0 |            |           |          |      |                  |              |                   |              |
 | W10        |                   | High Range | IO_L3N_T0_DQS_13        | User IO     |                   |      13 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
-| W11        | HSIA0             | High Range | IO_L3P_T0_DQS_13        | INPUT       | LVCMOS33          |      13 |            |      |                     |                 NONE |         | FIXED      |           |          |      | NONE             |              |                   |              |
-| W12        |                   | High Range | IO_L4N_T0_13            | User IO     |                   |      13 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
+| W11        |                   | High Range | IO_L3P_T0_DQS_13        | User IO     |                   |      13 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
+| W12        | HSIA0             | High Range | IO_L4N_T0_13            | INPUT       | LVCMOS33          |      13 |            |      |                     |                 NONE |         | FIXED      |           |          |      | NONE             |              |                   |              |
 | W13        |                   | High Range | IO_L20N_T3_33           | User IO     |                   |      33 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
 | W14        |                   | High Range | VCCO_33                 | VCCO        |                   |      33 |            |      |                     |                      |    3.30 |            |           |          |      |                  |              |                   |              |
 | W15        |                   | High Range | IO_L21P_T3_DQS_33       | User IO     |                   |      33 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |

@@ -1,4 +1,4 @@
-set_property PACKAGE_PIN W11 [get_ports HSIA0]
+set_property PACKAGE_PIN W12 [get_ports HSIA0]
 set_property PACKAGE_PIN AA11 [get_ports HSICK]
 set_property IOSTANDARD LVCMOS33 [get_ports HSICK]
 set_property IOSTANDARD LVCMOS33 [get_ports HSIA0]
